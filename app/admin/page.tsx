@@ -29,5 +29,12 @@ export default async function AdminPage() {
     .order('date', { ascending: true })
     .order('time', { ascending: true })
 
-  return <AdminDashboard reservations={reservations || []} />
+  // Fetch images from storage
+  const { data: imageFiles } = await supabase.storage
+    .from('images')
+    .list()
+
+  const images = imageFiles?.map(f => f.name) || []
+
+  return <AdminDashboard reservations={reservations || []} images={images} />
 }
