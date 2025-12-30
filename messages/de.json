@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Warum uns wahlen",
+    "stats": {
+      "propertiesSold": "Verkaufte Immobilien",
+      "clientSatisfaction": "Kundenzufriedenheit",
+      "yearsExperience": "Jahre Erfahrung",
+      "awardsWon": "Gewonnene Auszeichnungen"
+    },
+    "featuredProperties": {
+      "subtitle": "Ausgewahlte Angebote",
+      "title": "Entdecken Sie Ihre Traumimmobilie",
+      "description": "Entdecken Sie unsere handverlesene Auswahl an Premium-Immobilien, sorgfaltig kuratiert fur Ihren Lebensstil und Ihre Investitionsziele.",
+      "viewAll": "Alle Immobilien",
+      "forSale": "Zu verkaufen",
+      "forRent": "Zu vermieten",
+      "featured": "Empfohlen"
+    },
+    "whyChooseUs": {
+      "subtitle": "Warum uns wahlen",
+      "title": "Ihr vertrauensvoller Partner fur Immobilien",
+      "description": "Mit jahrelanger Erfahrung und einem Engagement fur Exzellenz bieten wir personalisierte Beratung, um fundierte Immobilienentscheidungen zu treffen.",
+      "learnMore": "Mehr uber uns",
+      "watchVideo": "Unsere Geschichte",
+      "certified": "Zertifizierte Makler",
+      "trusted": "Vertrauensvoller Service",
+      "topRated": "Bestbewertet"
+    },
     "features": {
       "marketExpertise": {
         "title": "Marktexpertise",
@@ -33,10 +57,57 @@
         "description": "Verfugbar Montag bis Samstag, 8:00 bis 20:00 Uhr"
       }
     },
+    "ourServices": {
+      "subtitle": "Unsere Leistungen",
+      "title": "Umfassende Immobiliendienstleistungen",
+      "description": "Vom Kauf Ihres ersten Eigenheims bis zur Verwaltung von Investmentportfolios bieten wir massgeschneiderte Losungen fur Ihre Bedurfnisse.",
+      "learnMore": "Mehr erfahren"
+    },
+    "services": {
+      "buying": {
+        "title": "Immobilienkauf",
+        "description": "Expertenberatung bei jedem Schritt zum Kauf Ihrer Traumimmobilie."
+      },
+      "selling": {
+        "title": "Immobilienverkauf",
+        "description": "Strategisches Marketing und Verhandlung zur Maximierung des Immobilienwerts."
+      },
+      "renting": {
+        "title": "Mietservices",
+        "description": "Finden Sie die perfekte Miete oder lassen Sie uns Ihr Mietportfolio verwalten."
+      },
+      "investment": {
+        "title": "Anlageberatung",
+        "description": "Datengestutzte Einblicke zum Vermogensaufbau durch Immobilien."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Referenzen",
+      "title": "Was unsere Kunden sagen",
+      "reviews": {
+        "1": {
+          "name": "Sarah Muller",
+          "role": "Hauseigentumer",
+          "text": "Das Team machte unseren Hauskauf reibungslos. Ihre Marktkenntnis und ihr Engagement haben unsere Erwartungen ubertroffen."
+        },
+        "2": {
+          "name": "Thomas Schmidt",
+          "role": "Immobilieninvestor",
+          "text": "Hervorragende Anlageberatung, die mir geholfen hat, ein profitables Immobilienportfolio aufzubauen. Sehr empfehlenswert."
+        },
+        "3": {
+          "name": "Anna Weber",
+          "role": "Erstkaufer",
+          "text": "Als Erstkaufer war ich nervos, aber sie haben mich mit Geduld und Expertise durch jeden Schritt gefuhrt."
+        }
+      }
+    },
     "cta": {
+      "badge": "Starten Sie Ihre Reise heute",
       "title": "Bereit loszulegen?",
       "description": "Buchen Sie noch heute eine kostenlose Beratung und machen Sie den ersten Schritt zu Ihren Immobilienzielen.",
-      "button": "Termin vereinbaren"
+      "button": "Termin vereinbaren",
+      "browseProperties": "Immobilien durchsuchen"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Unsere Immobilien",
     "subtitle": "Durchsuchen Sie unsere Auswahl an Immobilien zum Verkauf und zur Miete",
     "noProperties": "Derzeit keine Immobilien verfugbar.",
+    "noResultsWithFilters": "Keine Immobilien entsprechen Ihren Filtern.",
+    "clearFilters": "Alle Filter loschen",
+    "resultsFound": "{count} Immobilien gefunden",
     "contactForListings": "Kontaktieren Sie uns fur kommende Angebote",
     "forSale": "Zu verkaufen",
     "forRent": "Zu vermieten",
@@ -95,7 +169,65 @@
     "interestedTitle": "Interesse an einer Immobilie?",
     "interestedDescription": "Buchen Sie eine Beratung, um Ihre Optionen zu besprechen.",
     "bookConsultation": "Beratung buchen",
-    "noImage": "Kein Bild"
+    "noImage": "Kein Bild",
+    "filters": {
+      "allTypes": "Alle Typen",
+      "forSale": "Zu verkaufen",
+      "forRent": "Zu vermieten",
+      "allPropertyTypes": "Alle Immobilientypen",
+      "minPrice": "Min Preis",
+      "maxPrice": "Max Preis",
+      "minArea": "Min m²",
+      "maxArea": "Max m²",
+      "bedrooms": "Schlafzimmer",
+      "bathrooms": "Badezimmer",
+      "yearBuilt": "Baujahr",
+      "from": "Von",
+      "to": "Bis",
+      "furnished": "Mobliert",
+      "furnishedYes": "Mobliert",
+      "furnishedNo": "Unmobliert",
+      "amenities": "Ausstattung",
+      "any": "Alle",
+      "moreFilters": "Mehr Filter",
+      "search": "Suchen",
+      "clear": "Loschen",
+      "propertyTypes": {
+        "apartment": "Wohnung",
+        "villa": "Villa",
+        "house": "Haus",
+        "penthouse": "Penthouse",
+        "studio": "Studio",
+        "duplex": "Duplex",
+        "land": "Grundstuck",
+        "commercial": "Gewerbe",
+        "office": "Buro"
+      },
+      "amenitiesList": {
+        "pool": "Pool",
+        "gym": "Fitnessstudio",
+        "parking": "Parkplatz",
+        "security": "Sicherheit",
+        "elevator": "Aufzug",
+        "balcony": "Balkon",
+        "garden": "Garten",
+        "sea_view": "Meerblick",
+        "city_view": "Stadtblick",
+        "air_conditioning": "Klimaanlage",
+        "heating": "Heizung",
+        "storage": "Lager"
+      }
+    },
+    "pagination": {
+      "showing": "Angezeigt",
+      "of": "von",
+      "properties": "Immobilien",
+      "first": "Erste Seite",
+      "previous": "Vorherige Seite",
+      "next": "Nachste Seite",
+      "last": "Letzte Seite",
+      "loading": "Laden..."
+    }
   },
   "common": {
     "learnMore": "Mehr erfahren",

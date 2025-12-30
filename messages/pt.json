@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Por Que Nos Escolher",
+    "stats": {
+      "propertiesSold": "Imoveis Vendidos",
+      "clientSatisfaction": "Satisfacao do Cliente",
+      "yearsExperience": "Anos de Experiencia",
+      "awardsWon": "Premios Conquistados"
+    },
+    "featuredProperties": {
+      "subtitle": "Imoveis em Destaque",
+      "title": "Descubra Seu Imovel Perfeito",
+      "description": "Explore nossa selecao de imoveis premium, cuidadosamente escolhidos para combinar com seu estilo de vida e objetivos de investimento.",
+      "viewAll": "Ver Todos os Imoveis",
+      "forSale": "A Venda",
+      "forRent": "Para Alugar",
+      "featured": "Destaque"
+    },
+    "whyChooseUs": {
+      "subtitle": "Por Que Nos Escolher",
+      "title": "Seu Parceiro de Confianca em Imoveis",
+      "description": "Com anos de experiencia e compromisso com a excelencia, fornecemos orientacao personalizada para ajuda-lo a tomar decisoes imobiliarias informadas.",
+      "learnMore": "Saiba Mais Sobre Nos",
+      "watchVideo": "Assista Nossa Historia",
+      "certified": "Agentes Certificados",
+      "trusted": "Servico Confiavel",
+      "topRated": "Melhor Avaliado"
+    },
     "features": {
       "marketExpertise": {
         "title": "Expertise de Mercado",
@@ -33,10 +57,57 @@
         "description": "Disponivel de segunda a sabado, das 8h as 20h"
       }
     },
+    "ourServices": {
+      "subtitle": "O Que Oferecemos",
+      "title": "Servicos Imobiliarios Completos",
+      "description": "Da compra da sua primeira casa a gestao de portfolios de investimento, oferecemos solucoes completas adaptadas as suas necessidades.",
+      "learnMore": "Saiba Mais"
+    },
+    "services": {
+      "buying": {
+        "title": "Compra de Imoveis",
+        "description": "Orientacao especializada em cada etapa da compra do seu imovel dos sonhos."
+      },
+      "selling": {
+        "title": "Venda de Imoveis",
+        "description": "Marketing estrategico e negociacao para maximizar o valor do seu imovel."
+      },
+      "renting": {
+        "title": "Servicos de Locacao",
+        "description": "Encontre o aluguel perfeito ou deixe-nos gerenciar seu portfolio de locacao."
+      },
+      "investment": {
+        "title": "Consultoria de Investimento",
+        "description": "Insights baseados em dados para ajuda-lo a construir patrimonio atraves de imoveis."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Depoimentos",
+      "title": "O Que Nossos Clientes Dizem",
+      "reviews": {
+        "1": {
+          "name": "Julia Santos",
+          "role": "Proprietaria",
+          "text": "A equipe tornou nossa experiencia de compra perfeita. Seu conhecimento de mercado e dedicacao superaram nossas expectativas."
+        },
+        "2": {
+          "name": "Pedro Oliveira",
+          "role": "Investidor Imobiliario",
+          "text": "Excelente consultoria de investimento que me ajudou a construir um portfolio imobiliario lucrativo. Altamente recomendado."
+        },
+        "3": {
+          "name": "Ana Silva",
+          "role": "Primeira Compradora",
+          "text": "Como compradora de primeira viagem, estava nervosa, mas me guiaram em cada etapa com paciencia e expertise."
+        }
+      }
+    },
     "cta": {
+      "badge": "Comece Sua Jornada Hoje",
       "title": "Pronto para Comecar?",
       "description": "Agende uma consulta gratuita hoje e de o primeiro passo em direcao aos seus objetivos imobiliarios.",
-      "button": "Agendar Consulta"
+      "button": "Agendar Consulta",
+      "browseProperties": "Explorar Imoveis"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Nossos Imoveis",
     "subtitle": "Navegue pela nossa selecao de imoveis para venda e aluguel",
     "noProperties": "Nenhum imovel disponivel no momento.",
+    "noResultsWithFilters": "Nenhum imovel corresponde aos seus filtros.",
+    "clearFilters": "Limpar todos os filtros",
+    "resultsFound": "{count} imoveis encontrados",
     "contactForListings": "Entre em contato para listagens futuras",
     "forSale": "Venda",
     "forRent": "Aluguel",
@@ -95,7 +169,65 @@
     "interestedTitle": "Interessado em um Imovel?",
     "interestedDescription": "Agende uma consulta para discutir suas opcoes.",
     "bookConsultation": "Agendar Consulta",
-    "noImage": "Sem imagem"
+    "noImage": "Sem imagem",
+    "filters": {
+      "allTypes": "Todos os tipos",
+      "forSale": "Venda",
+      "forRent": "Aluguel",
+      "allPropertyTypes": "Todos os tipos de imovel",
+      "minPrice": "Preco min",
+      "maxPrice": "Preco max",
+      "minArea": "Min m²",
+      "maxArea": "Max m²",
+      "bedrooms": "Quartos",
+      "bathrooms": "Banheiros",
+      "yearBuilt": "Ano de construcao",
+      "from": "De",
+      "to": "Ate",
+      "furnished": "Mobiliado",
+      "furnishedYes": "Mobiliado",
+      "furnishedNo": "Sem mobilia",
+      "amenities": "Comodidades",
+      "any": "Qualquer",
+      "moreFilters": "Mais filtros",
+      "search": "Pesquisar",
+      "clear": "Limpar",
+      "propertyTypes": {
+        "apartment": "Apartamento",
+        "villa": "Vila",
+        "house": "Casa",
+        "penthouse": "Cobertura",
+        "studio": "Estudio",
+        "duplex": "Duplex",
+        "land": "Terreno",
+        "commercial": "Comercial",
+        "office": "Escritorio"
+      },
+      "amenitiesList": {
+        "pool": "Piscina",
+        "gym": "Academia",
+        "parking": "Estacionamento",
+        "security": "Seguranca",
+        "elevator": "Elevador",
+        "balcony": "Varanda",
+        "garden": "Jardim",
+        "sea_view": "Vista para o mar",
+        "city_view": "Vista para a cidade",
+        "air_conditioning": "Ar condicionado",
+        "heating": "Aquecimento",
+        "storage": "Armazenamento"
+      }
+    },
+    "pagination": {
+      "showing": "Mostrando",
+      "of": "de",
+      "properties": "imoveis",
+      "first": "Primeira pagina",
+      "previous": "Pagina anterior",
+      "next": "Proxima pagina",
+      "last": "Ultima pagina",
+      "loading": "Carregando..."
+    }
   },
   "common": {
     "learnMore": "Saiba Mais",

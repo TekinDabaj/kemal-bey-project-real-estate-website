@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "为什么选择我们",
+    "stats": {
+      "propertiesSold": "已售房产",
+      "clientSatisfaction": "客户满意度",
+      "yearsExperience": "年经验",
+      "awardsWon": "获得奖项"
+    },
+    "featuredProperties": {
+      "subtitle": "精选房源",
+      "title": "发现您的理想房产",
+      "description": "探索我们精心挑选的优质房产系列，为您的生活方式和投资目标量身定制。",
+      "viewAll": "查看所有房产",
+      "forSale": "出售",
+      "forRent": "出租",
+      "featured": "精选"
+    },
+    "whyChooseUs": {
+      "subtitle": "为什么选择我们",
+      "title": "您值得信赖的房地产合作伙伴",
+      "description": "凭借多年的经验和对卓越的承诺，我们提供个性化指导，帮助您做出明智的房地产决策。",
+      "learnMore": "了解更多",
+      "watchVideo": "观看我们的故事",
+      "certified": "认证经纪人",
+      "trusted": "值得信赖",
+      "topRated": "最高评分"
+    },
     "features": {
       "marketExpertise": {
         "title": "市场专业知识",
@@ -33,10 +57,57 @@
         "description": "周一至周六，上午8点至晚上8点"
       }
     },
+    "ourServices": {
+      "subtitle": "我们的服务",
+      "title": "全面的房地产服务",
+      "description": "从购买您的第一套房子到管理投资组合，我们提供量身定制的端到端解决方案。",
+      "learnMore": "了解更多"
+    },
+    "services": {
+      "buying": {
+        "title": "房产购买",
+        "description": "在购买梦想房产的每一步提供专业指导。"
+      },
+      "selling": {
+        "title": "房产销售",
+        "description": "战略营销和谈判，最大化您房产的价值。"
+      },
+      "renting": {
+        "title": "租赁服务",
+        "description": "寻找完美租房或让我们管理您的租赁组合。"
+      },
+      "investment": {
+        "title": "投资咨询",
+        "description": "数据驱动的洞察，帮助您通过房地产积累财富。"
+      }
+    },
+    "testimonials": {
+      "subtitle": "客户评价",
+      "title": "客户的声音",
+      "reviews": {
+        "1": {
+          "name": "王丽华",
+          "role": "房主",
+          "text": "团队让我们的购房体验非常顺利。他们的市场知识和敬业精神超出了我们的期望。"
+        },
+        "2": {
+          "name": "张建国",
+          "role": "房地产投资者",
+          "text": "出色的投资建议帮助我建立了盈利的房地产投资组合。强烈推荐他们的服务。"
+        },
+        "3": {
+          "name": "李美玲",
+          "role": "首次购房者",
+          "text": "作为首次购房者，我很紧张，但他们耐心专业地指导我完成每一步。"
+        }
+      }
+    },
     "cta": {
+      "badge": "今天开始您的旅程",
       "title": "准备好开始了吗？",
       "description": "今天就预约免费咨询，迈出实现房地产目标的第一步。",
-      "button": "预约咨询"
+      "button": "预约咨询",
+      "browseProperties": "浏览房产"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "我们的房产",
     "subtitle": "浏览我们的出售和出租房产精选",
     "noProperties": "目前暂无可用房产。",
+    "noResultsWithFilters": "没有符合您筛选条件的房产。",
+    "clearFilters": "清除所有筛选",
+    "resultsFound": "找到 {count} 个房产",
     "contactForListings": "联系我们获取即将上市房源",
     "forSale": "出售",
     "forRent": "出租",
@@ -95,7 +169,65 @@
     "interestedTitle": "对房产感兴趣？",
     "interestedDescription": "预约咨询讨论您的选择。",
     "bookConsultation": "预约咨询",
-    "noImage": "暂无图片"
+    "noImage": "暂无图片",
+    "filters": {
+      "allTypes": "所有类型",
+      "forSale": "出售",
+      "forRent": "出租",
+      "allPropertyTypes": "所有房产类型",
+      "minPrice": "最低价格",
+      "maxPrice": "最高价格",
+      "minArea": "最小面积",
+      "maxArea": "最大面积",
+      "bedrooms": "卧室",
+      "bathrooms": "浴室",
+      "yearBuilt": "建造年份",
+      "from": "从",
+      "to": "到",
+      "furnished": "带家具",
+      "furnishedYes": "带家具",
+      "furnishedNo": "不带家具",
+      "amenities": "设施",
+      "any": "任意",
+      "moreFilters": "更多筛选",
+      "search": "搜索",
+      "clear": "清除",
+      "propertyTypes": {
+        "apartment": "公寓",
+        "villa": "别墅",
+        "house": "住宅",
+        "penthouse": "顶层公寓",
+        "studio": "单间公寓",
+        "duplex": "复式",
+        "land": "土地",
+        "commercial": "商业",
+        "office": "办公室"
+      },
+      "amenitiesList": {
+        "pool": "游泳池",
+        "gym": "健身房",
+        "parking": "停车位",
+        "security": "安保",
+        "elevator": "电梯",
+        "balcony": "阳台",
+        "garden": "花园",
+        "sea_view": "海景",
+        "city_view": "城市景观",
+        "air_conditioning": "空调",
+        "heating": "暖气",
+        "storage": "储物间"
+      }
+    },
+    "pagination": {
+      "showing": "显示",
+      "of": "/",
+      "properties": "个房产",
+      "first": "首页",
+      "previous": "上一页",
+      "next": "下一页",
+      "last": "末页",
+      "loading": "加载中..."
+    }
   },
   "common": {
     "learnMore": "了解更多",

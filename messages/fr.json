@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Pourquoi nous choisir",
+    "stats": {
+      "propertiesSold": "Proprietes Vendues",
+      "clientSatisfaction": "Satisfaction Client",
+      "yearsExperience": "Annees d'Experience",
+      "awardsWon": "Prix Remportes"
+    },
+    "featuredProperties": {
+      "subtitle": "Annonces Vedettes",
+      "title": "Decouvrez Votre Propriete Ideale",
+      "description": "Explorez notre selection de proprietes premium, soigneusement selectionnees pour correspondre a votre style de vie et vos objectifs d'investissement.",
+      "viewAll": "Voir Toutes les Proprietes",
+      "forSale": "A Vendre",
+      "forRent": "A Louer",
+      "featured": "Vedette"
+    },
+    "whyChooseUs": {
+      "subtitle": "Pourquoi nous choisir",
+      "title": "Votre Partenaire de Confiance en Immobilier",
+      "description": "Avec des annees d'experience et un engagement envers l'excellence, nous fournissons des conseils personnalises pour vous aider a prendre des decisions immobilieres eclairees.",
+      "learnMore": "En Savoir Plus",
+      "watchVideo": "Voir Notre Histoire",
+      "certified": "Agents Certifies",
+      "trusted": "Service de Confiance",
+      "topRated": "Meilleure Note"
+    },
     "features": {
       "marketExpertise": {
         "title": "Expertise du marche",
@@ -33,10 +57,57 @@
         "description": "Disponible du lundi au samedi, de 8h a 20h"
       }
     },
+    "ourServices": {
+      "subtitle": "Ce Que Nous Offrons",
+      "title": "Services Immobiliers Complets",
+      "description": "De l'achat de votre premiere maison a la gestion de portefeuilles d'investissement, nous offrons des solutions sur mesure adaptees a vos besoins.",
+      "learnMore": "En Savoir Plus"
+    },
+    "services": {
+      "buying": {
+        "title": "Achat Immobilier",
+        "description": "Accompagnement expert a chaque etape de l'achat de votre propriete de reve."
+      },
+      "selling": {
+        "title": "Vente Immobiliere",
+        "description": "Marketing strategique et negociation pour maximiser la valeur de votre bien."
+      },
+      "renting": {
+        "title": "Services de Location",
+        "description": "Trouvez la location parfaite ou laissez-nous gerer votre portefeuille locatif."
+      },
+      "investment": {
+        "title": "Conseil en Investissement",
+        "description": "Analyses basees sur les donnees pour vous aider a batir votre patrimoine immobilier."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Temoignages",
+      "title": "Ce Que Disent Nos Clients",
+      "reviews": {
+        "1": {
+          "name": "Sophie Martin",
+          "role": "Proprietaire",
+          "text": "L'equipe a rendu notre experience d'achat fluide. Leur connaissance du marche et leur devouement ont depasse nos attentes."
+        },
+        "2": {
+          "name": "Pierre Dubois",
+          "role": "Investisseur Immobilier",
+          "text": "Excellents conseils d'investissement qui m'ont aide a constituer un portefeuille immobilier rentable. Je recommande vivement."
+        },
+        "3": {
+          "name": "Marie Leroy",
+          "role": "Premier Achat",
+          "text": "En tant que premiere acheteuse, j'etais nerveuse, mais ils m'ont guidee a chaque etape avec patience et expertise."
+        }
+      }
+    },
     "cta": {
+      "badge": "Commencez Votre Voyage Aujourd'hui",
       "title": "Pret a commencer ?",
       "description": "Reservez une consultation gratuite aujourd'hui et faites le premier pas vers vos objectifs immobiliers.",
-      "button": "Planifier un rendez-vous"
+      "button": "Planifier un rendez-vous",
+      "browseProperties": "Parcourir les Proprietes"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Nos Proprietes",
     "subtitle": "Parcourez notre selection de proprietes a vendre et a louer",
     "noProperties": "Aucune propriete disponible pour le moment.",
+    "noResultsWithFilters": "Aucune propriete ne correspond a vos filtres.",
+    "clearFilters": "Effacer tous les filtres",
+    "resultsFound": "{count} proprietes trouvees",
     "contactForListings": "Contactez-nous pour les annonces a venir",
     "forSale": "A Vendre",
     "forRent": "A Louer",
@@ -95,7 +169,65 @@
     "interestedTitle": "Interesse par une Propriete?",
     "interestedDescription": "Reservez une consultation pour discuter de vos options.",
     "bookConsultation": "Reserver une consultation",
-    "noImage": "Pas d'image"
+    "noImage": "Pas d'image",
+    "filters": {
+      "allTypes": "Tous les types",
+      "forSale": "A vendre",
+      "forRent": "A louer",
+      "allPropertyTypes": "Tous les types de bien",
+      "minPrice": "Prix min",
+      "maxPrice": "Prix max",
+      "minArea": "Min m²",
+      "maxArea": "Max m²",
+      "bedrooms": "Chambres",
+      "bathrooms": "Salles de bain",
+      "yearBuilt": "Annee de construction",
+      "from": "De",
+      "to": "A",
+      "furnished": "Meuble",
+      "furnishedYes": "Meuble",
+      "furnishedNo": "Non meuble",
+      "amenities": "Equipements",
+      "any": "Tous",
+      "moreFilters": "Plus de filtres",
+      "search": "Rechercher",
+      "clear": "Effacer",
+      "propertyTypes": {
+        "apartment": "Appartement",
+        "villa": "Villa",
+        "house": "Maison",
+        "penthouse": "Penthouse",
+        "studio": "Studio",
+        "duplex": "Duplex",
+        "land": "Terrain",
+        "commercial": "Commercial",
+        "office": "Bureau"
+      },
+      "amenitiesList": {
+        "pool": "Piscine",
+        "gym": "Salle de sport",
+        "parking": "Parking",
+        "security": "Securite",
+        "elevator": "Ascenseur",
+        "balcony": "Balcon",
+        "garden": "Jardin",
+        "sea_view": "Vue mer",
+        "city_view": "Vue ville",
+        "air_conditioning": "Climatisation",
+        "heating": "Chauffage",
+        "storage": "Rangement"
+      }
+    },
+    "pagination": {
+      "showing": "Affichage",
+      "of": "sur",
+      "properties": "proprietes",
+      "first": "Premiere page",
+      "previous": "Page precedente",
+      "next": "Page suivante",
+      "last": "Derniere page",
+      "loading": "Chargement..."
+    }
   },
   "common": {
     "learnMore": "En savoir plus",

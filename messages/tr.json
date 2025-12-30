@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Neden Bizi Secmelisiniz",
+    "stats": {
+      "propertiesSold": "Satilan Emlak",
+      "clientSatisfaction": "Musteri Memnuniyeti",
+      "yearsExperience": "Yillik Deneyim",
+      "awardsWon": "Kazanilan Odul"
+    },
+    "featuredProperties": {
+      "subtitle": "One Cikan Ilanlar",
+      "title": "Hayalinizdeki Mulku Kesfedin",
+      "description": "Yasam tarziniza ve yatirim hedeflerinize uygun, ozenle secilmis premium emlak koleksiyonumuzu kesfedi.",
+      "viewAll": "Tum Emlaklari Gor",
+      "forSale": "Satilik",
+      "forRent": "Kiralik",
+      "featured": "One Cikan"
+    },
+    "whyChooseUs": {
+      "subtitle": "Neden Bizi Secmelisiniz",
+      "title": "Gayrimenkulde Guvenilir Ortaginiz",
+      "description": "Yillarin deneyimi ve mukemmellige olan bagliligimizla, bilinçli gayrimenkul kararlari almaniza yardimci olmak icin kisisellestirilmis rehberlik sunuyoruz.",
+      "learnMore": "Hakkimizda Daha Fazla",
+      "watchVideo": "Hikayemizi Izleyin",
+      "certified": "Sertifikali Danismanlar",
+      "trusted": "Guvenilir Hizmet",
+      "topRated": "En Iyi Derecelendirme"
+    },
     "features": {
       "marketExpertise": {
         "title": "Piyasa Uzmanligi",
@@ -33,10 +57,57 @@
         "description": "Pazartesi - Cumartesi, 08:00 - 20:00 arasi hizmetinizdeyiz"
       }
     },
+    "ourServices": {
+      "subtitle": "Neler Sunuyoruz",
+      "title": "Kapsamli Gayrimenkul Hizmetleri",
+      "description": "Ilk evinizi satin almaktan yatirim portfoylerini yonetmeye kadar, ihtiyaclariniza ozel uctan uca cozumler sunuyoruz.",
+      "learnMore": "Daha Fazla"
+    },
+    "services": {
+      "buying": {
+        "title": "Emlak Satin Alma",
+        "description": "Hayalinizdeki mulku satin almanin her adiminda uzman rehberlik."
+      },
+      "selling": {
+        "title": "Emlak Satisi",
+        "description": "Mulkunuzun degerini maksimize etmek icin stratejik pazarlama ve muzakere."
+      },
+      "renting": {
+        "title": "Kiralama Hizmetleri",
+        "description": "Mukemmel kiralik bulmak veya kiralama portfoyunuzu yonetmek icin buradayiz."
+      },
+      "investment": {
+        "title": "Yatirim Danismanligi",
+        "description": "Gayrimenkul ile servet olusturmaniza yardimci olacak veri odakli icgoruler."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Referanslar",
+      "title": "Musterilerimiz Ne Diyor",
+      "reviews": {
+        "1": {
+          "name": "Ayse Yilmaz",
+          "role": "Ev Sahibi",
+          "text": "Ekip, ev satin alma deneyimimizi sorunsuz hale getirdi. Piyasa bilgileri ve ozverileri beklentilerimizi asti."
+        },
+        "2": {
+          "name": "Mehmet Kaya",
+          "role": "Gayrimenkul Yatirimcisi",
+          "text": "Karli bir gayrimenkul portfoyu olusturmama yardimci olan olağanustu yatirim tavsiyeleri. Hizmetlerini siddetle tavsiye ederim."
+        },
+        "3": {
+          "name": "Zeynep Demir",
+          "role": "Ilk Kez Alan",
+          "text": "Ilk kez alici olarak gergindim, ancak her adimda sabir ve uzmanlikla bana rehberlik ettiler."
+        }
+      }
+    },
     "cta": {
+      "badge": "Yolculugunuza Bugun Baslayin",
       "title": "Baslamaya Hazir misiniz?",
       "description": "Bugün ücretsiz danismanlik randevusu alin ve gayrimenkul hedeflerinize dogru ilk adimi atin.",
-      "button": "Randevu Planla"
+      "button": "Randevu Planla",
+      "browseProperties": "Emlaklara Goz At"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Emlaklarimiz",
     "subtitle": "Satilik ve kiralik emlak seceneklerimizi inceleyin",
     "noProperties": "Su anda mevcut emlak bulunmamaktadir.",
+    "noResultsWithFilters": "Filtrelerinize uygun emlak bulunamadi.",
+    "clearFilters": "Tum filtreleri temizle",
+    "resultsFound": "{count} emlak bulundu",
     "contactForListings": "Yeni ilanlar icin bizimle iletisime gecin",
     "forSale": "Satilik",
     "forRent": "Kiralik",
@@ -95,7 +169,65 @@
     "interestedTitle": "Bir Emlakla Ilgileniyor musunuz?",
     "interestedDescription": "Seceneklerinizi gorusmek icin bir danismanlik randevusu alin.",
     "bookConsultation": "Randevu Al",
-    "noImage": "Gorsel yok"
+    "noImage": "Gorsel yok",
+    "filters": {
+      "allTypes": "Tum Turler",
+      "forSale": "Satilik",
+      "forRent": "Kiralik",
+      "allPropertyTypes": "Tum Emlak Turleri",
+      "minPrice": "Min Fiyat",
+      "maxPrice": "Max Fiyat",
+      "minArea": "Min m²",
+      "maxArea": "Max m²",
+      "bedrooms": "Yatak Odasi",
+      "bathrooms": "Banyo",
+      "yearBuilt": "Yapi Yili",
+      "from": "Baslangic",
+      "to": "Bitis",
+      "furnished": "Esyali",
+      "furnishedYes": "Esyali",
+      "furnishedNo": "Esyasiz",
+      "amenities": "Olanaklar",
+      "any": "Tumu",
+      "moreFilters": "Daha Fazla Filtre",
+      "search": "Ara",
+      "clear": "Temizle",
+      "propertyTypes": {
+        "apartment": "Daire",
+        "villa": "Villa",
+        "house": "Mustakil Ev",
+        "penthouse": "Cati Kati",
+        "studio": "Studyo",
+        "duplex": "Dublex",
+        "land": "Arsa",
+        "commercial": "Ticari",
+        "office": "Ofis"
+      },
+      "amenitiesList": {
+        "pool": "Havuz",
+        "gym": "Spor Salonu",
+        "parking": "Otopark",
+        "security": "Guvenlik",
+        "elevator": "Asansor",
+        "balcony": "Balkon",
+        "garden": "Bahce",
+        "sea_view": "Deniz Manzarasi",
+        "city_view": "Sehir Manzarasi",
+        "air_conditioning": "Klima",
+        "heating": "Isitma",
+        "storage": "Depo"
+      }
+    },
+    "pagination": {
+      "showing": "Gosterilen",
+      "of": "/",
+      "properties": "emlak",
+      "first": "Ilk sayfa",
+      "previous": "Onceki sayfa",
+      "next": "Sonraki sayfa",
+      "last": "Son sayfa",
+      "loading": "Yukleniyor..."
+    }
   },
   "common": {
     "learnMore": "Daha Fazla",

@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Mengapa Pilih Kami",
+    "stats": {
+      "propertiesSold": "Hartanah Dijual",
+      "clientSatisfaction": "Kepuasan Pelanggan",
+      "yearsExperience": "Tahun Pengalaman",
+      "awardsWon": "Anugerah Dimenangi"
+    },
+    "featuredProperties": {
+      "subtitle": "Hartanah Pilihan",
+      "title": "Temui Hartanah Impian Anda",
+      "description": "Terokai koleksi hartanah premium yang dipilih dengan teliti untuk gaya hidup dan matlamat pelaburan anda.",
+      "viewAll": "Lihat Semua Hartanah",
+      "forSale": "Untuk Dijual",
+      "forRent": "Untuk Disewa",
+      "featured": "Pilihan"
+    },
+    "whyChooseUs": {
+      "subtitle": "Mengapa Pilih Kami",
+      "title": "Rakan Kongsi Hartanah Dipercayai",
+      "description": "Dengan pengalaman bertahun-tahun dan komitmen terhadap kecemerlangan, kami menyediakan panduan peribadi untuk membantu anda membuat keputusan hartanah yang bijak.",
+      "learnMore": "Ketahui Lebih Lanjut",
+      "watchVideo": "Tonton Kisah Kami",
+      "certified": "Ejen Bersijil",
+      "trusted": "Perkhidmatan Dipercayai",
+      "topRated": "Penilaian Tertinggi"
+    },
     "features": {
       "marketExpertise": {
         "title": "Kepakaran Pasaran",
@@ -33,10 +57,57 @@
         "description": "Tersedia Isnin hingga Sabtu, 8 PG hingga 8 MLM"
       }
     },
+    "ourServices": {
+      "subtitle": "Apa Yang Kami Tawarkan",
+      "title": "Perkhidmatan Hartanah Komprehensif",
+      "description": "Dari membeli rumah pertama hingga menguruskan portfolio pelaburan, kami menawarkan penyelesaian menyeluruh yang disesuaikan dengan keperluan anda.",
+      "learnMore": "Ketahui Lebih Lanjut"
+    },
+    "services": {
+      "buying": {
+        "title": "Pembelian Hartanah",
+        "description": "Panduan pakar di setiap langkah pembelian hartanah impian anda."
+      },
+      "selling": {
+        "title": "Penjualan Hartanah",
+        "description": "Pemasaran strategik dan rundingan untuk memaksimumkan nilai hartanah anda."
+      },
+      "renting": {
+        "title": "Perkhidmatan Sewaan",
+        "description": "Cari sewaan yang sempurna atau biarkan kami menguruskan portfolio sewaan anda."
+      },
+      "investment": {
+        "title": "Nasihat Pelaburan",
+        "description": "Wawasan berdasarkan data untuk membantu anda membina kekayaan melalui hartanah."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Testimoni",
+      "title": "Apa Kata Pelanggan Kami",
+      "reviews": {
+        "1": {
+          "name": "Siti Aminah",
+          "role": "Pemilik Rumah",
+          "text": "Pasukan ini menjadikan pengalaman pembelian rumah kami lancar. Pengetahuan pasaran dan dedikasi mereka melebihi jangkaan kami."
+        },
+        "2": {
+          "name": "Ahmad Razak",
+          "role": "Pelabur Hartanah",
+          "text": "Nasihat pelaburan yang cemerlang yang membantu saya membina portfolio hartanah yang menguntungkan. Sangat disyorkan."
+        },
+        "3": {
+          "name": "Nurul Hidayah",
+          "role": "Pembeli Pertama",
+          "text": "Sebagai pembeli kali pertama, saya gementar, tetapi mereka membimbing saya di setiap langkah dengan sabar dan kepakaran."
+        }
+      }
+    },
     "cta": {
+      "badge": "Mulakan Perjalanan Anda Hari Ini",
       "title": "Bersedia untuk Bermula?",
       "description": "Tempah perundingan percuma hari ini dan ambil langkah pertama ke arah matlamat hartanah anda.",
-      "button": "Jadualkan Temu Janji"
+      "button": "Jadualkan Temu Janji",
+      "browseProperties": "Layari Hartanah"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Hartanah Kami",
     "subtitle": "Layari pilihan hartanah untuk dijual dan disewa",
     "noProperties": "Tiada hartanah tersedia pada masa ini.",
+    "noResultsWithFilters": "Tiada hartanah yang sepadan dengan penapis anda.",
+    "clearFilters": "Kosongkan semua penapis",
+    "resultsFound": "{count} hartanah ditemui",
     "contactForListings": "Hubungi kami untuk senarai akan datang",
     "forSale": "Untuk Dijual",
     "forRent": "Untuk Disewa",
@@ -95,7 +169,65 @@
     "interestedTitle": "Berminat dengan Hartanah?",
     "interestedDescription": "Tempah perundingan untuk membincangkan pilihan anda.",
     "bookConsultation": "Tempah Perundingan",
-    "noImage": "Tiada imej"
+    "noImage": "Tiada imej",
+    "filters": {
+      "allTypes": "Semua Jenis",
+      "forSale": "Untuk Dijual",
+      "forRent": "Untuk Disewa",
+      "allPropertyTypes": "Semua Jenis Hartanah",
+      "minPrice": "Harga Min",
+      "maxPrice": "Harga Maks",
+      "minArea": "Min m²",
+      "maxArea": "Maks m²",
+      "bedrooms": "Bilik Tidur",
+      "bathrooms": "Bilik Mandi",
+      "yearBuilt": "Tahun Dibina",
+      "from": "Dari",
+      "to": "Hingga",
+      "furnished": "Berperabot",
+      "furnishedYes": "Berperabot",
+      "furnishedNo": "Tanpa Perabot",
+      "amenities": "Kemudahan",
+      "any": "Mana-mana",
+      "moreFilters": "Lagi Penapis",
+      "search": "Cari",
+      "clear": "Kosongkan",
+      "propertyTypes": {
+        "apartment": "Pangsapuri",
+        "villa": "Vila",
+        "house": "Rumah",
+        "penthouse": "Penthouse",
+        "studio": "Studio",
+        "duplex": "Dupleks",
+        "land": "Tanah",
+        "commercial": "Komersial",
+        "office": "Pejabat"
+      },
+      "amenitiesList": {
+        "pool": "Kolam Renang",
+        "gym": "Gim",
+        "parking": "Tempat Letak Kereta",
+        "security": "Keselamatan",
+        "elevator": "Lif",
+        "balcony": "Balkoni",
+        "garden": "Taman",
+        "sea_view": "Pemandangan Laut",
+        "city_view": "Pemandangan Bandar",
+        "air_conditioning": "Penyaman Udara",
+        "heating": "Pemanasan",
+        "storage": "Penyimpanan"
+      }
+    },
+    "pagination": {
+      "showing": "Menunjukkan",
+      "of": "daripada",
+      "properties": "hartanah",
+      "first": "Halaman pertama",
+      "previous": "Halaman sebelum",
+      "next": "Halaman seterusnya",
+      "last": "Halaman terakhir",
+      "loading": "Memuatkan..."
+    }
   },
   "common": {
     "learnMore": "Ketahui Lebih",

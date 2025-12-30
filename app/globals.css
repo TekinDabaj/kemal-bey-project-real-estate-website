@@ -82,3 +82,17 @@ body {
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #4d4a6c;
 }
+
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  animation: shimmer 1.5s infinite;
+}

@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Mengapa Memilih Kami",
+    "stats": {
+      "propertiesSold": "Properti Terjual",
+      "clientSatisfaction": "Kepuasan Klien",
+      "yearsExperience": "Tahun Pengalaman",
+      "awardsWon": "Penghargaan Diraih"
+    },
+    "featuredProperties": {
+      "subtitle": "Properti Unggulan",
+      "title": "Temukan Properti Impian Anda",
+      "description": "Jelajahi koleksi properti premium yang dipilih dengan cermat untuk gaya hidup dan tujuan investasi Anda.",
+      "viewAll": "Lihat Semua Properti",
+      "forSale": "Dijual",
+      "forRent": "Disewakan",
+      "featured": "Unggulan"
+    },
+    "whyChooseUs": {
+      "subtitle": "Mengapa Memilih Kami",
+      "title": "Mitra Properti Terpercaya Anda",
+      "description": "Dengan pengalaman bertahun-tahun dan komitmen terhadap keunggulan, kami memberikan panduan personal untuk membantu Anda membuat keputusan properti yang tepat.",
+      "learnMore": "Pelajari Lebih Lanjut",
+      "watchVideo": "Tonton Kisah Kami",
+      "certified": "Agen Bersertifikat",
+      "trusted": "Layanan Terpercaya",
+      "topRated": "Peringkat Tertinggi"
+    },
     "features": {
       "marketExpertise": {
         "title": "Keahlian Pasar",
@@ -33,10 +57,57 @@
         "description": "Tersedia Senin hingga Sabtu, pukul 08.00 - 20.00"
       }
     },
+    "ourServices": {
+      "subtitle": "Yang Kami Tawarkan",
+      "title": "Layanan Properti Komprehensif",
+      "description": "Dari membeli rumah pertama hingga mengelola portofolio investasi, kami menawarkan solusi menyeluruh yang disesuaikan dengan kebutuhan Anda.",
+      "learnMore": "Pelajari Lebih Lanjut"
+    },
+    "services": {
+      "buying": {
+        "title": "Pembelian Properti",
+        "description": "Panduan ahli di setiap langkah pembelian properti impian Anda."
+      },
+      "selling": {
+        "title": "Penjualan Properti",
+        "description": "Pemasaran strategis dan negosiasi untuk memaksimalkan nilai properti Anda."
+      },
+      "renting": {
+        "title": "Layanan Sewa",
+        "description": "Temukan sewa yang sempurna atau biarkan kami mengelola portofolio sewa Anda."
+      },
+      "investment": {
+        "title": "Konsultasi Investasi",
+        "description": "Wawasan berbasis data untuk membantu Anda membangun kekayaan melalui properti."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Testimoni",
+      "title": "Apa Kata Klien Kami",
+      "reviews": {
+        "1": {
+          "name": "Dewi Sartika",
+          "role": "Pemilik Rumah",
+          "text": "Tim ini membuat pengalaman pembelian rumah kami mulus. Pengetahuan pasar dan dedikasi mereka melebihi ekspektasi kami."
+        },
+        "2": {
+          "name": "Budi Santoso",
+          "role": "Investor Properti",
+          "text": "Saran investasi luar biasa yang membantu saya membangun portofolio properti yang menguntungkan. Sangat direkomendasikan."
+        },
+        "3": {
+          "name": "Rina Wati",
+          "role": "Pembeli Pertama",
+          "text": "Sebagai pembeli pertama kali, saya gugup, tetapi mereka membimbing saya di setiap langkah dengan sabar dan keahlian."
+        }
+      }
+    },
     "cta": {
+      "badge": "Mulai Perjalanan Anda Hari Ini",
       "title": "Siap untuk Memulai?",
       "description": "Pesan konsultasi gratis hari ini dan ambil langkah pertama menuju tujuan properti Anda.",
-      "button": "Jadwalkan Pertemuan"
+      "button": "Jadwalkan Pertemuan",
+      "browseProperties": "Jelajahi Properti"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Properti Kami",
     "subtitle": "Telusuri pilihan properti untuk dijual dan disewa",
     "noProperties": "Tidak ada properti tersedia saat ini.",
+    "noResultsWithFilters": "Tidak ada properti yang cocok dengan filter Anda.",
+    "clearFilters": "Hapus semua filter",
+    "resultsFound": "{count} properti ditemukan",
     "contactForListings": "Hubungi kami untuk listing mendatang",
     "forSale": "Dijual",
     "forRent": "Disewakan",
@@ -95,7 +169,65 @@
     "interestedTitle": "Tertarik dengan Properti?",
     "interestedDescription": "Pesan konsultasi untuk membahas pilihan Anda.",
     "bookConsultation": "Pesan Konsultasi",
-    "noImage": "Tidak ada gambar"
+    "noImage": "Tidak ada gambar",
+    "filters": {
+      "allTypes": "Semua Tipe",
+      "forSale": "Dijual",
+      "forRent": "Disewakan",
+      "allPropertyTypes": "Semua Tipe Properti",
+      "minPrice": "Harga Min",
+      "maxPrice": "Harga Maks",
+      "minArea": "Min m²",
+      "maxArea": "Maks m²",
+      "bedrooms": "Kamar Tidur",
+      "bathrooms": "Kamar Mandi",
+      "yearBuilt": "Tahun Dibangun",
+      "from": "Dari",
+      "to": "Sampai",
+      "furnished": "Berperabot",
+      "furnishedYes": "Berperabot",
+      "furnishedNo": "Tanpa Perabot",
+      "amenities": "Fasilitas",
+      "any": "Semua",
+      "moreFilters": "Filter Lainnya",
+      "search": "Cari",
+      "clear": "Hapus",
+      "propertyTypes": {
+        "apartment": "Apartemen",
+        "villa": "Vila",
+        "house": "Rumah",
+        "penthouse": "Penthouse",
+        "studio": "Studio",
+        "duplex": "Dupleks",
+        "land": "Tanah",
+        "commercial": "Komersial",
+        "office": "Kantor"
+      },
+      "amenitiesList": {
+        "pool": "Kolam Renang",
+        "gym": "Gym",
+        "parking": "Parkir",
+        "security": "Keamanan",
+        "elevator": "Lift",
+        "balcony": "Balkon",
+        "garden": "Taman",
+        "sea_view": "Pemandangan Laut",
+        "city_view": "Pemandangan Kota",
+        "air_conditioning": "AC",
+        "heating": "Pemanas",
+        "storage": "Penyimpanan"
+      }
+    },
+    "pagination": {
+      "showing": "Menampilkan",
+      "of": "dari",
+      "properties": "properti",
+      "first": "Halaman pertama",
+      "previous": "Halaman sebelumnya",
+      "next": "Halaman berikutnya",
+      "last": "Halaman terakhir",
+      "loading": "Memuat..."
+    }
   },
   "common": {
     "learnMore": "Pelajari Lebih",

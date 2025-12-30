@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "選ばれる理由",
+    "stats": {
+      "propertiesSold": "販売物件数",
+      "clientSatisfaction": "顧客満足度",
+      "yearsExperience": "年の経験",
+      "awardsWon": "受賞歴"
+    },
+    "featuredProperties": {
+      "subtitle": "注目物件",
+      "title": "理想の物件を見つけよう",
+      "description": "ライフスタイルと投資目標に合わせて厳選されたプレミアム物件をご覧ください。",
+      "viewAll": "すべての物件を見る",
+      "forSale": "売却",
+      "forRent": "賃貸",
+      "featured": "注目"
+    },
+    "whyChooseUs": {
+      "subtitle": "選ばれる理由",
+      "title": "信頼できる不動産パートナー",
+      "description": "長年の経験と卓越性へのこだわりにより、賢明な不動産決定を行うための個別ガイダンスを提供します。",
+      "learnMore": "詳しく見る",
+      "watchVideo": "ストーリーを見る",
+      "certified": "認定エージェント",
+      "trusted": "信頼のサービス",
+      "topRated": "最高評価"
+    },
     "features": {
       "marketExpertise": {
         "title": "市場の専門知識",
@@ -33,10 +57,57 @@
         "description": "月曜日から土曜日、午前8時から午後8時まで"
       }
     },
+    "ourServices": {
+      "subtitle": "サービス内容",
+      "title": "総合不動産サービス",
+      "description": "初めての住宅購入から投資ポートフォリオ管理まで、お客様のニーズに合わせた包括的なソリューションを提供します。",
+      "learnMore": "詳しく見る"
+    },
+    "services": {
+      "buying": {
+        "title": "物件購入",
+        "description": "夢の物件購入のすべてのステップで専門的なガイダンス。"
+      },
+      "selling": {
+        "title": "物件売却",
+        "description": "物件価値を最大化する戦略的マーケティングと交渉。"
+      },
+      "renting": {
+        "title": "賃貸サービス",
+        "description": "理想の賃貸物件を見つけるか、賃貸ポートフォリオの管理をお任せください。"
+      },
+      "investment": {
+        "title": "投資アドバイザリー",
+        "description": "不動産を通じて資産を築くためのデータ駆動型インサイト。"
+      }
+    },
+    "testimonials": {
+      "subtitle": "お客様の声",
+      "title": "お客様からの評価",
+      "reviews": {
+        "1": {
+          "name": "田中美咲",
+          "role": "住宅オーナー",
+          "text": "チームのおかげで住宅購入がスムーズでした。市場知識と献身は期待を超えました。"
+        },
+        "2": {
+          "name": "鈴木健太",
+          "role": "不動産投資家",
+          "text": "収益性の高い不動産ポートフォリオ構築を支援してくれた優れた投資アドバイス。強くお勧めします。"
+        },
+        "3": {
+          "name": "佐藤愛子",
+          "role": "初めての購入者",
+          "text": "初めての購入者として緊張していましたが、忍耐と専門知識で一歩一歩導いてくれました。"
+        }
+      }
+    },
     "cta": {
+      "badge": "今日から始めよう",
       "title": "始める準備はできましたか？",
       "description": "今すぐ無料相談をご予約いただき、不動産目標への第一歩を踏み出しましょう。",
-      "button": "予約する"
+      "button": "予約する",
+      "browseProperties": "物件を探す"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "物件一覧",
     "subtitle": "売却・賃貸物件をご覧ください",
     "noProperties": "現在、物件はありません。",
+    "noResultsWithFilters": "条件に一致する物件が見つかりません。",
+    "clearFilters": "すべてのフィルターをクリア",
+    "resultsFound": "{count}件の物件が見つかりました",
     "contactForListings": "今後の物件についてはお問い合わせください",
     "forSale": "売却",
     "forRent": "賃貸",
@@ -95,7 +169,65 @@
     "interestedTitle": "物件にご興味がありますか？",
     "interestedDescription": "オプションについてご相談の予約をしてください。",
     "bookConsultation": "相談予約",
-    "noImage": "画像なし"
+    "noImage": "画像なし",
+    "filters": {
+      "allTypes": "すべてのタイプ",
+      "forSale": "売却",
+      "forRent": "賃貸",
+      "allPropertyTypes": "すべての物件タイプ",
+      "minPrice": "最低価格",
+      "maxPrice": "最高価格",
+      "minArea": "最小面積",
+      "maxArea": "最大面積",
+      "bedrooms": "寝室",
+      "bathrooms": "浴室",
+      "yearBuilt": "築年数",
+      "from": "から",
+      "to": "まで",
+      "furnished": "家具付き",
+      "furnishedYes": "家具付き",
+      "furnishedNo": "家具なし",
+      "amenities": "設備",
+      "any": "すべて",
+      "moreFilters": "その他のフィルター",
+      "search": "検索",
+      "clear": "クリア",
+      "propertyTypes": {
+        "apartment": "マンション",
+        "villa": "別荘",
+        "house": "一戸建て",
+        "penthouse": "ペントハウス",
+        "studio": "ワンルーム",
+        "duplex": "メゾネット",
+        "land": "土地",
+        "commercial": "商業施設",
+        "office": "オフィス"
+      },
+      "amenitiesList": {
+        "pool": "プール",
+        "gym": "ジム",
+        "parking": "駐車場",
+        "security": "セキュリティ",
+        "elevator": "エレベーター",
+        "balcony": "バルコニー",
+        "garden": "庭",
+        "sea_view": "オーシャンビュー",
+        "city_view": "シティビュー",
+        "air_conditioning": "エアコン",
+        "heating": "暖房",
+        "storage": "収納"
+      }
+    },
+    "pagination": {
+      "showing": "表示中",
+      "of": "/",
+      "properties": "件",
+      "first": "最初のページ",
+      "previous": "前のページ",
+      "next": "次のページ",
+      "last": "最後のページ",
+      "loading": "読み込み中..."
+    }
   },
   "common": {
     "learnMore": "詳しく見る",

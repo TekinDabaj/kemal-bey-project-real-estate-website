@@ -14,7 +14,31 @@
     "brandName": "Premier Realty"
   },
   "home": {
-    "whyChooseUs": "Why Choose Us",
+    "stats": {
+      "propertiesSold": "Properties Sold",
+      "clientSatisfaction": "Client Satisfaction",
+      "yearsExperience": "Years Experience",
+      "awardsWon": "Awards Won"
+    },
+    "featuredProperties": {
+      "subtitle": "Featured Listings",
+      "title": "Discover Your Perfect Property",
+      "description": "Explore our handpicked selection of premium properties, carefully curated to match your lifestyle and investment goals.",
+      "viewAll": "View All Properties",
+      "forSale": "For Sale",
+      "forRent": "For Rent",
+      "featured": "Featured"
+    },
+    "whyChooseUs": {
+      "subtitle": "Why Choose Us",
+      "title": "Your Trusted Partner in Real Estate",
+      "description": "With years of experience and a commitment to excellence, we provide personalized guidance to help you make informed real estate decisions.",
+      "learnMore": "Learn More About Us",
+      "watchVideo": "Watch Our Story",
+      "certified": "Certified Agents",
+      "trusted": "Trusted Service",
+      "topRated": "Top Rated"
+    },
     "features": {
       "marketExpertise": {
         "title": "Market Expertise",
@@ -33,10 +57,57 @@
         "description": "Available Monday to Saturday, 8 AM to 8 PM"
       }
     },
+    "ourServices": {
+      "subtitle": "What We Offer",
+      "title": "Comprehensive Real Estate Services",
+      "description": "From buying your first home to managing investment portfolios, we offer end-to-end solutions tailored to your needs.",
+      "learnMore": "Learn More"
+    },
+    "services": {
+      "buying": {
+        "title": "Property Buying",
+        "description": "Expert guidance through every step of purchasing your dream property."
+      },
+      "selling": {
+        "title": "Property Selling",
+        "description": "Strategic marketing and negotiation to maximize your property's value."
+      },
+      "renting": {
+        "title": "Rental Services",
+        "description": "Find the perfect rental or let us manage your rental property portfolio."
+      },
+      "investment": {
+        "title": "Investment Advisory",
+        "description": "Data-driven insights to help you build wealth through real estate."
+      }
+    },
+    "testimonials": {
+      "subtitle": "Testimonials",
+      "title": "What Our Clients Say",
+      "reviews": {
+        "1": {
+          "name": "Sarah Mitchell",
+          "role": "Homeowner",
+          "text": "The team made our home buying experience seamless. Their market knowledge and dedication exceeded our expectations."
+        },
+        "2": {
+          "name": "James Anderson",
+          "role": "Property Investor",
+          "text": "Outstanding investment advice that helped me build a profitable real estate portfolio. Highly recommend their services."
+        },
+        "3": {
+          "name": "Emily Chen",
+          "role": "First-time Buyer",
+          "text": "As a first-time buyer, I was nervous, but they guided me through every step with patience and expertise."
+        }
+      }
+    },
     "cta": {
+      "badge": "Start Your Journey Today",
       "title": "Ready to Get Started?",
       "description": "Book a free consultation today and take the first step toward your real estate goals.",
-      "button": "Schedule Appointment"
+      "button": "Schedule Appointment",
+      "browseProperties": "Browse Properties"
     }
   },
   "booking": {
@@ -84,6 +155,9 @@
     "title": "Our Properties",
     "subtitle": "Browse our selection of properties for sale and rent",
     "noProperties": "No properties available at the moment.",
+    "noResultsWithFilters": "No properties match your filters.",
+    "clearFilters": "Clear all filters",
+    "resultsFound": "{count} properties found",
     "contactForListings": "Contact us for upcoming listings",
     "forSale": "For Sale",
     "forRent": "For Rent",
@@ -95,7 +169,65 @@
     "interestedTitle": "Interested in a Property?",
     "interestedDescription": "Book a consultation to discuss your options.",
     "bookConsultation": "Book Consultation",
-    "noImage": "No image"
+    "noImage": "No image",
+    "filters": {
+      "allTypes": "All Types",
+      "forSale": "For Sale",
+      "forRent": "For Rent",
+      "allPropertyTypes": "All Property Types",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "minArea": "Min m²",
+      "maxArea": "Max m²",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "yearBuilt": "Year Built",
+      "from": "From",
+      "to": "To",
+      "furnished": "Furnished",
+      "furnishedYes": "Furnished",
+      "furnishedNo": "Unfurnished",
+      "amenities": "Amenities",
+      "any": "Any",
+      "moreFilters": "More Filters",
+      "search": "Search",
+      "clear": "Clear",
+      "propertyTypes": {
+        "apartment": "Apartment",
+        "villa": "Villa",
+        "house": "House",
+        "penthouse": "Penthouse",
+        "studio": "Studio",
+        "duplex": "Duplex",
+        "land": "Land",
+        "commercial": "Commercial",
+        "office": "Office"
+      },
+      "amenitiesList": {
+        "pool": "Pool",
+        "gym": "Gym",
+        "parking": "Parking",
+        "security": "Security",
+        "elevator": "Elevator",
+        "balcony": "Balcony",
+        "garden": "Garden",
+        "sea_view": "Sea View",
+        "city_view": "City View",
+        "air_conditioning": "Air Conditioning",
+        "heating": "Heating",
+        "storage": "Storage"
+      }
+    },
+    "pagination": {
+      "showing": "Showing",
+      "of": "of",
+      "properties": "properties",
+      "first": "First page",
+      "previous": "Previous page",
+      "next": "Next page",
+      "last": "Last page",
+      "loading": "Loading..."
+    }
   },
   "common": {
     "learnMore": "Learn More",
