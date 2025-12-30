@@ -8,6 +8,7 @@
     "properties": "Immobilien",
     "services": "Dienstleistungen",
     "about": "Uber uns",
+    "blog": "Blog",
     "contact": "Kontakt",
     "bookConsultation": "Beratung buchen",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Reservierungen",
       "properties": "Immobilien",
-      "content": "Bilder"
+      "content": "Bilder",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Reservierungen",
@@ -442,6 +444,99 @@
         "deleteFailed": "Loschung fehlgeschlagen",
         "confirmDelete": "Mochten Sie diesen Slide wirklich loschen?"
       }
+    },
+    "blog": {
+      "title": "Blogbeitrage",
+      "createNew": "Neu erstellen",
+      "noPosts": "Noch keine Blogbeitrage. Erstellen Sie Ihren ersten Beitrag.",
+      "noExcerpt": "Kein Auszug",
+      "published": "Veroffentlicht",
+      "draft": "Entwurf",
+      "featured": "Hervorgehoben",
+      "by": "Von",
+      "view": "Ansehen",
+      "edit": "Bearbeiten",
+      "delete": "Loschen",
+      "confirmDelete": "Mochten Sie diesen Blogbeitrag wirklich loschen?",
+      "deleteFailed": "Blogbeitrag konnte nicht geloscht werden"
+    },
+    "blogEditor": {
+      "pageTitle": "Blogbeitrag erstellen",
+      "editPageTitle": "Blogbeitrag bearbeiten",
+      "backToBlog": "Zuruck zum Blog",
+      "title": "Titel",
+      "titlePlaceholder": "Blogbeitragstitel eingeben...",
+      "slug": "URL-Slug",
+      "slugPlaceholder": "url-freundlicher-slug",
+      "excerpt": "Auszug",
+      "excerptPlaceholder": "Kurze Beschreibung des Beitrags...",
+      "content": "Inhalt",
+      "contentPlaceholder": "Beginnen Sie mit dem Schreiben Ihres Blogbeitrags...",
+      "featuredImage": "Titelbild",
+      "uploadImage": "Klicken zum Hochladen",
+      "changeImage": "Andern",
+      "removeImage": "Entfernen",
+      "author": "Autor",
+      "authorPlaceholder": "Autorname",
+      "status": "Status",
+      "published": "Veroffentlicht",
+      "draft": "Entwurf",
+      "featured": "Hervorgehobener Beitrag",
+      "featuredDescription": "Hervorgehobene Beitrage werden zuerst angezeigt",
+      "saveDraft": "Entwurf speichern",
+      "publish": "Veroffentlichen",
+      "update": "Aktualisieren",
+      "saving": "Speichern...",
+      "publishing": "Veroffentlichen...",
+      "validation": {
+        "titleRequired": "Titel ist erforderlich",
+        "slugRequired": "URL-Slug ist erforderlich",
+        "contentRequired": "Inhalt ist erforderlich",
+        "authorRequired": "Autor ist erforderlich"
+      },
+      "success": {
+        "created": "Blogbeitrag erfolgreich erstellt",
+        "updated": "Blogbeitrag erfolgreich aktualisiert"
+      },
+      "error": {
+        "createFailed": "Blogbeitrag konnte nicht erstellt werden",
+        "updateFailed": "Blogbeitrag konnte nicht aktualisiert werden",
+        "uploadFailed": "Bild konnte nicht hochgeladen werden"
+      },
+      "toolbar": {
+        "bold": "Fett",
+        "italic": "Kursiv",
+        "underline": "Unterstrichen",
+        "strikethrough": "Durchgestrichen",
+        "heading1": "Uberschrift 1",
+        "heading2": "Uberschrift 2",
+        "heading3": "Uberschrift 3",
+        "bulletList": "Aufzahlung",
+        "orderedList": "Nummerierte Liste",
+        "alignLeft": "Links ausrichten",
+        "alignCenter": "Zentrieren",
+        "alignRight": "Rechts ausrichten",
+        "link": "Link hinzufugen",
+        "image": "Bild einfugen",
+        "code": "Codeblock",
+        "quote": "Zitat",
+        "undo": "Ruckgangig",
+        "redo": "Wiederholen",
+        "textColor": "Textfarbe"
+      }
     }
+  },
+  "blog": {
+    "title": "Unser Blog",
+    "subtitle": "Einblicke, Tipps und Neuigkeiten aus der Immobilienwelt",
+    "noPosts": "Derzeit keine Blogbeitrage verfugbar.",
+    "checkBackSoon": "Schauen Sie bald wieder vorbei!",
+    "featured": "Hervorgehoben",
+    "minRead": "Min. Lesezeit",
+    "backToBlog": "Zuruck zum Blog",
+    "relatedPosts": "Verwandte Beitrage",
+    "ctaTitle": "Bereit loszulegen?",
+    "ctaDescription": "Buchen Sie eine Beratung mit unseren Immobilienexperten.",
+    "ctaButton": "Beratung buchen"
   }
 }

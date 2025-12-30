@@ -41,16 +41,18 @@ import {
   X,
   Trash2,
   CalendarDays,
-  Image,
+  Image as ImageIcon,
   Building2,
   ChevronLeft,
   ChevronRight,
   Bell,
   BellOff,
 } from "lucide-react";
-import { Reservation, Property, HeroSlide } from "@/types/database";
+import { FileText } from "lucide-react";
+import { Reservation, Property, HeroSlide, BlogPost } from "@/types/database";
 import ContentEditor from "./ContentEditor";
 import PropertiesManager from "./PropertiesManager";
+import BlogManager from "./BlogManager";
 import { useTranslations } from "next-intl";
 
 type DateFnsLocale = typeof enGB;
@@ -73,12 +75,14 @@ type Props = {
   reservations: Reservation[];
   properties: Property[];
   heroSlides: HeroSlide[];
+  blogPosts: BlogPost[];
 };
 
 export default function AdminDashboard({
   reservations: initialReservations,
   properties,
   heroSlides,
+  blogPosts,
 }: Props) {
   const t = useTranslations("admin");
   const params = useParams();
@@ -90,20 +94,24 @@ export default function AdminDashboard({
     "all" | "pending" | "confirmed" | "cancelled"
   >("all");
   const [activeTab, setActiveTab] = useState<
-    "reservations" | "properties" | "content"
+    "reservations" | "properties" | "content" | "blog"
   >("reservations");
   const [calendarMonth, setCalendarMonth] = useState(new Date());
-  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
-    if (typeof window === "undefined") return false;
-    if (!("Notification" in window)) return false;
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | "unsupported">("default");
+
+  // Hydration fix: update notification state only after mount
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    if (!("Notification" in window)) {
+      setNotificationPermission("unsupported");
+      return;
+    }
+    setNotificationPermission(Notification.permission);
     const savedPreference = localStorage.getItem("admin_notifications_enabled");
-    return savedPreference === "true" && Notification.permission === "granted";
-  });
-  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | "unsupported">(() => {
-    if (typeof window === "undefined") return "default";
-    if (!("Notification" in window)) return "unsupported";
-    return Notification.permission;
-  });
+    setNotificationsEnabled(savedPreference === "true" && Notification.permission === "granted");
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
   const notifiedReservationsRef = useRef<Set<string>>(new Set());
   const serviceWorkerRef = useRef<ServiceWorkerRegistration | null>(null);
   const router = useRouter();
@@ -387,7 +395,17 @@ export default function AdminDashboard({
                   : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
               }`}
             >
-              <Image size={18} /> {t("tabs.content")}
+              <ImageIcon size={18} /> {t("tabs.content")}
+            </button>
+            <button
+              onClick={() => setActiveTab("blog")}
+              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
+                activeTab === "blog"
+                  ? "border-amber-500 text-amber-600 dark:text-amber-400"
+                  : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+              }`}
+            >
+              <FileText size={18} /> {t("tabs.blog")}
             </button>
           </div>
         </div>
@@ -723,6 +741,10 @@ export default function AdminDashboard({
 
         {activeTab === "content" && (
           <ContentEditor initialHeroSlides={heroSlides} />
+        )}
+
+        {activeTab === "blog" && (
+          <BlogManager initialPosts={blogPosts} />
         )}
       </div>
     </div>

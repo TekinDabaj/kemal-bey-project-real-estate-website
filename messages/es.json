@@ -8,6 +8,7 @@
     "properties": "Propiedades",
     "services": "Servicios",
     "about": "Nosotros",
+    "blog": "Blog",
     "contact": "Contacto",
     "bookConsultation": "Reservar Consulta",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Reservas",
       "properties": "Propiedades",
-      "content": "Imagenes"
+      "content": "Imagenes",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Reservas",
@@ -442,6 +444,99 @@
         "deleteFailed": "Error al eliminar",
         "confirmDelete": "Esta seguro de eliminar este slide?"
       }
+    },
+    "blog": {
+      "title": "Articulos del Blog",
+      "createNew": "Crear Nuevo",
+      "noPosts": "Aun no hay articulos. Cree su primer articulo.",
+      "noExcerpt": "Sin extracto",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "featured": "Destacado",
+      "by": "Por",
+      "view": "Ver",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "confirmDelete": "Esta seguro de eliminar este articulo?",
+      "deleteFailed": "Error al eliminar el articulo"
+    },
+    "blogEditor": {
+      "pageTitle": "Crear Articulo",
+      "editPageTitle": "Editar Articulo",
+      "backToBlog": "Volver al Blog",
+      "title": "Titulo",
+      "titlePlaceholder": "Ingrese el titulo del articulo...",
+      "slug": "Slug URL",
+      "slugPlaceholder": "slug-amigable-url",
+      "excerpt": "Extracto",
+      "excerptPlaceholder": "Breve descripcion del articulo...",
+      "content": "Contenido",
+      "contentPlaceholder": "Comience a escribir su articulo...",
+      "featuredImage": "Imagen Destacada",
+      "uploadImage": "Clic para subir",
+      "changeImage": "Cambiar",
+      "removeImage": "Eliminar",
+      "author": "Autor",
+      "authorPlaceholder": "Nombre del autor",
+      "status": "Estado",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "featured": "Articulo Destacado",
+      "featuredDescription": "Los articulos destacados aparecen primero",
+      "saveDraft": "Guardar Borrador",
+      "publish": "Publicar",
+      "update": "Actualizar",
+      "saving": "Guardando...",
+      "publishing": "Publicando...",
+      "validation": {
+        "titleRequired": "El titulo es requerido",
+        "slugRequired": "El slug URL es requerido",
+        "contentRequired": "El contenido es requerido",
+        "authorRequired": "El autor es requerido"
+      },
+      "success": {
+        "created": "Articulo creado exitosamente",
+        "updated": "Articulo actualizado exitosamente"
+      },
+      "error": {
+        "createFailed": "Error al crear el articulo",
+        "updateFailed": "Error al actualizar el articulo",
+        "uploadFailed": "Error al subir la imagen"
+      },
+      "toolbar": {
+        "bold": "Negrita",
+        "italic": "Cursiva",
+        "underline": "Subrayado",
+        "strikethrough": "Tachado",
+        "heading1": "Titulo 1",
+        "heading2": "Titulo 2",
+        "heading3": "Titulo 3",
+        "bulletList": "Lista con puntos",
+        "orderedList": "Lista numerada",
+        "alignLeft": "Alinear izquierda",
+        "alignCenter": "Centrar",
+        "alignRight": "Alinear derecha",
+        "link": "Agregar enlace",
+        "image": "Insertar imagen",
+        "code": "Bloque de codigo",
+        "quote": "Cita",
+        "undo": "Deshacer",
+        "redo": "Rehacer",
+        "textColor": "Color de texto"
+      }
     }
+  },
+  "blog": {
+    "title": "Nuestro Blog",
+    "subtitle": "Ideas, consejos y noticias del mundo inmobiliario",
+    "noPosts": "No hay articulos disponibles en este momento.",
+    "checkBackSoon": "Vuelva pronto para actualizaciones!",
+    "featured": "Destacado",
+    "minRead": "min de lectura",
+    "backToBlog": "Volver al Blog",
+    "relatedPosts": "Articulos Relacionados",
+    "ctaTitle": "Listo para comenzar?",
+    "ctaDescription": "Reserve una consulta con nuestros expertos inmobiliarios.",
+    "ctaButton": "Reservar Consulta"
   }
 }

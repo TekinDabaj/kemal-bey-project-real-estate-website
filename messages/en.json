@@ -8,6 +8,7 @@
     "properties": "Properties",
     "services": "Services",
     "about": "About",
+    "blog": "Blog",
     "contact": "Contact",
     "bookConsultation": "Book Consultation",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Reservations",
       "properties": "Properties",
-      "content": "Images"
+      "content": "Images",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Reservations",
@@ -442,6 +444,99 @@
         "deleteFailed": "Failed to delete slide",
         "confirmDelete": "Are you sure you want to delete this slide?"
       }
+    },
+    "blog": {
+      "title": "Blog Posts",
+      "createNew": "Create New",
+      "noPosts": "No blog posts yet. Create your first post.",
+      "noExcerpt": "No excerpt",
+      "published": "Published",
+      "draft": "Draft",
+      "featured": "Featured",
+      "by": "By",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this blog post?",
+      "deleteFailed": "Failed to delete blog post"
+    },
+    "blogEditor": {
+      "pageTitle": "Create Blog Post",
+      "editPageTitle": "Edit Blog Post",
+      "backToBlog": "Back to Blog",
+      "title": "Title",
+      "titlePlaceholder": "Enter blog post title...",
+      "slug": "URL Slug",
+      "slugPlaceholder": "url-friendly-slug",
+      "excerpt": "Excerpt",
+      "excerptPlaceholder": "Brief description of the post...",
+      "content": "Content",
+      "contentPlaceholder": "Start writing your blog post...",
+      "featuredImage": "Featured Image",
+      "uploadImage": "Click to upload",
+      "changeImage": "Change",
+      "removeImage": "Remove",
+      "author": "Author",
+      "authorPlaceholder": "Author name",
+      "status": "Status",
+      "published": "Published",
+      "draft": "Draft",
+      "featured": "Featured Post",
+      "featuredDescription": "Featured posts appear first",
+      "saveDraft": "Save Draft",
+      "publish": "Publish",
+      "update": "Update",
+      "saving": "Saving...",
+      "publishing": "Publishing...",
+      "validation": {
+        "titleRequired": "Title is required",
+        "slugRequired": "URL slug is required",
+        "contentRequired": "Content is required",
+        "authorRequired": "Author is required"
+      },
+      "success": {
+        "created": "Blog post created successfully",
+        "updated": "Blog post updated successfully"
+      },
+      "error": {
+        "createFailed": "Failed to create blog post",
+        "updateFailed": "Failed to update blog post",
+        "uploadFailed": "Failed to upload image"
+      },
+      "toolbar": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "underline": "Underline",
+        "strikethrough": "Strikethrough",
+        "heading1": "Heading 1",
+        "heading2": "Heading 2",
+        "heading3": "Heading 3",
+        "bulletList": "Bullet List",
+        "orderedList": "Numbered List",
+        "alignLeft": "Align Left",
+        "alignCenter": "Align Center",
+        "alignRight": "Align Right",
+        "link": "Add Link",
+        "image": "Insert Image",
+        "code": "Code Block",
+        "quote": "Quote",
+        "undo": "Undo",
+        "redo": "Redo",
+        "textColor": "Text Color"
+      }
     }
+  },
+  "blog": {
+    "title": "Our Blog",
+    "subtitle": "Insights, tips, and news from the real estate world",
+    "noPosts": "No blog posts available at the moment.",
+    "checkBackSoon": "Check back soon for updates!",
+    "featured": "Featured",
+    "minRead": "min read",
+    "backToBlog": "Back to Blog",
+    "relatedPosts": "Related Posts",
+    "ctaTitle": "Ready to Get Started?",
+    "ctaDescription": "Book a consultation with our real estate experts.",
+    "ctaButton": "Book Consultation"
   }
 }

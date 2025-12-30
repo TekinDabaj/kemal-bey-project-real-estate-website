@@ -8,6 +8,7 @@
     "properties": "Hartanah",
     "services": "Perkhidmatan",
     "about": "Tentang Kami",
+    "blog": "Blog",
     "contact": "Hubungi",
     "bookConsultation": "Tempah Perundingan",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Tempahan",
       "properties": "Hartanah",
-      "content": "Imej"
+      "content": "Imej",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Tempahan",
@@ -442,6 +444,99 @@
         "deleteFailed": "Pemadaman gagal",
         "confirmDelete": "Adakah anda pasti mahu memadamkan slaid ini?"
       }
+    },
+    "blog": {
+      "title": "Artikel Blog",
+      "createNew": "Cipta Baru",
+      "noPosts": "Belum ada artikel blog. Cipta artikel pertama anda.",
+      "noExcerpt": "Tiada petikan",
+      "published": "Diterbitkan",
+      "draft": "Draf",
+      "featured": "Pilihan",
+      "by": "Oleh",
+      "view": "Lihat",
+      "edit": "Edit",
+      "delete": "Padam",
+      "confirmDelete": "Adakah anda pasti mahu memadamkan artikel ini?",
+      "deleteFailed": "Gagal memadamkan artikel blog"
+    },
+    "blogEditor": {
+      "pageTitle": "Cipta Artikel Blog",
+      "editPageTitle": "Edit Artikel Blog",
+      "backToBlog": "Kembali ke Blog",
+      "title": "Tajuk",
+      "titlePlaceholder": "Masukkan tajuk artikel...",
+      "slug": "Slug URL",
+      "slugPlaceholder": "slug-mesra-url",
+      "excerpt": "Petikan",
+      "excerptPlaceholder": "Penerangan ringkas artikel...",
+      "content": "Kandungan",
+      "contentPlaceholder": "Mula menulis artikel blog anda...",
+      "featuredImage": "Imej Pilihan",
+      "uploadImage": "Klik untuk muat naik",
+      "changeImage": "Tukar",
+      "removeImage": "Alih Keluar",
+      "author": "Penulis",
+      "authorPlaceholder": "Nama penulis",
+      "status": "Status",
+      "published": "Diterbitkan",
+      "draft": "Draf",
+      "featured": "Artikel Pilihan",
+      "featuredDescription": "Artikel pilihan dipaparkan dahulu",
+      "saveDraft": "Simpan Draf",
+      "publish": "Terbitkan",
+      "update": "Kemaskini",
+      "saving": "Menyimpan...",
+      "publishing": "Menerbitkan...",
+      "validation": {
+        "titleRequired": "Tajuk diperlukan",
+        "slugRequired": "Slug URL diperlukan",
+        "contentRequired": "Kandungan diperlukan",
+        "authorRequired": "Penulis diperlukan"
+      },
+      "success": {
+        "created": "Artikel blog berjaya dicipta",
+        "updated": "Artikel blog berjaya dikemaskini"
+      },
+      "error": {
+        "createFailed": "Gagal mencipta artikel blog",
+        "updateFailed": "Gagal mengemaskini artikel blog",
+        "uploadFailed": "Gagal memuat naik imej"
+      },
+      "toolbar": {
+        "bold": "Tebal",
+        "italic": "Italik",
+        "underline": "Garis Bawah",
+        "strikethrough": "Garis Potong",
+        "heading1": "Tajuk 1",
+        "heading2": "Tajuk 2",
+        "heading3": "Tajuk 3",
+        "bulletList": "Senarai Bulet",
+        "orderedList": "Senarai Bernombor",
+        "alignLeft": "Jajar Kiri",
+        "alignCenter": "Tengah",
+        "alignRight": "Jajar Kanan",
+        "link": "Tambah Pautan",
+        "image": "Sisip Imej",
+        "code": "Blok Kod",
+        "quote": "Petikan",
+        "undo": "Buat Asal",
+        "redo": "Buat Semula",
+        "textColor": "Warna Teks"
+      }
     }
+  },
+  "blog": {
+    "title": "Blog Kami",
+    "subtitle": "Pandangan, petua dan berita dari dunia hartanah",
+    "noPosts": "Tiada artikel blog tersedia pada masa ini.",
+    "checkBackSoon": "Sila semak semula untuk kemaskini!",
+    "featured": "Pilihan",
+    "minRead": "min bacaan",
+    "backToBlog": "Kembali ke Blog",
+    "relatedPosts": "Artikel Berkaitan",
+    "ctaTitle": "Bersedia untuk bermula?",
+    "ctaDescription": "Tempah perundingan dengan pakar hartanah kami.",
+    "ctaButton": "Tempah Perundingan"
   }
 }

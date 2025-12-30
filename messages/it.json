@@ -8,6 +8,7 @@
     "properties": "Proprieta",
     "services": "Servizi",
     "about": "Chi siamo",
+    "blog": "Blog",
     "contact": "Contatti",
     "bookConsultation": "Prenota consulenza",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Prenotazioni",
       "properties": "Proprieta",
-      "content": "Immagini"
+      "content": "Immagini",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Prenotazioni",
@@ -442,6 +444,99 @@
         "deleteFailed": "Eliminazione fallita",
         "confirmDelete": "Sei sicuro di voler eliminare questo slide?"
       }
+    },
+    "blog": {
+      "title": "Articoli del Blog",
+      "createNew": "Crea Nuovo",
+      "noPosts": "Nessun articolo ancora. Crea il tuo primo articolo.",
+      "noExcerpt": "Nessun estratto",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "featured": "In Evidenza",
+      "by": "Di",
+      "view": "Visualizza",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "confirmDelete": "Sei sicuro di voler eliminare questo articolo?",
+      "deleteFailed": "Eliminazione articolo fallita"
+    },
+    "blogEditor": {
+      "pageTitle": "Crea Articolo",
+      "editPageTitle": "Modifica Articolo",
+      "backToBlog": "Torna al Blog",
+      "title": "Titolo",
+      "titlePlaceholder": "Inserisci il titolo dell'articolo...",
+      "slug": "Slug URL",
+      "slugPlaceholder": "slug-url-amichevole",
+      "excerpt": "Estratto",
+      "excerptPlaceholder": "Breve descrizione dell'articolo...",
+      "content": "Contenuto",
+      "contentPlaceholder": "Inizia a scrivere il tuo articolo...",
+      "featuredImage": "Immagine in Evidenza",
+      "uploadImage": "Clicca per caricare",
+      "changeImage": "Cambia",
+      "removeImage": "Rimuovi",
+      "author": "Autore",
+      "authorPlaceholder": "Nome autore",
+      "status": "Stato",
+      "published": "Pubblicato",
+      "draft": "Bozza",
+      "featured": "Articolo in Evidenza",
+      "featuredDescription": "Gli articoli in evidenza appaiono per primi",
+      "saveDraft": "Salva Bozza",
+      "publish": "Pubblica",
+      "update": "Aggiorna",
+      "saving": "Salvataggio...",
+      "publishing": "Pubblicazione...",
+      "validation": {
+        "titleRequired": "Il titolo e obbligatorio",
+        "slugRequired": "Lo slug URL e obbligatorio",
+        "contentRequired": "Il contenuto e obbligatorio",
+        "authorRequired": "L'autore e obbligatorio"
+      },
+      "success": {
+        "created": "Articolo creato con successo",
+        "updated": "Articolo aggiornato con successo"
+      },
+      "error": {
+        "createFailed": "Creazione articolo fallita",
+        "updateFailed": "Aggiornamento articolo fallito",
+        "uploadFailed": "Caricamento immagine fallito"
+      },
+      "toolbar": {
+        "bold": "Grassetto",
+        "italic": "Corsivo",
+        "underline": "Sottolineato",
+        "strikethrough": "Barrato",
+        "heading1": "Titolo 1",
+        "heading2": "Titolo 2",
+        "heading3": "Titolo 3",
+        "bulletList": "Elenco puntato",
+        "orderedList": "Elenco numerato",
+        "alignLeft": "Allinea a sinistra",
+        "alignCenter": "Centra",
+        "alignRight": "Allinea a destra",
+        "link": "Aggiungi link",
+        "image": "Inserisci immagine",
+        "code": "Blocco codice",
+        "quote": "Citazione",
+        "undo": "Annulla",
+        "redo": "Ripristina",
+        "textColor": "Colore testo"
+      }
     }
+  },
+  "blog": {
+    "title": "Il Nostro Blog",
+    "subtitle": "Approfondimenti, consigli e notizie dal mondo immobiliare",
+    "noPosts": "Nessun articolo disponibile al momento.",
+    "checkBackSoon": "Torna presto per gli aggiornamenti!",
+    "featured": "In Evidenza",
+    "minRead": "min lettura",
+    "backToBlog": "Torna al Blog",
+    "relatedPosts": "Articoli Correlati",
+    "ctaTitle": "Pronto per iniziare?",
+    "ctaDescription": "Prenota una consulenza con i nostri esperti immobiliari.",
+    "ctaButton": "Prenota Consulenza"
   }
 }

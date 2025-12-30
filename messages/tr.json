@@ -8,6 +8,7 @@
     "properties": "Emlaklar",
     "services": "Hizmetler",
     "about": "Hakkimizda",
+    "blog": "Blog",
     "contact": "Iletisim",
     "bookConsultation": "Randevu Al",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Randevular",
       "properties": "Emlaklar",
-      "content": "Gorseller"
+      "content": "Gorseller",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Randevular",
@@ -442,6 +444,99 @@
         "deleteFailed": "Slayt silinemedi",
         "confirmDelete": "Bu slayti silmek istediginizden emin misiniz?"
       }
+    },
+    "blog": {
+      "title": "Blog Yazilari",
+      "createNew": "Yeni Olustur",
+      "noPosts": "Henuz blog yazisi yok. Ilk yazinizi olusturun.",
+      "noExcerpt": "Ozet yok",
+      "published": "Yayinda",
+      "draft": "Taslak",
+      "featured": "One Cikan",
+      "by": "Yazar:",
+      "view": "Goruntule",
+      "edit": "Duzenle",
+      "delete": "Sil",
+      "confirmDelete": "Bu blog yazisini silmek istediginizden emin misiniz?",
+      "deleteFailed": "Blog yazisi silinemedi"
+    },
+    "blogEditor": {
+      "pageTitle": "Blog Yazisi Olustur",
+      "editPageTitle": "Blog Yazisini Duzenle",
+      "backToBlog": "Bloga Don",
+      "title": "Baslik",
+      "titlePlaceholder": "Blog yazisi basligini girin...",
+      "slug": "URL Kisaltmasi",
+      "slugPlaceholder": "url-dostu-kisaltma",
+      "excerpt": "Ozet",
+      "excerptPlaceholder": "Yazinin kisa aciklamasi...",
+      "content": "Icerik",
+      "contentPlaceholder": "Blog yazinizi yazmaya baslayin...",
+      "featuredImage": "One Cikan Gorsel",
+      "uploadImage": "Yuklemek icin tiklayin",
+      "changeImage": "Degistir",
+      "removeImage": "Kaldir",
+      "author": "Yazar",
+      "authorPlaceholder": "Yazar adi",
+      "status": "Durum",
+      "published": "Yayinda",
+      "draft": "Taslak",
+      "featured": "One Cikan Yazi",
+      "featuredDescription": "One cikan yazilar ilk sirada gosterilir",
+      "saveDraft": "Taslak Kaydet",
+      "publish": "Yayinla",
+      "update": "Guncelle",
+      "saving": "Kaydediliyor...",
+      "publishing": "Yayinlaniyor...",
+      "validation": {
+        "titleRequired": "Baslik zorunludur",
+        "slugRequired": "URL kisaltmasi zorunludur",
+        "contentRequired": "Icerik zorunludur",
+        "authorRequired": "Yazar zorunludur"
+      },
+      "success": {
+        "created": "Blog yazisi basariyla olusturuldu",
+        "updated": "Blog yazisi basariyla guncellendi"
+      },
+      "error": {
+        "createFailed": "Blog yazisi olusturulamadi",
+        "updateFailed": "Blog yazisi guncellenemedi",
+        "uploadFailed": "Gorsel yuklenemedi"
+      },
+      "toolbar": {
+        "bold": "Kalin",
+        "italic": "Italik",
+        "underline": "Alti Cizili",
+        "strikethrough": "Ustu Cizili",
+        "heading1": "Baslik 1",
+        "heading2": "Baslik 2",
+        "heading3": "Baslik 3",
+        "bulletList": "Madde Listesi",
+        "orderedList": "Numarali Liste",
+        "alignLeft": "Sola Hizala",
+        "alignCenter": "Ortala",
+        "alignRight": "Saga Hizala",
+        "link": "Baglanti Ekle",
+        "image": "Gorsel Ekle",
+        "code": "Kod Blogu",
+        "quote": "Alinti",
+        "undo": "Geri Al",
+        "redo": "Yinele",
+        "textColor": "Metin Rengi"
+      }
     }
+  },
+  "blog": {
+    "title": "Blogumuz",
+    "subtitle": "Gayrimenkul dunyasindan bilgiler, ipuclari ve haberler",
+    "noPosts": "Su anda mevcut blog yazisi bulunmamaktadir.",
+    "checkBackSoon": "Guncellemeler icin yakinda tekrar kontrol edin!",
+    "featured": "One Cikan",
+    "minRead": "dk okuma",
+    "backToBlog": "Bloga Don",
+    "relatedPosts": "Ilgili Yazilar",
+    "ctaTitle": "Baslamaya Hazir misiniz?",
+    "ctaDescription": "Gayrimenkul uzmanlarimizla bir gorusme planlayin.",
+    "ctaButton": "Randevu Al"
   }
 }

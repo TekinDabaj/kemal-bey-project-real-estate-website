@@ -41,11 +41,18 @@ export default async function AdminPage() {
     .select('*')
     .order('sort_order', { ascending: true })
 
+  // Fetch blog posts
+  const { data: blogPosts } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .order('created_at', { ascending: false })
+
   return (
-    <AdminDashboard 
-      reservations={reservations || []} 
+    <AdminDashboard
+      reservations={reservations || []}
       properties={properties || []}
       heroSlides={heroSlides || []}
+      blogPosts={blogPosts || []}
     />
   )
 }

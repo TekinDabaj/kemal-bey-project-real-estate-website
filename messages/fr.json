@@ -8,6 +8,7 @@
     "properties": "Proprietes",
     "services": "Services",
     "about": "A propos",
+    "blog": "Blog",
     "contact": "Contact",
     "bookConsultation": "Reserver une consultation",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Reservations",
       "properties": "Proprietes",
-      "content": "Images"
+      "content": "Images",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Reservations",
@@ -442,6 +444,99 @@
         "deleteFailed": "Echec de la suppression",
         "confirmDelete": "Etes-vous sur de vouloir supprimer ce slide?"
       }
+    },
+    "blog": {
+      "title": "Articles de blog",
+      "createNew": "Creer nouveau",
+      "noPosts": "Pas encore d'articles. Creez votre premier article.",
+      "noExcerpt": "Pas d'extrait",
+      "published": "Publie",
+      "draft": "Brouillon",
+      "featured": "En vedette",
+      "by": "Par",
+      "view": "Voir",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "confirmDelete": "Etes-vous sur de vouloir supprimer cet article?",
+      "deleteFailed": "Echec de la suppression de l'article"
+    },
+    "blogEditor": {
+      "pageTitle": "Creer un article",
+      "editPageTitle": "Modifier l'article",
+      "backToBlog": "Retour au blog",
+      "title": "Titre",
+      "titlePlaceholder": "Entrez le titre de l'article...",
+      "slug": "Slug URL",
+      "slugPlaceholder": "slug-convivial-url",
+      "excerpt": "Extrait",
+      "excerptPlaceholder": "Breve description de l'article...",
+      "content": "Contenu",
+      "contentPlaceholder": "Commencez a ecrire votre article...",
+      "featuredImage": "Image a la une",
+      "uploadImage": "Cliquez pour telecharger",
+      "changeImage": "Changer",
+      "removeImage": "Supprimer",
+      "author": "Auteur",
+      "authorPlaceholder": "Nom de l'auteur",
+      "status": "Statut",
+      "published": "Publie",
+      "draft": "Brouillon",
+      "featured": "Article en vedette",
+      "featuredDescription": "Les articles en vedette apparaissent en premier",
+      "saveDraft": "Enregistrer le brouillon",
+      "publish": "Publier",
+      "update": "Mettre a jour",
+      "saving": "Enregistrement...",
+      "publishing": "Publication...",
+      "validation": {
+        "titleRequired": "Le titre est requis",
+        "slugRequired": "Le slug URL est requis",
+        "contentRequired": "Le contenu est requis",
+        "authorRequired": "L'auteur est requis"
+      },
+      "success": {
+        "created": "Article cree avec succes",
+        "updated": "Article mis a jour avec succes"
+      },
+      "error": {
+        "createFailed": "Echec de la creation de l'article",
+        "updateFailed": "Echec de la mise a jour de l'article",
+        "uploadFailed": "Echec du telechargement de l'image"
+      },
+      "toolbar": {
+        "bold": "Gras",
+        "italic": "Italique",
+        "underline": "Souligne",
+        "strikethrough": "Barre",
+        "heading1": "Titre 1",
+        "heading2": "Titre 2",
+        "heading3": "Titre 3",
+        "bulletList": "Liste a puces",
+        "orderedList": "Liste numerotee",
+        "alignLeft": "Aligner a gauche",
+        "alignCenter": "Centrer",
+        "alignRight": "Aligner a droite",
+        "link": "Ajouter un lien",
+        "image": "Inserer une image",
+        "code": "Bloc de code",
+        "quote": "Citation",
+        "undo": "Annuler",
+        "redo": "Retablir",
+        "textColor": "Couleur du texte"
+      }
     }
+  },
+  "blog": {
+    "title": "Notre Blog",
+    "subtitle": "Conseils, astuces et actualites du monde immobilier",
+    "noPosts": "Aucun article disponible pour le moment.",
+    "checkBackSoon": "Revenez bientot pour les mises a jour!",
+    "featured": "En vedette",
+    "minRead": "min de lecture",
+    "backToBlog": "Retour au blog",
+    "relatedPosts": "Articles connexes",
+    "ctaTitle": "Pret a commencer?",
+    "ctaDescription": "Reservez une consultation avec nos experts immobiliers.",
+    "ctaButton": "Reserver une consultation"
   }
 }

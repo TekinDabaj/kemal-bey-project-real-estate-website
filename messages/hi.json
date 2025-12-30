@@ -8,6 +8,7 @@
     "properties": "संपत्तियां",
     "services": "सेवाएं",
     "about": "हमारे बारे में",
+    "blog": "ब्लॉग",
     "contact": "संपर्क",
     "bookConsultation": "परामर्श बुक करें",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "बुकिंग",
       "properties": "संपत्तियां",
-      "content": "चित्र"
+      "content": "चित्र",
+      "blog": "ब्लॉग"
     },
     "reservations": {
       "title": "बुकिंग",
@@ -442,6 +444,99 @@
         "deleteFailed": "हटाना विफल",
         "confirmDelete": "क्या आप वाकई इस स्लाइड को हटाना चाहते हैं?"
       }
+    },
+    "blog": {
+      "title": "ब्लॉग पोस्ट",
+      "createNew": "नया बनाएं",
+      "noPosts": "अभी तक कोई ब्लॉग पोस्ट नहीं। अपनी पहली पोस्ट बनाएं।",
+      "noExcerpt": "कोई सारांश नहीं",
+      "published": "प्रकाशित",
+      "draft": "ड्राफ्ट",
+      "featured": "विशेष",
+      "by": "द्वारा",
+      "view": "देखें",
+      "edit": "संपादित करें",
+      "delete": "हटाएं",
+      "confirmDelete": "क्या आप वाकई इस ब्लॉग पोस्ट को हटाना चाहते हैं?",
+      "deleteFailed": "ब्लॉग पोस्ट हटाने में विफल"
+    },
+    "blogEditor": {
+      "pageTitle": "ब्लॉग पोस्ट बनाएं",
+      "editPageTitle": "ब्लॉग पोस्ट संपादित करें",
+      "backToBlog": "ब्लॉग पर वापस",
+      "title": "शीर्षक",
+      "titlePlaceholder": "ब्लॉग पोस्ट का शीर्षक दर्ज करें...",
+      "slug": "URL स्लग",
+      "slugPlaceholder": "url-friendly-slug",
+      "excerpt": "सारांश",
+      "excerptPlaceholder": "पोस्ट का संक्षिप्त विवरण...",
+      "content": "सामग्री",
+      "contentPlaceholder": "अपनी ब्लॉग पोस्ट लिखना शुरू करें...",
+      "featuredImage": "फीचर्ड इमेज",
+      "uploadImage": "अपलोड करने के लिए क्लिक करें",
+      "changeImage": "बदलें",
+      "removeImage": "हटाएं",
+      "author": "लेखक",
+      "authorPlaceholder": "लेखक का नाम",
+      "status": "स्थिति",
+      "published": "प्रकाशित",
+      "draft": "ड्राफ्ट",
+      "featured": "विशेष पोस्ट",
+      "featuredDescription": "विशेष पोस्ट पहले दिखाई जाती हैं",
+      "saveDraft": "ड्राफ्ट सहेजें",
+      "publish": "प्रकाशित करें",
+      "update": "अपडेट करें",
+      "saving": "सहेजा जा रहा है...",
+      "publishing": "प्रकाशित हो रहा है...",
+      "validation": {
+        "titleRequired": "शीर्षक आवश्यक है",
+        "slugRequired": "URL स्लग आवश्यक है",
+        "contentRequired": "सामग्री आवश्यक है",
+        "authorRequired": "लेखक आवश्यक है"
+      },
+      "success": {
+        "created": "ब्लॉग पोस्ट सफलतापूर्वक बनाया गया",
+        "updated": "ब्लॉग पोस्ट सफलतापूर्वक अपडेट किया गया"
+      },
+      "error": {
+        "createFailed": "ब्लॉग पोस्ट बनाने में विफल",
+        "updateFailed": "ब्लॉग पोस्ट अपडेट करने में विफल",
+        "uploadFailed": "इमेज अपलोड करने में विफल"
+      },
+      "toolbar": {
+        "bold": "बोल्ड",
+        "italic": "इटैलिक",
+        "underline": "अंडरलाइन",
+        "strikethrough": "स्ट्राइकथ्रू",
+        "heading1": "शीर्षक 1",
+        "heading2": "शीर्षक 2",
+        "heading3": "शीर्षक 3",
+        "bulletList": "बुलेट लिस्ट",
+        "orderedList": "नंबर लिस्ट",
+        "alignLeft": "बाएं संरेखित",
+        "alignCenter": "केंद्र में",
+        "alignRight": "दाएं संरेखित",
+        "link": "लिंक जोड़ें",
+        "image": "इमेज डालें",
+        "code": "कोड ब्लॉक",
+        "quote": "उद्धरण",
+        "undo": "पूर्ववत करें",
+        "redo": "फिर से करें",
+        "textColor": "टेक्स्ट रंग"
+      }
     }
+  },
+  "blog": {
+    "title": "हमारा ब्लॉग",
+    "subtitle": "रियल एस्टेट दुनिया से अंतर्दृष्टि, सुझाव और समाचार",
+    "noPosts": "वर्तमान में कोई ब्लॉग पोस्ट उपलब्ध नहीं है।",
+    "checkBackSoon": "अपडेट के लिए जल्द वापस आएं!",
+    "featured": "विशेष",
+    "minRead": "मिनट पढ़ने का समय",
+    "backToBlog": "ब्लॉग पर वापस",
+    "relatedPosts": "संबंधित पोस्ट",
+    "ctaTitle": "शुरू करने के लिए तैयार हैं?",
+    "ctaDescription": "हमारे रियल एस्टेट विशेषज्ञों के साथ परामर्श बुक करें।",
+    "ctaButton": "परामर्श बुक करें"
   }
 }

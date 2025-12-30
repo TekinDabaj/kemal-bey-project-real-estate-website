@@ -67,3 +67,18 @@ export type HeroSlide = {
   active: boolean;
   created_at: string;
 };
+
+export type BlogPost = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string;
+  featured_image: string | null;
+  author: string;
+  status: "published" | "draft";
+  featured: boolean;
+  created_at: string;
+  updated_at: string;
+  published_at: string | null;
+};

@@ -8,6 +8,7 @@
     "properties": "物件",
     "services": "サービス",
     "about": "会社概要",
+    "blog": "ブログ",
     "contact": "お問い合わせ",
     "bookConsultation": "相談予約",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "予約",
       "properties": "物件",
-      "content": "画像"
+      "content": "画像",
+      "blog": "ブログ"
     },
     "reservations": {
       "title": "予約管理",
@@ -442,6 +444,99 @@
         "deleteFailed": "削除失敗",
         "confirmDelete": "このスライドを削除してもよろしいですか？"
       }
+    },
+    "blog": {
+      "title": "ブログ記事",
+      "createNew": "新規作成",
+      "noPosts": "まだブログ記事がありません。最初の記事を作成してください。",
+      "noExcerpt": "抜粋なし",
+      "published": "公開済み",
+      "draft": "下書き",
+      "featured": "注目",
+      "by": "著者",
+      "view": "表示",
+      "edit": "編集",
+      "delete": "削除",
+      "confirmDelete": "このブログ記事を削除してもよろしいですか？",
+      "deleteFailed": "ブログ記事の削除に失敗しました"
+    },
+    "blogEditor": {
+      "pageTitle": "ブログ記事を作成",
+      "editPageTitle": "ブログ記事を編集",
+      "backToBlog": "ブログに戻る",
+      "title": "タイトル",
+      "titlePlaceholder": "ブログ記事のタイトルを入力...",
+      "slug": "URLスラッグ",
+      "slugPlaceholder": "url-friendly-slug",
+      "excerpt": "抜粋",
+      "excerptPlaceholder": "記事の簡単な説明...",
+      "content": "コンテンツ",
+      "contentPlaceholder": "ブログ記事を書き始めてください...",
+      "featuredImage": "アイキャッチ画像",
+      "uploadImage": "クリックしてアップロード",
+      "changeImage": "変更",
+      "removeImage": "削除",
+      "author": "著者",
+      "authorPlaceholder": "著者名",
+      "status": "ステータス",
+      "published": "公開済み",
+      "draft": "下書き",
+      "featured": "注目記事",
+      "featuredDescription": "注目記事は最初に表示されます",
+      "saveDraft": "下書き保存",
+      "publish": "公開",
+      "update": "更新",
+      "saving": "保存中...",
+      "publishing": "公開中...",
+      "validation": {
+        "titleRequired": "タイトルは必須です",
+        "slugRequired": "URLスラッグは必須です",
+        "contentRequired": "コンテンツは必須です",
+        "authorRequired": "著者は必須です"
+      },
+      "success": {
+        "created": "ブログ記事が正常に作成されました",
+        "updated": "ブログ記事が正常に更新されました"
+      },
+      "error": {
+        "createFailed": "ブログ記事の作成に失敗しました",
+        "updateFailed": "ブログ記事の更新に失敗しました",
+        "uploadFailed": "画像のアップロードに失敗しました"
+      },
+      "toolbar": {
+        "bold": "太字",
+        "italic": "斜体",
+        "underline": "下線",
+        "strikethrough": "取り消し線",
+        "heading1": "見出し1",
+        "heading2": "見出し2",
+        "heading3": "見出し3",
+        "bulletList": "箇条書き",
+        "orderedList": "番号付きリスト",
+        "alignLeft": "左揃え",
+        "alignCenter": "中央揃え",
+        "alignRight": "右揃え",
+        "link": "リンクを追加",
+        "image": "画像を挿入",
+        "code": "コードブロック",
+        "quote": "引用",
+        "undo": "元に戻す",
+        "redo": "やり直し",
+        "textColor": "文字色"
+      }
     }
+  },
+  "blog": {
+    "title": "私たちのブログ",
+    "subtitle": "不動産の世界からの洞察、ヒント、ニュース",
+    "noPosts": "現在利用可能なブログ記事はありません。",
+    "checkBackSoon": "更新をお待ちください！",
+    "featured": "注目",
+    "minRead": "分で読める",
+    "backToBlog": "ブログに戻る",
+    "relatedPosts": "関連記事",
+    "ctaTitle": "始める準備はできましたか？",
+    "ctaDescription": "不動産の専門家との相談を予約してください。",
+    "ctaButton": "相談を予約"
   }
 }

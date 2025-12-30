@@ -33,6 +33,9 @@ export default function Header() {
             <Link href="/about" className="hover:text-amber-400 transition">
               {t('about')}
             </Link>
+            <Link href="/blog" className="hover:text-amber-400 transition">
+              {t('blog')}
+            </Link>
             <Link href="/contact" className="hover:text-amber-400 transition">
               {t('contact')}
             </Link>
@@ -88,6 +91,13 @@ export default function Header() {
               onClick={() => setIsOpen(false)}
             >
               {t('about')}
+            </Link>
+            <Link
+              href="/blog"
+              className="block py-2 hover:text-amber-400"
+              onClick={() => setIsOpen(false)}
+            >
+              {t('blog')}
             </Link>
             <Link
               href="/contact"

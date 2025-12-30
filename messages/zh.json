@@ -8,6 +8,7 @@
     "properties": "房产",
     "services": "服务",
     "about": "关于我们",
+    "blog": "博客",
     "contact": "联系我们",
     "bookConsultation": "预约咨询",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "预约",
       "properties": "房产",
-      "content": "图片"
+      "content": "图片",
+      "blog": "博客"
     },
     "reservations": {
       "title": "预约管理",
@@ -442,6 +444,99 @@
         "deleteFailed": "删除失败",
         "confirmDelete": "您确定要删除此幻灯片吗？"
       }
+    },
+    "blog": {
+      "title": "博客文章",
+      "createNew": "创建新文章",
+      "noPosts": "暂无博客文章。创建您的第一篇文章。",
+      "noExcerpt": "无摘要",
+      "published": "已发布",
+      "draft": "草稿",
+      "featured": "精选",
+      "by": "作者",
+      "view": "查看",
+      "edit": "编辑",
+      "delete": "删除",
+      "confirmDelete": "您确定要删除此博客文章吗？",
+      "deleteFailed": "删除博客文章失败"
+    },
+    "blogEditor": {
+      "pageTitle": "创建博客文章",
+      "editPageTitle": "编辑博客文章",
+      "backToBlog": "返回博客",
+      "title": "标题",
+      "titlePlaceholder": "输入博客文章标题...",
+      "slug": "URL别名",
+      "slugPlaceholder": "url-友好-别名",
+      "excerpt": "摘要",
+      "excerptPlaceholder": "文章简短描述...",
+      "content": "内容",
+      "contentPlaceholder": "开始撰写您的博客文章...",
+      "featuredImage": "特色图片",
+      "uploadImage": "点击上传",
+      "changeImage": "更换",
+      "removeImage": "移除",
+      "author": "作者",
+      "authorPlaceholder": "作者姓名",
+      "status": "状态",
+      "published": "已发布",
+      "draft": "草稿",
+      "featured": "精选文章",
+      "featuredDescription": "精选文章将优先显示",
+      "saveDraft": "保存草稿",
+      "publish": "发布",
+      "update": "更新",
+      "saving": "保存中...",
+      "publishing": "发布中...",
+      "validation": {
+        "titleRequired": "标题为必填项",
+        "slugRequired": "URL别名为必填项",
+        "contentRequired": "内容为必填项",
+        "authorRequired": "作者为必填项"
+      },
+      "success": {
+        "created": "博客文章创建成功",
+        "updated": "博客文章更新成功"
+      },
+      "error": {
+        "createFailed": "创建博客文章失败",
+        "updateFailed": "更新博客文章失败",
+        "uploadFailed": "上传图片失败"
+      },
+      "toolbar": {
+        "bold": "粗体",
+        "italic": "斜体",
+        "underline": "下划线",
+        "strikethrough": "删除线",
+        "heading1": "标题1",
+        "heading2": "标题2",
+        "heading3": "标题3",
+        "bulletList": "无序列表",
+        "orderedList": "有序列表",
+        "alignLeft": "左对齐",
+        "alignCenter": "居中",
+        "alignRight": "右对齐",
+        "link": "添加链接",
+        "image": "插入图片",
+        "code": "代码块",
+        "quote": "引用",
+        "undo": "撤销",
+        "redo": "重做",
+        "textColor": "文字颜色"
+      }
     }
+  },
+  "blog": {
+    "title": "我们的博客",
+    "subtitle": "房地产世界的见解、提示和新闻",
+    "noPosts": "目前没有可用的博客文章。",
+    "checkBackSoon": "请稍后再来查看更新！",
+    "featured": "精选",
+    "minRead": "分钟阅读",
+    "backToBlog": "返回博客",
+    "relatedPosts": "相关文章",
+    "ctaTitle": "准备开始了吗？",
+    "ctaDescription": "与我们的房地产专家预约咨询。",
+    "ctaButton": "预约咨询"
   }
 }

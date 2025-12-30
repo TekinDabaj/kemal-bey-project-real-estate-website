@@ -8,6 +8,7 @@
     "properties": "Properti",
     "services": "Layanan",
     "about": "Tentang",
+    "blog": "Blog",
     "contact": "Kontak",
     "bookConsultation": "Pesan Konsultasi",
     "brandName": "Premier Realty"
@@ -166,7 +167,8 @@
     "tabs": {
       "reservations": "Reservasi",
       "properties": "Properti",
-      "content": "Gambar"
+      "content": "Gambar",
+      "blog": "Blog"
     },
     "reservations": {
       "title": "Reservasi",
@@ -442,6 +444,99 @@
         "deleteFailed": "Gagal menghapus",
         "confirmDelete": "Apakah Anda yakin ingin menghapus slide ini?"
       }
+    },
+    "blog": {
+      "title": "Artikel Blog",
+      "createNew": "Buat Baru",
+      "noPosts": "Belum ada artikel blog. Buat artikel pertama Anda.",
+      "noExcerpt": "Tidak ada ringkasan",
+      "published": "Dipublikasikan",
+      "draft": "Draf",
+      "featured": "Unggulan",
+      "by": "Oleh",
+      "view": "Lihat",
+      "edit": "Edit",
+      "delete": "Hapus",
+      "confirmDelete": "Apakah Anda yakin ingin menghapus artikel ini?",
+      "deleteFailed": "Gagal menghapus artikel blog"
+    },
+    "blogEditor": {
+      "pageTitle": "Buat Artikel Blog",
+      "editPageTitle": "Edit Artikel Blog",
+      "backToBlog": "Kembali ke Blog",
+      "title": "Judul",
+      "titlePlaceholder": "Masukkan judul artikel...",
+      "slug": "Slug URL",
+      "slugPlaceholder": "slug-ramah-url",
+      "excerpt": "Ringkasan",
+      "excerptPlaceholder": "Deskripsi singkat artikel...",
+      "content": "Konten",
+      "contentPlaceholder": "Mulai menulis artikel blog Anda...",
+      "featuredImage": "Gambar Unggulan",
+      "uploadImage": "Klik untuk mengunggah",
+      "changeImage": "Ubah",
+      "removeImage": "Hapus",
+      "author": "Penulis",
+      "authorPlaceholder": "Nama penulis",
+      "status": "Status",
+      "published": "Dipublikasikan",
+      "draft": "Draf",
+      "featured": "Artikel Unggulan",
+      "featuredDescription": "Artikel unggulan ditampilkan pertama",
+      "saveDraft": "Simpan Draf",
+      "publish": "Publikasikan",
+      "update": "Perbarui",
+      "saving": "Menyimpan...",
+      "publishing": "Mempublikasikan...",
+      "validation": {
+        "titleRequired": "Judul wajib diisi",
+        "slugRequired": "Slug URL wajib diisi",
+        "contentRequired": "Konten wajib diisi",
+        "authorRequired": "Penulis wajib diisi"
+      },
+      "success": {
+        "created": "Artikel blog berhasil dibuat",
+        "updated": "Artikel blog berhasil diperbarui"
+      },
+      "error": {
+        "createFailed": "Gagal membuat artikel blog",
+        "updateFailed": "Gagal memperbarui artikel blog",
+        "uploadFailed": "Gagal mengunggah gambar"
+      },
+      "toolbar": {
+        "bold": "Tebal",
+        "italic": "Miring",
+        "underline": "Garis Bawah",
+        "strikethrough": "Coret",
+        "heading1": "Judul 1",
+        "heading2": "Judul 2",
+        "heading3": "Judul 3",
+        "bulletList": "Daftar Poin",
+        "orderedList": "Daftar Bernomor",
+        "alignLeft": "Rata Kiri",
+        "alignCenter": "Rata Tengah",
+        "alignRight": "Rata Kanan",
+        "link": "Tambah Tautan",
+        "image": "Sisipkan Gambar",
+        "code": "Blok Kode",
+        "quote": "Kutipan",
+        "undo": "Urungkan",
+        "redo": "Ulangi",
+        "textColor": "Warna Teks"
+      }
     }
+  },
+  "blog": {
+    "title": "Blog Kami",
+    "subtitle": "Wawasan, tips, dan berita dari dunia properti",
+    "noPosts": "Tidak ada artikel blog tersedia saat ini.",
+    "checkBackSoon": "Silakan periksa kembali untuk pembaruan!",
+    "featured": "Unggulan",
+    "minRead": "menit baca",
+    "backToBlog": "Kembali ke Blog",
+    "relatedPosts": "Artikel Terkait",
+    "ctaTitle": "Siap untuk memulai?",
+    "ctaDescription": "Pesan konsultasi dengan ahli properti kami.",
+    "ctaButton": "Pesan Konsultasi"
   }
 }
