@@ -22,12 +22,19 @@ export type AdminUser = {
   created_at: string
 }
 
+export type RoomSpec = {
+  name: string
+  area: number
+}
+
 export type Property = {
   id: string
   title: string
   description: string | null
   price: number | null
   location: string | null
+  latitude: number | null
+  longitude: number | null
   bedrooms: number | null
   bathrooms: number | null
   area: number | null
@@ -35,6 +42,17 @@ export type Property = {
   status: 'active' | 'sold' | 'rented' | 'inactive'
   featured: boolean
   images: string[]
+  floor_plans: string[] | null
+  rooms: RoomSpec[] | null
+  amenities: string[] | null
+  year_built: number | null
+  parking_spaces: number | null
+  heating_type: string | null
+  cooling_type: string | null
+  property_type: string | null
+  floor_number: number | null
+  total_floors: number | null
+  furnished: boolean | null
   created_at: string
   updated_at: string
 }

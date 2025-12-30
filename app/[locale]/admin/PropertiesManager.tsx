@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
+import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Property } from '@/types/database'
-import { Plus, Pencil, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react'
+import { Plus, Pencil, Trash2, Image as ImageIcon, ExternalLink } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 type Props = {
@@ -12,155 +14,12 @@ type Props = {
 
 export default function PropertiesManager({ initialProperties }: Props) {
   const t = useTranslations('admin.properties')
-  const tCommon = useTranslations('common')
+  const params = useParams()
+  const locale = params.locale as string || 'en'
   const [properties, setProperties] = useState(initialProperties)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [editingProperty, setEditingProperty] = useState<Property | null>(null)
-  const [uploading, setUploading] = useState(false)
-  const [formImages, setFormImages] = useState<string[]>([])
-  const fileInputRef = useRef<HTMLInputElement>(null)
   const supabase = createClient()
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`
-
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    price: '',
-    location: '',
-    bedrooms: '',
-    bathrooms: '',
-    area: '',
-    type: 'sale' as 'sale' | 'rent',
-    status: 'active' as 'active' | 'sold' | 'rented' | 'inactive',
-    featured: false
-  })
-
-  function openModal(property?: Property) {
-    if (property) {
-      setEditingProperty(property)
-      setFormData({
-        title: property.title,
-        description: property.description || '',
-        price: property.price?.toString() || '',
-        location: property.location || '',
-        bedrooms: property.bedrooms?.toString() || '',
-        bathrooms: property.bathrooms?.toString() || '',
-        area: property.area?.toString() || '',
-        type: property.type || 'sale',
-        status: property.status,
-        featured: property.featured
-      })
-      setFormImages(property.images || [])
-    } else {
-      setEditingProperty(null)
-      setFormData({
-        title: '',
-        description: '',
-        price: '',
-        location: '',
-        bedrooms: '',
-        bathrooms: '',
-        area: '',
-        type: 'sale',
-        status: 'active',
-        featured: false
-      })
-      setFormImages([])
-    }
-    setIsModalOpen(true)
-  }
-
-  function closeModal() {
-    setIsModalOpen(false)
-    setEditingProperty(null)
-  }
-
-  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = e.target.files
-    if (!files || files.length === 0) return
-
-    setUploading(true)
-
-    for (const file of Array.from(files)) {
-      const fileExt = file.name.split('.').pop()
-      const fileName = `properties/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
-
-      const { error } = await supabase.storage
-        .from('images')
-        .upload(fileName, file)
-
-      if (!error) {
-        setFormImages(prev => [...prev, fileName])
-      } else {
-        console.error('Upload error:', error)
-        alert(`Failed to upload ${file.name}`)
-      }
-    }
-
-    setUploading(false)
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ''
-    }
-  }
-
-  async function removeImage(fileName: string) {
-    const { error } = await supabase.storage
-      .from('images')
-      .remove([fileName])
-
-    if (!error) {
-      setFormImages(formImages.filter(img => img !== fileName))
-    }
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-
-    const propertyData = {
-      title: formData.title,
-      description: formData.description || null,
-      price: formData.price ? parseFloat(formData.price) : null,
-      location: formData.location || null,
-      bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : null,
-      bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : null,
-      area: formData.area ? parseFloat(formData.area) : null,
-      type: formData.type,
-      status: formData.status,
-      featured: formData.featured,
-      images: formImages,
-      updated_at: new Date().toISOString()
-    }
-
-    if (editingProperty) {
-      const { data, error } = await supabase
-        .from('properties')
-        .update(propertyData)
-        .eq('id', editingProperty.id)
-        .select()
-        .single()
-
-      if (!error && data) {
-        setProperties(properties.map(p => p.id === editingProperty.id ? data : p))
-        closeModal()
-      } else {
-        alert('Failed to update property')
-      }
-    } else {
-      const { data, error } = await supabase
-        .from('properties')
-        .insert(propertyData)
-        .select()
-        .single()
-
-      if (!error && data) {
-        setProperties([data, ...properties])
-        closeModal()
-      } else {
-        alert('Failed to create property')
-      }
-    }
-  }
 
   async function handleDelete(id: string) {
     if (!confirm(t('confirmDelete'))) return
@@ -196,12 +55,12 @@ export default function PropertiesManager({ initialProperties }: Props) {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-slate-900">{t('title')}</h2>
-        <button
-          onClick={() => openModal()}
+        <Link
+          href={`/${locale}/admin/listproperty`}
           className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-medium transition"
         >
           <Plus size={18} /> {t('addProperty')}
-        </button>
+        </Link>
       </div>
 
       {/* Properties List */}
@@ -210,7 +69,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
           {t('noProperties')}
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {properties.map((property) => (
             <div key={property.id} className="bg-white rounded-lg border border-slate-200 p-4 flex gap-4">
               {/* Thumbnail */}
@@ -229,18 +88,18 @@ export default function PropertiesManager({ initialProperties }: Props) {
               </div>
 
               {/* Info */}
-              <div className="flex-grow">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="font-semibold text-slate-900">{property.title}</h3>
-                    <p className="text-sm text-slate-500">{property.location || t('noLocation')}</p>
+              <div className="flex-grow min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-slate-900 truncate">{property.title}</h3>
+                    <p className="text-sm text-slate-500 truncate">{property.location || t('noLocation')}</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[property.status]}`}>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColors[property.status]}`}>
                       {statusLabels[property.status]}
                     </span>
                     {property.featured && (
-                      <span className="px-2 py-1 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                      <span className="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
                         {t('featured')}
                       </span>
                     )}
@@ -258,213 +117,54 @@ export default function PropertiesManager({ initialProperties }: Props) {
                   {property.bathrooms && <span>{property.bathrooms} {t('baths')}</span>}
                   {property.area && <span>{property.area} m²</span>}
                 </div>
+
+                {/* Property Type & Additional Info */}
+                <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
+                  {property.property_type && (
+                    <span className="px-2 py-0.5 bg-slate-100 rounded">
+                      {property.property_type}
+                    </span>
+                  )}
+                  {property.amenities && property.amenities.length > 0 && (
+                    <span className="text-slate-400">
+                      +{property.amenities.length} amenities
+                    </span>
+                  )}
+                  {property.rooms && property.rooms.length > 0 && (
+                    <span className="text-slate-400">
+                      {property.rooms.length} rooms detailed
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Actions */}
               <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={() => openModal(property)}
+                <Link
+                  href={`/${locale}/properties/${property.id}`}
+                  target="_blank"
                   className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition"
+                  title="View"
+                >
+                  <ExternalLink size={16} />
+                </Link>
+                <Link
+                  href={`/${locale}/admin/listproperty?edit=${property.id}`}
+                  className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition"
+                  title={t('editProperty')}
                 >
                   <Pencil size={16} />
-                </button>
+                </Link>
                 <button
                   onClick={() => handleDelete(property.id)}
                   className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
+                  title="Delete"
                 >
                   <Trash2 size={16} />
                 </button>
               </div>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-6 border-b border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-900">
-                {editingProperty ? t('editProperty') : t('addProperty')}
-              </h3>
-              <button onClick={closeModal} className="text-slate-400 hover:text-slate-600">
-                <X size={24} />
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              {/* Images */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">{t('images')}</label>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {formImages.map((img) => (
-                    <div key={img} className="relative w-24 h-24 rounded-lg overflow-hidden">
-                      <img src={`${bucketUrl}${img}`} alt="" className="w-full h-full object-cover" />
-                      <button
-                        type="button"
-                        onClick={() => removeImage(img)}
-                        className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full"
-                      >
-                        <X size={12} />
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    disabled={uploading}
-                    className="w-24 h-24 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center text-slate-400 hover:border-amber-400 hover:text-amber-500 transition"
-                  >
-                    {uploading ? '...' : <Upload size={24} />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Title */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">{t('propertyTitle')} *</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
-
-              {/* Description */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">{t('description')}</label>
-                <textarea
-                  rows={3}
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
-
-              {/* Price & Location */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('price')}</label>
-                  <input
-                    type="number"
-                    value={formData.price}
-                    onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('location')}</label>
-                  <input
-                    type="text"
-                    value={formData.location}
-                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Bedrooms, Bathrooms, Area */}
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('bedrooms')}</label>
-                  <input
-                    type="number"
-                    value={formData.bedrooms}
-                    onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('bathrooms')}</label>
-                  <input
-                    type="number"
-                    value={formData.bathrooms}
-                    onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('area')} (m²)</label>
-                  <input
-                    type="number"
-                    value={formData.area}
-                    onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Type & Status */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('type')}</label>
-                  <select
-                    value={formData.type}
-                    onChange={(e) => setFormData({ ...formData, type: e.target.value as 'sale' | 'rent' })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  >
-                    <option value="sale">{t('forSale')}</option>
-                    <option value="rent">{t('forRent')}</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('status')}</label>
-                  <select
-                    value={formData.status}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'sold' | 'rented' | 'inactive' })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  >
-                    <option value="active">{t('active')}</option>
-                    <option value="sold">{t('sold')}</option>
-                    <option value="rented">{t('rented')}</option>
-                    <option value="inactive">{t('inactive')}</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Featured */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="featured"
-                  checked={formData.featured}
-                  onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                  className="w-4 h-4 text-amber-500 rounded focus:ring-amber-500"
-                />
-                <label htmlFor="featured" className="text-sm font-medium text-slate-700">
-                  {t('featuredDescription')}
-                </label>
-              </div>
-
-              {/* Submit */}
-              <div className="flex gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition"
-                >
-                  {tCommon('cancel')}
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg font-medium transition"
-                >
-                  {editingProperty ? t('updateProperty') : t('createProperty')}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
       )}
     </div>

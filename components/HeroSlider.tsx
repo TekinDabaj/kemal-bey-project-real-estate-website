@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { HeroSlide } from '@/types/database'
@@ -14,46 +14,56 @@ export default function HeroSlider({ slides }: Props) {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const sliderRef = useRef<HTMLDivElement>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const isTransitioningRef = useRef(false)
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`
 
   // Create extended slides array with clones for infinite loop
-  const extendedSlides = slides.length > 0 
+  const extendedSlides = slides.length > 0
     ? [slides[slides.length - 1], ...slides, slides[0]]
     : []
 
-  const goToNext = useCallback(() => {
-    if (isTransitioning) return
+  // Keep ref in sync with state
+  useEffect(() => {
+    isTransitioningRef.current = isTransitioning
+  }, [isTransitioning])
+
+  const goToNext = () => {
+    if (isTransitioningRef.current) return
     setIsTransitioning(true)
     setCurrentIndex((prev) => prev + 1)
-  }, [isTransitioning])
+  }
 
-  const goToPrev = useCallback(() => {
-    if (isTransitioning) return
+  const goToPrev = () => {
+    if (isTransitioningRef.current) return
     setIsTransitioning(true)
     setCurrentIndex((prev) => prev - 1)
-  }, [isTransitioning])
+  }
 
-  const goToSlide = useCallback((index: number) => {
-    if (isTransitioning || index + 1 === currentIndex) return
+  const goToSlide = (index: number) => {
+    if (isTransitioningRef.current || index + 1 === currentIndex) return
     setIsTransitioning(true)
     setCurrentIndex(index + 1)
-  }, [isTransitioning, currentIndex])
+  }
 
-  // Start/stop auto-slide
-  const startAutoSlide = useCallback(() => {
-    if (slides.length <= 1) return
-    stopAutoSlide()
-    intervalRef.current = setInterval(() => {
-      goToNext()
-    }, 5000)
-  }, [slides.length, goToNext])
-
-  const stopAutoSlide = useCallback(() => {
+  // Stop auto-slide
+  const stopAutoSlide = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
     }
-  }, [])
+  }
+
+  // Start auto-slide
+  const startAutoSlide = () => {
+    if (slides.length <= 1) return
+    stopAutoSlide()
+    intervalRef.current = setInterval(() => {
+      if (!isTransitioningRef.current) {
+        setIsTransitioning(true)
+        setCurrentIndex((prev) => prev + 1)
+      }
+    }, 5000)
+  }
 
   // Handle visibility change
   useEffect(() => {
@@ -65,6 +75,7 @@ export default function HeroSlider({ slides }: Props) {
         if (sliderRef.current) {
           sliderRef.current.style.transition = 'none'
           setCurrentIndex(1)
+          setIsTransitioning(false)
           setTimeout(() => {
             if (sliderRef.current) {
               sliderRef.current.style.transition = 'transform 700ms ease-in-out'
@@ -76,17 +87,19 @@ export default function HeroSlider({ slides }: Props) {
     }
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    
+
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
-  }, [startAutoSlide, stopAutoSlide])
+  }, [slides.length])
 
   // Start auto-slide on mount
   useEffect(() => {
-    startAutoSlide()
+    if (slides.length > 1) {
+      startAutoSlide()
+    }
     return () => stopAutoSlide()
-  }, [startAutoSlide, stopAutoSlide])
+  }, [slides.length])
 
   // Handle seamless loop transition
   useEffect(() => {
@@ -94,7 +107,7 @@ export default function HeroSlider({ slides }: Props) {
 
     const handleTransitionEnd = () => {
       setIsTransitioning(false)
-      
+
       if (currentIndex === 0) {
         if (sliderRef.current) {
           sliderRef.current.style.transition = 'none'
