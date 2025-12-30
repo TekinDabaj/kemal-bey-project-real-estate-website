@@ -1,65 +1,75 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { ArrowRight, Building, Users, TrendingUp, Clock } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div>
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-20 lg:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+              Expert Real Estate <span className="text-amber-400">Guidance</span> You Can Trust
+            </h1>
+            <p className="text-xl text-slate-300 mb-8">
+              Whether you're buying, selling, or investing, our consultants provide personalized advice to help you make confident decisions.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/book"
+                className="bg-amber-500 hover:bg-amber-600 text-slate-900 px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+              >
+                Book a Consultation <ArrowRight size={20} />
+              </Link>
+              <Link
+                href="/services"
+                className="border border-slate-500 hover:border-amber-400 hover:text-amber-400 px-6 py-3 rounded-lg font-semibold transition"
+              >
+                Our Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">Why Choose Us</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Building, title: 'Market Expertise', desc: 'Deep knowledge of local and regional real estate markets' },
+              { icon: Users, title: 'Personal Approach', desc: 'Tailored advice based on your unique needs and goals' },
+              { icon: TrendingUp, title: 'Data-Driven', desc: 'Decisions backed by comprehensive market analysis' },
+              { icon: Clock, title: 'Flexible Hours', desc: 'Available Monday to Saturday, 8 AM to 8 PM' },
+            ].map((item, i) => (
+              <div key={i} className="text-center p-6">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-100 text-amber-600 mb-4">
+                  <item.icon size={28} />
+                </div>
+                <h3 className="font-semibold text-lg mb-2 text-slate-900">{item.title}</h3>
+                <p className="text-slate-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 bg-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-slate-900">Ready to Get Started?</h2>
+          <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
+            Book a free consultation today and take the first step toward your real estate goals.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/book"
+            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-lg font-semibold transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Schedule Appointment <ArrowRight size={20} />
+          </Link>
         </div>
-      </main>
+      </section>
     </div>
-  );
+  )
 }
