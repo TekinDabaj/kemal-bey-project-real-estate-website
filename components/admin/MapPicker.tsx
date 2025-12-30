@@ -19,11 +19,11 @@ type Props = {
   }
 }
 
-// Loader for Google Maps with modern async pattern
+// Loader for Google Maps with callback pattern
 const loadGoogleMapsScript = (apiKey: string): Promise<void> => {
   return new Promise((resolve, reject) => {
-    // Already loaded - check if google.maps exists and has importLibrary
-    if (typeof window !== 'undefined' && window.google?.maps && typeof window.google.maps.importLibrary === 'function') {
+    // Already loaded
+    if (typeof window !== 'undefined' && window.google?.maps?.Map) {
       resolve()
       return
     }
@@ -31,17 +31,30 @@ const loadGoogleMapsScript = (apiKey: string): Promise<void> => {
     // Check if script is already loading
     const existingScript = document.querySelector('script[src*="maps.googleapis.com"]')
     if (existingScript) {
-      existingScript.addEventListener('load', () => resolve())
-      existingScript.addEventListener('error', () => reject(new Error('Failed to load Google Maps')))
+      // Wait for existing script to load
+      const checkLoaded = () => {
+        if (window.google?.maps?.Map) {
+          resolve()
+        } else {
+          setTimeout(checkLoaded, 100)
+        }
+      }
+      checkLoaded()
       return
     }
 
-    // Create and load script with async loading
+    // Create callback function
+    const callbackName = '__googleMapsCallback'
+    ;(window as unknown as Record<string, () => void>)[callbackName] = () => {
+      resolve()
+      delete (window as unknown as Record<string, () => void>)[callbackName]
+    }
+
+    // Create and load script with libraries
     const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&loading=async`
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,marker&callback=${callbackName}`
     script.async = true
     script.defer = true
-    script.onload = () => resolve()
     script.onerror = () => reject(new Error('Failed to load Google Maps script'))
     document.head.appendChild(script)
   })
@@ -77,15 +90,10 @@ export default function MapPicker({ isOpen, onClose, onConfirm, initialLat, init
       // Load the script
       await loadGoogleMapsScript(apiKey)
 
-      // Import required libraries using modern importLibrary
-      const { Map } = await google.maps.importLibrary('maps') as google.maps.MapsLibrary
-      const { AdvancedMarkerElement } = await google.maps.importLibrary('marker') as google.maps.MarkerLibrary
-      const { Autocomplete } = await google.maps.importLibrary('places') as google.maps.PlacesLibrary
-
       const initialPosition = { lat: selectedLat, lng: selectedLng }
 
       // Create map - mapId required for AdvancedMarkerElement
-      const map = new Map(mapRef.current, {
+      const map = new google.maps.Map(mapRef.current, {
         center: initialPosition,
         zoom: 14,
         mapId: '16f5308c3b673f9e269fee5c', // Replace with your Map ID from Google Cloud Console
@@ -117,7 +125,7 @@ export default function MapPicker({ isOpen, onClose, onConfirm, initialLat, init
       `
 
       // Create AdvancedMarkerElement
-      const marker = new AdvancedMarkerElement({
+      const marker = new google.maps.marker.AdvancedMarkerElement({
         map,
         position: initialPosition,
         content: markerContent,
@@ -147,7 +155,7 @@ export default function MapPicker({ isOpen, onClose, onConfirm, initialLat, init
 
       // Setup Autocomplete for search
       if (searchInputRef.current) {
-        const autocomplete = new Autocomplete(searchInputRef.current, {
+        const autocomplete = new google.maps.places.Autocomplete(searchInputRef.current, {
           fields: ['geometry', 'name', 'formatted_address'],
         })
 
