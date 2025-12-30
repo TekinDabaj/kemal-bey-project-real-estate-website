@@ -4,19 +4,23 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { format } from 'date-fns'
-import { LogOut, Calendar, Clock, User, Mail, Phone, MessageSquare, Check, X, Trash2, CalendarDays, Image } from 'lucide-react'
-import { Reservation } from '@/types/database'
+import { LogOut, Calendar, Clock, User, Mail, Phone, MessageSquare, Check, X, Trash2, CalendarDays, Image, Building2 } from 'lucide-react'
+import { Reservation, Property } from '@/types/database'
 import ContentEditor from './ContentEditor'
+import PropertiesManager from './PropertiesManager'
 
 type Props = {
   reservations: Reservation[]
-  images: string[]
+  images: {
+    homepage: string[]
+  }
+  properties: Property[]
 }
 
-export default function AdminDashboard({ reservations: initialReservations, images }: Props) {
+export default function AdminDashboard({ reservations: initialReservations, images, properties }: Props) {
   const [reservations, setReservations] = useState(initialReservations)
   const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all')
-  const [activeTab, setActiveTab] = useState<'reservations' | 'content'>('reservations')
+  const [activeTab, setActiveTab] = useState<'reservations' | 'properties' | 'content'>('reservations')
   const router = useRouter()
   const supabase = createClient()
 
@@ -89,6 +93,16 @@ export default function AdminDashboard({ reservations: initialReservations, imag
               <CalendarDays size={18} /> Reservations
             </button>
             <button
+              onClick={() => setActiveTab('properties')}
+              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
+                activeTab === 'properties'
+                  ? 'border-amber-500 text-amber-600'
+                  : 'border-transparent text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              <Building2 size={18} /> Properties
+            </button>
+            <button
               onClick={() => setActiveTab('content')}
               className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
                 activeTab === 'content'
@@ -103,7 +117,7 @@ export default function AdminDashboard({ reservations: initialReservations, imag
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {activeTab === 'reservations' ? (
+        {activeTab === 'reservations' && (
           <>
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -223,7 +237,13 @@ export default function AdminDashboard({ reservations: initialReservations, imag
               )}
             </div>
           </>
-        ) : (
+        )}
+
+        {activeTab === 'properties' && (
+          <PropertiesManager initialProperties={properties} />
+        )}
+
+        {activeTab === 'content' && (
           <ContentEditor initialImages={images} />
         )}
       </div>

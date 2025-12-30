@@ -18,6 +18,7 @@ export default function Header() {
           {/* Desktop nav */}
           <div className="hidden md:flex space-x-8">
             <Link href="/" className="hover:text-amber-400 transition">Home</Link>
+            <Link href="/properties" className="hover:text-amber-400 transition">Properties</Link>
             <Link href="/services" className="hover:text-amber-400 transition">Services</Link>
             <Link href="/about" className="hover:text-amber-400 transition">About</Link>
             <Link href="/contact" className="hover:text-amber-400 transition">Contact</Link>
@@ -39,6 +40,7 @@ export default function Header() {
         {isOpen && (
           <div className="md:hidden pb-4 space-y-2">
             <Link href="/" className="block py-2 hover:text-amber-400" onClick={() => setIsOpen(false)}>Home</Link>
+            <Link href="/properties" className="block py-2 hover:text-amber-400" onClick={() => setIsOpen(false)}>Properties</Link>
             <Link href="/services" className="block py-2 hover:text-amber-400" onClick={() => setIsOpen(false)}>Services</Link>
             <Link href="/about" className="block py-2 hover:text-amber-400" onClick={() => setIsOpen(false)}>About</Link>
             <Link href="/contact" className="block py-2 hover:text-amber-400" onClick={() => setIsOpen(false)}>Contact</Link>

@@ -1,23 +1,40 @@
 export type Reservation = {
-    id: string
-    name: string
-    email: string
-    phone: string
-    message: string | null
-    date: string
-    time: string
-    status: 'pending' | 'confirmed' | 'cancelled'
-    created_at: string
-  }
-  
-  export type SiteContent = {
-    id: string
-    content: Record<string, any>
-    updated_at: string
-  }
-  
-  export type AdminUser = {
-    id: string
-    email: string
-    created_at: string
-  }
+  id: string
+  name: string
+  email: string
+  phone: string
+  message: string | null
+  date: string
+  time: string
+  status: 'pending' | 'confirmed' | 'cancelled'
+  created_at: string
+}
+
+export type SiteContent = {
+  id: string
+  content: Record<string, any>
+  updated_at: string
+}
+
+export type AdminUser = {
+  id: string
+  email: string
+  created_at: string
+}
+
+export type Property = {
+  id: string
+  title: string
+  description: string | null
+  price: number | null
+  location: string | null
+  bedrooms: number | null
+  bathrooms: number | null
+  area: number | null
+  type: 'sale' | 'rent' | null
+  status: 'active' | 'sold' | 'rented' | 'inactive'
+  featured: boolean
+  images: string[]
+  created_at: string
+  updated_at: string
+}

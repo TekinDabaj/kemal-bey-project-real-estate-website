@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Building, Users, TrendingUp, Clock } from 'lucide-react'
+import Gallery from '@/components/Gallery'
 
 export default function Home() {
   return (
@@ -54,6 +55,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Gallery */}
+      <Gallery />
 
       {/* CTA */}
       <section className="py-16 bg-slate-100">
