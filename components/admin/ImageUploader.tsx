@@ -20,7 +20,6 @@ type Props = {
     dragDrop: string
     maxSize: string
     uploading: string
-    uploadProgress: string
     uploadComplete: string
     removeImage: string
     setCover: string

@@ -97,7 +97,6 @@ export default async function ListPropertyPage({
       dragDrop: t('media.dragDrop'),
       maxSize: t('media.maxSize'),
       uploading: t('media.uploading'),
-      uploadProgress: t('media.uploadProgress'),
       uploadComplete: t('media.uploadComplete'),
       removeImage: t('media.removeImage'),
       setCover: t('media.setCover'),
