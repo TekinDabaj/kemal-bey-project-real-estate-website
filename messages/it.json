@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Consulenza Immobiliare",
+    "description": "Servizi professionali di consulenza immobiliare"
+  },
+  "navigation": {
+    "home": "Home",
+    "properties": "Proprieta",
+    "services": "Servizi",
+    "about": "Chi siamo",
+    "contact": "Contatti",
+    "bookConsultation": "Prenota consulenza",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Perche sceglierci",
+    "features": {
+      "marketExpertise": {
+        "title": "Competenza di mercato",
+        "description": "Conoscenza approfondita dei mercati immobiliari locali e regionali"
+      },
+      "personalApproach": {
+        "title": "Approccio personale",
+        "description": "Consulenza su misura in base alle tue esigenze e obiettivi unici"
+      },
+      "dataDriven": {
+        "title": "Basato sui dati",
+        "description": "Decisioni supportate da analisi di mercato complete"
+      },
+      "flexibleHours": {
+        "title": "Orari flessibili",
+        "description": "Disponibile dal lunedi al sabato, dalle 8:00 alle 20:00"
+      }
+    },
+    "cta": {
+      "title": "Pronto per iniziare?",
+      "description": "Prenota oggi una consulenza gratuita e fai il primo passo verso i tuoi obiettivi immobiliari.",
+      "button": "Fissa un appuntamento"
+    }
+  },
+  "booking": {
+    "title": "Prenota una Consulenza",
+    "subtitle": "Programma la tua consulenza gratuita con i nostri esperti immobiliari",
+    "selectDate": "Seleziona Data",
+    "selectTime": "Seleziona Orario",
+    "yourDetails": "I Tuoi Dati",
+    "step": "Passo",
+    "of": "di",
+    "name": "Nome Completo",
+    "email": "Indirizzo Email",
+    "phone": "Numero di Telefono",
+    "message": "Messaggio",
+    "messagePlaceholder": "Raccontaci le tue esigenze immobiliari o eventuali domande...",
+    "optional": "facoltativo",
+    "required": "obbligatorio",
+    "confirmBooking": "Conferma Prenotazione",
+    "booking": "Prenotazione in corso...",
+    "booked": "Prenotato",
+    "available": "Disponibile",
+    "unavailable": "Non Disponibile",
+    "success": {
+      "title": "Prenotazione Confermata!",
+      "subtitle": "La tua consulenza e stata programmata con successo",
+      "scheduledFor": "Programmata per",
+      "at": "alle",
+      "confirmationSent": "Un'email di conferma e stata inviata a",
+      "whatNext": "Cosa succede ora?",
+      "step1": "Riceverai un'email di conferma con i dettagli dell'incontro",
+      "step2": "Il nostro consulente si preparera per la tua sessione",
+      "step3": "Unisciti a noi all'orario programmato per la tua consulenza",
+      "backToHome": "Torna alla Home"
+    },
+    "error": {
+      "title": "Qualcosa e andato storto",
+      "description": "Per favore riprova o contattaci direttamente.",
+      "tryAgain": "Riprova"
+    },
+    "workingHours": "Disponibile Lunedi - Sabato, 8:00 - 20:00",
+    "freeConsultation": "Consulenza gratuita di 30 minuti",
+    "noObligation": "Senza impegno, annulla in qualsiasi momento"
+  },
+  "common": {
+    "learnMore": "Scopri di piu",
+    "viewAll": "Vedi tutto",
+    "readMore": "Leggi di piu",
+    "submit": "Invia",
+    "cancel": "Annulla",
+    "close": "Chiudi",
+    "loading": "Caricamento...",
+    "error": "Si e verificato un errore",
+    "success": "Successo"
+  },
+  "admin": {
+    "title": "Pannello Admin",
+    "logout": "Esci",
+    "login": {
+      "title": "Accesso Admin",
+      "email": "Email",
+      "password": "Password",
+      "signIn": "Accedi",
+      "signingIn": "Accesso in corso...",
+      "invalidCredentials": "Email o password non validi",
+      "noAccess": "Non hai accesso amministratore"
+    },
+    "tabs": {
+      "reservations": "Prenotazioni",
+      "properties": "Proprieta",
+      "content": "Immagini"
+    },
+    "reservations": {
+      "title": "Prenotazioni",
+      "stats": { "total": "Totale", "pending": "In attesa", "confirmed": "Confermate", "cancelled": "Annullate" },
+      "filter": { "all": "Tutte", "pending": "In attesa", "confirmed": "Confermate", "cancelled": "Annullate" },
+      "noReservations": "Nessuna prenotazione trovata",
+      "booked": "Prenotato",
+      "actions": { "confirm": "Conferma", "cancel": "Annulla", "delete": "Elimina" },
+      "confirmDelete": "Sei sicuro di voler eliminare questa prenotazione?",
+      "calendar": { "title": "Calendario Prenotazioni", "today": "Oggi", "noAppointments": "Nessun appuntamento", "appointments": "appuntamenti" }
+    },
+    "properties": {
+      "title": "Gestisci Proprieta", "addProperty": "Aggiungi Proprieta", "editProperty": "Modifica Proprieta",
+      "noProperties": "Nessuna proprieta ancora. Aggiungi la tua prima proprieta.",
+      "images": "Immagini", "propertyTitle": "Titolo", "description": "Descrizione", "price": "Prezzo", "location": "Posizione",
+      "bedrooms": "Camere", "bathrooms": "Bagni", "area": "Superficie", "type": "Tipo",
+      "forSale": "In Vendita", "forRent": "In Affitto", "status": "Stato",
+      "active": "Attivo", "sold": "Venduto", "rented": "Affittato", "inactive": "Inattivo",
+      "featured": "In Evidenza", "featuredDescription": "Proprieta in evidenza (mostrata per prima)",
+      "createProperty": "Crea Proprieta", "updateProperty": "Aggiorna Proprieta",
+      "confirmDelete": "Sei sicuro di voler eliminare questa proprieta?",
+      "noLocation": "Nessuna posizione", "beds": "cam.", "baths": "bagni",
+      "uploadFailed": "Caricamento fallito", "updateFailed": "Aggiornamento fallito",
+      "createFailed": "Creazione fallita", "deleteFailed": "Eliminazione fallita"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Slider Hero", "description": "Immagini banner con testo sulla home page",
+        "addSlide": "Aggiungi Slide", "editSlide": "Modifica Slide",
+        "noSlides": "Nessuno slide ancora. Aggiungi il tuo primo slide hero.",
+        "backgroundImage": "Immagine di Sfondo", "slideTitle": "Titolo",
+        "titlePlaceholder": "Consulenza Immobiliare Esperta di cui Puoi Fidarti",
+        "highlight": "Testo Evidenziato", "highlightPlaceholder": "Esperta",
+        "highlightDescription": "Questo testo sara evidenziato in ambra. Deve far parte del titolo.",
+        "subtitle": "Sottotitolo", "subtitlePlaceholder": "Che tu stia comprando, vendendo o investendo...",
+        "activeLabel": "Attivo (visibile sulla home page)",
+        "createSlide": "Crea Slide", "updateSlide": "Aggiorna Slide",
+        "activate": "Attiva", "deactivate": "Disattiva",
+        "changeImage": "Cambia Immagine", "uploadImage": "Clicca per caricare immagine",
+        "recommendedSize": "Consigliato: 1920x1080", "uploading": "Caricamento...",
+        "pleaseUpload": "Per favore carica un'immagine",
+        "updateFailed": "Aggiornamento fallito", "createFailed": "Creazione fallita",
+        "deleteFailed": "Eliminazione fallita", "confirmDelete": "Sei sicuro di voler eliminare questo slide?"
+      }
+    }
+  }
+}

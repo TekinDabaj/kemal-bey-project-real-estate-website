@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(npm install:*)",
+      "Bash(dir:*)",
+      "Bash(powershell -Command \"Move-Item -Path ''page.tsx'' -Destination ''[locale]/''; Move-Item -Path ''about'' -Destination ''[locale]/''; Move-Item -Path ''book'' -Destination ''[locale]/''; Move-Item -Path ''contact'' -Destination ''[locale]/''; Move-Item -Path ''properties'' -Destination ''[locale]/''; Move-Item -Path ''services'' -Destination ''[locale]/''; Move-Item -Path ''admin'' -Destination ''[locale]/''\")",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}

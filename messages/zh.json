@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | 房地产咨询",
+    "description": "专业房地产咨询服务"
+  },
+  "navigation": {
+    "home": "首页",
+    "properties": "房产",
+    "services": "服务",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "bookConsultation": "预约咨询",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "为什么选择我们",
+    "features": {
+      "marketExpertise": {
+        "title": "市场专业知识",
+        "description": "对本地和区域房地产市场的深入了解"
+      },
+      "personalApproach": {
+        "title": "个性化服务",
+        "description": "根据您独特的需求和目标量身定制建议"
+      },
+      "dataDriven": {
+        "title": "数据驱动",
+        "description": "基于全面市场分析的决策支持"
+      },
+      "flexibleHours": {
+        "title": "灵活时间",
+        "description": "周一至周六，上午8点至晚上8点"
+      }
+    },
+    "cta": {
+      "title": "准备好开始了吗？",
+      "description": "今天就预约免费咨询，迈出实现房地产目标的第一步。",
+      "button": "预约咨询"
+    }
+  },
+  "booking": {
+    "title": "预约咨询",
+    "subtitle": "与我们的房地产专家预约免费咨询",
+    "selectDate": "选择日期",
+    "selectTime": "选择时间",
+    "yourDetails": "您的信息",
+    "step": "步骤",
+    "of": "/",
+    "name": "姓名",
+    "email": "电子邮箱",
+    "phone": "电话号码",
+    "message": "留言",
+    "messagePlaceholder": "请告诉我们您的房地产需求或任何问题...",
+    "optional": "可选",
+    "required": "必填",
+    "confirmBooking": "确认预约",
+    "booking": "预约中...",
+    "booked": "已预约",
+    "available": "可预约",
+    "unavailable": "不可用",
+    "success": {
+      "title": "预约成功！",
+      "subtitle": "您的咨询已成功安排",
+      "scheduledFor": "预约时间",
+      "at": "",
+      "confirmationSent": "确认邮件已发送至",
+      "whatNext": "接下来会发生什么？",
+      "step1": "您将收到包含会议详情的确认邮件",
+      "step2": "我们的顾问将为您的咨询做准备",
+      "step3": "在预定时间参加您的咨询",
+      "backToHome": "返回首页"
+    },
+    "error": {
+      "title": "出现错误",
+      "description": "请重试或直接联系我们。",
+      "tryAgain": "重试"
+    },
+    "workingHours": "周一至周六 上午8:00 - 晚上8:00",
+    "freeConsultation": "免费30分钟咨询",
+    "noObligation": "无任何义务，随时可取消"
+  },
+  "common": {
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "readMore": "阅读更多",
+    "submit": "提交",
+    "cancel": "取消",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "success": "成功"
+  },
+  "admin": {
+    "title": "管理面板",
+    "logout": "退出登录",
+    "login": {
+      "title": "管理员登录",
+      "email": "邮箱",
+      "password": "密码",
+      "signIn": "登录",
+      "signingIn": "登录中...",
+      "invalidCredentials": "邮箱或密码无效",
+      "noAccess": "您没有管理员权限"
+    },
+    "tabs": {
+      "reservations": "预约",
+      "properties": "房产",
+      "content": "图片"
+    },
+    "reservations": {
+      "title": "预约管理",
+      "stats": { "total": "总计", "pending": "待处理", "confirmed": "已确认", "cancelled": "已取消" },
+      "filter": { "all": "全部", "pending": "待处理", "confirmed": "已确认", "cancelled": "已取消" },
+      "noReservations": "未找到预约",
+      "booked": "已预约",
+      "actions": { "confirm": "确认", "cancel": "取消", "delete": "删除" },
+      "confirmDelete": "您确定要删除此预约吗？",
+      "calendar": { "title": "预约日历", "today": "今天", "noAppointments": "无预约", "appointments": "个预约" }
+    },
+    "properties": {
+      "title": "房产管理", "addProperty": "添加房产", "editProperty": "编辑房产",
+      "noProperties": "暂无房产。添加您的第一个房产。",
+      "images": "图片", "propertyTitle": "标题", "description": "描述", "price": "价格", "location": "位置",
+      "bedrooms": "卧室", "bathrooms": "浴室", "area": "面积", "type": "类型",
+      "forSale": "出售", "forRent": "出租", "status": "状态",
+      "active": "在售", "sold": "已售", "rented": "已租", "inactive": "下架",
+      "featured": "精选", "featuredDescription": "精选房产（优先展示）",
+      "createProperty": "创建房产", "updateProperty": "更新房产",
+      "confirmDelete": "您确定要删除此房产吗？",
+      "noLocation": "无位置", "beds": "室", "baths": "卫",
+      "uploadFailed": "上传失败", "updateFailed": "更新失败",
+      "createFailed": "创建失败", "deleteFailed": "删除失败"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "首页轮播", "description": "首页横幅图片和文字",
+        "addSlide": "添加幻灯片", "editSlide": "编辑幻灯片",
+        "noSlides": "暂无幻灯片。添加您的第一个首页幻灯片。",
+        "backgroundImage": "背景图片", "slideTitle": "标题",
+        "titlePlaceholder": "值得信赖的专业房地产咨询",
+        "highlight": "高亮文字", "highlightPlaceholder": "专业",
+        "highlightDescription": "此文字将以琥珀色高亮显示。必须是标题的一部分。",
+        "subtitle": "副标题", "subtitlePlaceholder": "无论您是购买、出售还是投资...",
+        "activeLabel": "激活（在首页显示）",
+        "createSlide": "创建幻灯片", "updateSlide": "更新幻灯片",
+        "activate": "激活", "deactivate": "停用",
+        "changeImage": "更换图片", "uploadImage": "点击上传图片",
+        "recommendedSize": "推荐尺寸：1920x1080", "uploading": "上传中...",
+        "pleaseUpload": "请上传图片",
+        "updateFailed": "更新失败", "createFailed": "创建失败",
+        "deleteFailed": "删除失败", "confirmDelete": "您确定要删除此幻灯片吗？"
+      }
+    }
+  }
+}

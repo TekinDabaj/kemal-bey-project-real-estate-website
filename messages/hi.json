@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | रियल एस्टेट परामर्श",
+    "description": "पेशेवर रियल एस्टेट परामर्श सेवाएं"
+  },
+  "navigation": {
+    "home": "होम",
+    "properties": "संपत्तियां",
+    "services": "सेवाएं",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क",
+    "bookConsultation": "परामर्श बुक करें",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "हमें क्यों चुनें",
+    "features": {
+      "marketExpertise": {
+        "title": "बाजार विशेषज्ञता",
+        "description": "स्थानीय और क्षेत्रीय रियल एस्टेट बाजारों का गहन ज्ञान"
+      },
+      "personalApproach": {
+        "title": "व्यक्तिगत दृष्टिकोण",
+        "description": "आपकी अनूठी जरूरतों और लक्ष्यों के आधार पर अनुकूलित सलाह"
+      },
+      "dataDriven": {
+        "title": "डेटा-संचालित",
+        "description": "व्यापक बाजार विश्लेषण द्वारा समर्थित निर्णय"
+      },
+      "flexibleHours": {
+        "title": "लचीले समय",
+        "description": "सोमवार से शनिवार, सुबह 8 बजे से रात 8 बजे तक उपलब्ध"
+      }
+    },
+    "cta": {
+      "title": "शुरू करने के लिए तैयार हैं?",
+      "description": "आज ही मुफ्त परामर्श बुक करें और अपने रियल एस्टेट लक्ष्यों की ओर पहला कदम उठाएं।",
+      "button": "अपॉइंटमेंट शेड्यूल करें"
+    }
+  },
+  "booking": {
+    "title": "परामर्श बुक करें",
+    "subtitle": "हमारे रियल एस्टेट विशेषज्ञों के साथ अपना मुफ्त परामर्श शेड्यूल करें",
+    "selectDate": "तारीख चुनें",
+    "selectTime": "समय चुनें",
+    "yourDetails": "आपका विवरण",
+    "step": "चरण",
+    "of": "में से",
+    "name": "पूरा नाम",
+    "email": "ईमेल पता",
+    "phone": "फोन नंबर",
+    "message": "संदेश",
+    "messagePlaceholder": "हमें अपनी रियल एस्टेट जरूरतों या किसी भी प्रश्न के बारे में बताएं...",
+    "optional": "वैकल्पिक",
+    "required": "आवश्यक",
+    "confirmBooking": "बुकिंग की पुष्टि करें",
+    "booking": "बुकिंग हो रही है...",
+    "booked": "बुक हो गया",
+    "available": "उपलब्ध",
+    "unavailable": "अनुपलब्ध",
+    "success": {
+      "title": "बुकिंग की पुष्टि!",
+      "subtitle": "आपका परामर्श सफलतापूर्वक शेड्यूल हो गया है",
+      "scheduledFor": "शेड्यूल किया गया",
+      "at": "बजे",
+      "confirmationSent": "पुष्टिकरण ईमेल भेजा गया",
+      "whatNext": "आगे क्या होगा?",
+      "step1": "आपको मीटिंग विवरण के साथ एक पुष्टिकरण ईमेल प्राप्त होगी",
+      "step2": "हमारे सलाहकार आपके सत्र की तैयारी करेंगे",
+      "step3": "निर्धारित समय पर अपने परामर्श में शामिल हों",
+      "backToHome": "होम पर वापस जाएं"
+    },
+    "error": {
+      "title": "कुछ गलत हो गया",
+      "description": "कृपया पुनः प्रयास करें या सीधे हमसे संपर्क करें।",
+      "tryAgain": "पुनः प्रयास करें"
+    },
+    "workingHours": "सोमवार - शनिवार, सुबह 8:00 - रात 8:00 बजे तक उपलब्ध",
+    "freeConsultation": "30 मिनट का मुफ्त परामर्श",
+    "noObligation": "कोई बाध्यता नहीं, कभी भी रद्द करें"
+  },
+  "common": {
+    "learnMore": "और जानें",
+    "viewAll": "सभी देखें",
+    "readMore": "और पढ़ें",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "loading": "लोड हो रहा है...",
+    "error": "एक त्रुटि हुई",
+    "success": "सफलता"
+  },
+  "admin": {
+    "title": "एडमिन पैनल",
+    "logout": "लॉग आउट",
+    "login": {
+      "title": "एडमिन लॉगिन",
+      "email": "ईमेल",
+      "password": "पासवर्ड",
+      "signIn": "साइन इन",
+      "signingIn": "साइन इन हो रहा है...",
+      "invalidCredentials": "अमान्य ईमेल या पासवर्ड",
+      "noAccess": "आपके पास एडमिन एक्सेस नहीं है"
+    },
+    "tabs": {
+      "reservations": "बुकिंग",
+      "properties": "संपत्तियां",
+      "content": "चित्र"
+    },
+    "reservations": {
+      "title": "बुकिंग",
+      "stats": { "total": "कुल", "pending": "लंबित", "confirmed": "पुष्टि", "cancelled": "रद्द" },
+      "filter": { "all": "सभी", "pending": "लंबित", "confirmed": "पुष्टि", "cancelled": "रद्द" },
+      "noReservations": "कोई बुकिंग नहीं मिली",
+      "booked": "बुक किया गया",
+      "actions": { "confirm": "पुष्टि करें", "cancel": "रद्द करें", "delete": "हटाएं" },
+      "confirmDelete": "क्या आप वाकई इस बुकिंग को हटाना चाहते हैं?",
+      "calendar": { "title": "बुकिंग कैलेंडर", "today": "आज", "noAppointments": "कोई अपॉइंटमेंट नहीं", "appointments": "अपॉइंटमेंट" }
+    },
+    "properties": {
+      "title": "संपत्ति प्रबंधन", "addProperty": "संपत्ति जोड़ें", "editProperty": "संपत्ति संपादित करें",
+      "noProperties": "अभी तक कोई संपत्ति नहीं। अपनी पहली संपत्ति जोड़ें।",
+      "images": "चित्र", "propertyTitle": "शीर्षक", "description": "विवरण", "price": "मूल्य", "location": "स्थान",
+      "bedrooms": "बेडरूम", "bathrooms": "बाथरूम", "area": "क्षेत्रफल", "type": "प्रकार",
+      "forSale": "बिक्री के लिए", "forRent": "किराए पर", "status": "स्थिति",
+      "active": "सक्रिय", "sold": "बिक गया", "rented": "किराए पर दिया", "inactive": "निष्क्रिय",
+      "featured": "विशेष", "featuredDescription": "विशेष संपत्ति (पहले दिखाई देती है)",
+      "createProperty": "संपत्ति बनाएं", "updateProperty": "संपत्ति अपडेट करें",
+      "confirmDelete": "क्या आप वाकई इस संपत्ति को हटाना चाहते हैं?",
+      "noLocation": "कोई स्थान नहीं", "beds": "बेड", "baths": "बाथ",
+      "uploadFailed": "अपलोड विफल", "updateFailed": "अपडेट विफल",
+      "createFailed": "बनाना विफल", "deleteFailed": "हटाना विफल"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "हीरो स्लाइडर", "description": "होम पेज पर बैनर छवियां और टेक्स्ट",
+        "addSlide": "स्लाइड जोड़ें", "editSlide": "स्लाइड संपादित करें",
+        "noSlides": "अभी तक कोई स्लाइड नहीं। अपनी पहली हीरो स्लाइड जोड़ें।",
+        "backgroundImage": "पृष्ठभूमि छवि", "slideTitle": "शीर्षक",
+        "titlePlaceholder": "विश्वसनीय विशेषज्ञ रियल एस्टेट मार्गदर्शन",
+        "highlight": "हाइलाइट टेक्स्ट", "highlightPlaceholder": "विशेषज्ञ",
+        "highlightDescription": "यह टेक्स्ट एम्बर रंग में हाइलाइट होगा। शीर्षक का हिस्सा होना चाहिए।",
+        "subtitle": "उपशीर्षक", "subtitlePlaceholder": "चाहे आप खरीद रहे हों, बेच रहे हों या निवेश कर रहे हों...",
+        "activeLabel": "सक्रिय (होम पेज पर दिखाई देता है)",
+        "createSlide": "स्लाइड बनाएं", "updateSlide": "स्लाइड अपडेट करें",
+        "activate": "सक्रिय करें", "deactivate": "निष्क्रिय करें",
+        "changeImage": "छवि बदलें", "uploadImage": "छवि अपलोड करने के लिए क्लिक करें",
+        "recommendedSize": "अनुशंसित: 1920x1080", "uploading": "अपलोड हो रहा है...",
+        "pleaseUpload": "कृपया एक छवि अपलोड करें",
+        "updateFailed": "अपडेट विफल", "createFailed": "बनाना विफल",
+        "deleteFailed": "हटाना विफल", "confirmDelete": "क्या आप वाकई इस स्लाइड को हटाना चाहते हैं?"
+      }
+    }
+  }
+}

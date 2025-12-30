@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | 不動産コンサルティング",
+    "description": "プロフェッショナルな不動産コンサルティングサービス"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "properties": "物件",
+    "services": "サービス",
+    "about": "会社概要",
+    "contact": "お問い合わせ",
+    "bookConsultation": "相談予約",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "選ばれる理由",
+    "features": {
+      "marketExpertise": {
+        "title": "市場の専門知識",
+        "description": "地域および広域の不動産市場に関する深い知識"
+      },
+      "personalApproach": {
+        "title": "パーソナルアプローチ",
+        "description": "お客様独自のニーズと目標に基づいたカスタマイズされたアドバイス"
+      },
+      "dataDriven": {
+        "title": "データ駆動",
+        "description": "包括的な市場分析に基づいた意思決定"
+      },
+      "flexibleHours": {
+        "title": "柔軟な営業時間",
+        "description": "月曜日から土曜日、午前8時から午後8時まで"
+      }
+    },
+    "cta": {
+      "title": "始める準備はできましたか？",
+      "description": "今すぐ無料相談をご予約いただき、不動産目標への第一歩を踏み出しましょう。",
+      "button": "予約する"
+    }
+  },
+  "booking": {
+    "title": "相談予約",
+    "subtitle": "不動産の専門家との無料相談をご予約ください",
+    "selectDate": "日付を選択",
+    "selectTime": "時間を選択",
+    "yourDetails": "お客様情報",
+    "step": "ステップ",
+    "of": "/",
+    "name": "お名前",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "message": "メッセージ",
+    "messagePlaceholder": "不動産に関するご要望やご質問をお聞かせください...",
+    "optional": "任意",
+    "required": "必須",
+    "confirmBooking": "予約を確定",
+    "booking": "予約処理中...",
+    "booked": "予約済み",
+    "available": "予約可能",
+    "unavailable": "予約不可",
+    "success": {
+      "title": "予約完了！",
+      "subtitle": "ご相談の予約が正常に完了しました",
+      "scheduledFor": "予約日時",
+      "at": "",
+      "confirmationSent": "確認メールを送信しました",
+      "whatNext": "次のステップ",
+      "step1": "ミーティング詳細を記載した確認メールをお送りします",
+      "step2": "担当コンサルタントがセッションの準備をいたします",
+      "step3": "予約時間にご参加ください",
+      "backToHome": "ホームに戻る"
+    },
+    "error": {
+      "title": "エラーが発生しました",
+      "description": "もう一度お試しいただくか、直接お問い合わせください。",
+      "tryAgain": "再試行"
+    },
+    "workingHours": "月曜日〜土曜日 8:00〜20:00",
+    "freeConsultation": "30分の無料相談",
+    "noObligation": "ご契約の義務なし、いつでもキャンセル可能"
+  },
+  "common": {
+    "learnMore": "詳しく見る",
+    "viewAll": "すべて見る",
+    "readMore": "続きを読む",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "success": "成功"
+  },
+  "admin": {
+    "title": "管理パネル",
+    "logout": "ログアウト",
+    "login": {
+      "title": "管理者ログイン",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "signIn": "ログイン",
+      "signingIn": "ログイン中...",
+      "invalidCredentials": "メールアドレスまたはパスワードが無効です",
+      "noAccess": "管理者権限がありません"
+    },
+    "tabs": {
+      "reservations": "予約",
+      "properties": "物件",
+      "content": "画像"
+    },
+    "reservations": {
+      "title": "予約管理",
+      "stats": { "total": "合計", "pending": "保留中", "confirmed": "確認済み", "cancelled": "キャンセル" },
+      "filter": { "all": "すべて", "pending": "保留中", "confirmed": "確認済み", "cancelled": "キャンセル" },
+      "noReservations": "予約が見つかりません",
+      "booked": "予約済み",
+      "actions": { "confirm": "確認", "cancel": "キャンセル", "delete": "削除" },
+      "confirmDelete": "この予約を削除してもよろしいですか？",
+      "calendar": { "title": "予約カレンダー", "today": "今日", "noAppointments": "予約なし", "appointments": "件の予約" }
+    },
+    "properties": {
+      "title": "物件管理", "addProperty": "物件を追加", "editProperty": "物件を編集",
+      "noProperties": "物件がまだありません。最初の物件を追加してください。",
+      "images": "画像", "propertyTitle": "タイトル", "description": "説明", "price": "価格", "location": "所在地",
+      "bedrooms": "寝室", "bathrooms": "バスルーム", "area": "面積", "type": "タイプ",
+      "forSale": "売却", "forRent": "賃貸", "status": "ステータス",
+      "active": "公開中", "sold": "売却済み", "rented": "賃貸中", "inactive": "非公開",
+      "featured": "注目", "featuredDescription": "注目物件（最初に表示）",
+      "createProperty": "物件を作成", "updateProperty": "物件を更新",
+      "confirmDelete": "この物件を削除してもよろしいですか？",
+      "noLocation": "所在地なし", "beds": "寝室", "baths": "浴室",
+      "uploadFailed": "アップロード失敗", "updateFailed": "更新失敗",
+      "createFailed": "作成失敗", "deleteFailed": "削除失敗"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "ヒーロースライダー", "description": "ホームページのバナー画像とテキスト",
+        "addSlide": "スライドを追加", "editSlide": "スライドを編集",
+        "noSlides": "スライドがまだありません。最初のヒーロースライドを追加してください。",
+        "backgroundImage": "背景画像", "slideTitle": "タイトル",
+        "titlePlaceholder": "信頼できる専門不動産アドバイス",
+        "highlight": "ハイライトテキスト", "highlightPlaceholder": "専門",
+        "highlightDescription": "このテキストはアンバー色でハイライトされます。タイトルの一部である必要があります。",
+        "subtitle": "サブタイトル", "subtitlePlaceholder": "購入、売却、投資のいずれでも...",
+        "activeLabel": "アクティブ（ホームページに表示）",
+        "createSlide": "スライドを作成", "updateSlide": "スライドを更新",
+        "activate": "有効化", "deactivate": "無効化",
+        "changeImage": "画像を変更", "uploadImage": "クリックして画像をアップロード",
+        "recommendedSize": "推奨サイズ：1920x1080", "uploading": "アップロード中...",
+        "pleaseUpload": "画像をアップロードしてください",
+        "updateFailed": "更新失敗", "createFailed": "作成失敗",
+        "deleteFailed": "削除失敗", "confirmDelete": "このスライドを削除してもよろしいですか？"
+      }
+    }
+  }
+}

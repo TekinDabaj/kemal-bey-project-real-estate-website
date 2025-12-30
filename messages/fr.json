@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Conseil Immobilier",
+    "description": "Services de conseil immobilier professionnel"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "properties": "Proprietes",
+    "services": "Services",
+    "about": "A propos",
+    "contact": "Contact",
+    "bookConsultation": "Reserver une consultation",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Pourquoi nous choisir",
+    "features": {
+      "marketExpertise": {
+        "title": "Expertise du marche",
+        "description": "Connaissance approfondie des marches immobiliers locaux et regionaux"
+      },
+      "personalApproach": {
+        "title": "Approche personnelle",
+        "description": "Conseils adaptes a vos besoins et objectifs uniques"
+      },
+      "dataDriven": {
+        "title": "Base sur les donnees",
+        "description": "Decisions soutenues par des analyses de marche completes"
+      },
+      "flexibleHours": {
+        "title": "Horaires flexibles",
+        "description": "Disponible du lundi au samedi, de 8h a 20h"
+      }
+    },
+    "cta": {
+      "title": "Pret a commencer ?",
+      "description": "Reservez une consultation gratuite aujourd'hui et faites le premier pas vers vos objectifs immobiliers.",
+      "button": "Planifier un rendez-vous"
+    }
+  },
+  "booking": {
+    "title": "Reserver une Consultation",
+    "subtitle": "Planifiez votre consultation gratuite avec nos experts immobiliers",
+    "selectDate": "Selectionner une Date",
+    "selectTime": "Selectionner une Heure",
+    "yourDetails": "Vos Coordonnees",
+    "step": "Etape",
+    "of": "sur",
+    "name": "Nom Complet",
+    "email": "Adresse Email",
+    "phone": "Numero de Telephone",
+    "message": "Message",
+    "messagePlaceholder": "Parlez-nous de vos besoins immobiliers ou de vos questions...",
+    "optional": "facultatif",
+    "required": "obligatoire",
+    "confirmBooking": "Confirmer la Reservation",
+    "booking": "Reservation en cours...",
+    "booked": "Reserve",
+    "available": "Disponible",
+    "unavailable": "Indisponible",
+    "success": {
+      "title": "Reservation Confirmee !",
+      "subtitle": "Votre consultation a ete programmee avec succes",
+      "scheduledFor": "Prevu pour le",
+      "at": "a",
+      "confirmationSent": "Un email de confirmation a ete envoye a",
+      "whatNext": "Et maintenant ?",
+      "step1": "Vous recevrez un email de confirmation avec les details de la reunion",
+      "step2": "Notre consultant preparera votre session",
+      "step3": "Rejoignez-nous a l'heure prevue pour votre consultation",
+      "backToHome": "Retour a l'Accueil"
+    },
+    "error": {
+      "title": "Une erreur s'est produite",
+      "description": "Veuillez reessayer ou nous contacter directement.",
+      "tryAgain": "Reessayer"
+    },
+    "workingHours": "Disponible Lundi - Samedi, 8h00 - 20h00",
+    "freeConsultation": "Consultation gratuite de 30 minutes",
+    "noObligation": "Sans engagement, annulez a tout moment"
+  },
+  "common": {
+    "learnMore": "En savoir plus",
+    "viewAll": "Voir tout",
+    "readMore": "Lire la suite",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Succes"
+  },
+  "admin": {
+    "title": "Panneau Admin",
+    "logout": "Deconnexion",
+    "login": {
+      "title": "Connexion Admin",
+      "email": "Email",
+      "password": "Mot de passe",
+      "signIn": "Se connecter",
+      "signingIn": "Connexion...",
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "noAccess": "Vous n'avez pas d'acces administrateur"
+    },
+    "tabs": {
+      "reservations": "Reservations",
+      "properties": "Proprietes",
+      "content": "Images"
+    },
+    "reservations": {
+      "title": "Reservations",
+      "stats": { "total": "Total", "pending": "En attente", "confirmed": "Confirmees", "cancelled": "Annulees" },
+      "filter": { "all": "Toutes", "pending": "En attente", "confirmed": "Confirmees", "cancelled": "Annulees" },
+      "noReservations": "Aucune reservation trouvee",
+      "booked": "Reserve",
+      "actions": { "confirm": "Confirmer", "cancel": "Annuler", "delete": "Supprimer" },
+      "confirmDelete": "Etes-vous sur de vouloir supprimer cette reservation?",
+      "calendar": { "title": "Calendrier des reservations", "today": "Aujourd'hui", "noAppointments": "Aucun rendez-vous", "appointments": "rendez-vous" }
+    },
+    "properties": {
+      "title": "Gerer les proprietes", "addProperty": "Ajouter une propriete", "editProperty": "Modifier la propriete",
+      "noProperties": "Pas encore de proprietes. Ajoutez votre premiere propriete.",
+      "images": "Images", "propertyTitle": "Titre", "description": "Description", "price": "Prix", "location": "Emplacement",
+      "bedrooms": "Chambres", "bathrooms": "Salles de bain", "area": "Surface", "type": "Type",
+      "forSale": "A vendre", "forRent": "A louer", "status": "Statut",
+      "active": "Actif", "sold": "Vendu", "rented": "Loue", "inactive": "Inactif",
+      "featured": "En vedette", "featuredDescription": "Propriete en vedette (affichee en premier)",
+      "createProperty": "Creer la propriete", "updateProperty": "Mettre a jour",
+      "confirmDelete": "Etes-vous sur de vouloir supprimer cette propriete?",
+      "noLocation": "Pas d'emplacement", "beds": "ch.", "baths": "sdb",
+      "uploadFailed": "Echec du telechargement", "updateFailed": "Echec de la mise a jour",
+      "createFailed": "Echec de la creation", "deleteFailed": "Echec de la suppression"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Slider Hero", "description": "Images de banniere avec texte sur la page d'accueil",
+        "addSlide": "Ajouter un slide", "editSlide": "Modifier le slide",
+        "noSlides": "Pas encore de slides. Ajoutez votre premier slide hero.",
+        "backgroundImage": "Image de fond", "slideTitle": "Titre",
+        "titlePlaceholder": "Conseil immobilier expert en qui vous pouvez avoir confiance",
+        "highlight": "Texte en surbrillance", "highlightPlaceholder": "Conseil",
+        "highlightDescription": "Ce texte sera mis en surbrillance en ambre. Doit faire partie du titre.",
+        "subtitle": "Sous-titre", "subtitlePlaceholder": "Que vous achetiez, vendiez ou investissiez...",
+        "activeLabel": "Actif (visible sur la page d'accueil)",
+        "createSlide": "Creer le slide", "updateSlide": "Mettre a jour",
+        "activate": "Activer", "deactivate": "Desactiver",
+        "changeImage": "Changer l'image", "uploadImage": "Cliquez pour telecharger",
+        "recommendedSize": "Recommande: 1920x1080", "uploading": "Telechargement...",
+        "pleaseUpload": "Veuillez telecharger une image",
+        "updateFailed": "Echec de la mise a jour", "createFailed": "Echec de la creation",
+        "deleteFailed": "Echec de la suppression", "confirmDelete": "Etes-vous sur de vouloir supprimer ce slide?"
+      }
+    }
+  }
+}

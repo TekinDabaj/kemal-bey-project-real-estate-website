@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Perundingan Hartanah",
+    "description": "Perkhidmatan perundingan hartanah profesional"
+  },
+  "navigation": {
+    "home": "Utama",
+    "properties": "Hartanah",
+    "services": "Perkhidmatan",
+    "about": "Tentang Kami",
+    "contact": "Hubungi",
+    "bookConsultation": "Tempah Perundingan",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Mengapa Pilih Kami",
+    "features": {
+      "marketExpertise": {
+        "title": "Kepakaran Pasaran",
+        "description": "Pengetahuan mendalam tentang pasaran hartanah tempatan dan serantau"
+      },
+      "personalApproach": {
+        "title": "Pendekatan Peribadi",
+        "description": "Nasihat yang disesuaikan berdasarkan keperluan dan matlamat unik anda"
+      },
+      "dataDriven": {
+        "title": "Berdasarkan Data",
+        "description": "Keputusan disokong oleh analisis pasaran yang komprehensif"
+      },
+      "flexibleHours": {
+        "title": "Waktu Fleksibel",
+        "description": "Tersedia Isnin hingga Sabtu, 8 PG hingga 8 MLM"
+      }
+    },
+    "cta": {
+      "title": "Bersedia untuk Bermula?",
+      "description": "Tempah perundingan percuma hari ini dan ambil langkah pertama ke arah matlamat hartanah anda.",
+      "button": "Jadualkan Temu Janji"
+    }
+  },
+  "booking": {
+    "title": "Tempah Perundingan",
+    "subtitle": "Jadualkan perundingan percuma dengan pakar hartanah kami",
+    "selectDate": "Pilih Tarikh",
+    "selectTime": "Pilih Masa",
+    "yourDetails": "Maklumat Anda",
+    "step": "Langkah",
+    "of": "daripada",
+    "name": "Nama Penuh",
+    "email": "Alamat E-mel",
+    "phone": "Nombor Telefon",
+    "message": "Mesej",
+    "messagePlaceholder": "Beritahu kami tentang keperluan hartanah anda atau sebarang soalan...",
+    "optional": "pilihan",
+    "required": "wajib",
+    "confirmBooking": "Sahkan Tempahan",
+    "booking": "Menempah...",
+    "booked": "Ditempah",
+    "available": "Tersedia",
+    "unavailable": "Tidak Tersedia",
+    "success": {
+      "title": "Tempahan Disahkan!",
+      "subtitle": "Perundingan anda telah berjaya dijadualkan",
+      "scheduledFor": "Dijadualkan pada",
+      "at": "pukul",
+      "confirmationSent": "E-mel pengesahan telah dihantar ke",
+      "whatNext": "Apa seterusnya?",
+      "step1": "Anda akan menerima e-mel pengesahan dengan butiran mesyuarat",
+      "step2": "Perunding kami akan membuat persediaan untuk sesi anda",
+      "step3": "Sertai kami pada masa yang dijadualkan untuk perundingan anda",
+      "backToHome": "Kembali ke Utama"
+    },
+    "error": {
+      "title": "Sesuatu tidak kena",
+      "description": "Sila cuba lagi atau hubungi kami secara langsung.",
+      "tryAgain": "Cuba Lagi"
+    },
+    "workingHours": "Tersedia Isnin - Sabtu, 8:00 PG - 8:00 MLM",
+    "freeConsultation": "Perundingan percuma 30 minit",
+    "noObligation": "Tiada kewajipan, batalkan bila-bila masa"
+  },
+  "common": {
+    "learnMore": "Ketahui Lebih",
+    "viewAll": "Lihat Semua",
+    "readMore": "Baca Lagi",
+    "submit": "Hantar",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "loading": "Memuatkan...",
+    "error": "Ralat berlaku",
+    "success": "Berjaya"
+  },
+  "admin": {
+    "title": "Panel Admin",
+    "logout": "Log Keluar",
+    "login": {
+      "title": "Log Masuk Admin",
+      "email": "E-mel",
+      "password": "Kata Laluan",
+      "signIn": "Log Masuk",
+      "signingIn": "Sedang Log Masuk...",
+      "invalidCredentials": "E-mel atau kata laluan tidak sah",
+      "noAccess": "Anda tidak mempunyai akses admin"
+    },
+    "tabs": {
+      "reservations": "Tempahan",
+      "properties": "Hartanah",
+      "content": "Imej"
+    },
+    "reservations": {
+      "title": "Tempahan",
+      "stats": { "total": "Jumlah", "pending": "Menunggu", "confirmed": "Disahkan", "cancelled": "Dibatalkan" },
+      "filter": { "all": "Semua", "pending": "Menunggu", "confirmed": "Disahkan", "cancelled": "Dibatalkan" },
+      "noReservations": "Tiada tempahan dijumpai",
+      "booked": "Ditempah",
+      "actions": { "confirm": "Sahkan", "cancel": "Batal", "delete": "Padam" },
+      "confirmDelete": "Adakah anda pasti mahu memadamkan tempahan ini?",
+      "calendar": { "title": "Kalendar Tempahan", "today": "Hari Ini", "noAppointments": "Tiada temu janji", "appointments": "temu janji" }
+    },
+    "properties": {
+      "title": "Urus Hartanah", "addProperty": "Tambah Hartanah", "editProperty": "Edit Hartanah",
+      "noProperties": "Belum ada hartanah. Tambah hartanah pertama anda.",
+      "images": "Imej", "propertyTitle": "Tajuk", "description": "Penerangan", "price": "Harga", "location": "Lokasi",
+      "bedrooms": "Bilik Tidur", "bathrooms": "Bilik Air", "area": "Kawasan", "type": "Jenis",
+      "forSale": "Untuk Dijual", "forRent": "Untuk Disewa", "status": "Status",
+      "active": "Aktif", "sold": "Dijual", "rented": "Disewa", "inactive": "Tidak Aktif",
+      "featured": "Ditampilkan", "featuredDescription": "Hartanah ditampilkan (dipaparkan dahulu)",
+      "createProperty": "Cipta Hartanah", "updateProperty": "Kemaskini Hartanah",
+      "confirmDelete": "Adakah anda pasti mahu memadamkan hartanah ini?",
+      "noLocation": "Tiada lokasi", "beds": "bilik", "baths": "mandi",
+      "uploadFailed": "Muat naik gagal", "updateFailed": "Kemaskini gagal",
+      "createFailed": "Penciptaan gagal", "deleteFailed": "Pemadaman gagal"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Slider Hero", "description": "Imej sepanduk dengan teks di halaman utama",
+        "addSlide": "Tambah Slaid", "editSlide": "Edit Slaid",
+        "noSlides": "Belum ada slaid. Tambah slaid hero pertama anda.",
+        "backgroundImage": "Imej Latar Belakang", "slideTitle": "Tajuk",
+        "titlePlaceholder": "Nasihat Hartanah Pakar Yang Boleh Anda Percayai",
+        "highlight": "Teks Diserlahkan", "highlightPlaceholder": "Pakar",
+        "highlightDescription": "Teks ini akan diserlahkan dengan warna ambar. Mesti sebahagian daripada tajuk.",
+        "subtitle": "Sari Kata", "subtitlePlaceholder": "Sama ada membeli, menjual atau melabur...",
+        "activeLabel": "Aktif (kelihatan di halaman utama)",
+        "createSlide": "Cipta Slaid", "updateSlide": "Kemaskini Slaid",
+        "activate": "Aktifkan", "deactivate": "Nyahaktifkan",
+        "changeImage": "Tukar Imej", "uploadImage": "Klik untuk muat naik imej",
+        "recommendedSize": "Disyorkan: 1920x1080", "uploading": "Memuat naik...",
+        "pleaseUpload": "Sila muat naik imej",
+        "updateFailed": "Kemaskini gagal", "createFailed": "Penciptaan gagal",
+        "deleteFailed": "Pemadaman gagal", "confirmDelete": "Adakah anda pasti mahu memadamkan slaid ini?"
+      }
+    }
+  }
+}

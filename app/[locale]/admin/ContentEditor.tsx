@@ -4,12 +4,15 @@ import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Upload, Trash2, Presentation, Plus, Pencil, X } from 'lucide-react'
 import { HeroSlide } from '@/types/database'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   initialHeroSlides: HeroSlide[]
 }
 
 export default function ContentEditor({ initialHeroSlides }: Props) {
+  const t = useTranslations('admin.content.heroSlider')
+  const tCommon = useTranslations('common')
   const [heroSlides, setHeroSlides] = useState(initialHeroSlides)
   const [uploading, setUploading] = useState<string | null>(null)
   const [isSlideModalOpen, setIsSlideModalOpen] = useState(false)
@@ -87,7 +90,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
     e.preventDefault()
 
     if (!slideFormImage) {
-      alert('Please upload an image')
+      alert(t('pleaseUpload'))
       return
     }
 
@@ -112,7 +115,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
         setHeroSlides(heroSlides.map(s => s.id === editingSlide.id ? data : s))
         closeSlideModal()
       } else {
-        alert('Failed to update slide')
+        alert(t('updateFailed'))
       }
     } else {
       const { data, error } = await supabase
@@ -125,13 +128,13 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
         setHeroSlides([...heroSlides, data])
         closeSlideModal()
       } else {
-        alert('Failed to create slide')
+        alert(t('createFailed'))
       }
     }
   }
 
   async function handleSlideDelete(id: string) {
-    if (!confirm('Are you sure you want to delete this slide?')) return
+    if (!confirm(t('confirmDelete'))) return
 
     const { error } = await supabase
       .from('hero_slides')
@@ -141,7 +144,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
     if (!error) {
       setHeroSlides(heroSlides.filter(s => s.id !== id))
     } else {
-      alert('Failed to delete slide')
+      alert(t('deleteFailed'))
     }
   }
 
@@ -167,15 +170,15 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                 <Presentation className="w-5 h-5 text-purple-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900">Hero Slider</h3>
-                <p className="text-sm text-slate-500">Banner images with text on the homepage</p>
+                <h3 className="font-semibold text-slate-900">{t('title')}</h3>
+                <p className="text-sm text-slate-500">{t('description')}</p>
               </div>
             </div>
             <button
               onClick={() => openSlideModal()}
               className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-medium text-sm transition"
             >
-              <Plus size={16} /> Add Slide
+              <Plus size={16} /> {t('addSlide')}
             </button>
           </div>
         </div>
@@ -184,7 +187,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
           {heroSlides.length === 0 ? (
             <div className="border-2 border-dashed border-slate-200 rounded-lg p-8 text-center">
               <Presentation className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-              <p className="text-slate-500 text-sm">No slides yet. Add your first hero slide.</p>
+              <p className="text-slate-500 text-sm">{t('noSlides')}</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -215,7 +218,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                         <span className={`shrink-0 px-2 py-0.5 rounded text-xs font-medium ${
                           slide.active ? 'bg-green-100 text-green-700' : 'bg-slate-200 text-slate-600'
                         }`}>
-                          {slide.active ? 'Active' : 'Inactive'}
+                          {slide.active ? t('activate') : t('deactivate')}
                         </span>
                       </div>
                       {slide.subtitle && (
@@ -226,7 +229,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                           onClick={() => toggleSlideActive(slide.id, slide.active)}
                           className="text-xs px-2 py-1 rounded bg-white border border-slate-200 text-slate-600 hover:bg-slate-100"
                         >
-                          {slide.active ? 'Deactivate' : 'Activate'}
+                          {slide.active ? t('deactivate') : t('activate')}
                         </button>
                         <button
                           onClick={() => openSlideModal(slide)}
@@ -255,7 +258,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
           <div className="bg-white rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-6 border-b border-slate-200">
               <h3 className="text-lg font-semibold text-slate-900">
-                {editingSlide ? 'Edit Slide' : 'Add Slide'}
+                {editingSlide ? t('editSlide') : t('addSlide')}
               </h3>
               <button onClick={closeSlideModal} className="text-slate-400 hover:text-slate-600">
                 <X size={24} />
@@ -266,7 +269,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
               {/* Image */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Background Image *
+                  {t('backgroundImage')} *
                 </label>
                 <input
                   ref={slideFileInputRef}
@@ -275,7 +278,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   onChange={handleSlideImageUpload}
                   className="hidden"
                 />
-                
+
                 {slideFormImage ? (
                   <div className="relative aspect-video rounded-lg overflow-hidden bg-slate-100">
                     <img
@@ -288,7 +291,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                       onClick={() => slideFileInputRef.current?.click()}
                       className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition flex items-center justify-center text-white font-medium"
                     >
-                      Change Image
+                      {t('changeImage')}
                     </button>
                   </div>
                 ) : (
@@ -299,12 +302,12 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                     className="w-full aspect-video border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center text-slate-400 hover:border-amber-400 hover:text-amber-500 transition"
                   >
                     {uploading === 'hero' ? (
-                      'Uploading...'
+                      t('uploading')
                     ) : (
                       <>
                         <Upload size={32} className="mb-2" />
-                        <span>Click to upload image</span>
-                        <span className="text-xs mt-1">Recommended: 1920x1080</span>
+                        <span>{t('uploadImage')}</span>
+                        <span className="text-xs mt-1">{t('recommendedSize')}</span>
                       </>
                     )}
                   </button>
@@ -314,14 +317,14 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
               {/* Title */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Title *
+                  {t('slideTitle')} *
                 </label>
                 <input
                   type="text"
                   required
                   value={slideFormData.title}
                   onChange={(e) => setSlideFormData({ ...slideFormData, title: e.target.value })}
-                  placeholder="Expert Real Estate Guidance You Can Trust"
+                  placeholder={t('titlePlaceholder')}
                   className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 />
               </div>
@@ -329,30 +332,30 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
               {/* Highlight */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Highlighted Text
+                  {t('highlight')}
                 </label>
                 <input
                   type="text"
                   value={slideFormData.highlight}
                   onChange={(e) => setSlideFormData({ ...slideFormData, highlight: e.target.value })}
-                  placeholder="Guidance"
+                  placeholder={t('highlightPlaceholder')}
                   className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 />
                 <p className="text-xs text-slate-500 mt-1">
-                  This text will be highlighted in amber color. Must be part of the title.
+                  {t('highlightDescription')}
                 </p>
               </div>
 
               {/* Subtitle */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Subtitle
+                  {t('subtitle')}
                 </label>
                 <textarea
                   rows={2}
                   value={slideFormData.subtitle}
                   onChange={(e) => setSlideFormData({ ...slideFormData, subtitle: e.target.value })}
-                  placeholder="Whether you're buying, selling, or investing..."
+                  placeholder={t('subtitlePlaceholder')}
                   className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 />
               </div>
@@ -367,7 +370,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   className="w-4 h-4 text-amber-500 rounded focus:ring-amber-500"
                 />
                 <label htmlFor="slideActive" className="text-sm font-medium text-slate-700">
-                  Active (visible on homepage)
+                  {t('activeLabel')}
                 </label>
               </div>
 
@@ -378,13 +381,13 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   onClick={closeSlideModal}
                   className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition"
                 >
-                  Cancel
+                  {tCommon('cancel')}
                 </button>
                 <button
                   type="submit"
                   className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg font-medium transition"
                 >
-                  {editingSlide ? 'Update' : 'Create'} Slide
+                  {editingSlide ? t('updateSlide') : t('createSlide')}
                 </button>
               </div>
             </form>

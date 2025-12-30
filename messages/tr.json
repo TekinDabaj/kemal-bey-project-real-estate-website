@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Gayrimenkul Danismanlik",
+    "description": "Profesyonel gayrimenkul danismanlik hizmetleri"
+  },
+  "navigation": {
+    "home": "Ana Sayfa",
+    "properties": "Emlaklar",
+    "services": "Hizmetler",
+    "about": "Hakkimizda",
+    "contact": "Iletisim",
+    "bookConsultation": "Randevu Al",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Neden Bizi Secmelisiniz",
+    "features": {
+      "marketExpertise": {
+        "title": "Piyasa Uzmanligi",
+        "description": "Yerel ve bolgesel gayrimenkul piyasalari hakkinda derin bilgi"
+      },
+      "personalApproach": {
+        "title": "Kisisel Yaklasim",
+        "description": "Benzersiz ihtiyac ve hedeflerinize gore ozellestirilmis tavsiyeler"
+      },
+      "dataDriven": {
+        "title": "Veri Odakli",
+        "description": "Kapsamli piyasa analizleriyle desteklenen kararlar"
+      },
+      "flexibleHours": {
+        "title": "Esnek Saatler",
+        "description": "Pazartesi - Cumartesi, 08:00 - 20:00 arasi hizmetinizdeyiz"
+      }
+    },
+    "cta": {
+      "title": "Baslamaya Hazir misiniz?",
+      "description": "Bugün ücretsiz danismanlik randevusu alin ve gayrimenkul hedeflerinize dogru ilk adimi atin.",
+      "button": "Randevu Planla"
+    }
+  },
+  "booking": {
+    "title": "Danismanlik Randevusu",
+    "subtitle": "Gayrimenkul uzmanlarimizla ucretsiz gorusmenizi planlayin",
+    "selectDate": "Tarih Secin",
+    "selectTime": "Saat Secin",
+    "yourDetails": "Bilgileriniz",
+    "step": "Adim",
+    "of": "/",
+    "name": "Ad Soyad",
+    "email": "E-posta Adresi",
+    "phone": "Telefon Numarasi",
+    "message": "Mesaj",
+    "messagePlaceholder": "Gayrimenkul ihtiyaclarinizi veya sorularinizi bize iletin...",
+    "optional": "istege bagli",
+    "required": "zorunlu",
+    "confirmBooking": "Randevuyu Onayla",
+    "booking": "Randevu aliniyor...",
+    "booked": "Dolu",
+    "available": "Musait",
+    "unavailable": "Musait Degil",
+    "success": {
+      "title": "Randevu Onaylandi!",
+      "subtitle": "Gorusmeniz basariyla planlandi",
+      "scheduledFor": "Tarih",
+      "at": "Saat",
+      "confirmationSent": "Onay e-postasi gonderildi",
+      "whatNext": "Sirada ne var?",
+      "step1": "Toplanti detaylarini iceren bir onay e-postasi alacaksiniz",
+      "step2": "Danismanlarimiz gorusmeniz icin hazirlik yapacak",
+      "step3": "Planlanan saatte gorusmenize katilin",
+      "backToHome": "Ana Sayfaya Don"
+    },
+    "error": {
+      "title": "Bir hata olustu",
+      "description": "Lutfen tekrar deneyin veya dogrudan bizimle iletisime gecin.",
+      "tryAgain": "Tekrar Dene"
+    },
+    "workingHours": "Pazartesi - Cumartesi, 08:00 - 20:00",
+    "freeConsultation": "Ucretsiz 30 dakikalik gorusme",
+    "noObligation": "Baglayici degil, istediginiz zaman iptal edebilirsiniz"
+  },
+  "common": {
+    "learnMore": "Daha Fazla",
+    "viewAll": "Tumunu Gor",
+    "readMore": "Devamini Oku",
+    "submit": "Gonder",
+    "cancel": "Iptal",
+    "close": "Kapat",
+    "loading": "Yukleniyor...",
+    "error": "Bir hata olustu",
+    "success": "Basarili"
+  },
+  "admin": {
+    "title": "Yonetim Paneli",
+    "logout": "Cikis Yap",
+    "login": {
+      "title": "Yonetici Girisi",
+      "email": "E-posta",
+      "password": "Sifre",
+      "signIn": "Giris Yap",
+      "signingIn": "Giris yapiliyor...",
+      "invalidCredentials": "Gecersiz e-posta veya sifre",
+      "noAccess": "Yonetici erisim yetkiniz yok"
+    },
+    "tabs": {
+      "reservations": "Randevular",
+      "properties": "Emlaklar",
+      "content": "Gorseller"
+    },
+    "reservations": {
+      "title": "Randevular",
+      "stats": {
+        "total": "Toplam",
+        "pending": "Bekleyen",
+        "confirmed": "Onaylanan",
+        "cancelled": "Iptal Edilen"
+      },
+      "filter": {
+        "all": "Tumu",
+        "pending": "Bekleyen",
+        "confirmed": "Onaylanan",
+        "cancelled": "Iptal Edilen"
+      },
+      "noReservations": "Randevu bulunamadi",
+      "booked": "Rezerve Edildi",
+      "actions": {
+        "confirm": "Onayla",
+        "cancel": "Iptal Et",
+        "delete": "Sil"
+      },
+      "confirmDelete": "Bu randevuyu silmek istediginizden emin misiniz?",
+      "calendar": {
+        "title": "Randevu Takvimi",
+        "today": "Bugun",
+        "noAppointments": "Randevu yok",
+        "appointments": "randevu"
+      }
+    },
+    "properties": {
+      "title": "Emlak Yonetimi",
+      "addProperty": "Emlak Ekle",
+      "editProperty": "Emlak Duzenle",
+      "noProperties": "Henuz emlak yok. Ilk emlakinizi ekleyin.",
+      "images": "Gorseller",
+      "propertyTitle": "Baslik",
+      "description": "Aciklama",
+      "price": "Fiyat",
+      "location": "Konum",
+      "bedrooms": "Yatak Odasi",
+      "bathrooms": "Banyo",
+      "area": "Alan",
+      "type": "Tur",
+      "forSale": "Satilik",
+      "forRent": "Kiralik",
+      "status": "Durum",
+      "active": "Aktif",
+      "sold": "Satildi",
+      "rented": "Kiralandi",
+      "inactive": "Pasif",
+      "featured": "One Cikan",
+      "featuredDescription": "One cikan emlak (ilk sirada gosterilir)",
+      "createProperty": "Emlak Olustur",
+      "updateProperty": "Emlak Guncelle",
+      "confirmDelete": "Bu emlaki silmek istediginizden emin misiniz?",
+      "noLocation": "Konum yok",
+      "beds": "yatak",
+      "baths": "banyo",
+      "uploadFailed": "Yukleme basarisiz",
+      "updateFailed": "Emlak guncellenemedi",
+      "createFailed": "Emlak olusturulamadi",
+      "deleteFailed": "Emlak silinemedi"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Ana Sayfa Slaytlari",
+        "description": "Ana sayfadaki banner gorselleri ve metinleri",
+        "addSlide": "Slayt Ekle",
+        "editSlide": "Slayt Duzenle",
+        "noSlides": "Henuz slayt yok. Ilk slaydinizi ekleyin.",
+        "backgroundImage": "Arka Plan Gorseli",
+        "slideTitle": "Baslik",
+        "titlePlaceholder": "Guvenebileceginiz Uzman Gayrimenkul Rehberligi",
+        "highlight": "Vurgulanan Metin",
+        "highlightPlaceholder": "Uzman",
+        "highlightDescription": "Bu metin amber rengiyle vurgulanacak. Basligin bir parcasi olmali.",
+        "subtitle": "Alt Baslik",
+        "subtitlePlaceholder": "Satin aliyor, satiyor veya yatirim yapiyor olun...",
+        "activeLabel": "Aktif (ana sayfada gorunur)",
+        "createSlide": "Slayt Olustur",
+        "updateSlide": "Slayt Guncelle",
+        "activate": "Aktif Et",
+        "deactivate": "Pasif Et",
+        "changeImage": "Gorsel Degistir",
+        "uploadImage": "Gorsel yuklemek icin tiklayin",
+        "recommendedSize": "Onerilen: 1920x1080",
+        "uploading": "Yukleniyor...",
+        "pleaseUpload": "Lutfen bir gorsel yukleyin",
+        "updateFailed": "Slayt guncellenemedi",
+        "createFailed": "Slayt olusturulamadi",
+        "deleteFailed": "Slayt silinemedi",
+        "confirmDelete": "Bu slayti silmek istediginizden emin misiniz?"
+      }
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Real Estate Consultancy",
+    "description": "Professional real estate consultation services"
+  },
+  "navigation": {
+    "home": "Home",
+    "properties": "Properties",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "bookConsultation": "Book Consultation",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Why Choose Us",
+    "features": {
+      "marketExpertise": {
+        "title": "Market Expertise",
+        "description": "Deep knowledge of local and regional real estate markets"
+      },
+      "personalApproach": {
+        "title": "Personal Approach",
+        "description": "Tailored advice based on your unique needs and goals"
+      },
+      "dataDriven": {
+        "title": "Data-Driven",
+        "description": "Decisions backed by comprehensive market analysis"
+      },
+      "flexibleHours": {
+        "title": "Flexible Hours",
+        "description": "Available Monday to Saturday, 8 AM to 8 PM"
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "description": "Book a free consultation today and take the first step toward your real estate goals.",
+      "button": "Schedule Appointment"
+    }
+  },
+  "booking": {
+    "title": "Book a Consultation",
+    "subtitle": "Schedule your free consultation with our real estate experts",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "yourDetails": "Your Details",
+    "step": "Step",
+    "of": "of",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your real estate needs or any questions you have...",
+    "optional": "optional",
+    "required": "required",
+    "confirmBooking": "Confirm Booking",
+    "booking": "Booking...",
+    "booked": "Booked",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "success": {
+      "title": "Booking Confirmed!",
+      "subtitle": "Your consultation has been successfully scheduled",
+      "scheduledFor": "Scheduled for",
+      "at": "at",
+      "confirmationSent": "A confirmation email has been sent to",
+      "whatNext": "What happens next?",
+      "step1": "You'll receive a confirmation email with meeting details",
+      "step2": "Our consultant will prepare for your session",
+      "step3": "Join us at the scheduled time for your consultation",
+      "backToHome": "Back to Home"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "Please try again or contact us directly.",
+      "tryAgain": "Try Again"
+    },
+    "workingHours": "Available Monday - Saturday, 8:00 AM - 8:00 PM",
+    "freeConsultation": "Free 30-minute consultation",
+    "noObligation": "No obligation, cancel anytime"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "logout": "Logout",
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "password": "Password",
+      "signIn": "Sign In",
+      "signingIn": "Signing in...",
+      "invalidCredentials": "Invalid email or password",
+      "noAccess": "You do not have admin access"
+    },
+    "tabs": {
+      "reservations": "Reservations",
+      "properties": "Properties",
+      "content": "Images"
+    },
+    "reservations": {
+      "title": "Reservations",
+      "stats": {
+        "total": "Total",
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled"
+      },
+      "filter": {
+        "all": "All",
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled"
+      },
+      "noReservations": "No reservations found",
+      "booked": "Booked",
+      "actions": {
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "delete": "Delete"
+      },
+      "confirmDelete": "Are you sure you want to delete this reservation?",
+      "calendar": {
+        "title": "Reservation Calendar",
+        "today": "Today",
+        "noAppointments": "No appointments",
+        "appointments": "appointments"
+      }
+    },
+    "properties": {
+      "title": "Manage Properties",
+      "addProperty": "Add Property",
+      "editProperty": "Edit Property",
+      "noProperties": "No properties yet. Add your first property.",
+      "images": "Images",
+      "propertyTitle": "Title",
+      "description": "Description",
+      "price": "Price",
+      "location": "Location",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "area": "Area",
+      "type": "Type",
+      "forSale": "For Sale",
+      "forRent": "For Rent",
+      "status": "Status",
+      "active": "Active",
+      "sold": "Sold",
+      "rented": "Rented",
+      "inactive": "Inactive",
+      "featured": "Featured",
+      "featuredDescription": "Featured property (shown first)",
+      "createProperty": "Create Property",
+      "updateProperty": "Update Property",
+      "confirmDelete": "Are you sure you want to delete this property?",
+      "noLocation": "No location",
+      "beds": "beds",
+      "baths": "baths",
+      "uploadFailed": "Failed to upload",
+      "updateFailed": "Failed to update property",
+      "createFailed": "Failed to create property",
+      "deleteFailed": "Failed to delete property"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Hero Slider",
+        "description": "Banner images with text on the homepage",
+        "addSlide": "Add Slide",
+        "editSlide": "Edit Slide",
+        "noSlides": "No slides yet. Add your first hero slide.",
+        "backgroundImage": "Background Image",
+        "slideTitle": "Title",
+        "titlePlaceholder": "Expert Real Estate Guidance You Can Trust",
+        "highlight": "Highlighted Text",
+        "highlightPlaceholder": "Guidance",
+        "highlightDescription": "This text will be highlighted in amber color. Must be part of the title.",
+        "subtitle": "Subtitle",
+        "subtitlePlaceholder": "Whether you're buying, selling, or investing...",
+        "activeLabel": "Active (visible on homepage)",
+        "createSlide": "Create Slide",
+        "updateSlide": "Update Slide",
+        "activate": "Activate",
+        "deactivate": "Deactivate",
+        "changeImage": "Change Image",
+        "uploadImage": "Click to upload image",
+        "recommendedSize": "Recommended: 1920x1080",
+        "uploading": "Uploading...",
+        "pleaseUpload": "Please upload an image",
+        "updateFailed": "Failed to update slide",
+        "createFailed": "Failed to create slide",
+        "deleteFailed": "Failed to delete slide",
+        "confirmDelete": "Are you sure you want to delete this slide?"
+      }
+    }
+  }
+}

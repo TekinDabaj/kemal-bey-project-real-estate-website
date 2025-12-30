@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Consultoria Imobiliaria",
+    "description": "Servicos profissionais de consultoria imobiliaria"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "properties": "Imoveis",
+    "services": "Servicos",
+    "about": "Sobre",
+    "contact": "Contato",
+    "bookConsultation": "Agendar Consulta",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Por Que Nos Escolher",
+    "features": {
+      "marketExpertise": {
+        "title": "Expertise de Mercado",
+        "description": "Conhecimento profundo dos mercados imobiliarios locais e regionais"
+      },
+      "personalApproach": {
+        "title": "Abordagem Pessoal",
+        "description": "Aconselhamento personalizado com base nas suas necessidades e objetivos unicos"
+      },
+      "dataDriven": {
+        "title": "Baseado em Dados",
+        "description": "Decisoes apoiadas por analises de mercado abrangentes"
+      },
+      "flexibleHours": {
+        "title": "Horarios Flexiveis",
+        "description": "Disponivel de segunda a sabado, das 8h as 20h"
+      }
+    },
+    "cta": {
+      "title": "Pronto para Comecar?",
+      "description": "Agende uma consulta gratuita hoje e de o primeiro passo em direcao aos seus objetivos imobiliarios.",
+      "button": "Agendar Consulta"
+    }
+  },
+  "booking": {
+    "title": "Agendar Consulta",
+    "subtitle": "Agende sua consulta gratuita com nossos especialistas imobiliarios",
+    "selectDate": "Selecionar Data",
+    "selectTime": "Selecionar Horario",
+    "yourDetails": "Seus Dados",
+    "step": "Passo",
+    "of": "de",
+    "name": "Nome Completo",
+    "email": "Endereco de Email",
+    "phone": "Numero de Telefone",
+    "message": "Mensagem",
+    "messagePlaceholder": "Conte-nos sobre suas necessidades imobiliarias ou duvidas...",
+    "optional": "opcional",
+    "required": "obrigatorio",
+    "confirmBooking": "Confirmar Agendamento",
+    "booking": "Agendando...",
+    "booked": "Agendado",
+    "available": "Disponivel",
+    "unavailable": "Indisponivel",
+    "success": {
+      "title": "Agendamento Confirmado!",
+      "subtitle": "Sua consulta foi agendada com sucesso",
+      "scheduledFor": "Agendado para",
+      "at": "as",
+      "confirmationSent": "Um email de confirmacao foi enviado para",
+      "whatNext": "O que acontece agora?",
+      "step1": "Voce recebera um email de confirmacao com os detalhes da reuniao",
+      "step2": "Nosso consultor se preparara para sua sessao",
+      "step3": "Junte-se a nos no horario agendado para sua consulta",
+      "backToHome": "Voltar ao Inicio"
+    },
+    "error": {
+      "title": "Algo deu errado",
+      "description": "Por favor, tente novamente ou entre em contato conosco diretamente.",
+      "tryAgain": "Tentar Novamente"
+    },
+    "workingHours": "Disponivel Segunda - Sabado, 8:00 - 20:00",
+    "freeConsultation": "Consulta gratuita de 30 minutos",
+    "noObligation": "Sem compromisso, cancele a qualquer momento"
+  },
+  "common": {
+    "learnMore": "Saiba Mais",
+    "viewAll": "Ver Tudo",
+    "readMore": "Ler Mais",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "success": "Sucesso"
+  },
+  "admin": {
+    "title": "Painel Admin",
+    "logout": "Sair",
+    "login": {
+      "title": "Login Admin",
+      "email": "Email",
+      "password": "Senha",
+      "signIn": "Entrar",
+      "signingIn": "Entrando...",
+      "invalidCredentials": "Email ou senha invalidos",
+      "noAccess": "Voce nao tem acesso de administrador"
+    },
+    "tabs": {
+      "reservations": "Reservas",
+      "properties": "Imoveis",
+      "content": "Imagens"
+    },
+    "reservations": {
+      "title": "Reservas",
+      "stats": { "total": "Total", "pending": "Pendentes", "confirmed": "Confirmadas", "cancelled": "Canceladas" },
+      "filter": { "all": "Todas", "pending": "Pendentes", "confirmed": "Confirmadas", "cancelled": "Canceladas" },
+      "noReservations": "Nenhuma reserva encontrada",
+      "booked": "Reservado",
+      "actions": { "confirm": "Confirmar", "cancel": "Cancelar", "delete": "Excluir" },
+      "confirmDelete": "Tem certeza que deseja excluir esta reserva?",
+      "calendar": { "title": "Calendario de Reservas", "today": "Hoje", "noAppointments": "Sem agendamentos", "appointments": "agendamentos" }
+    },
+    "properties": {
+      "title": "Gerenciar Imoveis", "addProperty": "Adicionar Imovel", "editProperty": "Editar Imovel",
+      "noProperties": "Ainda nao ha imoveis. Adicione seu primeiro imovel.",
+      "images": "Imagens", "propertyTitle": "Titulo", "description": "Descricao", "price": "Preco", "location": "Localizacao",
+      "bedrooms": "Quartos", "bathrooms": "Banheiros", "area": "Area", "type": "Tipo",
+      "forSale": "Venda", "forRent": "Aluguel", "status": "Status",
+      "active": "Ativo", "sold": "Vendido", "rented": "Alugado", "inactive": "Inativo",
+      "featured": "Destaque", "featuredDescription": "Imovel em destaque (exibido primeiro)",
+      "createProperty": "Criar Imovel", "updateProperty": "Atualizar Imovel",
+      "confirmDelete": "Tem certeza que deseja excluir este imovel?",
+      "noLocation": "Sem localizacao", "beds": "quartos", "baths": "banhos",
+      "uploadFailed": "Falha no upload", "updateFailed": "Falha ao atualizar",
+      "createFailed": "Falha ao criar", "deleteFailed": "Falha ao excluir"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Slider Principal", "description": "Imagens de banner com texto na pagina inicial",
+        "addSlide": "Adicionar Slide", "editSlide": "Editar Slide",
+        "noSlides": "Ainda nao ha slides. Adicione seu primeiro slide.",
+        "backgroundImage": "Imagem de Fundo", "slideTitle": "Titulo",
+        "titlePlaceholder": "Consultoria Imobiliaria Especializada em que Voce Pode Confiar",
+        "highlight": "Texto Destacado", "highlightPlaceholder": "Especializada",
+        "highlightDescription": "Este texto sera destacado em ambar. Deve fazer parte do titulo.",
+        "subtitle": "Subtitulo", "subtitlePlaceholder": "Seja comprando, vendendo ou investindo...",
+        "activeLabel": "Ativo (visivel na pagina inicial)",
+        "createSlide": "Criar Slide", "updateSlide": "Atualizar Slide",
+        "activate": "Ativar", "deactivate": "Desativar",
+        "changeImage": "Alterar Imagem", "uploadImage": "Clique para enviar imagem",
+        "recommendedSize": "Recomendado: 1920x1080", "uploading": "Enviando...",
+        "pleaseUpload": "Por favor envie uma imagem",
+        "updateFailed": "Falha ao atualizar", "createFailed": "Falha ao criar",
+        "deleteFailed": "Falha ao excluir", "confirmDelete": "Tem certeza que deseja excluir este slide?"
+      }
+    }
+  }
+}

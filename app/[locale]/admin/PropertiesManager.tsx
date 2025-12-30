@@ -4,12 +4,15 @@ import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Property } from '@/types/database'
 import { Plus, Pencil, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   initialProperties: Property[]
 }
 
 export default function PropertiesManager({ initialProperties }: Props) {
+  const t = useTranslations('admin.properties')
+  const tCommon = useTranslations('common')
   const [properties, setProperties] = useState(initialProperties)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProperty, setEditingProperty] = useState<Property | null>(null)
@@ -160,7 +163,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('Are you sure you want to delete this property?')) return
+    if (!confirm(t('confirmDelete'))) return
 
     const { error } = await supabase
       .from('properties')
@@ -170,7 +173,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
     if (!error) {
       setProperties(properties.filter(p => p.id !== id))
     } else {
-      alert('Failed to delete property')
+      alert(t('deleteFailed'))
     }
   }
 
@@ -181,23 +184,30 @@ export default function PropertiesManager({ initialProperties }: Props) {
     inactive: 'bg-slate-100 text-slate-800'
   }
 
+  const statusLabels = {
+    active: t('active'),
+    sold: t('sold'),
+    rented: t('rented'),
+    inactive: t('inactive')
+  }
+
   return (
     <div>
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-slate-900">Manage Properties</h2>
+        <h2 className="text-lg font-semibold text-slate-900">{t('title')}</h2>
         <button
           onClick={() => openModal()}
           className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-medium transition"
         >
-          <Plus size={18} /> Add Property
+          <Plus size={18} /> {t('addProperty')}
         </button>
       </div>
 
       {/* Properties List */}
       {properties.length === 0 ? (
         <div className="bg-white rounded-lg p-8 text-center text-slate-500 border border-slate-200">
-          No properties yet. Add your first property.
+          {t('noProperties')}
         </div>
       ) : (
         <div className="space-y-4">
@@ -223,15 +233,15 @@ export default function PropertiesManager({ initialProperties }: Props) {
                 <div className="flex items-start justify-between">
                   <div>
                     <h3 className="font-semibold text-slate-900">{property.title}</h3>
-                    <p className="text-sm text-slate-500">{property.location || 'No location'}</p>
+                    <p className="text-sm text-slate-500">{property.location || t('noLocation')}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-1 rounded text-xs font-medium ${statusColors[property.status]}`}>
-                      {property.status}
+                      {statusLabels[property.status]}
                     </span>
                     {property.featured && (
                       <span className="px-2 py-1 rounded text-xs font-medium bg-amber-100 text-amber-800">
-                        Featured
+                        {t('featured')}
                       </span>
                     )}
                   </div>
@@ -244,8 +254,8 @@ export default function PropertiesManager({ initialProperties }: Props) {
                       {property.type === 'rent' && '/mo'}
                     </span>
                   )}
-                  {property.bedrooms && <span>{property.bedrooms} beds</span>}
-                  {property.bathrooms && <span>{property.bathrooms} baths</span>}
+                  {property.bedrooms && <span>{property.bedrooms} {t('beds')}</span>}
+                  {property.bathrooms && <span>{property.bathrooms} {t('baths')}</span>}
                   {property.area && <span>{property.area} m²</span>}
                 </div>
               </div>
@@ -276,7 +286,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
           <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-6 border-b border-slate-200">
               <h3 className="text-lg font-semibold text-slate-900">
-                {editingProperty ? 'Edit Property' : 'Add Property'}
+                {editingProperty ? t('editProperty') : t('addProperty')}
               </h3>
               <button onClick={closeModal} className="text-slate-400 hover:text-slate-600">
                 <X size={24} />
@@ -286,7 +296,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               {/* Images */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Images</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">{t('images')}</label>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -321,7 +331,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
 
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Title *</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('propertyTitle')} *</label>
                 <input
                   type="text"
                   required
@@ -333,7 +343,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">{t('description')}</label>
                 <textarea
                   rows={3}
                   value={formData.description}
@@ -345,7 +355,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
               {/* Price & Location */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Price</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('price')}</label>
                   <input
                     type="number"
                     value={formData.price}
@@ -354,7 +364,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Location</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('location')}</label>
                   <input
                     type="text"
                     value={formData.location}
@@ -367,7 +377,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
               {/* Bedrooms, Bathrooms, Area */}
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Bedrooms</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('bedrooms')}</label>
                   <input
                     type="number"
                     value={formData.bedrooms}
@@ -376,7 +386,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Bathrooms</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('bathrooms')}</label>
                   <input
                     type="number"
                     value={formData.bathrooms}
@@ -385,7 +395,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Area (m²)</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('area')} (m²)</label>
                   <input
                     type="number"
                     value={formData.area}
@@ -398,27 +408,27 @@ export default function PropertiesManager({ initialProperties }: Props) {
               {/* Type & Status */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Type</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('type')}</label>
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as 'sale' | 'rent' })}
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                   >
-                    <option value="sale">For Sale</option>
-                    <option value="rent">For Rent</option>
+                    <option value="sale">{t('forSale')}</option>
+                    <option value="rent">{t('forRent')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Status</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">{t('status')}</label>
                   <select
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'sold' | 'rented' | 'inactive' })}
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                   >
-                    <option value="active">Active</option>
-                    <option value="sold">Sold</option>
-                    <option value="rented">Rented</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="active">{t('active')}</option>
+                    <option value="sold">{t('sold')}</option>
+                    <option value="rented">{t('rented')}</option>
+                    <option value="inactive">{t('inactive')}</option>
                   </select>
                 </div>
               </div>
@@ -433,7 +443,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
                   className="w-4 h-4 text-amber-500 rounded focus:ring-amber-500"
                 />
                 <label htmlFor="featured" className="text-sm font-medium text-slate-700">
-                  Featured property (shown first)
+                  {t('featuredDescription')}
                 </label>
               </div>
 
@@ -444,13 +454,13 @@ export default function PropertiesManager({ initialProperties }: Props) {
                   onClick={closeModal}
                   className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition"
                 >
-                  Cancel
+                  {tCommon('cancel')}
                 </button>
                 <button
                   type="submit"
                   className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg font-medium transition"
                 >
-                  {editingProperty ? 'Update' : 'Create'} Property
+                  {editingProperty ? t('updateProperty') : t('createProperty')}
                 </button>
               </div>
             </form>

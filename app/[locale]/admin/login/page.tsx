@@ -4,11 +4,13 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Lock } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export default function AdminLogin() {
+  const t = useTranslations('admin.login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<'invalidCredentials' | 'noAccess' | ''>('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const supabase = createClient()
@@ -24,7 +26,7 @@ export default function AdminLogin() {
     })
 
     if (authError) {
-      setError('Invalid email or password')
+      setError('invalidCredentials')
       setLoading(false)
       return
     }
@@ -37,7 +39,7 @@ export default function AdminLogin() {
 
     if (!adminUser) {
       await supabase.auth.signOut()
-      setError('You do not have admin access')
+      setError('noAccess')
       setLoading(false)
       return
     }
@@ -53,18 +55,18 @@ export default function AdminLogin() {
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-slate-900 text-amber-400 mb-4">
               <Lock size={28} />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900">Admin Login</h1>
+            <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             {error && (
               <div className="bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm">
-                {error}
+                {t(error)}
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('email')}</label>
               <input
                 type="email"
                 required
@@ -75,7 +77,7 @@ export default function AdminLogin() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">{t('password')}</label>
               <input
                 type="password"
                 required
@@ -90,7 +92,7 @@ export default function AdminLogin() {
               disabled={loading}
               className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-lg font-semibold transition disabled:opacity-50"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? t('signingIn') : t('signIn')}
             </button>
           </form>
         </div>

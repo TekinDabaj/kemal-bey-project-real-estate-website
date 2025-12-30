@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Consultoria Inmobiliaria",
+    "description": "Servicios profesionales de consultoria inmobiliaria"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "properties": "Propiedades",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "bookConsultation": "Reservar Consulta",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Por Que Elegirnos",
+    "features": {
+      "marketExpertise": {
+        "title": "Experiencia en el Mercado",
+        "description": "Conocimiento profundo de los mercados inmobiliarios locales y regionales"
+      },
+      "personalApproach": {
+        "title": "Enfoque Personal",
+        "description": "Asesoramiento personalizado segun sus necesidades y objetivos unicos"
+      },
+      "dataDriven": {
+        "title": "Basado en Datos",
+        "description": "Decisiones respaldadas por analisis de mercado exhaustivos"
+      },
+      "flexibleHours": {
+        "title": "Horarios Flexibles",
+        "description": "Disponible de lunes a sabado, de 8:00 a 20:00"
+      }
+    },
+    "cta": {
+      "title": "Listo para Comenzar?",
+      "description": "Reserve una consulta gratuita hoy y de el primer paso hacia sus objetivos inmobiliarios.",
+      "button": "Programar Cita"
+    }
+  },
+  "booking": {
+    "title": "Reservar Consulta",
+    "subtitle": "Programe su consulta gratuita con nuestros expertos inmobiliarios",
+    "selectDate": "Seleccionar Fecha",
+    "selectTime": "Seleccionar Hora",
+    "yourDetails": "Sus Datos",
+    "step": "Paso",
+    "of": "de",
+    "name": "Nombre Completo",
+    "email": "Correo Electronico",
+    "phone": "Numero de Telefono",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuentenos sobre sus necesidades inmobiliarias o cualquier pregunta...",
+    "optional": "opcional",
+    "required": "requerido",
+    "confirmBooking": "Confirmar Reserva",
+    "booking": "Reservando...",
+    "booked": "Reservado",
+    "available": "Disponible",
+    "unavailable": "No Disponible",
+    "success": {
+      "title": "Reserva Confirmada!",
+      "subtitle": "Su consulta ha sido programada exitosamente",
+      "scheduledFor": "Programada para",
+      "at": "a las",
+      "confirmationSent": "Se ha enviado un correo de confirmacion a",
+      "whatNext": "Que sigue?",
+      "step1": "Recibira un correo de confirmacion con los detalles de la reunion",
+      "step2": "Nuestro consultor se preparara para su sesion",
+      "step3": "Unase a nosotros en el horario programado para su consulta",
+      "backToHome": "Volver al Inicio"
+    },
+    "error": {
+      "title": "Algo salio mal",
+      "description": "Por favor intente de nuevo o contactenos directamente.",
+      "tryAgain": "Intentar de Nuevo"
+    },
+    "workingHours": "Disponible Lunes - Sabado, 8:00 AM - 8:00 PM",
+    "freeConsultation": "Consulta gratuita de 30 minutos",
+    "noObligation": "Sin compromiso, cancele en cualquier momento"
+  },
+  "common": {
+    "learnMore": "Mas Informacion",
+    "viewAll": "Ver Todo",
+    "readMore": "Leer Mas",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "loading": "Cargando...",
+    "error": "Ocurrio un error",
+    "success": "Exito"
+  },
+  "admin": {
+    "title": "Panel de Admin",
+    "logout": "Cerrar sesion",
+    "login": {
+      "title": "Acceso Admin",
+      "email": "Correo",
+      "password": "Contrasena",
+      "signIn": "Iniciar sesion",
+      "signingIn": "Iniciando...",
+      "invalidCredentials": "Correo o contrasena invalidos",
+      "noAccess": "No tiene acceso de administrador"
+    },
+    "tabs": {
+      "reservations": "Reservas",
+      "properties": "Propiedades",
+      "content": "Imagenes"
+    },
+    "reservations": {
+      "title": "Reservas",
+      "stats": { "total": "Total", "pending": "Pendientes", "confirmed": "Confirmadas", "cancelled": "Canceladas" },
+      "filter": { "all": "Todas", "pending": "Pendientes", "confirmed": "Confirmadas", "cancelled": "Canceladas" },
+      "noReservations": "No se encontraron reservas",
+      "booked": "Reservado",
+      "actions": { "confirm": "Confirmar", "cancel": "Cancelar", "delete": "Eliminar" },
+      "confirmDelete": "Esta seguro de eliminar esta reserva?",
+      "calendar": { "title": "Calendario de Reservas", "today": "Hoy", "noAppointments": "Sin citas", "appointments": "citas" }
+    },
+    "properties": {
+      "title": "Gestionar Propiedades", "addProperty": "Agregar Propiedad", "editProperty": "Editar Propiedad",
+      "noProperties": "Aun no hay propiedades. Agregue su primera propiedad.",
+      "images": "Imagenes", "propertyTitle": "Titulo", "description": "Descripcion", "price": "Precio", "location": "Ubicacion",
+      "bedrooms": "Habitaciones", "bathrooms": "Banos", "area": "Area", "type": "Tipo",
+      "forSale": "En Venta", "forRent": "En Alquiler", "status": "Estado",
+      "active": "Activa", "sold": "Vendida", "rented": "Alquilada", "inactive": "Inactiva",
+      "featured": "Destacada", "featuredDescription": "Propiedad destacada (se muestra primero)",
+      "createProperty": "Crear Propiedad", "updateProperty": "Actualizar Propiedad",
+      "confirmDelete": "Esta seguro de eliminar esta propiedad?",
+      "noLocation": "Sin ubicacion", "beds": "hab.", "baths": "banos",
+      "uploadFailed": "Error al subir", "updateFailed": "Error al actualizar",
+      "createFailed": "Error al crear", "deleteFailed": "Error al eliminar"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Slider Principal", "description": "Imagenes de banner con texto en la pagina principal",
+        "addSlide": "Agregar Slide", "editSlide": "Editar Slide",
+        "noSlides": "Aun no hay slides. Agregue su primer slide.",
+        "backgroundImage": "Imagen de Fondo", "slideTitle": "Titulo",
+        "titlePlaceholder": "Asesoria Inmobiliaria Experta en la que Puede Confiar",
+        "highlight": "Texto Resaltado", "highlightPlaceholder": "Experta",
+        "highlightDescription": "Este texto se resaltara en ambar. Debe ser parte del titulo.",
+        "subtitle": "Subtitulo", "subtitlePlaceholder": "Ya sea que compre, venda o invierta...",
+        "activeLabel": "Activo (visible en pagina principal)",
+        "createSlide": "Crear Slide", "updateSlide": "Actualizar Slide",
+        "activate": "Activar", "deactivate": "Desactivar",
+        "changeImage": "Cambiar Imagen", "uploadImage": "Clic para subir imagen",
+        "recommendedSize": "Recomendado: 1920x1080", "uploading": "Subiendo...",
+        "pleaseUpload": "Por favor suba una imagen",
+        "updateFailed": "Error al actualizar", "createFailed": "Error al crear",
+        "deleteFailed": "Error al eliminar", "confirmDelete": "Esta seguro de eliminar este slide?"
+      }
+    }
+  }
+}

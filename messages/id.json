@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Konsultasi Properti",
+    "description": "Layanan konsultasi properti profesional"
+  },
+  "navigation": {
+    "home": "Beranda",
+    "properties": "Properti",
+    "services": "Layanan",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "bookConsultation": "Pesan Konsultasi",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Mengapa Memilih Kami",
+    "features": {
+      "marketExpertise": {
+        "title": "Keahlian Pasar",
+        "description": "Pengetahuan mendalam tentang pasar properti lokal dan regional"
+      },
+      "personalApproach": {
+        "title": "Pendekatan Personal",
+        "description": "Saran yang disesuaikan berdasarkan kebutuhan dan tujuan unik Anda"
+      },
+      "dataDriven": {
+        "title": "Berbasis Data",
+        "description": "Keputusan didukung oleh analisis pasar yang komprehensif"
+      },
+      "flexibleHours": {
+        "title": "Jam Fleksibel",
+        "description": "Tersedia Senin hingga Sabtu, pukul 08.00 - 20.00"
+      }
+    },
+    "cta": {
+      "title": "Siap untuk Memulai?",
+      "description": "Pesan konsultasi gratis hari ini dan ambil langkah pertama menuju tujuan properti Anda.",
+      "button": "Jadwalkan Pertemuan"
+    }
+  },
+  "booking": {
+    "title": "Pesan Konsultasi",
+    "subtitle": "Jadwalkan konsultasi gratis dengan ahli properti kami",
+    "selectDate": "Pilih Tanggal",
+    "selectTime": "Pilih Waktu",
+    "yourDetails": "Data Anda",
+    "step": "Langkah",
+    "of": "dari",
+    "name": "Nama Lengkap",
+    "email": "Alamat Email",
+    "phone": "Nomor Telepon",
+    "message": "Pesan",
+    "messagePlaceholder": "Ceritakan kebutuhan properti Anda atau pertanyaan yang Anda miliki...",
+    "optional": "opsional",
+    "required": "wajib",
+    "confirmBooking": "Konfirmasi Pemesanan",
+    "booking": "Memproses...",
+    "booked": "Terpesan",
+    "available": "Tersedia",
+    "unavailable": "Tidak Tersedia",
+    "success": {
+      "title": "Pemesanan Dikonfirmasi!",
+      "subtitle": "Konsultasi Anda telah berhasil dijadwalkan",
+      "scheduledFor": "Dijadwalkan untuk",
+      "at": "pukul",
+      "confirmationSent": "Email konfirmasi telah dikirim ke",
+      "whatNext": "Apa selanjutnya?",
+      "step1": "Anda akan menerima email konfirmasi dengan detail pertemuan",
+      "step2": "Konsultan kami akan mempersiapkan sesi Anda",
+      "step3": "Bergabunglah dengan kami pada waktu yang dijadwalkan",
+      "backToHome": "Kembali ke Beranda"
+    },
+    "error": {
+      "title": "Terjadi kesalahan",
+      "description": "Silakan coba lagi atau hubungi kami langsung.",
+      "tryAgain": "Coba Lagi"
+    },
+    "workingHours": "Tersedia Senin - Sabtu, 08.00 - 20.00",
+    "freeConsultation": "Konsultasi gratis 30 menit",
+    "noObligation": "Tanpa kewajiban, batalkan kapan saja"
+  },
+  "common": {
+    "learnMore": "Pelajari Lebih",
+    "viewAll": "Lihat Semua",
+    "readMore": "Baca Selengkapnya",
+    "submit": "Kirim",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "success": "Berhasil"
+  },
+  "admin": {
+    "title": "Panel Admin",
+    "logout": "Keluar",
+    "login": {
+      "title": "Login Admin",
+      "email": "Email",
+      "password": "Kata Sandi",
+      "signIn": "Masuk",
+      "signingIn": "Sedang Masuk...",
+      "invalidCredentials": "Email atau kata sandi tidak valid",
+      "noAccess": "Anda tidak memiliki akses admin"
+    },
+    "tabs": {
+      "reservations": "Reservasi",
+      "properties": "Properti",
+      "content": "Gambar"
+    },
+    "reservations": {
+      "title": "Reservasi",
+      "stats": { "total": "Total", "pending": "Menunggu", "confirmed": "Dikonfirmasi", "cancelled": "Dibatalkan" },
+      "filter": { "all": "Semua", "pending": "Menunggu", "confirmed": "Dikonfirmasi", "cancelled": "Dibatalkan" },
+      "noReservations": "Tidak ada reservasi ditemukan",
+      "booked": "Dipesan",
+      "actions": { "confirm": "Konfirmasi", "cancel": "Batalkan", "delete": "Hapus" },
+      "confirmDelete": "Apakah Anda yakin ingin menghapus reservasi ini?",
+      "calendar": { "title": "Kalender Reservasi", "today": "Hari Ini", "noAppointments": "Tidak ada janji", "appointments": "janji" }
+    },
+    "properties": {
+      "title": "Kelola Properti", "addProperty": "Tambah Properti", "editProperty": "Edit Properti",
+      "noProperties": "Belum ada properti. Tambahkan properti pertama Anda.",
+      "images": "Gambar", "propertyTitle": "Judul", "description": "Deskripsi", "price": "Harga", "location": "Lokasi",
+      "bedrooms": "Kamar Tidur", "bathrooms": "Kamar Mandi", "area": "Luas", "type": "Tipe",
+      "forSale": "Dijual", "forRent": "Disewakan", "status": "Status",
+      "active": "Aktif", "sold": "Terjual", "rented": "Tersewa", "inactive": "Tidak Aktif",
+      "featured": "Unggulan", "featuredDescription": "Properti unggulan (ditampilkan pertama)",
+      "createProperty": "Buat Properti", "updateProperty": "Perbarui Properti",
+      "confirmDelete": "Apakah Anda yakin ingin menghapus properti ini?",
+      "noLocation": "Tidak ada lokasi", "beds": "kamar", "baths": "mandi",
+      "uploadFailed": "Gagal mengunggah", "updateFailed": "Gagal memperbarui",
+      "createFailed": "Gagal membuat", "deleteFailed": "Gagal menghapus"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Slider Hero", "description": "Gambar banner dengan teks di halaman utama",
+        "addSlide": "Tambah Slide", "editSlide": "Edit Slide",
+        "noSlides": "Belum ada slide. Tambahkan slide hero pertama Anda.",
+        "backgroundImage": "Gambar Latar", "slideTitle": "Judul",
+        "titlePlaceholder": "Panduan Properti Ahli yang Dapat Anda Percaya",
+        "highlight": "Teks Sorotan", "highlightPlaceholder": "Ahli",
+        "highlightDescription": "Teks ini akan disorot dengan warna amber. Harus menjadi bagian dari judul.",
+        "subtitle": "Subjudul", "subtitlePlaceholder": "Baik membeli, menjual, atau berinvestasi...",
+        "activeLabel": "Aktif (terlihat di halaman utama)",
+        "createSlide": "Buat Slide", "updateSlide": "Perbarui Slide",
+        "activate": "Aktifkan", "deactivate": "Nonaktifkan",
+        "changeImage": "Ubah Gambar", "uploadImage": "Klik untuk mengunggah gambar",
+        "recommendedSize": "Disarankan: 1920x1080", "uploading": "Mengunggah...",
+        "pleaseUpload": "Silakan unggah gambar",
+        "updateFailed": "Gagal memperbarui", "createFailed": "Gagal membuat",
+        "deleteFailed": "Gagal menghapus", "confirmDelete": "Apakah Anda yakin ingin menghapus slide ini?"
+      }
+    }
+  }
+}

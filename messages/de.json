@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "title": "Premier Realty | Immobilienberatung",
+    "description": "Professionelle Immobilienberatungsdienstleistungen"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "properties": "Immobilien",
+    "services": "Dienstleistungen",
+    "about": "Uber uns",
+    "contact": "Kontakt",
+    "bookConsultation": "Beratung buchen",
+    "brandName": "Premier Realty"
+  },
+  "home": {
+    "whyChooseUs": "Warum uns wahlen",
+    "features": {
+      "marketExpertise": {
+        "title": "Marktexpertise",
+        "description": "Tiefgreifendes Wissen uber lokale und regionale Immobilienmarkte"
+      },
+      "personalApproach": {
+        "title": "Personlicher Ansatz",
+        "description": "Massgeschneiderte Beratung basierend auf Ihren einzigartigen Bedurfnissen und Zielen"
+      },
+      "dataDriven": {
+        "title": "Datengesteuert",
+        "description": "Entscheidungen gestutzt durch umfassende Marktanalysen"
+      },
+      "flexibleHours": {
+        "title": "Flexible Zeiten",
+        "description": "Verfugbar Montag bis Samstag, 8:00 bis 20:00 Uhr"
+      }
+    },
+    "cta": {
+      "title": "Bereit loszulegen?",
+      "description": "Buchen Sie noch heute eine kostenlose Beratung und machen Sie den ersten Schritt zu Ihren Immobilienzielen.",
+      "button": "Termin vereinbaren"
+    }
+  },
+  "booking": {
+    "title": "Beratung Buchen",
+    "subtitle": "Vereinbaren Sie Ihre kostenlose Beratung mit unseren Immobilienexperten",
+    "selectDate": "Datum wahlen",
+    "selectTime": "Uhrzeit wahlen",
+    "yourDetails": "Ihre Daten",
+    "step": "Schritt",
+    "of": "von",
+    "name": "Vollstandiger Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefonnummer",
+    "message": "Nachricht",
+    "messagePlaceholder": "Erzahlen Sie uns von Ihren Immobilienbedurfnissen oder Fragen...",
+    "optional": "optional",
+    "required": "erforderlich",
+    "confirmBooking": "Buchung bestatigen",
+    "booking": "Buche...",
+    "booked": "Gebucht",
+    "available": "Verfugbar",
+    "unavailable": "Nicht verfugbar",
+    "success": {
+      "title": "Buchung Bestatigt!",
+      "subtitle": "Ihre Beratung wurde erfolgreich geplant",
+      "scheduledFor": "Geplant fur",
+      "at": "um",
+      "confirmationSent": "Eine Bestatigungs-E-Mail wurde gesendet an",
+      "whatNext": "Was passiert als nachstes?",
+      "step1": "Sie erhalten eine Bestatigungs-E-Mail mit den Besprechungsdetails",
+      "step2": "Unser Berater wird sich auf Ihre Sitzung vorbereiten",
+      "step3": "Nehmen Sie zum geplanten Zeitpunkt an Ihrer Beratung teil",
+      "backToHome": "Zuruck zur Startseite"
+    },
+    "error": {
+      "title": "Etwas ist schiefgelaufen",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+      "tryAgain": "Erneut versuchen"
+    },
+    "workingHours": "Verfugbar Montag - Samstag, 8:00 - 20:00 Uhr",
+    "freeConsultation": "Kostenlose 30-minutige Beratung",
+    "noObligation": "Keine Verpflichtung, jederzeit stornierbar"
+  },
+  "common": {
+    "learnMore": "Mehr erfahren",
+    "viewAll": "Alle anzeigen",
+    "readMore": "Weiterlesen",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "close": "Schliessen",
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolgreich"
+  },
+  "admin": {
+    "title": "Admin-Bereich",
+    "logout": "Abmelden",
+    "login": {
+      "title": "Admin-Anmeldung",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "signIn": "Anmelden",
+      "signingIn": "Anmeldung...",
+      "invalidCredentials": "Ungultige E-Mail oder Passwort",
+      "noAccess": "Sie haben keinen Admin-Zugang"
+    },
+    "tabs": {
+      "reservations": "Reservierungen",
+      "properties": "Immobilien",
+      "content": "Bilder"
+    },
+    "reservations": {
+      "title": "Reservierungen",
+      "stats": { "total": "Gesamt", "pending": "Ausstehend", "confirmed": "Bestatigt", "cancelled": "Storniert" },
+      "filter": { "all": "Alle", "pending": "Ausstehend", "confirmed": "Bestatigt", "cancelled": "Storniert" },
+      "noReservations": "Keine Reservierungen gefunden",
+      "booked": "Gebucht",
+      "actions": { "confirm": "Bestatigen", "cancel": "Stornieren", "delete": "Loschen" },
+      "confirmDelete": "Mochten Sie diese Reservierung wirklich loschen?",
+      "calendar": { "title": "Reservierungskalender", "today": "Heute", "noAppointments": "Keine Termine", "appointments": "Termine" }
+    },
+    "properties": {
+      "title": "Immobilien verwalten", "addProperty": "Immobilie hinzufugen", "editProperty": "Immobilie bearbeiten",
+      "noProperties": "Noch keine Immobilien. Fugen Sie Ihre erste Immobilie hinzu.",
+      "images": "Bilder", "propertyTitle": "Titel", "description": "Beschreibung", "price": "Preis", "location": "Standort",
+      "bedrooms": "Schlafzimmer", "bathrooms": "Badezimmer", "area": "Flache", "type": "Typ",
+      "forSale": "Zu verkaufen", "forRent": "Zu vermieten", "status": "Status",
+      "active": "Aktiv", "sold": "Verkauft", "rented": "Vermietet", "inactive": "Inaktiv",
+      "featured": "Hervorgehoben", "featuredDescription": "Hervorgehobene Immobilie (zuerst angezeigt)",
+      "createProperty": "Immobilie erstellen", "updateProperty": "Immobilie aktualisieren",
+      "confirmDelete": "Mochten Sie diese Immobilie wirklich loschen?",
+      "noLocation": "Kein Standort", "beds": "Schlafz.", "baths": "Bader",
+      "uploadFailed": "Upload fehlgeschlagen", "updateFailed": "Aktualisierung fehlgeschlagen",
+      "createFailed": "Erstellung fehlgeschlagen", "deleteFailed": "Loschung fehlgeschlagen"
+    },
+    "content": {
+      "heroSlider": {
+        "title": "Hero-Slider", "description": "Bannerbilder mit Text auf der Startseite",
+        "addSlide": "Slide hinzufugen", "editSlide": "Slide bearbeiten",
+        "noSlides": "Noch keine Slides. Fugen Sie Ihren ersten Hero-Slide hinzu.",
+        "backgroundImage": "Hintergrundbild", "slideTitle": "Titel",
+        "titlePlaceholder": "Experten-Immobilienberatung der Sie vertrauen konnen",
+        "highlight": "Hervorgehobener Text", "highlightPlaceholder": "Experten",
+        "highlightDescription": "Dieser Text wird in Bernsteinfarbe hervorgehoben. Muss Teil des Titels sein.",
+        "subtitle": "Untertitel", "subtitlePlaceholder": "Ob Sie kaufen, verkaufen oder investieren...",
+        "activeLabel": "Aktiv (auf Startseite sichtbar)",
+        "createSlide": "Slide erstellen", "updateSlide": "Slide aktualisieren",
+        "activate": "Aktivieren", "deactivate": "Deaktivieren",
+        "changeImage": "Bild andern", "uploadImage": "Klicken zum Hochladen",
+        "recommendedSize": "Empfohlen: 1920x1080", "uploading": "Hochladen...",
+        "pleaseUpload": "Bitte laden Sie ein Bild hoch",
+        "updateFailed": "Aktualisierung fehlgeschlagen", "createFailed": "Erstellung fehlgeschlagen",
+        "deleteFailed": "Loschung fehlgeschlagen", "confirmDelete": "Mochten Sie diesen Slide wirklich loschen?"
+      }
+    }
+  }
+}
