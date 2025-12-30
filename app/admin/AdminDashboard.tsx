@@ -5,19 +5,17 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { format } from 'date-fns'
 import { LogOut, Calendar, Clock, User, Mail, Phone, MessageSquare, Check, X, Trash2, CalendarDays, Image, Building2 } from 'lucide-react'
-import { Reservation, Property } from '@/types/database'
+import { Reservation, Property, HeroSlide } from '@/types/database'
 import ContentEditor from './ContentEditor'
 import PropertiesManager from './PropertiesManager'
 
 type Props = {
   reservations: Reservation[]
-  images: {
-    homepage: string[]
-  }
   properties: Property[]
+  heroSlides: HeroSlide[]
 }
 
-export default function AdminDashboard({ reservations: initialReservations, images, properties }: Props) {
+export default function AdminDashboard({ reservations: initialReservations, properties, heroSlides }: Props) {
   const [reservations, setReservations] = useState(initialReservations)
   const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all')
   const [activeTab, setActiveTab] = useState<'reservations' | 'properties' | 'content'>('reservations')
@@ -244,7 +242,7 @@ export default function AdminDashboard({ reservations: initialReservations, imag
         )}
 
         {activeTab === 'content' && (
-          <ContentEditor initialImages={images} />
+          <ContentEditor initialHeroSlides={heroSlides} />
         )}
       </div>
     </div>

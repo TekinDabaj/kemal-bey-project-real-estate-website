@@ -29,28 +29,23 @@ export default async function AdminPage() {
     .order('date', { ascending: true })
     .order('time', { ascending: true })
 
-  // Fetch images by folder
-  const { data: homepageImages } = await supabase.storage
-    .from('images')
-    .list('homepage')
-
-  const images = {
-    homepage: homepageImages
-      ?.filter(f => f.name !== '.emptyFolderPlaceholder')
-      .map(f => `homepage/${f.name}`) || []
-  }
-
   // Fetch properties
   const { data: properties } = await supabase
     .from('properties')
     .select('*')
     .order('created_at', { ascending: false })
 
+  // Fetch hero slides
+  const { data: heroSlides } = await supabase
+    .from('hero_slides')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
   return (
     <AdminDashboard 
       reservations={reservations || []} 
-      images={images} 
       properties={properties || []}
+      heroSlides={heroSlides || []}
     />
   )
 }

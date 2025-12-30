@@ -38,3 +38,14 @@ export type Property = {
   created_at: string
   updated_at: string
 }
+
+export type HeroSlide = {
+  id: string
+  image: string
+  title: string
+  highlight: string | null
+  subtitle: string | null
+  sort_order: number
+  active: boolean
+  created_at: string
+}

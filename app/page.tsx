@@ -1,37 +1,22 @@
 import Link from 'next/link'
 import { ArrowRight, Building, Users, TrendingUp, Clock } from 'lucide-react'
+import { createClient } from '@/lib/supabase/server'
 import Gallery from '@/components/Gallery'
+import HeroSlider from '@/components/HeroSlider'
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient()
+
+  const { data: heroSlides } = await supabase
+    .from('hero_slides')
+    .select('*')
+    .eq('active', true)
+    .order('sort_order', { ascending: true })
+
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Expert Real Estate <span className="text-amber-400">Guidance</span> You Can Trust
-            </h1>
-            <p className="text-xl text-slate-300 mb-8">
-              Whether you're buying, selling, or investing, our consultants provide personalized advice to help you make confident decisions.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/book"
-                className="bg-amber-500 hover:bg-amber-600 text-slate-900 px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
-              >
-                Book a Consultation <ArrowRight size={20} />
-              </Link>
-              <Link
-                href="/services"
-                className="border border-slate-500 hover:border-amber-400 hover:text-amber-400 px-6 py-3 rounded-lg font-semibold transition"
-              >
-                Our Services
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Slider */}
+      <HeroSlider slides={heroSlides || []} />
 
       {/* Features */}
       <section className="py-16 lg:py-24 bg-white">

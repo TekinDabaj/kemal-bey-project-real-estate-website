@@ -48,9 +48,10 @@ export default async function PropertiesPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {properties.map((property) => (
-                <div
+                <Link
                   key={property.id}
-                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+                  href={`/properties/${property.id}`}
+                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition group"
                 >
                   {/* Image */}
                   <div className="relative aspect-[4/3] bg-slate-200">
@@ -58,7 +59,7 @@ export default async function PropertiesPage() {
                       <img
                         src={`${bucketUrl}${property.images[0]}`}
                         alt={property.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-slate-400">
@@ -83,7 +84,7 @@ export default async function PropertiesPage() {
 
                   {/* Content */}
                   <div className="p-5">
-                    <h3 className="text-xl font-semibold text-slate-900 mb-2">{property.title}</h3>
+                    <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-amber-600 transition">{property.title}</h3>
 
                     {property.location && (
                       <p className="flex items-center gap-1 text-slate-500 text-sm mb-3">
@@ -117,7 +118,7 @@ export default async function PropertiesPage() {
                       )}
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
