@@ -159,7 +159,9 @@
       "signIn": "Sign In",
       "signingIn": "Signing in...",
       "invalidCredentials": "Invalid email or password",
-      "noAccess": "You do not have admin access"
+      "noAccess": "You do not have admin access",
+      "subtitle": "Enter your credentials to access the admin panel",
+      "secureConnection": "Secure connection"
     },
     "tabs": {
       "reservations": "Reservations",
@@ -193,6 +195,18 @@
         "today": "Today",
         "noAppointments": "No appointments",
         "appointments": "appointments"
+      },
+      "notifications": {
+        "enabled": "Notifications On",
+        "disabled": "Notifications Off",
+        "turnOn": "Turn on notifications",
+        "turnOff": "Turn off notifications",
+        "notSupported": "Notifications are not supported in this browser",
+        "permissionDenied": "Notification permission was denied. Please enable it in your browser settings.",
+        "enabledTitle": "Notifications Enabled",
+        "enabledBody": "You will now receive notifications for upcoming reservations within 1 hour.",
+        "upcomingTitle": "Upcoming Reservation",
+        "upcomingBody": "{name} has a reservation in {minutes} minutes (at {time})"
       }
     },
     "properties": {

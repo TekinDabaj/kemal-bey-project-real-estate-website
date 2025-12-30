@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
+/* Enable dark mode variant based on .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light mode (default) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --accent: #f59e0b;
+  --accent-foreground: #171717;
+}
+
+/* Dark mode - rich dark with purple/blue tints */
+.dark {
+  --background: #0c0a1d;
+  --foreground: #f1f5f9;
+  --card: #13102b;
+  --card-foreground: #f1f5f9;
+  --muted: #1a1735;
+  --muted-foreground: #94a3b8;
+  --border: #2d2a4a;
+  --accent: #f59e0b;
+  --accent-foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom dark mode gradient backgrounds */
+.dark .dark-gradient-bg {
+  background: linear-gradient(135deg, #0c0a1d 0%, #1a1040 50%, #0f172a 100%);
+}
+
+.dark .dark-gradient-card {
+  background: linear-gradient(145deg, #13102b 0%, #1a1735 100%);
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Scrollbar styling for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1735;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3d3a5c;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4d4a6c;
 }

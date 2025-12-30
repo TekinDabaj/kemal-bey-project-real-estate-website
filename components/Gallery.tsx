@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default async function Gallery() {
   const supabase = await createClient()
-  
+
   const { data: properties } = await supabase
     .from('properties')
     .select('id, title, images')
@@ -20,15 +20,15 @@ export default async function Gallery() {
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-slate-50 dark:bg-[#0f0d24]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">Our Properties</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">Our Properties</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {propertiesWithImages.map((property) => (
-            <Link 
-              key={property.id} 
+            <Link
+              key={property.id}
               href={`/properties/${property.id}`}
-              className="group aspect-video rounded-xl overflow-hidden shadow-md"
+              className="group aspect-video rounded-xl overflow-hidden shadow-md dark:shadow-purple-900/10 bg-slate-200 dark:bg-[#1a1735] dark:ring-1 dark:ring-[#2d2a4a]"
             >
               <img
                 src={`${bucketUrl}${property.images[0]}`}
@@ -41,7 +41,7 @@ export default async function Gallery() {
         <div className="text-center mt-8">
           <Link
             href="/properties"
-            className="inline-block text-amber-600 hover:text-amber-700 font-medium"
+            className="inline-block text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-medium"
           >
             View All Properties →
           </Link>

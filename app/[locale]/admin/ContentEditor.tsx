@@ -162,16 +162,16 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
   return (
     <div className="space-y-8">
       {/* Hero Slider Section */}
-      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200 bg-slate-50">
+      <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-200 dark:border-[#2d2a4a] bg-slate-50 dark:bg-[#1a1735]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                <Presentation className="w-5 h-5 text-purple-600" />
+              <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                <Presentation className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900">{t('title')}</h3>
-                <p className="text-sm text-slate-500">{t('description')}</p>
+                <h3 className="font-semibold text-slate-900 dark:text-white">{t('title')}</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{t('description')}</p>
               </div>
             </div>
             <button
@@ -185,17 +185,17 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
 
         <div className="p-6">
           {heroSlides.length === 0 ? (
-            <div className="border-2 border-dashed border-slate-200 rounded-lg p-8 text-center">
-              <Presentation className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-              <p className="text-slate-500 text-sm">{t('noSlides')}</p>
+            <div className="border-2 border-dashed border-slate-200 dark:border-[#2d2a4a] rounded-lg p-8 text-center">
+              <Presentation className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+              <p className="text-slate-500 dark:text-slate-400 text-sm">{t('noSlides')}</p>
             </div>
           ) : (
             <div className="space-y-3">
               {heroSlides
                 .sort((a, b) => a.sort_order - b.sort_order)
                 .map((slide) => (
-                  <div key={slide.id} className="flex gap-4 p-3 bg-slate-50 rounded-lg">
-                    <div className="w-40 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                  <div key={slide.id} className="flex gap-4 p-3 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                    <div className="w-40 h-24 bg-slate-200 dark:bg-[#2d2a4a] rounded-lg overflow-hidden shrink-0">
                       <img
                         src={`${bucketUrl}${slide.image}`}
                         alt={slide.title}
@@ -204,7 +204,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                     </div>
                     <div className="flex-grow min-w-0">
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-medium text-slate-900 truncate">
+                        <h4 className="font-medium text-slate-900 dark:text-white truncate">
                           {slide.highlight ? (
                             <>
                               {slide.title.split(slide.highlight)[0]}
@@ -216,30 +216,30 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                           )}
                         </h4>
                         <span className={`shrink-0 px-2 py-0.5 rounded text-xs font-medium ${
-                          slide.active ? 'bg-green-100 text-green-700' : 'bg-slate-200 text-slate-600'
+                          slide.active ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-slate-200 text-slate-600 dark:bg-slate-700/30 dark:text-slate-400'
                         }`}>
                           {slide.active ? t('activate') : t('deactivate')}
                         </span>
                       </div>
                       {slide.subtitle && (
-                        <p className="text-sm text-slate-500 truncate mt-1">{slide.subtitle}</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 truncate mt-1">{slide.subtitle}</p>
                       )}
                       <div className="flex items-center gap-2 mt-3">
                         <button
                           onClick={() => toggleSlideActive(slide.id, slide.active)}
-                          className="text-xs px-2 py-1 rounded bg-white border border-slate-200 text-slate-600 hover:bg-slate-100"
+                          className="text-xs px-2 py-1 rounded bg-white dark:bg-[#13102b] border border-slate-200 dark:border-[#2d2a4a] text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#2d2a4a]"
                         >
                           {slide.active ? t('deactivate') : t('activate')}
                         </button>
                         <button
                           onClick={() => openSlideModal(slide)}
-                          className="p-1.5 bg-white border border-slate-200 text-slate-600 rounded hover:bg-slate-100"
+                          className="p-1.5 bg-white dark:bg-[#13102b] border border-slate-200 dark:border-[#2d2a4a] text-slate-600 dark:text-slate-400 rounded hover:bg-slate-100 dark:hover:bg-[#2d2a4a]"
                         >
                           <Pencil size={14} />
                         </button>
                         <button
                           onClick={() => handleSlideDelete(slide.id)}
-                          className="p-1.5 bg-white border border-red-200 text-red-600 rounded hover:bg-red-50"
+                          className="p-1.5 bg-white dark:bg-[#13102b] border border-red-200 dark:border-red-800/30 text-red-600 dark:text-red-400 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
                         >
                           <Trash2 size={14} />
                         </button>
@@ -255,12 +255,12 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
       {/* Slide Modal */}
       {isSlideModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-6 border-b border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-900">
+          <div className="bg-white dark:bg-[#13102b] rounded-xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-[#2d2a4a]">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                 {editingSlide ? t('editSlide') : t('addSlide')}
               </h3>
-              <button onClick={closeSlideModal} className="text-slate-400 hover:text-slate-600">
+              <button onClick={closeSlideModal} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
                 <X size={24} />
               </button>
             </div>
@@ -268,7 +268,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
             <form onSubmit={handleSlideSubmit} className="p-6 space-y-4">
               {/* Image */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   {t('backgroundImage')} *
                 </label>
                 <input
@@ -280,7 +280,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                 />
 
                 {slideFormImage ? (
-                  <div className="relative aspect-video rounded-lg overflow-hidden bg-slate-100">
+                  <div className="relative aspect-video rounded-lg overflow-hidden bg-slate-100 dark:bg-[#1a1735]">
                     <img
                       src={`${bucketUrl}${slideFormImage}`}
                       alt="Preview"
@@ -299,7 +299,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                     type="button"
                     onClick={() => slideFileInputRef.current?.click()}
                     disabled={uploading === 'hero'}
-                    className="w-full aspect-video border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center text-slate-400 hover:border-amber-400 hover:text-amber-500 transition"
+                    className="w-full aspect-video border-2 border-dashed border-slate-300 dark:border-[#2d2a4a] rounded-lg flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:border-amber-400 hover:text-amber-500 transition"
                   >
                     {uploading === 'hero' ? (
                       t('uploading')
@@ -316,7 +316,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
 
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t('slideTitle')} *
                 </label>
                 <input
@@ -325,13 +325,13 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   value={slideFormData.title}
                   onChange={(e) => setSlideFormData({ ...slideFormData, title: e.target.value })}
                   placeholder={t('titlePlaceholder')}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 />
               </div>
 
               {/* Highlight */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t('highlight')}
                 </label>
                 <input
@@ -339,16 +339,16 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   value={slideFormData.highlight}
                   onChange={(e) => setSlideFormData({ ...slideFormData, highlight: e.target.value })}
                   placeholder={t('highlightPlaceholder')}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 />
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   {t('highlightDescription')}
                 </p>
               </div>
 
               {/* Subtitle */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t('subtitle')}
                 </label>
                 <textarea
@@ -356,7 +356,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   value={slideFormData.subtitle}
                   onChange={(e) => setSlideFormData({ ...slideFormData, subtitle: e.target.value })}
                   placeholder={t('subtitlePlaceholder')}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  className="w-full px-4 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 />
               </div>
 
@@ -369,7 +369,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                   onChange={(e) => setSlideFormData({ ...slideFormData, active: e.target.checked })}
                   className="w-4 h-4 text-amber-500 rounded focus:ring-amber-500"
                 />
-                <label htmlFor="slideActive" className="text-sm font-medium text-slate-700">
+                <label htmlFor="slideActive" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                   {t('activeLabel')}
                 </label>
               </div>
@@ -379,7 +379,7 @@ export default function ContentEditor({ initialHeroSlides }: Props) {
                 <button
                   type="button"
                   onClick={closeSlideModal}
-                  className="flex-1 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition"
+                  className="flex-1 px-4 py-2 border border-slate-300 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-[#1a1735] transition"
                 >
                   {tCommon('cancel')}
                 </button>

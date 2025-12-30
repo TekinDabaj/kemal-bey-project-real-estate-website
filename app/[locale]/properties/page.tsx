@@ -28,26 +28,26 @@ export default async function PropertiesPage() {
   }
 
   return (
-    <div>
+    <div className="bg-white dark:bg-[#0c0a1d]">
       {/* Hero */}
-      <section className="bg-slate-900 text-white py-12">
+      <section className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl font-bold mb-3">{t('title')}</h1>
-          <p className="text-slate-300 max-w-2xl mx-auto text-sm">
+          <p className="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto text-sm">
             {t('subtitle')}
           </p>
         </div>
       </section>
 
       {/* Properties Grid */}
-      <section className="py-12 bg-slate-50">
+      <section className="py-12 bg-slate-50 dark:bg-[#0c0a1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {!properties || properties.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-slate-500">{t('noProperties')}</p>
+              <p className="text-slate-500 dark:text-slate-400">{t('noProperties')}</p>
               <Link
                 href="/contact"
-                className="inline-block mt-4 text-amber-600 hover:text-amber-700 font-medium text-sm"
+                className="inline-block mt-4 text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-medium text-sm"
               >
                 {t('contactForListings')}
               </Link>
@@ -58,10 +58,10 @@ export default async function PropertiesPage() {
                 <Link
                   key={property.id}
                   href={`/properties/${property.id}`}
-                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition group border border-slate-100"
+                  className="bg-white dark:bg-[#13102b] rounded-lg overflow-hidden shadow-sm hover:shadow-md dark:hover:shadow-purple-900/20 transition group border border-slate-100 dark:border-[#2d2a4a]"
                 >
                   {/* Image */}
-                  <div className="relative aspect-[16/10] bg-slate-200">
+                  <div className="relative aspect-[16/10] bg-slate-200 dark:bg-[#1a1735]">
                     {property.images && property.images.length > 0 ? (
                       <img
                         src={`${bucketUrl}${property.images[0]}`}
@@ -69,7 +69,7 @@ export default async function PropertiesPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">
+                      <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-600 text-sm">
                         {t('noImage')}
                       </div>
                     )}
@@ -101,36 +101,36 @@ export default async function PropertiesPage() {
 
                   {/* Content */}
                   <div className="p-4">
-                    <h3 className="font-semibold text-slate-900 mb-1 group-hover:text-amber-600 transition line-clamp-1">{property.title}</h3>
+                    <h3 className="font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition line-clamp-1">{property.title}</h3>
 
                     {property.location && (
-                      <p className="flex items-center gap-1 text-slate-500 text-xs mb-2">
+                      <p className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-xs mb-2">
                         <MapPin size={12} /> {property.location}
                       </p>
                     )}
 
                     {/* Description */}
                     {property.description && (
-                      <p className="text-slate-600 text-xs line-clamp-2 mb-3">
+                      <p className="text-slate-600 dark:text-slate-400 text-xs line-clamp-2 mb-3">
                         {property.description}
                       </p>
                     )}
 
                     {/* Features */}
-                    <div className="flex gap-3 text-slate-500 text-xs border-t border-slate-100 pt-3">
+                    <div className="flex gap-3 text-slate-500 dark:text-slate-400 text-xs border-t border-slate-100 dark:border-[#2d2a4a] pt-3">
                       {property.bedrooms && (
                         <span className="flex items-center gap-1">
-                          <BedDouble size={14} className="text-slate-400" /> {property.bedrooms} {t('beds')}
+                          <BedDouble size={14} className="text-slate-400 dark:text-slate-500" /> {property.bedrooms} {t('beds')}
                         </span>
                       )}
                       {property.bathrooms && (
                         <span className="flex items-center gap-1">
-                          <Bath size={14} className="text-slate-400" /> {property.bathrooms} {t('baths')}
+                          <Bath size={14} className="text-slate-400 dark:text-slate-500" /> {property.bathrooms} {t('baths')}
                         </span>
                       )}
                       {property.area && (
                         <span className="flex items-center gap-1">
-                          <Expand size={14} className="text-slate-400" /> {property.area} m²
+                          <Expand size={14} className="text-slate-400 dark:text-slate-500" /> {property.area} m²
                         </span>
                       )}
                     </div>
@@ -143,10 +143,10 @@ export default async function PropertiesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white dark:bg-[#13102b] dark:border-t dark:border-[#2d2a4a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">{t('interestedTitle')}</h2>
-          <p className="text-slate-600 text-sm mb-5">{t('interestedDescription')}</p>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{t('interestedTitle')}</h2>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mb-5">{t('interestedDescription')}</p>
           <Link
             href="/book"
             className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 px-6 py-2.5 rounded-lg font-semibold text-sm transition"

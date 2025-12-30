@@ -159,7 +159,9 @@
       "signIn": "Log Masuk",
       "signingIn": "Sedang Log Masuk...",
       "invalidCredentials": "E-mel atau kata laluan tidak sah",
-      "noAccess": "Anda tidak mempunyai akses admin"
+      "noAccess": "Anda tidak mempunyai akses admin",
+      "subtitle": "Masukkan kelayakan anda untuk mengakses panel pentadbir",
+      "secureConnection": "Sambungan selamat"
     },
     "tabs": {
       "reservations": "Tempahan",
@@ -168,27 +170,78 @@
     },
     "reservations": {
       "title": "Tempahan",
-      "stats": { "total": "Jumlah", "pending": "Menunggu", "confirmed": "Disahkan", "cancelled": "Dibatalkan" },
-      "filter": { "all": "Semua", "pending": "Menunggu", "confirmed": "Disahkan", "cancelled": "Dibatalkan" },
+      "stats": {
+        "total": "Jumlah",
+        "pending": "Menunggu",
+        "confirmed": "Disahkan",
+        "cancelled": "Dibatalkan"
+      },
+      "filter": {
+        "all": "Semua",
+        "pending": "Menunggu",
+        "confirmed": "Disahkan",
+        "cancelled": "Dibatalkan"
+      },
       "noReservations": "Tiada tempahan dijumpai",
       "booked": "Ditempah",
-      "actions": { "confirm": "Sahkan", "cancel": "Batal", "delete": "Padam" },
+      "actions": {
+        "confirm": "Sahkan",
+        "cancel": "Batal",
+        "delete": "Padam"
+      },
       "confirmDelete": "Adakah anda pasti mahu memadamkan tempahan ini?",
-      "calendar": { "title": "Kalendar Tempahan", "today": "Hari Ini", "noAppointments": "Tiada temu janji", "appointments": "temu janji" }
+      "calendar": {
+        "title": "Kalendar Tempahan",
+        "today": "Hari Ini",
+        "noAppointments": "Tiada temu janji",
+        "appointments": "temu janji"
+      },
+      "notifications": {
+        "enabled": "Pemberitahuan Dihidupkan",
+        "disabled": "Pemberitahuan Dimatikan",
+        "turnOn": "Hidupkan pemberitahuan",
+        "turnOff": "Matikan pemberitahuan",
+        "notSupported": "Pemberitahuan tidak disokong dalam pelayar ini",
+        "permissionDenied": "Kebenaran pemberitahuan ditolak. Sila aktifkan dalam tetapan pelayar.",
+        "enabledTitle": "Pemberitahuan Diaktifkan",
+        "enabledBody": "Anda kini akan menerima pemberitahuan untuk tempahan dalam masa 1 jam.",
+        "upcomingTitle": "Tempahan Akan Datang",
+        "upcomingBody": "{name} mempunyai tempahan dalam {minutes} minit (pada {time})"
+      }
     },
     "properties": {
-      "title": "Urus Hartanah", "addProperty": "Tambah Hartanah", "editProperty": "Edit Hartanah",
+      "title": "Urus Hartanah",
+      "addProperty": "Tambah Hartanah",
+      "editProperty": "Edit Hartanah",
       "noProperties": "Belum ada hartanah. Tambah hartanah pertama anda.",
-      "images": "Imej", "propertyTitle": "Tajuk", "description": "Penerangan", "price": "Harga", "location": "Lokasi",
-      "bedrooms": "Bilik Tidur", "bathrooms": "Bilik Air", "area": "Kawasan", "type": "Jenis",
-      "forSale": "Untuk Dijual", "forRent": "Untuk Disewa", "status": "Status",
-      "active": "Aktif", "sold": "Dijual", "rented": "Disewa", "inactive": "Tidak Aktif",
-      "featured": "Ditampilkan", "featuredDescription": "Hartanah ditampilkan (dipaparkan dahulu)",
-      "createProperty": "Cipta Hartanah", "updateProperty": "Kemaskini Hartanah",
+      "images": "Imej",
+      "propertyTitle": "Tajuk",
+      "description": "Penerangan",
+      "price": "Harga",
+      "location": "Lokasi",
+      "bedrooms": "Bilik Tidur",
+      "bathrooms": "Bilik Air",
+      "area": "Kawasan",
+      "type": "Jenis",
+      "forSale": "Untuk Dijual",
+      "forRent": "Untuk Disewa",
+      "status": "Status",
+      "active": "Aktif",
+      "sold": "Dijual",
+      "rented": "Disewa",
+      "inactive": "Tidak Aktif",
+      "featured": "Ditampilkan",
+      "featuredDescription": "Hartanah ditampilkan (dipaparkan dahulu)",
+      "createProperty": "Cipta Hartanah",
+      "updateProperty": "Kemaskini Hartanah",
       "confirmDelete": "Adakah anda pasti mahu memadamkan hartanah ini?",
-      "noLocation": "Tiada lokasi", "beds": "bilik", "baths": "mandi",
-      "uploadFailed": "Muat naik gagal", "updateFailed": "Kemaskini gagal",
-      "createFailed": "Penciptaan gagal", "deleteFailed": "Pemadaman gagal"
+      "noLocation": "Tiada lokasi",
+      "beds": "bilik",
+      "baths": "mandi",
+      "uploadFailed": "Muat naik gagal",
+      "updateFailed": "Kemaskini gagal",
+      "createFailed": "Penciptaan gagal",
+      "deleteFailed": "Pemadaman gagal"
     },
     "listProperty": {
       "pageTitle": "List New Property",
@@ -269,11 +322,24 @@
         "totalFloors": "Total Floors",
         "parkingSpaces": "Parking Spaces",
         "furnished": "Furnished",
-        "furnishedOptions": { "yes": "Furnished", "no": "Unfurnished", "partial": "Partially Furnished" },
+        "furnishedOptions": {
+          "yes": "Furnished",
+          "no": "Unfurnished",
+          "partial": "Partially Furnished"
+        },
         "heatingType": "Heating",
-        "heatingTypes": { "central": "Central Heating", "individual": "Individual", "floor": "Floor Heating", "none": "None" },
+        "heatingTypes": {
+          "central": "Central Heating",
+          "individual": "Individual",
+          "floor": "Floor Heating",
+          "none": "None"
+        },
         "coolingType": "Cooling",
-        "coolingTypes": { "central": "Central AC", "split": "Split AC", "none": "None" }
+        "coolingTypes": {
+          "central": "Central AC",
+          "split": "Split AC",
+          "none": "None"
+        }
       },
       "rooms": {
         "title": "Room Specifications",
@@ -336,27 +402,45 @@
         "typeRequired": "Listing type is required",
         "imagesRequired": "At least one image is required"
       },
-      "success": { "created": "Property created successfully", "updated": "Property updated successfully" },
-      "error": { "createFailed": "Failed to create property", "updateFailed": "Failed to update property", "uploadFailed": "Failed to upload image" }
+      "success": {
+        "created": "Property created successfully",
+        "updated": "Property updated successfully"
+      },
+      "error": {
+        "createFailed": "Failed to create property",
+        "updateFailed": "Failed to update property",
+        "uploadFailed": "Failed to upload image"
+      }
     },
     "content": {
       "heroSlider": {
-        "title": "Slider Hero", "description": "Imej sepanduk dengan teks di halaman utama",
-        "addSlide": "Tambah Slaid", "editSlide": "Edit Slaid",
+        "title": "Slider Hero",
+        "description": "Imej sepanduk dengan teks di halaman utama",
+        "addSlide": "Tambah Slaid",
+        "editSlide": "Edit Slaid",
         "noSlides": "Belum ada slaid. Tambah slaid hero pertama anda.",
-        "backgroundImage": "Imej Latar Belakang", "slideTitle": "Tajuk",
+        "backgroundImage": "Imej Latar Belakang",
+        "slideTitle": "Tajuk",
         "titlePlaceholder": "Nasihat Hartanah Pakar Yang Boleh Anda Percayai",
-        "highlight": "Teks Diserlahkan", "highlightPlaceholder": "Pakar",
+        "highlight": "Teks Diserlahkan",
+        "highlightPlaceholder": "Pakar",
         "highlightDescription": "Teks ini akan diserlahkan dengan warna ambar. Mesti sebahagian daripada tajuk.",
-        "subtitle": "Sari Kata", "subtitlePlaceholder": "Sama ada membeli, menjual atau melabur...",
+        "subtitle": "Sari Kata",
+        "subtitlePlaceholder": "Sama ada membeli, menjual atau melabur...",
         "activeLabel": "Aktif (kelihatan di halaman utama)",
-        "createSlide": "Cipta Slaid", "updateSlide": "Kemaskini Slaid",
-        "activate": "Aktifkan", "deactivate": "Nyahaktifkan",
-        "changeImage": "Tukar Imej", "uploadImage": "Klik untuk muat naik imej",
-        "recommendedSize": "Disyorkan: 1920x1080", "uploading": "Memuat naik...",
+        "createSlide": "Cipta Slaid",
+        "updateSlide": "Kemaskini Slaid",
+        "activate": "Aktifkan",
+        "deactivate": "Nyahaktifkan",
+        "changeImage": "Tukar Imej",
+        "uploadImage": "Klik untuk muat naik imej",
+        "recommendedSize": "Disyorkan: 1920x1080",
+        "uploading": "Memuat naik...",
         "pleaseUpload": "Sila muat naik imej",
-        "updateFailed": "Kemaskini gagal", "createFailed": "Penciptaan gagal",
-        "deleteFailed": "Pemadaman gagal", "confirmDelete": "Adakah anda pasti mahu memadamkan slaid ini?"
+        "updateFailed": "Kemaskini gagal",
+        "createFailed": "Penciptaan gagal",
+        "deleteFailed": "Pemadaman gagal",
+        "confirmDelete": "Adakah anda pasti mahu memadamkan slaid ini?"
       }
     }
   }

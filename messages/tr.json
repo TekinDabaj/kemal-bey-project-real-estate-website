@@ -159,7 +159,9 @@
       "signIn": "Giris Yap",
       "signingIn": "Giris yapiliyor...",
       "invalidCredentials": "Gecersiz e-posta veya sifre",
-      "noAccess": "Yonetici erisim yetkiniz yok"
+      "noAccess": "Yonetici erisim yetkiniz yok",
+      "subtitle": "Yonetici paneline erismek icin kimlik bilgilerinizi girin",
+      "secureConnection": "Guvenli baglanti"
     },
     "tabs": {
       "reservations": "Randevular",
@@ -193,6 +195,18 @@
         "today": "Bugun",
         "noAppointments": "Randevu yok",
         "appointments": "randevu"
+      },
+      "notifications": {
+        "enabled": "Bildirimler Acik",
+        "disabled": "Bildirimler Kapali",
+        "turnOn": "Bildirimleri ac",
+        "turnOff": "Bildirimleri kapat",
+        "notSupported": "Bu tarayicida bildirimler desteklenmiyor",
+        "permissionDenied": "Bildirim izni reddedildi. Lutfen tarayici ayarlarindan etkinlestirin.",
+        "enabledTitle": "Bildirimler Etkinlestirildi",
+        "enabledBody": "Artik 1 saat icindeki randevular icin bildirim alacaksiniz.",
+        "upcomingTitle": "Yaklasan Randevu",
+        "upcomingBody": "{name} adli kisinin {minutes} dakika icinde randevusu var (saat {time})"
       }
     },
     "properties": {
@@ -308,11 +322,24 @@
         "totalFloors": "Toplam Kat",
         "parkingSpaces": "Otopark",
         "furnished": "Esyali",
-        "furnishedOptions": { "yes": "Esyali", "no": "Esyasiz", "partial": "Kismi Esyali" },
+        "furnishedOptions": {
+          "yes": "Esyali",
+          "no": "Esyasiz",
+          "partial": "Kismi Esyali"
+        },
         "heatingType": "Isitma",
-        "heatingTypes": { "central": "Merkezi", "individual": "Bireysel", "floor": "Yerden Isitma", "none": "Yok" },
+        "heatingTypes": {
+          "central": "Merkezi",
+          "individual": "Bireysel",
+          "floor": "Yerden Isitma",
+          "none": "Yok"
+        },
         "coolingType": "Sogutma",
-        "coolingTypes": { "central": "Merkezi Klima", "split": "Split Klima", "none": "Yok" }
+        "coolingTypes": {
+          "central": "Merkezi Klima",
+          "split": "Split Klima",
+          "none": "Yok"
+        }
       },
       "rooms": {
         "title": "Oda Ozellikleri",
@@ -375,8 +402,15 @@
         "typeRequired": "Ilan turu zorunludur",
         "imagesRequired": "En az bir gorsel zorunludur"
       },
-      "success": { "created": "Emlak basariyla olusturuldu", "updated": "Emlak basariyla guncellendi" },
-      "error": { "createFailed": "Emlak olusturulamadi", "updateFailed": "Emlak guncellenemedi", "uploadFailed": "Gorsel yuklenemedi" }
+      "success": {
+        "created": "Emlak basariyla olusturuldu",
+        "updated": "Emlak basariyla guncellendi"
+      },
+      "error": {
+        "createFailed": "Emlak olusturulamadi",
+        "updateFailed": "Emlak guncellenemedi",
+        "uploadFailed": "Gorsel yuklenemedi"
+      }
     },
     "content": {
       "heroSlider": {

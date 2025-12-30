@@ -194,20 +194,20 @@ export default function PropertyListingForm({ property, t }: Props) {
     <button
       type="button"
       onClick={() => toggleSection(section)}
-      className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition rounded-t-lg"
+      className="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-[#1a1735] hover:bg-slate-100 dark:hover:bg-[#2d2a4a] transition rounded-t-lg"
     >
       <div className="flex items-center gap-2">
         <Icon className="w-5 h-5 text-amber-500" />
-        <span className="font-medium text-slate-900">{title}</span>
+        <span className="font-medium text-slate-900 dark:text-white">{title}</span>
       </div>
-      {expandedSections[section] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+      <span className="text-slate-500 dark:text-slate-400">{expandedSections[section] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}</span>
     </button>
   )
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-100 dark:bg-[#0c0a1d]">
       {/* Header */}
-      <div className="bg-slate-900 text-white px-4 py-4">
+      <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
         <div className="max-w-5xl mx-auto flex items-center gap-4">
           <Link
             href={`/${locale}/admin`}
@@ -216,7 +216,7 @@ export default function PropertyListingForm({ property, t }: Props) {
             <ArrowLeft size={18} />
             {t.backToProperties}
           </Link>
-          <div className="h-4 w-px bg-slate-700" />
+          <div className="h-4 w-px bg-slate-700 dark:bg-[#2d2a4a]" />
           <h1 className="text-lg font-semibold">
             {isEditing ? t.editPageTitle : t.pageTitle}
           </h1>
@@ -226,13 +226,13 @@ export default function PropertyListingForm({ property, t }: Props) {
       {/* Form */}
       <form onSubmit={(e) => { e.preventDefault(); handleSubmit(false) }} className="max-w-5xl mx-auto px-4 py-6 space-y-4">
         {/* Basic Info Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
           <SectionHeader icon={Building2} title={t.sections.basicInfo} section="basicInfo" />
           {expandedSections.basicInfo && (
             <div className="p-4 space-y-4">
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t.fields.title} <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -240,8 +240,8 @@ export default function PropertyListingForm({ property, t }: Props) {
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder={t.fields.titlePlaceholder}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm ${
-                    errors.title ? 'border-red-500' : 'border-slate-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white ${
+                    errors.title ? 'border-red-500' : 'border-slate-300 dark:border-[#2d2a4a]'
                   }`}
                 />
                 {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title}</p>}
@@ -249,7 +249,7 @@ export default function PropertyListingForm({ property, t }: Props) {
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t.fields.description} <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -257,8 +257,8 @@ export default function PropertyListingForm({ property, t }: Props) {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder={t.fields.descriptionPlaceholder}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm ${
-                    errors.description ? 'border-red-500' : 'border-slate-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white ${
+                    errors.description ? 'border-red-500' : 'border-slate-300 dark:border-[#2d2a4a]'
                   }`}
                 />
                 {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
@@ -267,7 +267,7 @@ export default function PropertyListingForm({ property, t }: Props) {
               {/* Price, Type, Status Row */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.fields.price} ({t.fields.currency}) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -275,21 +275,21 @@ export default function PropertyListingForm({ property, t }: Props) {
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                     placeholder={t.fields.pricePlaceholder}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm ${
-                      errors.price ? 'border-red-500' : 'border-slate-300'
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white ${
+                      errors.price ? 'border-red-500' : 'border-slate-300 dark:border-[#2d2a4a]'
                     }`}
                   />
                   {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.fields.type} <span className="text-red-500">*</span>
                   </label>
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as 'sale' | 'rent' })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   >
                     <option value="sale">{t.fields.forSale}</option>
                     <option value="rent">{t.fields.forRent}</option>
@@ -297,13 +297,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.fields.status}
                   </label>
                   <select
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'sold' | 'rented' | 'inactive' })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   >
                     <option value="active">{t.fields.active}</option>
                     <option value="sold">{t.fields.sold}</option>
@@ -322,9 +322,9 @@ export default function PropertyListingForm({ property, t }: Props) {
                   onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                   className="w-4 h-4 text-amber-500 rounded focus:ring-amber-500"
                 />
-                <label htmlFor="featured" className="text-sm text-slate-700">
+                <label htmlFor="featured" className="text-sm text-slate-700 dark:text-slate-300">
                   {t.fields.featured}
-                  <span className="text-slate-500 ml-1">({t.fields.featuredHelp})</span>
+                  <span className="text-slate-500 dark:text-slate-400 ml-1">({t.fields.featuredHelp})</span>
                 </label>
               </div>
             </div>
@@ -332,12 +332,12 @@ export default function PropertyListingForm({ property, t }: Props) {
         </div>
 
         {/* Location Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
           <SectionHeader icon={MapPin} title={t.sections.location} section="location" />
           {expandedSections.location && (
             <div className="p-4 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t.location.address} <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -345,8 +345,8 @@ export default function PropertyListingForm({ property, t }: Props) {
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                   placeholder={t.location.addressPlaceholder}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm ${
-                    errors.location ? 'border-red-500' : 'border-slate-300'
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white ${
+                    errors.location ? 'border-red-500' : 'border-slate-300 dark:border-[#2d2a4a]'
                   }`}
                 />
                 {errors.location && <p className="text-red-500 text-xs mt-1">{errors.location}</p>}
@@ -356,14 +356,14 @@ export default function PropertyListingForm({ property, t }: Props) {
                 <button
                   type="button"
                   onClick={() => setIsMapOpen(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition"
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-[#1a1735] hover:bg-slate-200 dark:hover:bg-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg text-sm font-medium transition"
                 >
                   <MapPin size={16} />
                   {t.location.pinOnMap}
                 </button>
 
                 {formData.latitude && formData.longitude && (
-                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
                     <span>{t.location.latitude}: {formData.latitude.toFixed(6)}</span>
                     <span>{t.location.longitude}: {formData.longitude.toFixed(6)}</span>
                   </div>
@@ -374,16 +374,16 @@ export default function PropertyListingForm({ property, t }: Props) {
         </div>
 
         {/* Media Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
           <SectionHeader icon={Camera} title={t.sections.media} section="media" />
           {expandedSections.media && (
             <div className="p-4 space-y-6">
               {/* Property Images */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t.media.propertyImages} <span className="text-red-500">*</span>
                 </label>
-                <p className="text-xs text-slate-500 mb-2">{t.media.propertyImagesHelp}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{t.media.propertyImagesHelp}</p>
                 <ImageUploader
                   images={images}
                   onImagesChange={setImages}
@@ -395,10 +395,10 @@ export default function PropertyListingForm({ property, t }: Props) {
 
               {/* Floor Plans */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   {t.media.floorPlans}
                 </label>
-                <p className="text-xs text-slate-500 mb-2">{t.media.floorPlansHelp}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{t.media.floorPlansHelp}</p>
                 <ImageUploader
                   images={floorPlans}
                   onImagesChange={setFloorPlans}
@@ -412,20 +412,20 @@ export default function PropertyListingForm({ property, t }: Props) {
         </div>
 
         {/* Specifications Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
           <SectionHeader icon={Settings2} title={t.sections.specifications} section="specs" />
           {expandedSections.specs && (
             <div className="p-4">
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {/* Property Type */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.propertyType}
                   </label>
                   <select
                     value={formData.property_type}
                     onChange={(e) => setFormData({ ...formData, property_type: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   >
                     <option value="">-</option>
                     {PROPERTY_TYPES.map(type => (
@@ -436,7 +436,7 @@ export default function PropertyListingForm({ property, t }: Props) {
 
                 {/* Bedrooms */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.bedrooms}
                   </label>
                   <input
@@ -444,13 +444,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                     min="0"
                     value={formData.bedrooms}
                     onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Bathrooms */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.bathrooms}
                   </label>
                   <input
@@ -458,13 +458,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                     min="0"
                     value={formData.bathrooms}
                     onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Total Area */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.totalArea}
                   </label>
                   <input
@@ -472,13 +472,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                     min="0"
                     value={formData.area}
                     onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Year Built */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.yearBuilt}
                   </label>
                   <input
@@ -487,13 +487,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                     max={new Date().getFullYear()}
                     value={formData.year_built}
                     onChange={(e) => setFormData({ ...formData, year_built: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Floor Number */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.floorNumber}
                   </label>
                   <input
@@ -501,13 +501,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                     min="0"
                     value={formData.floor_number}
                     onChange={(e) => setFormData({ ...formData, floor_number: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Total Floors */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.totalFloors}
                   </label>
                   <input
@@ -515,13 +515,13 @@ export default function PropertyListingForm({ property, t }: Props) {
                     min="1"
                     value={formData.total_floors}
                     onChange={(e) => setFormData({ ...formData, total_floors: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Parking */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.parkingSpaces}
                   </label>
                   <input
@@ -529,19 +529,19 @@ export default function PropertyListingForm({ property, t }: Props) {
                     min="0"
                     value={formData.parking_spaces}
                     onChange={(e) => setFormData({ ...formData, parking_spaces: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   />
                 </div>
 
                 {/* Furnished */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.furnished}
                   </label>
                   <select
                     value={formData.furnished}
                     onChange={(e) => setFormData({ ...formData, furnished: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   >
                     <option value="">-</option>
                     <option value="yes">{t.specs.furnishedOptions.yes}</option>
@@ -552,13 +552,13 @@ export default function PropertyListingForm({ property, t }: Props) {
 
                 {/* Heating */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.heatingType}
                   </label>
                   <select
                     value={formData.heating_type}
                     onChange={(e) => setFormData({ ...formData, heating_type: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   >
                     <option value="">-</option>
                     <option value="central">{t.specs.heatingTypes.central}</option>
@@ -570,13 +570,13 @@ export default function PropertyListingForm({ property, t }: Props) {
 
                 {/* Cooling */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     {t.specs.coolingType}
                   </label>
                   <select
                     value={formData.cooling_type}
                     onChange={(e) => setFormData({ ...formData, cooling_type: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                   >
                     <option value="">-</option>
                     <option value="central">{t.specs.coolingTypes.central}</option>
@@ -590,11 +590,11 @@ export default function PropertyListingForm({ property, t }: Props) {
         </div>
 
         {/* Room Details Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
           <SectionHeader icon={LayoutGrid} title={t.sections.rooms} section="rooms" />
           {expandedSections.rooms && (
             <div className="p-4">
-              <p className="text-xs text-slate-500 mb-3">{t.rooms.help}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{t.rooms.help}</p>
 
               {rooms.length > 0 && (
                 <div className="space-y-2 mb-3">
@@ -603,7 +603,7 @@ export default function PropertyListingForm({ property, t }: Props) {
                       <select
                         value={room.name}
                         onChange={(e) => updateRoom(index, 'name', e.target.value)}
-                        className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                        className="flex-1 px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                       >
                         <option value="">{t.rooms.roomName}</option>
                         {Object.entries(t.rooms.commonRooms).map(([key, value]) => (
@@ -617,12 +617,12 @@ export default function PropertyListingForm({ property, t }: Props) {
                         value={room.area || ''}
                         onChange={(e) => updateRoom(index, 'area', parseFloat(e.target.value) || 0)}
                         placeholder={t.rooms.roomArea}
-                        className="w-24 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+                        className="w-24 px-3 py-2 border border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
                       />
                       <button
                         type="button"
                         onClick={() => removeRoom(index)}
-                        className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition"
+                        className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -634,7 +634,7 @@ export default function PropertyListingForm({ property, t }: Props) {
               <button
                 type="button"
                 onClick={addRoom}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-amber-600 hover:bg-amber-50 rounded-lg transition"
+                className="flex items-center gap-2 px-3 py-2 text-sm text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-lg transition"
               >
                 <Plus size={16} />
                 {t.rooms.addRoom}
@@ -644,11 +644,11 @@ export default function PropertyListingForm({ property, t }: Props) {
         </div>
 
         {/* Amenities Section */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
           <SectionHeader icon={Sparkles} title={t.sections.amenities} section="amenities" />
           {expandedSections.amenities && (
             <div className="p-4">
-              <p className="text-xs text-slate-500 mb-3">{t.amenities.help}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{t.amenities.help}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                 {AMENITIES.map(amenity => (
                   <button
@@ -657,8 +657,8 @@ export default function PropertyListingForm({ property, t }: Props) {
                     onClick={() => toggleAmenity(amenity)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition ${
                       amenities.includes(amenity)
-                        ? 'bg-amber-100 text-amber-800 border-2 border-amber-400'
-                        : 'bg-slate-50 text-slate-600 border-2 border-transparent hover:bg-slate-100'
+                        ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 border-2 border-amber-400 dark:border-amber-600'
+                        : 'bg-slate-50 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 border-2 border-transparent hover:bg-slate-100 dark:hover:bg-[#2d2a4a]'
                     }`}
                   >
                     {amenities.includes(amenity) && <Check size={14} />}
@@ -671,12 +671,12 @@ export default function PropertyListingForm({ property, t }: Props) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-3 bg-white rounded-lg shadow-sm border border-slate-200 p-4">
+        <div className="flex items-center justify-end gap-3 bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] p-4">
           <button
             type="button"
             onClick={() => handleSubmit(true)}
             disabled={saving}
-            className="px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg text-sm font-medium transition disabled:opacity-50"
+            className="px-4 py-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded-lg text-sm font-medium transition disabled:opacity-50"
           >
             {t.actions.saveDraft}
           </button>

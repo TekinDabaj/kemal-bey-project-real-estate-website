@@ -5,13 +5,14 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Menu, X } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations('navigation');
 
   return (
-    <header className="bg-slate-900 text-white">
+    <header className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <Link href="/" className="text-xl font-semibold text-amber-400">
@@ -35,7 +36,10 @@ export default function Header() {
             <Link href="/contact" className="hover:text-amber-400 transition">
               {t('contact')}
             </Link>
-            <LanguageSwitcher />
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <LanguageSwitcher />
+            </div>
             <Link
               href="/book"
               className="bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded text-slate-900 font-medium transition"
@@ -46,6 +50,7 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <LanguageSwitcher />
             <button onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X size={24} /> : <Menu size={24} />}

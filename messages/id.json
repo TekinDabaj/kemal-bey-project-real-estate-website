@@ -159,7 +159,9 @@
       "signIn": "Masuk",
       "signingIn": "Sedang Masuk...",
       "invalidCredentials": "Email atau kata sandi tidak valid",
-      "noAccess": "Anda tidak memiliki akses admin"
+      "noAccess": "Anda tidak memiliki akses admin",
+      "subtitle": "Masukkan kredensial Anda untuk mengakses panel admin",
+      "secureConnection": "Koneksi aman"
     },
     "tabs": {
       "reservations": "Reservasi",
@@ -168,27 +170,78 @@
     },
     "reservations": {
       "title": "Reservasi",
-      "stats": { "total": "Total", "pending": "Menunggu", "confirmed": "Dikonfirmasi", "cancelled": "Dibatalkan" },
-      "filter": { "all": "Semua", "pending": "Menunggu", "confirmed": "Dikonfirmasi", "cancelled": "Dibatalkan" },
+      "stats": {
+        "total": "Total",
+        "pending": "Menunggu",
+        "confirmed": "Dikonfirmasi",
+        "cancelled": "Dibatalkan"
+      },
+      "filter": {
+        "all": "Semua",
+        "pending": "Menunggu",
+        "confirmed": "Dikonfirmasi",
+        "cancelled": "Dibatalkan"
+      },
       "noReservations": "Tidak ada reservasi ditemukan",
       "booked": "Dipesan",
-      "actions": { "confirm": "Konfirmasi", "cancel": "Batalkan", "delete": "Hapus" },
+      "actions": {
+        "confirm": "Konfirmasi",
+        "cancel": "Batalkan",
+        "delete": "Hapus"
+      },
       "confirmDelete": "Apakah Anda yakin ingin menghapus reservasi ini?",
-      "calendar": { "title": "Kalender Reservasi", "today": "Hari Ini", "noAppointments": "Tidak ada janji", "appointments": "janji" }
+      "calendar": {
+        "title": "Kalender Reservasi",
+        "today": "Hari Ini",
+        "noAppointments": "Tidak ada janji",
+        "appointments": "janji"
+      },
+      "notifications": {
+        "enabled": "Notifikasi Aktif",
+        "disabled": "Notifikasi Nonaktif",
+        "turnOn": "Aktifkan notifikasi",
+        "turnOff": "Matikan notifikasi",
+        "notSupported": "Notifikasi tidak didukung di browser ini",
+        "permissionDenied": "Izin notifikasi ditolak. Silakan aktifkan di pengaturan browser.",
+        "enabledTitle": "Notifikasi Diaktifkan",
+        "enabledBody": "Anda sekarang akan menerima notifikasi untuk reservasi dalam 1 jam.",
+        "upcomingTitle": "Reservasi Akan Datang",
+        "upcomingBody": "{name} memiliki reservasi dalam {minutes} menit (pukul {time})"
+      }
     },
     "properties": {
-      "title": "Kelola Properti", "addProperty": "Tambah Properti", "editProperty": "Edit Properti",
+      "title": "Kelola Properti",
+      "addProperty": "Tambah Properti",
+      "editProperty": "Edit Properti",
       "noProperties": "Belum ada properti. Tambahkan properti pertama Anda.",
-      "images": "Gambar", "propertyTitle": "Judul", "description": "Deskripsi", "price": "Harga", "location": "Lokasi",
-      "bedrooms": "Kamar Tidur", "bathrooms": "Kamar Mandi", "area": "Luas", "type": "Tipe",
-      "forSale": "Dijual", "forRent": "Disewakan", "status": "Status",
-      "active": "Aktif", "sold": "Terjual", "rented": "Tersewa", "inactive": "Tidak Aktif",
-      "featured": "Unggulan", "featuredDescription": "Properti unggulan (ditampilkan pertama)",
-      "createProperty": "Buat Properti", "updateProperty": "Perbarui Properti",
+      "images": "Gambar",
+      "propertyTitle": "Judul",
+      "description": "Deskripsi",
+      "price": "Harga",
+      "location": "Lokasi",
+      "bedrooms": "Kamar Tidur",
+      "bathrooms": "Kamar Mandi",
+      "area": "Luas",
+      "type": "Tipe",
+      "forSale": "Dijual",
+      "forRent": "Disewakan",
+      "status": "Status",
+      "active": "Aktif",
+      "sold": "Terjual",
+      "rented": "Tersewa",
+      "inactive": "Tidak Aktif",
+      "featured": "Unggulan",
+      "featuredDescription": "Properti unggulan (ditampilkan pertama)",
+      "createProperty": "Buat Properti",
+      "updateProperty": "Perbarui Properti",
       "confirmDelete": "Apakah Anda yakin ingin menghapus properti ini?",
-      "noLocation": "Tidak ada lokasi", "beds": "kamar", "baths": "mandi",
-      "uploadFailed": "Gagal mengunggah", "updateFailed": "Gagal memperbarui",
-      "createFailed": "Gagal membuat", "deleteFailed": "Gagal menghapus"
+      "noLocation": "Tidak ada lokasi",
+      "beds": "kamar",
+      "baths": "mandi",
+      "uploadFailed": "Gagal mengunggah",
+      "updateFailed": "Gagal memperbarui",
+      "createFailed": "Gagal membuat",
+      "deleteFailed": "Gagal menghapus"
     },
     "listProperty": {
       "pageTitle": "List New Property",
@@ -269,11 +322,24 @@
         "totalFloors": "Total Floors",
         "parkingSpaces": "Parking Spaces",
         "furnished": "Furnished",
-        "furnishedOptions": { "yes": "Furnished", "no": "Unfurnished", "partial": "Partially Furnished" },
+        "furnishedOptions": {
+          "yes": "Furnished",
+          "no": "Unfurnished",
+          "partial": "Partially Furnished"
+        },
         "heatingType": "Heating",
-        "heatingTypes": { "central": "Central Heating", "individual": "Individual", "floor": "Floor Heating", "none": "None" },
+        "heatingTypes": {
+          "central": "Central Heating",
+          "individual": "Individual",
+          "floor": "Floor Heating",
+          "none": "None"
+        },
         "coolingType": "Cooling",
-        "coolingTypes": { "central": "Central AC", "split": "Split AC", "none": "None" }
+        "coolingTypes": {
+          "central": "Central AC",
+          "split": "Split AC",
+          "none": "None"
+        }
       },
       "rooms": {
         "title": "Room Specifications",
@@ -336,27 +402,45 @@
         "typeRequired": "Listing type is required",
         "imagesRequired": "At least one image is required"
       },
-      "success": { "created": "Property created successfully", "updated": "Property updated successfully" },
-      "error": { "createFailed": "Failed to create property", "updateFailed": "Failed to update property", "uploadFailed": "Failed to upload image" }
+      "success": {
+        "created": "Property created successfully",
+        "updated": "Property updated successfully"
+      },
+      "error": {
+        "createFailed": "Failed to create property",
+        "updateFailed": "Failed to update property",
+        "uploadFailed": "Failed to upload image"
+      }
     },
     "content": {
       "heroSlider": {
-        "title": "Slider Hero", "description": "Gambar banner dengan teks di halaman utama",
-        "addSlide": "Tambah Slide", "editSlide": "Edit Slide",
+        "title": "Slider Hero",
+        "description": "Gambar banner dengan teks di halaman utama",
+        "addSlide": "Tambah Slide",
+        "editSlide": "Edit Slide",
         "noSlides": "Belum ada slide. Tambahkan slide hero pertama Anda.",
-        "backgroundImage": "Gambar Latar", "slideTitle": "Judul",
+        "backgroundImage": "Gambar Latar",
+        "slideTitle": "Judul",
         "titlePlaceholder": "Panduan Properti Ahli yang Dapat Anda Percaya",
-        "highlight": "Teks Sorotan", "highlightPlaceholder": "Ahli",
+        "highlight": "Teks Sorotan",
+        "highlightPlaceholder": "Ahli",
         "highlightDescription": "Teks ini akan disorot dengan warna amber. Harus menjadi bagian dari judul.",
-        "subtitle": "Subjudul", "subtitlePlaceholder": "Baik membeli, menjual, atau berinvestasi...",
+        "subtitle": "Subjudul",
+        "subtitlePlaceholder": "Baik membeli, menjual, atau berinvestasi...",
         "activeLabel": "Aktif (terlihat di halaman utama)",
-        "createSlide": "Buat Slide", "updateSlide": "Perbarui Slide",
-        "activate": "Aktifkan", "deactivate": "Nonaktifkan",
-        "changeImage": "Ubah Gambar", "uploadImage": "Klik untuk mengunggah gambar",
-        "recommendedSize": "Disarankan: 1920x1080", "uploading": "Mengunggah...",
+        "createSlide": "Buat Slide",
+        "updateSlide": "Perbarui Slide",
+        "activate": "Aktifkan",
+        "deactivate": "Nonaktifkan",
+        "changeImage": "Ubah Gambar",
+        "uploadImage": "Klik untuk mengunggah gambar",
+        "recommendedSize": "Disarankan: 1920x1080",
+        "uploading": "Mengunggah...",
         "pleaseUpload": "Silakan unggah gambar",
-        "updateFailed": "Gagal memperbarui", "createFailed": "Gagal membuat",
-        "deleteFailed": "Gagal menghapus", "confirmDelete": "Apakah Anda yakin ingin menghapus slide ini?"
+        "updateFailed": "Gagal memperbarui",
+        "createFailed": "Gagal membuat",
+        "deleteFailed": "Gagal menghapus",
+        "confirmDelete": "Apakah Anda yakin ingin menghapus slide ini?"
       }
     }
   }

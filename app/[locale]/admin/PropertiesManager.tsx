@@ -37,10 +37,10 @@ export default function PropertiesManager({ initialProperties }: Props) {
   }
 
   const statusColors = {
-    active: 'bg-green-100 text-green-800',
-    sold: 'bg-red-100 text-red-800',
-    rented: 'bg-blue-100 text-blue-800',
-    inactive: 'bg-slate-100 text-slate-800'
+    active: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+    sold: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+    rented: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+    inactive: 'bg-slate-100 text-slate-800 dark:bg-slate-700/30 dark:text-slate-400'
   }
 
   const statusLabels = {
@@ -54,7 +54,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
     <div>
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-slate-900">{t('title')}</h2>
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">{t('title')}</h2>
         <Link
           href={`/${locale}/admin/listproperty`}
           className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-medium transition"
@@ -65,15 +65,15 @@ export default function PropertiesManager({ initialProperties }: Props) {
 
       {/* Properties List */}
       {properties.length === 0 ? (
-        <div className="bg-white rounded-lg p-8 text-center text-slate-500 border border-slate-200">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg p-8 text-center text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-[#2d2a4a]">
           {t('noProperties')}
         </div>
       ) : (
         <div className="space-y-3">
           {properties.map((property) => (
-            <div key={property.id} className="bg-white rounded-lg border border-slate-200 p-4 flex gap-4">
+            <div key={property.id} className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] p-4 flex gap-4">
               {/* Thumbnail */}
-              <div className="w-32 h-24 bg-slate-100 rounded-lg overflow-hidden shrink-0">
+              <div className="w-32 h-24 bg-slate-100 dark:bg-[#1a1735] rounded-lg overflow-hidden shrink-0">
                 {property.images && property.images.length > 0 ? (
                   <img
                     src={`${bucketUrl}${property.images[0]}`}
@@ -81,7 +81,7 @@ export default function PropertiesManager({ initialProperties }: Props) {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-slate-400">
+                  <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-600">
                     <ImageIcon size={24} />
                   </div>
                 )}
@@ -91,24 +91,24 @@ export default function PropertiesManager({ initialProperties }: Props) {
               <div className="flex-grow min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <h3 className="font-semibold text-slate-900 truncate">{property.title}</h3>
-                    <p className="text-sm text-slate-500 truncate">{property.location || t('noLocation')}</p>
+                    <h3 className="font-semibold text-slate-900 dark:text-white truncate">{property.title}</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 truncate">{property.location || t('noLocation')}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColors[property.status]}`}>
                       {statusLabels[property.status]}
                     </span>
                     {property.featured && (
-                      <span className="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                      <span className="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
                         {t('featured')}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 mt-2 text-sm text-slate-600">
+                <div className="flex items-center gap-4 mt-2 text-sm text-slate-600 dark:text-slate-400">
                   {property.price && (
-                    <span className="font-medium text-amber-600">
+                    <span className="font-medium text-amber-600 dark:text-amber-400">
                       ${property.price.toLocaleString()}
                       {property.type === 'rent' && '/mo'}
                     </span>
@@ -119,19 +119,19 @@ export default function PropertiesManager({ initialProperties }: Props) {
                 </div>
 
                 {/* Property Type & Additional Info */}
-                <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
+                <div className="flex items-center gap-2 mt-2 text-xs text-slate-500 dark:text-slate-400">
                   {property.property_type && (
-                    <span className="px-2 py-0.5 bg-slate-100 rounded">
+                    <span className="px-2 py-0.5 bg-slate-100 dark:bg-[#1a1735] rounded">
                       {property.property_type}
                     </span>
                   )}
                   {property.amenities && property.amenities.length > 0 && (
-                    <span className="text-slate-400">
+                    <span className="text-slate-400 dark:text-slate-500">
                       +{property.amenities.length} amenities
                     </span>
                   )}
                   {property.rooms && property.rooms.length > 0 && (
-                    <span className="text-slate-400">
+                    <span className="text-slate-400 dark:text-slate-500">
                       {property.rooms.length} rooms detailed
                     </span>
                   )}
@@ -143,21 +143,21 @@ export default function PropertiesManager({ initialProperties }: Props) {
                 <Link
                   href={`/${locale}/properties/${property.id}`}
                   target="_blank"
-                  className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition"
+                  className="p-2 bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-200 dark:hover:bg-[#2d2a4a] transition"
                   title="View"
                 >
                   <ExternalLink size={16} />
                 </Link>
                 <Link
                   href={`/${locale}/admin/listproperty?edit=${property.id}`}
-                  className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition"
+                  className="p-2 bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-200 dark:hover:bg-[#2d2a4a] transition"
                   title={t('editProperty')}
                 >
                   <Pencil size={16} />
                 </Link>
                 <button
                   onClick={() => handleDelete(property.id)}
-                  className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
+                  className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition"
                   title="Delete"
                 >
                   <Trash2 size={16} />

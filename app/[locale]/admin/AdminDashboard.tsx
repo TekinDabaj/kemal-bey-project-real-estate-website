@@ -1,232 +1,552 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isSameDay, addMonths, subMonths } from 'date-fns'
-import { enGB, tr, ms, id, es, pt, de, fr, it, zhCN, ja, hi } from 'date-fns/locale'
-import { LogOut, Calendar, Clock, User, Mail, Phone, MessageSquare, Check, X, Trash2, CalendarDays, Image, Building2, ChevronLeft, ChevronRight } from 'lucide-react'
-import { Reservation, Property, HeroSlide } from '@/types/database'
-import ContentEditor from './ContentEditor'
-import PropertiesManager from './PropertiesManager'
-import { useTranslations } from 'next-intl'
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import {
+  format,
+  startOfMonth,
+  endOfMonth,
+  eachDayOfInterval,
+  isToday,
+  isSameDay,
+  addMonths,
+  subMonths,
+  differenceInMinutes,
+  parseISO,
+} from "date-fns";
+import {
+  enGB,
+  tr,
+  ms,
+  id,
+  es,
+  pt,
+  de,
+  fr,
+  it,
+  zhCN,
+  ja,
+  hi,
+} from "date-fns/locale";
+import {
+  LogOut,
+  Calendar,
+  Clock,
+  User,
+  Mail,
+  Phone,
+  MessageSquare,
+  Check,
+  X,
+  Trash2,
+  CalendarDays,
+  Image,
+  Building2,
+  ChevronLeft,
+  ChevronRight,
+  Bell,
+  BellOff,
+} from "lucide-react";
+import { Reservation, Property, HeroSlide } from "@/types/database";
+import ContentEditor from "./ContentEditor";
+import PropertiesManager from "./PropertiesManager";
+import { useTranslations } from "next-intl";
 
-type DateFnsLocale = typeof enGB
-const dateFnsLocales: Record<string, DateFnsLocale> = { en: enGB, tr, ms, id, es, pt, de, fr, it, zh: zhCN, ja, hi }
+type DateFnsLocale = typeof enGB;
+const dateFnsLocales: Record<string, DateFnsLocale> = {
+  en: enGB,
+  tr,
+  ms,
+  id,
+  es,
+  pt,
+  de,
+  fr,
+  it,
+  zh: zhCN,
+  ja,
+  hi,
+};
 
 type Props = {
-  reservations: Reservation[]
-  properties: Property[]
-  heroSlides: HeroSlide[]
-}
+  reservations: Reservation[];
+  properties: Property[];
+  heroSlides: HeroSlide[];
+};
 
-export default function AdminDashboard({ reservations: initialReservations, properties, heroSlides }: Props) {
-  const t = useTranslations('admin')
-  const params = useParams()
-  const locale = (params.locale as string) || 'en'
-  const dateLocale = dateFnsLocales[locale] || enGB
+export default function AdminDashboard({
+  reservations: initialReservations,
+  properties,
+  heroSlides,
+}: Props) {
+  const t = useTranslations("admin");
+  const params = useParams();
+  const locale = (params.locale as string) || "en";
+  const dateLocale = dateFnsLocales[locale] || enGB;
 
-  const [reservations, setReservations] = useState(initialReservations)
-  const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all')
-  const [activeTab, setActiveTab] = useState<'reservations' | 'properties' | 'content'>('reservations')
-  const [calendarMonth, setCalendarMonth] = useState(new Date())
-  const router = useRouter()
-  const supabase = createClient()
+  const [reservations, setReservations] = useState(initialReservations);
+  const [filter, setFilter] = useState<
+    "all" | "pending" | "confirmed" | "cancelled"
+  >("all");
+  const [activeTab, setActiveTab] = useState<
+    "reservations" | "properties" | "content"
+  >("reservations");
+  const [calendarMonth, setCalendarMonth] = useState(new Date());
+  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
+    if (typeof window === "undefined") return false;
+    if (!("Notification" in window)) return false;
+    const savedPreference = localStorage.getItem("admin_notifications_enabled");
+    return savedPreference === "true" && Notification.permission === "granted";
+  });
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | "unsupported">(() => {
+    if (typeof window === "undefined") return "default";
+    if (!("Notification" in window)) return "unsupported";
+    return Notification.permission;
+  });
+  const notifiedReservationsRef = useRef<Set<string>>(new Set());
+  const serviceWorkerRef = useRef<ServiceWorkerRegistration | null>(null);
+  const router = useRouter();
+  const supabase = createClient();
 
-  const filtered = reservations.filter(r => filter === 'all' || r.status === filter)
+  const filtered = reservations.filter(
+    (r) => filter === "all" || r.status === filter
+  );
 
   // Calendar helpers
-  const monthStart = startOfMonth(calendarMonth)
-  const monthEnd = endOfMonth(calendarMonth)
-  const calendarDays = eachDayOfInterval({ start: monthStart, end: monthEnd })
-  const startDayOfWeek = monthStart.getDay()
+  const monthStart = startOfMonth(calendarMonth);
+  const monthEnd = endOfMonth(calendarMonth);
+  const calendarDays = eachDayOfInterval({ start: monthStart, end: monthEnd });
+  const startDayOfWeek = monthStart.getDay();
 
   // Get reservations for a specific day
   const getReservationsForDay = (day: Date) => {
-    return reservations.filter(r => isSameDay(new Date(r.date), day))
-  }
+    return reservations.filter((r) => isSameDay(new Date(r.date), day));
+  };
+
+  // Notification functions
+  const NOTIFICATION_STORAGE_KEY = "admin_notifications_enabled";
+  const NOTIFIED_RESERVATIONS_KEY = "notified_reservations";
+
+  // Load notified reservations from storage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(NOTIFIED_RESERVATIONS_KEY);
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          notifiedReservationsRef.current = new Set(parsed);
+        } catch {
+          notifiedReservationsRef.current = new Set();
+        }
+      }
+    }
+  }, []);
+
+  // Save notified reservations to storage
+  const saveNotifiedReservations = useCallback(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        NOTIFIED_RESERVATIONS_KEY,
+        JSON.stringify([...notifiedReservationsRef.current])
+      );
+    }
+  }, []);
+
+  // Register service worker for notifications
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!("serviceWorker" in navigator)) return;
+
+    navigator.serviceWorker
+      .register("/notification-sw.js")
+      .then((registration) => {
+        serviceWorkerRef.current = registration;
+      })
+      .catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  }, []);
+
+  // Show notification via Service Worker
+  const showNotification = useCallback(
+    (reservation: Reservation, minutesUntil: number) => {
+      const title = t("reservations.notifications.upcomingTitle");
+      const body = t("reservations.notifications.upcomingBody", {
+        name: reservation.name,
+        minutes: minutesUntil,
+        time: reservation.time.slice(0, 5),
+      });
+
+      // Try service worker notification first (works when backgrounded)
+      if (serviceWorkerRef.current?.active) {
+        serviceWorkerRef.current.active.postMessage({
+          type: "SHOW_NOTIFICATION",
+          title,
+          body,
+          tag: `reservation-${reservation.id}`,
+          data: { reservationId: reservation.id },
+        });
+      } else if (Notification.permission === "granted") {
+        // Fallback to direct notification
+        new Notification(title, {
+          body,
+          icon: "/globe.svg",
+          tag: `reservation-${reservation.id}`,
+        });
+      }
+    },
+    [t]
+  );
+
+  // Check for upcoming reservations
+  const checkUpcomingReservations = useCallback(() => {
+    if (!notificationsEnabled) return;
+
+    const now = new Date();
+    const confirmedReservations = reservations.filter(
+      (r) => r.status === "confirmed" || r.status === "pending"
+    );
+
+    confirmedReservations.forEach((reservation) => {
+      // Create full datetime from date and time
+      const reservationDate = parseISO(reservation.date);
+      const [hours, minutes] = reservation.time.split(":").map(Number);
+      reservationDate.setHours(hours, minutes, 0, 0);
+
+      const minutesUntil = differenceInMinutes(reservationDate, now);
+
+      // Notify if within 60 minutes and not already notified
+      if (
+        minutesUntil > 0 &&
+        minutesUntil <= 60 &&
+        !notifiedReservationsRef.current.has(reservation.id)
+      ) {
+        showNotification(reservation, minutesUntil);
+        notifiedReservationsRef.current.add(reservation.id);
+        saveNotifiedReservations();
+      }
+    });
+  }, [notificationsEnabled, reservations, saveNotifiedReservations, showNotification]);
+
+  // Set up interval to check for upcoming reservations
+  useEffect(() => {
+    if (!notificationsEnabled) return;
+
+    // Check immediately
+    checkUpcomingReservations();
+
+    // Check every minute
+    const interval = setInterval(checkUpcomingReservations, 60000);
+
+    return () => clearInterval(interval);
+  }, [notificationsEnabled, checkUpcomingReservations]);
+
+  // Handle notification toggle
+  const handleNotificationToggle = async () => {
+    if (notificationsEnabled) {
+      // Disable notifications
+      setNotificationsEnabled(false);
+      localStorage.setItem(NOTIFICATION_STORAGE_KEY, "false");
+      return;
+    }
+
+    // Check if notifications are supported
+    if (!("Notification" in window)) {
+      alert(t("reservations.notifications.notSupported"));
+      return;
+    }
+
+    // Request permission if needed
+    if (Notification.permission === "default") {
+      const permission = await Notification.requestPermission();
+      setNotificationPermission(permission);
+
+      if (permission !== "granted") {
+        alert(t("reservations.notifications.permissionDenied"));
+        return;
+      }
+    } else if (Notification.permission === "denied") {
+      alert(t("reservations.notifications.permissionDenied"));
+      return;
+    }
+
+    // Enable notifications
+    setNotificationsEnabled(true);
+    localStorage.setItem(NOTIFICATION_STORAGE_KEY, "true");
+
+    // Show test notification
+    if (serviceWorkerRef.current?.active) {
+      serviceWorkerRef.current.active.postMessage({
+        type: "SHOW_NOTIFICATION",
+        title: t("reservations.notifications.enabledTitle"),
+        body: t("reservations.notifications.enabledBody"),
+        tag: "notification-enabled",
+      });
+    } else if (Notification.permission === "granted") {
+      new Notification(t("reservations.notifications.enabledTitle"), {
+        body: t("reservations.notifications.enabledBody"),
+        icon: "/globe.svg",
+      });
+    }
+  };
 
   async function handleLogout() {
-    await supabase.auth.signOut()
-    router.push('/admin/login')
+    await supabase.auth.signOut();
+    router.push("/admin/login");
   }
 
-  async function updateStatus(id: string, status: 'confirmed' | 'cancelled') {
+  async function updateStatus(id: string, status: "confirmed" | "cancelled") {
     const { error } = await supabase
-      .from('reservations')
+      .from("reservations")
       .update({ status })
-      .eq('id', id)
+      .eq("id", id);
 
     if (!error) {
-      setReservations(reservations.map(r =>
-        r.id === id ? { ...r, status } : r
-      ))
+      setReservations(
+        reservations.map((r) => (r.id === id ? { ...r, status } : r))
+      );
     }
   }
 
   async function deleteReservation(id: string) {
-    if (!confirm(t('reservations.confirmDelete'))) return
+    if (!confirm(t("reservations.confirmDelete"))) return;
 
-    const { error } = await supabase
-      .from('reservations')
-      .delete()
-      .eq('id', id)
+    const { error } = await supabase.from("reservations").delete().eq("id", id);
 
     if (!error) {
-      setReservations(reservations.filter(r => r.id !== id))
+      setReservations(reservations.filter((r) => r.id !== id));
     }
   }
 
   const statusColors = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    confirmed: 'bg-green-100 text-green-800',
-    cancelled: 'bg-red-100 text-red-800'
-  }
+    pending:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    confirmed:
+      "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+    cancelled: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+  };
 
   const statusLabels = {
-    pending: t('reservations.stats.pending'),
-    confirmed: t('reservations.stats.confirmed'),
-    cancelled: t('reservations.stats.cancelled')
-  }
+    pending: t("reservations.stats.pending"),
+    confirmed: t("reservations.stats.confirmed"),
+    cancelled: t("reservations.stats.cancelled"),
+  };
 
   const filterLabels = {
-    all: t('reservations.filter.all'),
-    pending: t('reservations.filter.pending'),
-    confirmed: t('reservations.filter.confirmed'),
-    cancelled: t('reservations.filter.cancelled')
-  }
+    all: t("reservations.filter.all"),
+    pending: t("reservations.filter.pending"),
+    confirmed: t("reservations.filter.confirmed"),
+    cancelled: t("reservations.filter.cancelled"),
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0c0a1d]">
       {/* Header */}
-      <div className="bg-slate-900 text-white px-4 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-semibold">{t('title')}</h1>
+      <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-8">
+          <h1 className="text-xl font-semibold">{t("title")}</h1>
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 text-slate-300 hover:text-white transition"
           >
-            <LogOut size={18} /> {t('logout')}
+            <LogOut size={18} /> {t("logout")}
           </button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white border-b border-slate-200">
+      <div className="bg-white dark:bg-[#13102b] border-b border-slate-200 dark:border-[#2d2a4a]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-4">
             <button
-              onClick={() => setActiveTab('reservations')}
+              onClick={() => setActiveTab("reservations")}
               className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
-                activeTab === 'reservations'
-                  ? 'border-amber-500 text-amber-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-700'
+                activeTab === "reservations"
+                  ? "border-amber-500 text-amber-600 dark:text-amber-400"
+                  : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
               }`}
             >
-              <CalendarDays size={18} /> {t('tabs.reservations')}
+              <CalendarDays size={18} /> {t("tabs.reservations")}
             </button>
             <button
-              onClick={() => setActiveTab('properties')}
+              onClick={() => setActiveTab("properties")}
               className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
-                activeTab === 'properties'
-                  ? 'border-amber-500 text-amber-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-700'
+                activeTab === "properties"
+                  ? "border-amber-500 text-amber-600 dark:text-amber-400"
+                  : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
               }`}
             >
-              <Building2 size={18} /> {t('tabs.properties')}
+              <Building2 size={18} /> {t("tabs.properties")}
             </button>
             <button
-              onClick={() => setActiveTab('content')}
+              onClick={() => setActiveTab("content")}
               className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
-                activeTab === 'content'
-                  ? 'border-amber-500 text-amber-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-700'
+                activeTab === "content"
+                  ? "border-amber-500 text-amber-600 dark:text-amber-400"
+                  : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
               }`}
             >
-              <Image size={18} /> {t('tabs.content')}
+              <Image size={18} /> {t("tabs.content")}
             </button>
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {activeTab === 'reservations' && (
+        {activeTab === "reservations" && (
           <>
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {[
-                { label: t('reservations.stats.total'), count: reservations.length, color: 'bg-slate-500' },
-                { label: t('reservations.stats.pending'), count: reservations.filter(r => r.status === 'pending').length, color: 'bg-yellow-500' },
-                { label: t('reservations.stats.confirmed'), count: reservations.filter(r => r.status === 'confirmed').length, color: 'bg-green-500' },
-                { label: t('reservations.stats.cancelled'), count: reservations.filter(r => r.status === 'cancelled').length, color: 'bg-red-500' },
+                {
+                  label: t("reservations.stats.total"),
+                  count: reservations.length,
+                  color: "text-slate-500 dark:text-slate-400",
+                },
+                {
+                  label: t("reservations.stats.pending"),
+                  count: reservations.filter((r) => r.status === "pending")
+                    .length,
+                  color: "text-yellow-500",
+                },
+                {
+                  label: t("reservations.stats.confirmed"),
+                  count: reservations.filter((r) => r.status === "confirmed")
+                    .length,
+                  color: "text-green-500",
+                },
+                {
+                  label: t("reservations.stats.cancelled"),
+                  count: reservations.filter((r) => r.status === "cancelled")
+                    .length,
+                  color: "text-red-500",
+                },
               ].map((stat) => (
-                <div key={stat.label} className="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
-                  <div className={`text-2xl font-bold ${stat.color.replace('bg-', 'text-')}`}>{stat.count}</div>
-                  <div className="text-slate-600 text-sm">{stat.label}</div>
+                <div
+                  key={stat.label}
+                  className="bg-white dark:bg-[#13102b] rounded-lg p-4 border border-slate-200 dark:border-[#2d2a4a]"
+                >
+                  <div className={`text-2xl font-bold ${stat.color}`}>
+                    {stat.count}
+                  </div>
+                  <div className="text-slate-600 dark:text-slate-400 text-sm">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
 
+            {/* Notification Toggle */}
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={handleNotificationToggle}
+                disabled={notificationPermission === "unsupported"}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition ${
+                  notificationsEnabled
+                    ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50"
+                    : "bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-[#2d2a4a]"
+                } ${notificationPermission === "unsupported" ? "opacity-50 cursor-not-allowed" : ""}`}
+                title={
+                  notificationPermission === "unsupported"
+                    ? t("reservations.notifications.notSupported")
+                    : notificationsEnabled
+                    ? t("reservations.notifications.turnOff")
+                    : t("reservations.notifications.turnOn")
+                }
+              >
+                {notificationsEnabled ? (
+                  <>
+                    <Bell size={16} />
+                    {t("reservations.notifications.enabled")}
+                  </>
+                ) : (
+                  <>
+                    <BellOff size={16} />
+                    {t("reservations.notifications.disabled")}
+                  </>
+                )}
+              </button>
+            </div>
+
             {/* Calendar View */}
-            <div className="bg-white rounded-lg border border-slate-200 p-4 mb-8">
+            <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] p-4 mb-8">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-slate-900">{t('reservations.calendar.title')}</h3>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+                  {t("reservations.calendar.title")}
+                </h3>
                 <div className="flex items-center gap-1">
                   <button
-                    onClick={() => setCalendarMonth(subMonths(calendarMonth, 1))}
-                    className="p-1.5 hover:bg-slate-100 rounded transition"
+                    onClick={() =>
+                      setCalendarMonth(subMonths(calendarMonth, 1))
+                    }
+                    className="p-1.5 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded transition text-slate-600 dark:text-slate-400"
                   >
                     <ChevronLeft size={18} />
                   </button>
-                  <span className="font-medium text-slate-700 min-w-[120px] text-center text-sm">
-                    {format(calendarMonth, 'MMMM yyyy', { locale: dateLocale })}
+                  <span className="font-medium text-slate-700 dark:text-slate-300 min-w-[120px] text-center text-sm">
+                    {format(calendarMonth, "MMMM yyyy", { locale: dateLocale })}
                   </span>
                   <button
-                    onClick={() => setCalendarMonth(addMonths(calendarMonth, 1))}
-                    className="p-1.5 hover:bg-slate-100 rounded transition"
+                    onClick={() =>
+                      setCalendarMonth(addMonths(calendarMonth, 1))
+                    }
+                    className="p-1.5 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded transition text-slate-600 dark:text-slate-400"
                   >
                     <ChevronRight size={18} />
                   </button>
                   <button
                     onClick={() => setCalendarMonth(new Date())}
-                    className="ml-1 px-2 py-1 text-xs bg-slate-100 hover:bg-slate-200 rounded transition"
+                    className="ml-1 px-2 py-1 text-xs bg-slate-100 dark:bg-[#1a1735] hover:bg-slate-200 dark:hover:bg-[#2d2a4a] text-slate-600 dark:text-slate-400 rounded transition"
                   >
-                    {t('reservations.calendar.today')}
+                    {t("reservations.calendar.today")}
                   </button>
                 </div>
               </div>
 
               {/* Calendar Grid */}
-              <div className="grid grid-cols-7 gap-px bg-slate-200 rounded-lg overflow-hidden">
+              <div className="grid grid-cols-7 gap-px bg-slate-200 dark:bg-[#2d2a4a] rounded-lg overflow-hidden">
                 {/* Day Headers */}
                 {Array.from({ length: 7 }).map((_, i) => (
-                  <div key={i} className="bg-slate-50 text-center text-xs font-medium text-slate-500 py-1.5">
-                    {format(new Date(2024, 0, i + 7), 'EEE', { locale: dateLocale })}
+                  <div
+                    key={i}
+                    className="bg-slate-50 dark:bg-[#1a1735] text-center text-xs font-medium text-slate-500 dark:text-slate-400 py-1.5"
+                  >
+                    {format(new Date(2024, 0, i + 7), "EEE", {
+                      locale: dateLocale,
+                    })}
                   </div>
                 ))}
 
                 {/* Empty cells before first day */}
                 {Array.from({ length: startDayOfWeek }).map((_, i) => (
-                  <div key={`empty-${i}`} className="bg-white min-h-[60px]" />
+                  <div
+                    key={`empty-${i}`}
+                    className="bg-white dark:bg-[#13102b] min-h-[60px]"
+                  />
                 ))}
 
                 {/* Calendar Days */}
                 {calendarDays.map((day) => {
-                  const dayReservations = getReservationsForDay(day)
-                  const hasReservations = dayReservations.length > 0
+                  const dayReservations = getReservationsForDay(day);
+                  const hasReservations = dayReservations.length > 0;
 
                   return (
                     <div
                       key={day.toISOString()}
-                      className={`bg-white min-h-[60px] p-1 ${
-                        isToday(day) ? 'bg-amber-50' : ''
+                      className={`bg-white dark:bg-[#13102b] min-h-[60px] p-1 ${
+                        isToday(day) ? "bg-amber-50 dark:bg-amber-900/20" : ""
                       }`}
                     >
                       <div className="flex flex-col h-full">
-                        <span className={`text-xs font-medium mb-0.5 ${
-                          isToday(day) ? 'text-amber-600' : 'text-slate-500'
-                        }`}>
-                          {format(day, 'd')}
+                        <span
+                          className={`text-xs font-medium mb-0.5 ${
+                            isToday(day)
+                              ? "text-amber-600 dark:text-amber-400"
+                              : "text-slate-500 dark:text-slate-400"
+                          }`}
+                        >
+                          {format(day, "d")}
                         </span>
                         {hasReservations && (
                           <div className="flex-1 space-y-0.5 overflow-hidden">
@@ -234,19 +554,22 @@ export default function AdminDashboard({ reservations: initialReservations, prop
                               <div
                                 key={reservation.id}
                                 className={`text-[10px] leading-tight px-1 py-0.5 rounded truncate ${
-                                  reservation.status === 'confirmed'
-                                    ? 'bg-green-100 text-green-700'
-                                    : reservation.status === 'pending'
-                                    ? 'bg-yellow-100 text-yellow-700'
-                                    : 'bg-red-100 text-red-700'
+                                  reservation.status === "confirmed"
+                                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                    : reservation.status === "pending"
+                                    ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+                                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                 }`}
-                                title={`${reservation.name} - ${reservation.time.slice(0, 5)}`}
+                                title={`${
+                                  reservation.name
+                                } - ${reservation.time.slice(0, 5)}`}
                               >
-                                {reservation.time.slice(0, 5)} {reservation.name.split(' ')[0]}
+                                {reservation.time.slice(0, 5)}{" "}
+                                {reservation.name.split(" ")[0]}
                               </div>
                             ))}
                             {dayReservations.length > 2 && (
-                              <div className="text-[10px] text-slate-500 px-1">
+                              <div className="text-[10px] text-slate-500 dark:text-slate-400 px-1">
                                 +{dayReservations.length - 2} more
                               </div>
                             )}
@@ -254,57 +577,80 @@ export default function AdminDashboard({ reservations: initialReservations, prop
                         )}
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
 
             {/* Filter */}
             <div className="flex gap-2 mb-6">
-              {(['all', 'pending', 'confirmed', 'cancelled'] as const).map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                    filter === f
-                      ? 'bg-slate-900 text-white'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-                  }`}
-                >
-                  {filterLabels[f]}
-                </button>
-              ))}
+              {(["all", "pending", "confirmed", "cancelled"] as const).map(
+                (f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                      filter === f
+                        ? "bg-slate-900 dark:bg-amber-500 text-white dark:text-slate-900"
+                        : "bg-white dark:bg-[#13102b] text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1a1735] border border-slate-200 dark:border-[#2d2a4a]"
+                    }`}
+                  >
+                    {filterLabels[f]}
+                  </button>
+                )
+              )}
             </div>
 
             {/* Reservations List */}
             <div className="space-y-4">
               {filtered.length === 0 ? (
-                <div className="bg-white rounded-lg p-8 text-center text-slate-500 border border-slate-200">
-                  {t('reservations.noReservations')}
+                <div className="bg-white dark:bg-[#13102b] rounded-lg p-8 text-center text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-[#2d2a4a]">
+                  {t("reservations.noReservations")}
                 </div>
               ) : (
                 filtered.map((reservation) => (
-                  <div key={reservation.id} className="bg-white rounded-lg p-6 shadow-sm border border-slate-200">
+                  <div
+                    key={reservation.id}
+                    className="bg-white dark:bg-[#13102b] rounded-lg p-6 border border-slate-200 dark:border-[#2d2a4a]"
+                  >
                     <div className="flex flex-wrap justify-between items-start gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-3">
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[reservation.status]}`}>
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              statusColors[reservation.status]
+                            }`}
+                          >
                             {statusLabels[reservation.status]}
                           </span>
-                          <span className="text-slate-400 text-sm">
-                            {t('reservations.booked')} {format(new Date(reservation.created_at), 'MMM d, yyyy', { locale: dateLocale })}
+                          <span className="text-slate-400 dark:text-slate-500 text-sm">
+                            {t("reservations.booked")}{" "}
+                            {format(
+                              new Date(reservation.created_at),
+                              "MMM d, yyyy",
+                              { locale: dateLocale }
+                            )}
                           </span>
                         </div>
 
-                        <div className="flex items-center gap-2 text-slate-900">
-                          <User size={16} className="text-slate-400" />
-                          <span className="font-medium">{reservation.name}</span>
+                        <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+                          <User
+                            size={16}
+                            className="text-slate-400 dark:text-slate-500"
+                          />
+                          <span className="font-medium">
+                            {reservation.name}
+                          </span>
                         </div>
 
-                        <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+                        <div className="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
                           <span className="flex items-center gap-1">
                             <Calendar size={14} className="text-amber-500" />
-                            {format(new Date(reservation.date), 'EEE, MMM d, yyyy', { locale: dateLocale })}
+                            {format(
+                              new Date(reservation.date),
+                              "EEE, MMM d, yyyy",
+                              { locale: dateLocale }
+                            )}
                           </span>
                           <span className="flex items-center gap-1">
                             <Clock size={14} className="text-amber-500" />
@@ -312,7 +658,7 @@ export default function AdminDashboard({ reservations: initialReservations, prop
                           </span>
                         </div>
 
-                        <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+                        <div className="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
                           <span className="flex items-center gap-1">
                             <Mail size={14} /> {reservation.email}
                           </span>
@@ -322,27 +668,34 @@ export default function AdminDashboard({ reservations: initialReservations, prop
                         </div>
 
                         {reservation.message && (
-                          <div className="flex items-start gap-1 text-sm text-slate-600 mt-2">
-                            <MessageSquare size={14} className="mt-0.5 shrink-0" />
+                          <div className="flex items-start gap-1 text-sm text-slate-600 dark:text-slate-400 mt-2">
+                            <MessageSquare
+                              size={14}
+                              className="mt-0.5 shrink-0"
+                            />
                             <span>{reservation.message}</span>
                           </div>
                         )}
                       </div>
 
                       <div className="flex gap-2">
-                        {reservation.status === 'pending' && (
+                        {reservation.status === "pending" && (
                           <>
                             <button
-                              onClick={() => updateStatus(reservation.id, 'confirmed')}
-                              className="p-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition"
-                              title={t('reservations.actions.confirm')}
+                              onClick={() =>
+                                updateStatus(reservation.id, "confirmed")
+                              }
+                              className="p-2 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition"
+                              title={t("reservations.actions.confirm")}
                             >
                               <Check size={18} />
                             </button>
                             <button
-                              onClick={() => updateStatus(reservation.id, 'cancelled')}
-                              className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition"
-                              title={t('reservations.actions.cancel')}
+                              onClick={() =>
+                                updateStatus(reservation.id, "cancelled")
+                              }
+                              className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition"
+                              title={t("reservations.actions.cancel")}
                             >
                               <X size={18} />
                             </button>
@@ -350,8 +703,8 @@ export default function AdminDashboard({ reservations: initialReservations, prop
                         )}
                         <button
                           onClick={() => deleteReservation(reservation.id)}
-                          className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition"
-                          title={t('reservations.actions.delete')}
+                          className="p-2 bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-200 dark:hover:bg-[#2d2a4a] transition"
+                          title={t("reservations.actions.delete")}
                         >
                           <Trash2 size={18} />
                         </button>
@@ -364,14 +717,14 @@ export default function AdminDashboard({ reservations: initialReservations, prop
           </>
         )}
 
-        {activeTab === 'properties' && (
+        {activeTab === "properties" && (
           <PropertiesManager initialProperties={properties} />
         )}
 
-        {activeTab === 'content' && (
+        {activeTab === "content" && (
           <ContentEditor initialHeroSlides={heroSlides} />
         )}
       </div>
     </div>
-  )
+  );
 }

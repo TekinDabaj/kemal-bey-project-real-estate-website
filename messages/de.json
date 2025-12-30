@@ -159,7 +159,9 @@
       "signIn": "Anmelden",
       "signingIn": "Anmeldung...",
       "invalidCredentials": "Ungultige E-Mail oder Passwort",
-      "noAccess": "Sie haben keinen Admin-Zugang"
+      "noAccess": "Sie haben keinen Admin-Zugang",
+      "subtitle": "Geben Sie Ihre Anmeldedaten ein, um auf das Admin-Panel zuzugreifen",
+      "secureConnection": "Sichere Verbindung"
     },
     "tabs": {
       "reservations": "Reservierungen",
@@ -168,27 +170,78 @@
     },
     "reservations": {
       "title": "Reservierungen",
-      "stats": { "total": "Gesamt", "pending": "Ausstehend", "confirmed": "Bestatigt", "cancelled": "Storniert" },
-      "filter": { "all": "Alle", "pending": "Ausstehend", "confirmed": "Bestatigt", "cancelled": "Storniert" },
+      "stats": {
+        "total": "Gesamt",
+        "pending": "Ausstehend",
+        "confirmed": "Bestatigt",
+        "cancelled": "Storniert"
+      },
+      "filter": {
+        "all": "Alle",
+        "pending": "Ausstehend",
+        "confirmed": "Bestatigt",
+        "cancelled": "Storniert"
+      },
       "noReservations": "Keine Reservierungen gefunden",
       "booked": "Gebucht",
-      "actions": { "confirm": "Bestatigen", "cancel": "Stornieren", "delete": "Loschen" },
+      "actions": {
+        "confirm": "Bestatigen",
+        "cancel": "Stornieren",
+        "delete": "Loschen"
+      },
       "confirmDelete": "Mochten Sie diese Reservierung wirklich loschen?",
-      "calendar": { "title": "Reservierungskalender", "today": "Heute", "noAppointments": "Keine Termine", "appointments": "Termine" }
+      "calendar": {
+        "title": "Reservierungskalender",
+        "today": "Heute",
+        "noAppointments": "Keine Termine",
+        "appointments": "Termine"
+      },
+      "notifications": {
+        "enabled": "Benachrichtigungen An",
+        "disabled": "Benachrichtigungen Aus",
+        "turnOn": "Benachrichtigungen einschalten",
+        "turnOff": "Benachrichtigungen ausschalten",
+        "notSupported": "Benachrichtigungen werden in diesem Browser nicht unterstutzt",
+        "permissionDenied": "Benachrichtigungsberechtigung wurde verweigert. Bitte in den Browsereinstellungen aktivieren.",
+        "enabledTitle": "Benachrichtigungen Aktiviert",
+        "enabledBody": "Sie erhalten jetzt Benachrichtigungen fur Reservierungen innerhalb von 1 Stunde.",
+        "upcomingTitle": "Bevorstehende Reservierung",
+        "upcomingBody": "{name} hat eine Reservierung in {minutes} Minuten (um {time})"
+      }
     },
     "properties": {
-      "title": "Immobilien verwalten", "addProperty": "Immobilie hinzufugen", "editProperty": "Immobilie bearbeiten",
+      "title": "Immobilien verwalten",
+      "addProperty": "Immobilie hinzufugen",
+      "editProperty": "Immobilie bearbeiten",
       "noProperties": "Noch keine Immobilien. Fugen Sie Ihre erste Immobilie hinzu.",
-      "images": "Bilder", "propertyTitle": "Titel", "description": "Beschreibung", "price": "Preis", "location": "Standort",
-      "bedrooms": "Schlafzimmer", "bathrooms": "Badezimmer", "area": "Flache", "type": "Typ",
-      "forSale": "Zu verkaufen", "forRent": "Zu vermieten", "status": "Status",
-      "active": "Aktiv", "sold": "Verkauft", "rented": "Vermietet", "inactive": "Inaktiv",
-      "featured": "Hervorgehoben", "featuredDescription": "Hervorgehobene Immobilie (zuerst angezeigt)",
-      "createProperty": "Immobilie erstellen", "updateProperty": "Immobilie aktualisieren",
+      "images": "Bilder",
+      "propertyTitle": "Titel",
+      "description": "Beschreibung",
+      "price": "Preis",
+      "location": "Standort",
+      "bedrooms": "Schlafzimmer",
+      "bathrooms": "Badezimmer",
+      "area": "Flache",
+      "type": "Typ",
+      "forSale": "Zu verkaufen",
+      "forRent": "Zu vermieten",
+      "status": "Status",
+      "active": "Aktiv",
+      "sold": "Verkauft",
+      "rented": "Vermietet",
+      "inactive": "Inaktiv",
+      "featured": "Hervorgehoben",
+      "featuredDescription": "Hervorgehobene Immobilie (zuerst angezeigt)",
+      "createProperty": "Immobilie erstellen",
+      "updateProperty": "Immobilie aktualisieren",
       "confirmDelete": "Mochten Sie diese Immobilie wirklich loschen?",
-      "noLocation": "Kein Standort", "beds": "Schlafz.", "baths": "Bader",
-      "uploadFailed": "Upload fehlgeschlagen", "updateFailed": "Aktualisierung fehlgeschlagen",
-      "createFailed": "Erstellung fehlgeschlagen", "deleteFailed": "Loschung fehlgeschlagen"
+      "noLocation": "Kein Standort",
+      "beds": "Schlafz.",
+      "baths": "Bader",
+      "uploadFailed": "Upload fehlgeschlagen",
+      "updateFailed": "Aktualisierung fehlgeschlagen",
+      "createFailed": "Erstellung fehlgeschlagen",
+      "deleteFailed": "Loschung fehlgeschlagen"
     },
     "listProperty": {
       "pageTitle": "List New Property",
@@ -269,11 +322,24 @@
         "totalFloors": "Total Floors",
         "parkingSpaces": "Parking Spaces",
         "furnished": "Furnished",
-        "furnishedOptions": { "yes": "Furnished", "no": "Unfurnished", "partial": "Partially Furnished" },
+        "furnishedOptions": {
+          "yes": "Furnished",
+          "no": "Unfurnished",
+          "partial": "Partially Furnished"
+        },
         "heatingType": "Heating",
-        "heatingTypes": { "central": "Central Heating", "individual": "Individual", "floor": "Floor Heating", "none": "None" },
+        "heatingTypes": {
+          "central": "Central Heating",
+          "individual": "Individual",
+          "floor": "Floor Heating",
+          "none": "None"
+        },
         "coolingType": "Cooling",
-        "coolingTypes": { "central": "Central AC", "split": "Split AC", "none": "None" }
+        "coolingTypes": {
+          "central": "Central AC",
+          "split": "Split AC",
+          "none": "None"
+        }
       },
       "rooms": {
         "title": "Room Specifications",
@@ -336,27 +402,45 @@
         "typeRequired": "Listing type is required",
         "imagesRequired": "At least one image is required"
       },
-      "success": { "created": "Property created successfully", "updated": "Property updated successfully" },
-      "error": { "createFailed": "Failed to create property", "updateFailed": "Failed to update property", "uploadFailed": "Failed to upload image" }
+      "success": {
+        "created": "Property created successfully",
+        "updated": "Property updated successfully"
+      },
+      "error": {
+        "createFailed": "Failed to create property",
+        "updateFailed": "Failed to update property",
+        "uploadFailed": "Failed to upload image"
+      }
     },
     "content": {
       "heroSlider": {
-        "title": "Hero-Slider", "description": "Bannerbilder mit Text auf der Startseite",
-        "addSlide": "Slide hinzufugen", "editSlide": "Slide bearbeiten",
+        "title": "Hero-Slider",
+        "description": "Bannerbilder mit Text auf der Startseite",
+        "addSlide": "Slide hinzufugen",
+        "editSlide": "Slide bearbeiten",
         "noSlides": "Noch keine Slides. Fugen Sie Ihren ersten Hero-Slide hinzu.",
-        "backgroundImage": "Hintergrundbild", "slideTitle": "Titel",
+        "backgroundImage": "Hintergrundbild",
+        "slideTitle": "Titel",
         "titlePlaceholder": "Experten-Immobilienberatung der Sie vertrauen konnen",
-        "highlight": "Hervorgehobener Text", "highlightPlaceholder": "Experten",
+        "highlight": "Hervorgehobener Text",
+        "highlightPlaceholder": "Experten",
         "highlightDescription": "Dieser Text wird in Bernsteinfarbe hervorgehoben. Muss Teil des Titels sein.",
-        "subtitle": "Untertitel", "subtitlePlaceholder": "Ob Sie kaufen, verkaufen oder investieren...",
+        "subtitle": "Untertitel",
+        "subtitlePlaceholder": "Ob Sie kaufen, verkaufen oder investieren...",
         "activeLabel": "Aktiv (auf Startseite sichtbar)",
-        "createSlide": "Slide erstellen", "updateSlide": "Slide aktualisieren",
-        "activate": "Aktivieren", "deactivate": "Deaktivieren",
-        "changeImage": "Bild andern", "uploadImage": "Klicken zum Hochladen",
-        "recommendedSize": "Empfohlen: 1920x1080", "uploading": "Hochladen...",
+        "createSlide": "Slide erstellen",
+        "updateSlide": "Slide aktualisieren",
+        "activate": "Aktivieren",
+        "deactivate": "Deaktivieren",
+        "changeImage": "Bild andern",
+        "uploadImage": "Klicken zum Hochladen",
+        "recommendedSize": "Empfohlen: 1920x1080",
+        "uploading": "Hochladen...",
         "pleaseUpload": "Bitte laden Sie ein Bild hoch",
-        "updateFailed": "Aktualisierung fehlgeschlagen", "createFailed": "Erstellung fehlgeschlagen",
-        "deleteFailed": "Loschung fehlgeschlagen", "confirmDelete": "Mochten Sie diesen Slide wirklich loschen?"
+        "updateFailed": "Aktualisierung fehlgeschlagen",
+        "createFailed": "Erstellung fehlgeschlagen",
+        "deleteFailed": "Loschung fehlgeschlagen",
+        "confirmDelete": "Mochten Sie diesen Slide wirklich loschen?"
       }
     }
   }

@@ -159,7 +159,9 @@
       "signIn": "Entrar",
       "signingIn": "Entrando...",
       "invalidCredentials": "Email ou senha invalidos",
-      "noAccess": "Voce nao tem acesso de administrador"
+      "noAccess": "Voce nao tem acesso de administrador",
+      "subtitle": "Digite suas credenciais para acessar o painel de administracao",
+      "secureConnection": "Conexao segura"
     },
     "tabs": {
       "reservations": "Reservas",
@@ -168,27 +170,78 @@
     },
     "reservations": {
       "title": "Reservas",
-      "stats": { "total": "Total", "pending": "Pendentes", "confirmed": "Confirmadas", "cancelled": "Canceladas" },
-      "filter": { "all": "Todas", "pending": "Pendentes", "confirmed": "Confirmadas", "cancelled": "Canceladas" },
+      "stats": {
+        "total": "Total",
+        "pending": "Pendentes",
+        "confirmed": "Confirmadas",
+        "cancelled": "Canceladas"
+      },
+      "filter": {
+        "all": "Todas",
+        "pending": "Pendentes",
+        "confirmed": "Confirmadas",
+        "cancelled": "Canceladas"
+      },
       "noReservations": "Nenhuma reserva encontrada",
       "booked": "Reservado",
-      "actions": { "confirm": "Confirmar", "cancel": "Cancelar", "delete": "Excluir" },
+      "actions": {
+        "confirm": "Confirmar",
+        "cancel": "Cancelar",
+        "delete": "Excluir"
+      },
       "confirmDelete": "Tem certeza que deseja excluir esta reserva?",
-      "calendar": { "title": "Calendario de Reservas", "today": "Hoje", "noAppointments": "Sem agendamentos", "appointments": "agendamentos" }
+      "calendar": {
+        "title": "Calendario de Reservas",
+        "today": "Hoje",
+        "noAppointments": "Sem agendamentos",
+        "appointments": "agendamentos"
+      },
+      "notifications": {
+        "enabled": "Notificacoes Ativadas",
+        "disabled": "Notificacoes Desativadas",
+        "turnOn": "Ativar notificacoes",
+        "turnOff": "Desativar notificacoes",
+        "notSupported": "As notificacoes nao sao suportadas neste navegador",
+        "permissionDenied": "A permissao de notificacao foi negada. Por favor, ative nas configuracoes do navegador.",
+        "enabledTitle": "Notificacoes Ativadas",
+        "enabledBody": "Voce agora recebera notificacoes para reservas dentro de 1 hora.",
+        "upcomingTitle": "Reserva Proxima",
+        "upcomingBody": "{name} tem uma reserva em {minutes} minutos (as {time})"
+      }
     },
     "properties": {
-      "title": "Gerenciar Imoveis", "addProperty": "Adicionar Imovel", "editProperty": "Editar Imovel",
+      "title": "Gerenciar Imoveis",
+      "addProperty": "Adicionar Imovel",
+      "editProperty": "Editar Imovel",
       "noProperties": "Ainda nao ha imoveis. Adicione seu primeiro imovel.",
-      "images": "Imagens", "propertyTitle": "Titulo", "description": "Descricao", "price": "Preco", "location": "Localizacao",
-      "bedrooms": "Quartos", "bathrooms": "Banheiros", "area": "Area", "type": "Tipo",
-      "forSale": "Venda", "forRent": "Aluguel", "status": "Status",
-      "active": "Ativo", "sold": "Vendido", "rented": "Alugado", "inactive": "Inativo",
-      "featured": "Destaque", "featuredDescription": "Imovel em destaque (exibido primeiro)",
-      "createProperty": "Criar Imovel", "updateProperty": "Atualizar Imovel",
+      "images": "Imagens",
+      "propertyTitle": "Titulo",
+      "description": "Descricao",
+      "price": "Preco",
+      "location": "Localizacao",
+      "bedrooms": "Quartos",
+      "bathrooms": "Banheiros",
+      "area": "Area",
+      "type": "Tipo",
+      "forSale": "Venda",
+      "forRent": "Aluguel",
+      "status": "Status",
+      "active": "Ativo",
+      "sold": "Vendido",
+      "rented": "Alugado",
+      "inactive": "Inativo",
+      "featured": "Destaque",
+      "featuredDescription": "Imovel em destaque (exibido primeiro)",
+      "createProperty": "Criar Imovel",
+      "updateProperty": "Atualizar Imovel",
       "confirmDelete": "Tem certeza que deseja excluir este imovel?",
-      "noLocation": "Sem localizacao", "beds": "quartos", "baths": "banhos",
-      "uploadFailed": "Falha no upload", "updateFailed": "Falha ao atualizar",
-      "createFailed": "Falha ao criar", "deleteFailed": "Falha ao excluir"
+      "noLocation": "Sem localizacao",
+      "beds": "quartos",
+      "baths": "banhos",
+      "uploadFailed": "Falha no upload",
+      "updateFailed": "Falha ao atualizar",
+      "createFailed": "Falha ao criar",
+      "deleteFailed": "Falha ao excluir"
     },
     "listProperty": {
       "pageTitle": "List New Property",
@@ -269,11 +322,24 @@
         "totalFloors": "Total Floors",
         "parkingSpaces": "Parking Spaces",
         "furnished": "Furnished",
-        "furnishedOptions": { "yes": "Furnished", "no": "Unfurnished", "partial": "Partially Furnished" },
+        "furnishedOptions": {
+          "yes": "Furnished",
+          "no": "Unfurnished",
+          "partial": "Partially Furnished"
+        },
         "heatingType": "Heating",
-        "heatingTypes": { "central": "Central Heating", "individual": "Individual", "floor": "Floor Heating", "none": "None" },
+        "heatingTypes": {
+          "central": "Central Heating",
+          "individual": "Individual",
+          "floor": "Floor Heating",
+          "none": "None"
+        },
         "coolingType": "Cooling",
-        "coolingTypes": { "central": "Central AC", "split": "Split AC", "none": "None" }
+        "coolingTypes": {
+          "central": "Central AC",
+          "split": "Split AC",
+          "none": "None"
+        }
       },
       "rooms": {
         "title": "Room Specifications",
@@ -336,27 +402,45 @@
         "typeRequired": "Listing type is required",
         "imagesRequired": "At least one image is required"
       },
-      "success": { "created": "Property created successfully", "updated": "Property updated successfully" },
-      "error": { "createFailed": "Failed to create property", "updateFailed": "Failed to update property", "uploadFailed": "Failed to upload image" }
+      "success": {
+        "created": "Property created successfully",
+        "updated": "Property updated successfully"
+      },
+      "error": {
+        "createFailed": "Failed to create property",
+        "updateFailed": "Failed to update property",
+        "uploadFailed": "Failed to upload image"
+      }
     },
     "content": {
       "heroSlider": {
-        "title": "Slider Principal", "description": "Imagens de banner com texto na pagina inicial",
-        "addSlide": "Adicionar Slide", "editSlide": "Editar Slide",
+        "title": "Slider Principal",
+        "description": "Imagens de banner com texto na pagina inicial",
+        "addSlide": "Adicionar Slide",
+        "editSlide": "Editar Slide",
         "noSlides": "Ainda nao ha slides. Adicione seu primeiro slide.",
-        "backgroundImage": "Imagem de Fundo", "slideTitle": "Titulo",
+        "backgroundImage": "Imagem de Fundo",
+        "slideTitle": "Titulo",
         "titlePlaceholder": "Consultoria Imobiliaria Especializada em que Voce Pode Confiar",
-        "highlight": "Texto Destacado", "highlightPlaceholder": "Especializada",
+        "highlight": "Texto Destacado",
+        "highlightPlaceholder": "Especializada",
         "highlightDescription": "Este texto sera destacado em ambar. Deve fazer parte do titulo.",
-        "subtitle": "Subtitulo", "subtitlePlaceholder": "Seja comprando, vendendo ou investindo...",
+        "subtitle": "Subtitulo",
+        "subtitlePlaceholder": "Seja comprando, vendendo ou investindo...",
         "activeLabel": "Ativo (visivel na pagina inicial)",
-        "createSlide": "Criar Slide", "updateSlide": "Atualizar Slide",
-        "activate": "Ativar", "deactivate": "Desativar",
-        "changeImage": "Alterar Imagem", "uploadImage": "Clique para enviar imagem",
-        "recommendedSize": "Recomendado: 1920x1080", "uploading": "Enviando...",
+        "createSlide": "Criar Slide",
+        "updateSlide": "Atualizar Slide",
+        "activate": "Ativar",
+        "deactivate": "Desativar",
+        "changeImage": "Alterar Imagem",
+        "uploadImage": "Clique para enviar imagem",
+        "recommendedSize": "Recomendado: 1920x1080",
+        "uploading": "Enviando...",
         "pleaseUpload": "Por favor envie uma imagem",
-        "updateFailed": "Falha ao atualizar", "createFailed": "Falha ao criar",
-        "deleteFailed": "Falha ao excluir", "confirmDelete": "Tem certeza que deseja excluir este slide?"
+        "updateFailed": "Falha ao atualizar",
+        "createFailed": "Falha ao criar",
+        "deleteFailed": "Falha ao excluir",
+        "confirmDelete": "Tem certeza que deseja excluir este slide?"
       }
     }
   }

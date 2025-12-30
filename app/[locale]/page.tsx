@@ -46,26 +46,29 @@ export default async function Home({ params }: Props) {
   ];
 
   return (
-    <div>
+    <div className="bg-white dark:bg-[#0c0a1d]">
       {/* Hero Slider */}
       <HeroSlider slides={heroSlides || []} />
 
       {/* Features */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-16 lg:py-24 bg-white dark:bg-[#0c0a1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">
+          <h2 className="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">
             {t('whyChooseUs')}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((item, i) => (
-              <div key={i} className="text-center p-6">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-100 text-amber-600 mb-4">
+              <div
+                key={i}
+                className="text-center p-6 rounded-xl bg-white dark:bg-[#13102b] dark:border dark:border-[#2d2a4a] hover:shadow-lg dark:hover:shadow-purple-900/20 transition-shadow"
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 mb-4">
                   <item.icon size={28} />
                 </div>
-                <h3 className="font-semibold text-lg mb-2 text-slate-900">
+                <h3 className="font-semibold text-lg mb-2 text-slate-900 dark:text-white">
                   {item.title}
                 </h3>
-                <p className="text-slate-600">{item.desc}</p>
+                <p className="text-slate-600 dark:text-slate-400">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -76,17 +79,17 @@ export default async function Home({ params }: Props) {
       <Gallery />
 
       {/* CTA */}
-      <section className="py-16 bg-slate-100">
+      <section className="py-16 bg-slate-100 dark:bg-[#13102b] dark:border-y dark:border-[#2d2a4a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-slate-900">
+          <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">
             {t('cta.title')}
           </h2>
-          <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
             {t('cta.description')}
           </p>
           <Link
             href="/book"
-            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-lg font-semibold transition"
+            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 dark:bg-amber-500 dark:hover:bg-amber-600 text-white dark:text-slate-900 px-8 py-3 rounded-lg font-semibold transition"
           >
             {t('cta.button')} <ArrowRight size={20} />
           </Link>
