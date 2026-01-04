@@ -29,12 +29,25 @@ export async function GET(request: Request) {
 
     if (error) {
       console.error('Database error:', error)
-      return NextResponse.json({ error: 'Failed to fetch appointments' }, { status: 500 })
+      return NextResponse.json({ error: 'Failed to fetch appointments', debug: { today, error: error.message } }, { status: 500 })
     }
 
     // No appointments today, no email needed
     if (!appointments || appointments.length === 0) {
-      return NextResponse.json({ message: 'No appointments today', sent: false })
+      // Debug: fetch all reservations to see what's in the database
+      const { data: allReservations } = await supabase
+        .from('reservations')
+        .select('date, status')
+        .limit(5)
+
+      return NextResponse.json({
+        message: 'No appointments today',
+        sent: false,
+        debug: {
+          queryDate: today,
+          existingDates: allReservations?.map(r => ({ date: r.date, status: r.status }))
+        }
+      })
     }
 
     // Build appointments list HTML
