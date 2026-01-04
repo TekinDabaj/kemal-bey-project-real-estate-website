@@ -114,7 +114,7 @@ export default function ImageGallery({ images, title, bucketUrl }: Props) {
         {/* Thumbnails */}
         {images.length > 1 && (
           <div className="p-3 bg-slate-50 dark:bg-[#1a1735] border-t border-slate-100 dark:border-[#2d2a4a]">
-            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
+            <div className="flex gap-2 overflow-x-auto py-1 px-1 scrollbar-thin">
               {images.map((img, index) => (
                 <button
                   key={img}

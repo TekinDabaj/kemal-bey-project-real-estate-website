@@ -349,7 +349,7 @@ export default function AdminDashboard({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0c0a1d]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0c0a1d] overflow-x-hidden">
       {/* Header */}
       <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8">
@@ -365,11 +365,11 @@ export default function AdminDashboard({
 
       {/* Tabs */}
       <div className="bg-white dark:bg-[#13102b] border-b border-slate-200 dark:border-[#2d2a4a]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-4">
+        <div className="max-w-7xl mx-auto px-4 overflow-x-auto scrollbar-thin">
+          <div className="flex gap-4 min-w-max">
             <button
               onClick={() => setActiveTab("reservations")}
-              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
+              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition whitespace-nowrap ${
                 activeTab === "reservations"
                   ? "border-amber-500 text-amber-600 dark:text-amber-400"
                   : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
@@ -379,7 +379,7 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={() => setActiveTab("properties")}
-              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
+              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition whitespace-nowrap ${
                 activeTab === "properties"
                   ? "border-amber-500 text-amber-600 dark:text-amber-400"
                   : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
@@ -389,7 +389,7 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={() => setActiveTab("content")}
-              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
+              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition whitespace-nowrap ${
                 activeTab === "content"
                   ? "border-amber-500 text-amber-600 dark:text-amber-400"
                   : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
@@ -399,7 +399,7 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={() => setActiveTab("blog")}
-              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition ${
+              className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition whitespace-nowrap ${
                 activeTab === "blog"
                   ? "border-amber-500 text-amber-600 dark:text-amber-400"
                   : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
@@ -522,81 +522,85 @@ export default function AdminDashboard({
                 </div>
               </div>
 
-              {/* Calendar Grid */}
-              <div className="grid grid-cols-7 gap-px bg-slate-200 dark:bg-[#2d2a4a] rounded-lg overflow-hidden">
-                {/* Day Headers */}
-                {Array.from({ length: 7 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-slate-50 dark:bg-[#1a1735] text-center text-xs font-medium text-slate-500 dark:text-slate-400 py-1.5"
-                  >
-                    {format(new Date(2024, 0, i + 7), "EEE", {
-                      locale: dateLocale,
-                    })}
-                  </div>
-                ))}
+              {/* Calendar Grid - Horizontally scrollable on mobile */}
+              <div className="overflow-x-auto -mx-4 px-4 pb-2">
+                <div className="min-w-[600px]">
+                  <div className="grid grid-cols-7 gap-px bg-slate-200 dark:bg-[#2d2a4a] rounded-lg overflow-hidden">
+                    {/* Day Headers */}
+                    {Array.from({ length: 7 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="bg-slate-50 dark:bg-[#1a1735] text-center text-xs font-medium text-slate-500 dark:text-slate-400 py-1.5"
+                      >
+                        {format(new Date(2024, 0, i + 7), "EEE", {
+                          locale: dateLocale,
+                        })}
+                      </div>
+                    ))}
 
-                {/* Empty cells before first day */}
-                {Array.from({ length: startDayOfWeek }).map((_, i) => (
-                  <div
-                    key={`empty-${i}`}
-                    className="bg-white dark:bg-[#13102b] min-h-[60px]"
-                  />
-                ))}
+                    {/* Empty cells before first day */}
+                    {Array.from({ length: startDayOfWeek }).map((_, i) => (
+                      <div
+                        key={`empty-${i}`}
+                        className="bg-white dark:bg-[#13102b] min-h-[70px]"
+                      />
+                    ))}
 
-                {/* Calendar Days */}
-                {calendarDays.map((day) => {
-                  const dayReservations = getReservationsForDay(day);
-                  const hasReservations = dayReservations.length > 0;
+                    {/* Calendar Days */}
+                    {calendarDays.map((day) => {
+                      const dayReservations = getReservationsForDay(day);
+                      const hasReservations = dayReservations.length > 0;
 
-                  return (
-                    <div
-                      key={day.toISOString()}
-                      className={`bg-white dark:bg-[#13102b] min-h-[60px] p-1 ${
-                        isToday(day) ? "bg-amber-50 dark:bg-amber-900/20" : ""
-                      }`}
-                    >
-                      <div className="flex flex-col h-full">
-                        <span
-                          className={`text-xs font-medium mb-0.5 ${
-                            isToday(day)
-                              ? "text-amber-600 dark:text-amber-400"
-                              : "text-slate-500 dark:text-slate-400"
+                      return (
+                        <div
+                          key={day.toISOString()}
+                          className={`bg-white dark:bg-[#13102b] min-h-[70px] p-1.5 ${
+                            isToday(day) ? "bg-amber-50 dark:bg-amber-900/20" : ""
                           }`}
                         >
-                          {format(day, "d")}
-                        </span>
-                        {hasReservations && (
-                          <div className="flex-1 space-y-0.5 overflow-hidden">
-                            {dayReservations.slice(0, 2).map((reservation) => (
-                              <div
-                                key={reservation.id}
-                                className={`text-[10px] leading-tight px-1 py-0.5 rounded truncate ${
-                                  reservation.status === "confirmed"
-                                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                    : reservation.status === "pending"
-                                    ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
-                                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                                }`}
-                                title={`${
-                                  reservation.name
-                                } - ${reservation.time.slice(0, 5)}`}
-                              >
-                                {reservation.time.slice(0, 5)}{" "}
-                                {reservation.name.split(" ")[0]}
-                              </div>
-                            ))}
-                            {dayReservations.length > 2 && (
-                              <div className="text-[10px] text-slate-500 dark:text-slate-400 px-1">
-                                +{dayReservations.length - 2} more
+                          <div className="flex flex-col h-full">
+                            <span
+                              className={`text-xs font-medium mb-1 ${
+                                isToday(day)
+                                  ? "text-amber-600 dark:text-amber-400"
+                                  : "text-slate-500 dark:text-slate-400"
+                              }`}
+                            >
+                              {format(day, "d")}
+                            </span>
+                            {hasReservations && (
+                              <div className="flex-1 space-y-0.5 overflow-hidden">
+                                {dayReservations.slice(0, 2).map((reservation) => (
+                                  <div
+                                    key={reservation.id}
+                                    className={`text-[10px] leading-tight px-1 py-0.5 rounded truncate ${
+                                      reservation.status === "confirmed"
+                                        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                        : reservation.status === "pending"
+                                        ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+                                        : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                    }`}
+                                    title={`${
+                                      reservation.name
+                                    } - ${reservation.time.slice(0, 5)}`}
+                                  >
+                                    {reservation.time.slice(0, 5)}{" "}
+                                    {reservation.name.split(" ")[0]}
+                                  </div>
+                                ))}
+                                {dayReservations.length > 2 && (
+                                  <div className="text-[10px] text-slate-500 dark:text-slate-400 px-1">
+                                    +{dayReservations.length - 2} more
+                                  </div>
+                                )}
                               </div>
                             )}
                           </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
 

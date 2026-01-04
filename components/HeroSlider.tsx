@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { HeroSlide } from '@/types/database'
@@ -17,6 +17,12 @@ export default function HeroSlider({ slides }: Props) {
   const isTransitioningRef = useRef(false)
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`
 
+  // Touch handling refs
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+  const touchStartY = useRef(0)
+  const isSwiping = useRef(false)
+
   // Create extended slides array with clones for infinite loop
   const extendedSlides = slides.length > 0
     ? [slides[slides.length - 1], ...slides, slides[0]]
@@ -27,34 +33,34 @@ export default function HeroSlider({ slides }: Props) {
     isTransitioningRef.current = isTransitioning
   }, [isTransitioning])
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (isTransitioningRef.current) return
     setIsTransitioning(true)
     setCurrentIndex((prev) => prev + 1)
-  }
+  }, [])
 
-  const goToPrev = () => {
+  const goToPrev = useCallback(() => {
     if (isTransitioningRef.current) return
     setIsTransitioning(true)
     setCurrentIndex((prev) => prev - 1)
-  }
+  }, [])
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     if (isTransitioningRef.current || index + 1 === currentIndex) return
     setIsTransitioning(true)
     setCurrentIndex(index + 1)
-  }
+  }, [currentIndex])
 
   // Stop auto-slide
-  const stopAutoSlide = () => {
+  const stopAutoSlide = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
     }
-  }
+  }, [])
 
   // Start auto-slide
-  const startAutoSlide = () => {
+  const startAutoSlide = useCallback(() => {
     if (slides.length <= 1) return
     stopAutoSlide()
     intervalRef.current = setInterval(() => {
@@ -63,7 +69,59 @@ export default function HeroSlider({ slides }: Props) {
         setCurrentIndex((prev) => prev + 1)
       }
     }, 5000)
-  }
+  }, [slides.length, stopAutoSlide])
+
+  // Touch handlers for swipe navigation
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+    isSwiping.current = false
+    stopAutoSlide()
+  }, [stopAutoSlide])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!touchStartX.current) return
+
+    const currentX = e.touches[0].clientX
+    const currentY = e.touches[0].clientY
+    const diffX = touchStartX.current - currentX
+    const diffY = touchStartY.current - currentY
+
+    // Only consider horizontal swipe if horizontal movement > vertical movement
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+      isSwiping.current = true
+      // Prevent vertical scroll when swiping horizontally
+      e.preventDefault()
+    }
+
+    touchEndX.current = currentX
+  }, [])
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isSwiping.current) {
+      startAutoSlide()
+      return
+    }
+
+    const diffX = touchStartX.current - touchEndX.current
+    const threshold = 50 // Minimum swipe distance
+
+    if (Math.abs(diffX) > threshold) {
+      if (diffX > 0) {
+        // Swiped left - go to next
+        goToNext()
+      } else {
+        // Swiped right - go to prev
+        goToPrev()
+      }
+    }
+
+    // Reset values
+    touchStartX.current = 0
+    touchEndX.current = 0
+    isSwiping.current = false
+    startAutoSlide()
+  }, [goToNext, goToPrev, startAutoSlide])
 
   // Handle visibility change
   useEffect(() => {
@@ -91,7 +149,7 @@ export default function HeroSlider({ slides }: Props) {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
-  }, [slides.length])
+  }, [startAutoSlide, stopAutoSlide])
 
   // Start auto-slide on mount
   useEffect(() => {
@@ -99,7 +157,7 @@ export default function HeroSlider({ slides }: Props) {
       startAutoSlide()
     }
     return () => stopAutoSlide()
-  }, [slides.length])
+  }, [slides.length, startAutoSlide, stopAutoSlide])
 
   // Handle seamless loop transition
   useEffect(() => {
@@ -226,7 +284,12 @@ export default function HeroSlider({ slides }: Props) {
   }
 
   return (
-    <section className="relative h-[600px] lg:h-[700px] overflow-hidden">
+    <section
+      className="relative h-[600px] lg:h-[700px] overflow-hidden touch-pan-y"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Slides Container */}
       <div
         ref={sliderRef}
@@ -244,6 +307,7 @@ export default function HeroSlider({ slides }: Props) {
                 src={`${bucketUrl}${slide.image}`}
                 alt={slide.title}
                 className="w-full h-full object-cover"
+                draggable={false}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
             </div>
@@ -285,32 +349,53 @@ export default function HeroSlider({ slides }: Props) {
         ))}
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - with proper touch support */}
       <button
+        type="button"
         onClick={goToPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition z-10"
+        onTouchEnd={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          goToPrev()
+        }}
+        aria-label="Previous slide"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white rounded-full transition z-20 touch-manipulation"
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft size={24} className="sm:w-6 sm:h-6 w-5 h-5" />
       </button>
       <button
+        type="button"
         onClick={goToNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition z-10"
+        onTouchEnd={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          goToNext()
+        }}
+        aria-label="Next slide"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white rounded-full transition z-20 touch-manipulation"
       >
-        <ChevronRight size={24} />
+        <ChevronRight size={24} className="sm:w-6 sm:h-6 w-5 h-5" />
       </button>
 
-      {/* Dots Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+      {/* Dots Indicator - with proper touch support */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
+            type="button"
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition ${
-              index === getRealIndex() ? 'bg-amber-500' : 'bg-white/50 hover:bg-white/70'
+            onTouchEnd={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              goToSlide(index)
+            }}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`w-3 h-3 rounded-full transition touch-manipulation ${
+              index === getRealIndex() ? 'bg-amber-500' : 'bg-white/50 hover:bg-white/70 active:bg-white/90'
             }`}
           />
         ))}
       </div>
     </section>
   )
-} 
+}

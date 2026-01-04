@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { MapPin, BedDouble, Bath, Expand } from 'lucide-react';
 
@@ -35,9 +35,20 @@ interface PropertyCarouselProps {
 
 export default function PropertyCarousel({ properties, bucketUrl, translations }: PropertyCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isInView, setIsInView] = useState(true);
-  const touchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Touch/drag state refs
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const currentTranslate = useRef(0);
+  const prevTranslate = useRef(0);
+  const animationRef = useRef<number | null>(null);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const trackWidthRef = useRef(0);
+  const singleSetWidthRef = useRef(0);
 
   // Only animate if 3 or more properties
   const shouldAnimate = properties.length >= 3;
@@ -52,6 +63,22 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
     sold: translations.sold,
     rented: translations.rented
   };
+
+  // Calculate widths after mount
+  useEffect(() => {
+    if (!trackRef.current || !shouldAnimate) return;
+
+    const updateWidths = () => {
+      if (trackRef.current) {
+        trackWidthRef.current = trackRef.current.scrollWidth;
+        singleSetWidthRef.current = trackWidthRef.current / 3;
+      }
+    };
+
+    updateWidths();
+    window.addEventListener('resize', updateWidths);
+    return () => window.removeEventListener('resize', updateWidths);
+  }, [shouldAnimate, properties.length]);
 
   // Intersection Observer - pause animation when not in viewport
   useEffect(() => {
@@ -71,33 +98,159 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
     return () => observer.disconnect();
   }, [shouldAnimate]);
 
-  // Handle touch for mobile
-  const handleTouchStart = () => {
-    if (!shouldAnimate) return;
-    if (touchTimeoutRef.current) {
-      clearTimeout(touchTimeoutRef.current);
+  // Set transform with infinite loop handling
+  const setTransform = useCallback((value: number) => {
+    if (!trackRef.current || !singleSetWidthRef.current) return;
+
+    // Handle infinite loop boundaries
+    const singleSetWidth = singleSetWidthRef.current;
+
+    // If scrolled past the first set (into negative clone area), jump forward
+    if (value > 0) {
+      value = value - singleSetWidth;
     }
-    setIsPaused(true);
-  };
+    // If scrolled past the second set, jump back
+    else if (value < -singleSetWidth * 2) {
+      value = value + singleSetWidth;
+    }
 
-  const handleTouchEnd = () => {
+    currentTranslate.current = value;
+    trackRef.current.style.transform = `translateX(${value}px)`;
+  }, []);
+
+  // Touch handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (!shouldAnimate) return;
-    touchTimeoutRef.current = setTimeout(() => setIsPaused(false), 2000);
-  };
 
-  // Cleanup timeout on unmount
+    // Clear any pending resume timeout
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+
+    setIsDragging(true);
+    setIsPaused(true);
+
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+
+    // Get current computed transform
+    if (trackRef.current) {
+      const style = window.getComputedStyle(trackRef.current);
+      const matrix = new DOMMatrix(style.transform);
+      prevTranslate.current = matrix.m41; // translateX value
+      currentTranslate.current = prevTranslate.current;
+
+      // Remove CSS animation temporarily
+      trackRef.current.style.animation = 'none';
+    }
+  }, [shouldAnimate]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isDragging || !shouldAnimate) return;
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX.current;
+    const diffY = currentY - touchStartY.current;
+
+    // Only handle horizontal swipes
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault();
+      const newTranslate = prevTranslate.current + diffX;
+      setTransform(newTranslate);
+    }
+  }, [isDragging, shouldAnimate, setTransform]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!shouldAnimate) return;
+
+    setIsDragging(false);
+
+    // Resume animation after delay
+    resumeTimeoutRef.current = setTimeout(() => {
+      if (trackRef.current) {
+        // Calculate animation offset based on current position
+        const singleSetWidth = singleSetWidthRef.current;
+        if (singleSetWidth > 0) {
+          // Normalize position to be within the first set
+          let normalizedPos = currentTranslate.current % singleSetWidth;
+          if (normalizedPos > 0) normalizedPos -= singleSetWidth;
+
+          // Calculate percentage through the animation
+          const percentage = Math.abs(normalizedPos / singleSetWidth) * 100;
+
+          // Restart animation from current position
+          const animationDuration = Math.max(30, properties.length * 3);
+          trackRef.current.style.animation = 'none';
+          trackRef.current.offsetHeight; // Force reflow
+          trackRef.current.style.transform = `translateX(${normalizedPos}px)`;
+          trackRef.current.style.animation = `infinite-scroll-manual ${animationDuration}s linear infinite`;
+          trackRef.current.style.animationDelay = `-${(percentage / 100) * animationDuration}s`;
+        }
+      }
+      setIsPaused(false);
+    }, 1500);
+  }, [shouldAnimate, properties.length]);
+
+  // Mouse handlers for desktop drag
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!shouldAnimate) return;
+
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+
+    setIsDragging(true);
+    setIsPaused(true);
+
+    touchStartX.current = e.clientX;
+
+    if (trackRef.current) {
+      const style = window.getComputedStyle(trackRef.current);
+      const matrix = new DOMMatrix(style.transform);
+      prevTranslate.current = matrix.m41;
+      currentTranslate.current = prevTranslate.current;
+      trackRef.current.style.animation = 'none';
+    }
+
+    e.preventDefault();
+  }, [shouldAnimate]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging || !shouldAnimate) return;
+
+    const diffX = e.clientX - touchStartX.current;
+    const newTranslate = prevTranslate.current + diffX;
+    setTransform(newTranslate);
+  }, [isDragging, shouldAnimate, setTransform]);
+
+  const handleMouseUp = useCallback(() => {
+    if (!isDragging) return;
+    handleTouchEnd();
+  }, [isDragging, handleTouchEnd]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isDragging) {
+      handleTouchEnd();
+    } else {
+      setIsPaused(false);
+    }
+  }, [isDragging, handleTouchEnd]);
+
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (touchTimeoutRef.current) {
-        clearTimeout(touchTimeoutRef.current);
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
   }, []);
 
   // Calculate animation duration based on number of properties
-  // More properties = longer duration for consistent speed
-  const baseDuration = 30; // seconds for base set
-  const animationDuration = Math.max(baseDuration, properties.length * 3);
+  const animationDuration = Math.max(30, properties.length * 3);
 
   // Static display for less than 3 properties
   if (!shouldAnimate) {
@@ -119,16 +272,21 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
     );
   }
 
-  const isAnimating = isInView && !isPaused;
+  const isAnimating = isInView && !isPaused && !isDragging;
 
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden py-2"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      className="relative overflow-hidden py-2 touch-pan-y"
+      onMouseEnter={() => !isDragging && setIsPaused(true)}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     >
       {/* Gradient masks for smooth edges */}
       <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-r from-slate-50 dark:from-[#0f0d24] to-transparent z-10 pointer-events-none" />
@@ -136,7 +294,8 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
 
       {/* Infinite scroll track */}
       <div
-        className="flex infinite-scroll-track"
+        ref={trackRef}
+        className="flex infinite-scroll-track select-none"
         style={{
           ['--animation-duration' as string]: `${animationDuration}s`,
           animationPlayState: isAnimating ? 'running' : 'paused',
@@ -157,6 +316,7 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
                 translations={translations}
                 statusBadge={statusBadge}
                 statusLabels={statusLabels}
+                isDragging={isDragging}
               />
             ))}
             {/* Gap between sets */}
@@ -167,11 +327,11 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
 
       <style jsx>{`
         .infinite-scroll-track {
-          animation: infinite-scroll var(--animation-duration, 30s) linear infinite;
+          animation: infinite-scroll-manual var(--animation-duration, 30s) linear infinite;
           will-change: transform;
         }
 
-        @keyframes infinite-scroll {
+        @keyframes infinite-scroll-manual {
           0% {
             transform: translateX(0);
           }
@@ -198,16 +358,28 @@ function PropertyCard({
   translations,
   statusBadge,
   statusLabels,
+  isDragging = false,
 }: {
   property: Property;
   bucketUrl: string;
   translations: PropertyCarouselProps['translations'];
   statusBadge: Record<string, string>;
   statusLabels: Record<string, string>;
+  isDragging?: boolean;
 }) {
+  const handleClick = (e: React.MouseEvent) => {
+    // Prevent navigation if we were dragging
+    if (isDragging) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   return (
     <Link
       href={`/properties/${property.id}`}
+      onClick={handleClick}
+      draggable={false}
       className="bg-white dark:bg-[#13102b] rounded-lg overflow-hidden shadow-sm hover:shadow-md dark:hover:shadow-purple-900/20 transition group border border-slate-100 dark:border-[#2d2a4a] w-[280px] sm:w-[320px] shrink-0"
     >
       {/* Image */}
@@ -216,8 +388,9 @@ function PropertyCard({
           <img
             src={`${bucketUrl}${property.images[0]}`}
             alt={property.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition duration-300 pointer-events-none"
             loading="lazy"
+            draggable={false}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-600 text-sm">

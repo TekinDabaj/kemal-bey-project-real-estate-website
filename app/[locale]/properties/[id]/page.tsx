@@ -401,8 +401,8 @@ export default async function PropertyDetailPage({ params }: Props) {
             )}
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-4">
+          {/* Sidebar - Hidden on mobile, shown on desktop */}
+          <div className="hidden lg:block space-y-4">
             {/* Contact Card */}
             <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a] sticky top-20">
               <h2 className="font-semibold text-slate-900 dark:text-white mb-2">{t('interested')}</h2>
@@ -449,6 +449,27 @@ export default async function PropertyDetailPage({ params }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Fixed Bottom Bar for Mobile */}
+      <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-[#13102b] border-t border-slate-200 dark:border-[#2d2a4a] p-4 z-40 shadow-lg shadow-black/10 dark:shadow-purple-900/20">
+        <div className="flex gap-3 max-w-lg mx-auto">
+          <Link
+            href={`/${locale}/book`}
+            className="flex-1 flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-3 rounded-lg font-semibold transition text-sm"
+          >
+            <Calendar size={18} /> {t('bookConsultation')}
+          </Link>
+          <Link
+            href={`/${locale}/contact`}
+            className="flex items-center justify-center gap-2 border border-slate-300 dark:border-[#2d2a4a] hover:border-amber-500 dark:hover:border-amber-500 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 px-4 py-3 rounded-lg font-medium transition text-sm"
+          >
+            {t('contactUs')}
+          </Link>
+        </div>
+      </div>
+
+      {/* Spacer for fixed bottom bar on mobile */}
+      <div className="h-20 lg:hidden" />
     </div>
   )
 }
