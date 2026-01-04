@@ -658,6 +658,64 @@
       }
     }
   },
+  "about": {
+    "title": "Hakkimizda",
+    "subtitle": "Bilinçli kararlar almaniza yardimci olmaya adanmis guvenilir gayrimenkul danismanlari",
+    "ourStory": "Hikayemiz",
+    "storyParagraph1": "Premier Realty, basit bir misyonla kuruldu: musterileri on plana koyan durust ve uzman gayrimenkul rehberligi saglamak. Yerel pazardaki yillarin deneyimiyle, yutzlerce aile ve yatirimcinin guvenlé emlak kararlari almasina yardimci olduk.",
+    "storyParagraph2": "Emlak alim veya satiminin stresli bir kumar degil, bilinçli bir karar olmasi gerektigine inaniyoruz. Bu nedenle her musterimiz icin egitim, seffaflik ve kisisellestirilmis hizmete odaklaniyoruz.",
+    "stats": {
+      "clientsServed": "Hizmet Verilen Musteri",
+      "yearsExperience": "Yillik Deneyim",
+      "satisfactionRate": "Memnuniyet Orani",
+      "responseTime": "Yanit Suresi"
+    },
+    "ourValues": "Degerlerimiz",
+    "values": {
+      "integrity": "Durustluk",
+      "integrityDescription": "Duymak istemedikleriniz olsa bile, durut degerlendirmeler ve tavsiyeler sunuyoruz. Guveniniz bizim onceliğimizdir.",
+      "expertise": "Uzmanlik",
+      "expertiseDescription": "Ekibimiz, size bilinçli rehberlik saglamak icin piyasa trendleri, mevzuat ve en iyi uygulamalar konusunda guncel kaliyor.",
+      "clientFocus": "Musteri Odaklilik",
+      "clientFocusDescription": "Hedefleriniz bizim hedeflerimizdir. Ihtiyaçlarinizi anlamak ve tavsiyelerimizi buna gore uyarlamak icin zaman ayiriyoruz."
+    },
+    "ctaTitle": "Birlikte Calisalim",
+    "ctaDescription": "Bir danismanlik randevusu planlayin ve size nasil yardimci olabilecegimizi gorun.",
+    "ctaButton": "Randevu Al"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "Ihtiyaçlariniza gore ozellestirilmis kapsamli gayrimenkul danismanlik hizmetleri",
+    "items": {
+      "propertyValuation": {
+        "title": "Emlak Degerleme",
+        "description": "Mevcut piyasa kosullari, karsilastirmali satislar ve emlak ozelliklerine dayali olarak mulkunuzun dogru piyasa degerini alin."
+      },
+      "investmentAnalysis": {
+        "title": "Yatirim Analizi",
+        "description": "ROI projeksiyonlari, piyasa trendleri ve risk degerlendirmesi dahil potansiyel gayrimenkul yatirimlarinin kapsamli analizi."
+      },
+      "marketResearch": {
+        "title": "Piyasa Arastirmasi",
+        "description": "Yerel piyasa kosullari, mahalle analizi ve emlak degerlerini etkileyebilecek gelecekteki gelisme planlari hakkinda detayli raporlar."
+      },
+      "buyingConsultation": {
+        "title": "Satin Alma Danismanligi",
+        "description": "Uygun mulklerin belirlenmesinden en iyi anlasmanin muzakeresine kadar emlak satin alma surecinde uzman rehberlik."
+      },
+      "sellingStrategy": {
+        "title": "Satis Stratejisi",
+        "description": "Mulkunuzu satisa hazirlamak, fiyatlandirma stratejisi ve en iyi sonucu elde etmek icin pazarlama konusunda stratejik tavsiyeler."
+      },
+      "financialPlanning": {
+        "title": "Finansal Planlama",
+        "description": "Ipotek seceneklerini, finansman stratejilerini ve gayrimenkul kararlarinin uzun vadeli finansal etkilerini anlamaniza yardim."
+      }
+    },
+    "ctaTitle": "Baslamaya Hazir misiniz?",
+    "ctaDescription": "Gayrimenkul ihtiyaclarinizi gorusmek icin ucretsiz danismanlik randevusu alin.",
+    "ctaButton": "Randevu Al"
+  },
   "blog": {
     "title": "Blogumuz",
     "subtitle": "Gayrimenkul dunyasindan bilgiler, ipuclari ve haberler",

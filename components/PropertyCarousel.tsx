@@ -34,8 +34,9 @@ interface PropertyCarouselProps {
 }
 
 export default function PropertyCarousel({ properties, bucketUrl, translations }: PropertyCarouselProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(true);
   const touchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Only animate if 3 or more properties
@@ -51,6 +52,24 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
     sold: translations.sold,
     rented: translations.rented
   };
+
+  // Intersection Observer - pause animation when not in viewport
+  useEffect(() => {
+    if (!shouldAnimate || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [shouldAnimate]);
 
   // Handle touch for mobile
   const handleTouchStart = () => {
@@ -75,6 +94,11 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
     };
   }, []);
 
+  // Calculate animation duration based on number of properties
+  // More properties = longer duration for consistent speed
+  const baseDuration = 30; // seconds for base set
+  const animationDuration = Math.max(baseDuration, properties.length * 3);
+
   // Static display for less than 3 properties
   if (!shouldAnimate) {
     return (
@@ -95,8 +119,11 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
     );
   }
 
+  const isAnimating = isInView && !isPaused;
+
   return (
     <div
+      ref={containerRef}
       className="relative overflow-hidden py-2"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -107,54 +134,56 @@ export default function PropertyCarousel({ properties, bucketUrl, translations }
       <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-r from-slate-50 dark:from-[#0f0d24] to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 lg:w-24 bg-gradient-to-l from-slate-50 dark:from-[#0f0d24] to-transparent z-10 pointer-events-none" />
 
-      {/* Scrolling wrapper - contains two identical sets for seamless loop */}
+      {/* Infinite scroll track */}
       <div
-        ref={scrollRef}
-        className="flex carousel-scroll"
+        className="flex infinite-scroll-track"
         style={{
-          animationPlayState: isPaused ? 'paused' : 'running',
+          ['--animation-duration' as string]: `${animationDuration}s`,
+          animationPlayState: isAnimating ? 'running' : 'paused',
         }}
       >
-        {/* First set of properties */}
-        <div className="flex gap-4 sm:gap-6 pl-4 sm:pl-6 lg:pl-8 shrink-0">
-          {properties.map((property) => (
-            <PropertyCard
-              key={`first-${property.id}`}
-              property={property}
-              bucketUrl={bucketUrl}
-              translations={translations}
-              statusBadge={statusBadge}
-              statusLabels={statusLabels}
-            />
-          ))}
-        </div>
-
-        {/* Second set (duplicate) for seamless loop */}
-        <div className="flex gap-4 sm:gap-6 pl-4 sm:pl-6 shrink-0">
-          {properties.map((property) => (
-            <PropertyCard
-              key={`second-${property.id}`}
-              property={property}
-              bucketUrl={bucketUrl}
-              translations={translations}
-              statusBadge={statusBadge}
-              statusLabels={statusLabels}
-            />
-          ))}
-        </div>
+        {/* We render 3 sets of properties to ensure seamless infinite loop */}
+        {[0, 1, 2].map((setIndex) => (
+          <div
+            key={setIndex}
+            className="flex gap-4 sm:gap-6 shrink-0"
+            style={{ paddingLeft: setIndex === 0 ? '1rem' : '0' }}
+          >
+            {properties.map((property) => (
+              <PropertyCard
+                key={`set-${setIndex}-${property.id}`}
+                property={property}
+                bucketUrl={bucketUrl}
+                translations={translations}
+                statusBadge={statusBadge}
+                statusLabels={statusLabels}
+              />
+            ))}
+            {/* Gap between sets */}
+            <div className="w-4 sm:w-6 shrink-0" />
+          </div>
+        ))}
       </div>
 
       <style jsx>{`
-        .carousel-scroll {
-          animation: seamless-scroll 40s linear infinite;
+        .infinite-scroll-track {
+          animation: infinite-scroll var(--animation-duration, 30s) linear infinite;
+          will-change: transform;
         }
 
-        @keyframes seamless-scroll {
+        @keyframes infinite-scroll {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(calc(-100% / 3));
+          }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+          .infinite-scroll-track {
+            animation: none;
           }
         }
       `}</style>

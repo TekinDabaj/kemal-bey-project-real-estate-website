@@ -1,63 +1,49 @@
 import { Building2, TrendingUp, FileSearch, Scale, Home, BadgeDollarSign } from 'lucide-react'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
-const services = [
-  {
-    icon: Building2,
-    title: 'Property Valuation',
-    description: 'Get an accurate market value assessment of your property based on current market conditions, comparable sales, and property features.'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Investment Analysis',
-    description: 'Comprehensive analysis of potential real estate investments including ROI projections, market trends, and risk assessment.'
-  },
-  {
-    icon: FileSearch,
-    title: 'Market Research',
-    description: 'Detailed reports on local market conditions, neighborhood analysis, and future development plans that may affect property values.'
-  },
-  {
-    icon: Scale,
-    title: 'Buying Consultation',
-    description: 'Expert guidance through the property buying process, from identifying suitable properties to negotiating the best deal.'
-  },
-  {
-    icon: Home,
-    title: 'Selling Strategy',
-    description: 'Strategic advice on preparing your property for sale, pricing strategy, and marketing to achieve the best possible outcome.'
-  },
-  {
-    icon: BadgeDollarSign,
-    title: 'Financial Planning',
-    description: 'Help understanding mortgage options, financing strategies, and long-term financial implications of real estate decisions.'
-  }
+const serviceKeys = [
+  { icon: Building2, key: 'propertyValuation' },
+  { icon: TrendingUp, key: 'investmentAnalysis' },
+  { icon: FileSearch, key: 'marketResearch' },
+  { icon: Scale, key: 'buyingConsultation' },
+  { icon: Home, key: 'sellingStrategy' },
+  { icon: BadgeDollarSign, key: 'financialPlanning' },
 ]
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const t = await getTranslations('services')
+
   return (
-    <div>
+    <div className="bg-white dark:bg-[#0c0a1d]">
       {/* Hero */}
-      <section className="bg-slate-900 text-white py-16">
+      <section className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Our Services</h1>
-          <p className="text-slate-300 max-w-2xl mx-auto">
-            Comprehensive real estate consultation services tailored to your needs
+          <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
+          <p className="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto">
+            {t('subtitle')}
           </p>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-[#0c0a1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, i) => (
-              <div key={i} className="border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-amber-100 text-amber-600 mb-4">
+            {serviceKeys.map((service, i) => (
+              <div
+                key={i}
+                className="border border-slate-200 dark:border-[#2d2a4a] rounded-xl p-6 hover:shadow-lg dark:hover:shadow-purple-900/20 transition bg-white dark:bg-[#13102b]"
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 mb-4">
                   <service.icon size={24} />
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">{service.title}</h3>
-                <p className="text-slate-600">{service.description}</p>
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                  {t(`items.${service.key}.title`)}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">
+                  {t(`items.${service.key}.description`)}
+                </p>
               </div>
             ))}
           </div>
@@ -65,15 +51,15 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-slate-100">
+      <section className="py-16 bg-slate-100 dark:bg-[#13102b] dark:border-t dark:border-[#2d2a4a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Ready to Get Started?</h2>
-          <p className="text-slate-600 mb-6">Book a free consultation to discuss your real estate needs.</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">{t('ctaTitle')}</h2>
+          <p className="text-slate-600 dark:text-slate-400 mb-6">{t('ctaDescription')}</p>
           <Link
             href="/book"
             className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 px-8 py-3 rounded-lg font-semibold transition"
           >
-            Book Consultation
+            {t('ctaButton')}
           </Link>
         </div>
       </section>

@@ -1,48 +1,59 @@
 import { Award, Users, Clock, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const t = await getTranslations('about')
+
+  const stats = [
+    { icon: Users, value: '500+', labelKey: 'clientsServed' },
+    { icon: Award, value: '15+', labelKey: 'yearsExperience' },
+    { icon: CheckCircle, value: '98%', labelKey: 'satisfactionRate' },
+    { icon: Clock, value: '24h', labelKey: 'responseTime' },
+  ]
+
+  const values = [
+    { titleKey: 'integrity', descriptionKey: 'integrityDescription' },
+    { titleKey: 'expertise', descriptionKey: 'expertiseDescription' },
+    { titleKey: 'clientFocus', descriptionKey: 'clientFocusDescription' },
+  ]
+
   return (
-    <div>
+    <div className="bg-white dark:bg-[#0c0a1d]">
       {/* Hero */}
-      <section className="bg-slate-900 text-white py-16">
+      <section className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">About Us</h1>
-          <p className="text-slate-300 max-w-2xl mx-auto">
-            Trusted real estate consultants dedicated to helping you make informed decisions
+          <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
+          <p className="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto">
+            {t('subtitle')}
           </p>
         </div>
       </section>
 
       {/* Story */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-[#0c0a1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Story</h2>
-            <p className="text-slate-600 mb-4">
-              Premier Realty was founded with a simple mission: to provide honest, expert real estate guidance that puts clients first. With years of experience in the local market, we've helped hundreds of families and investors make confident property decisions.
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">{t('ourStory')}</h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-4">
+              {t('storyParagraph1')}
             </p>
-            <p className="text-slate-600">
-              We believe that buying or selling property should be an informed decision, not a stressful gamble. That's why we focus on education, transparency, and personalized service for every client.
+            <p className="text-slate-600 dark:text-slate-400">
+              {t('storyParagraph2')}
             </p>
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-slate-50 dark:bg-[#13102b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { icon: Users, value: '500+', label: 'Clients Served' },
-              { icon: Award, value: '15+', label: 'Years Experience' },
-              { icon: CheckCircle, value: '98%', label: 'Satisfaction Rate' },
-              { icon: Clock, value: '24h', label: 'Response Time' },
-            ].map((stat, i) => (
+            {stats.map((stat, i) => (
               <div key={i}>
                 <stat.icon className="w-8 h-8 text-amber-500 mx-auto mb-2" />
-                <div className="text-3xl font-bold text-slate-900">{stat.value}</div>
-                <div className="text-slate-600">{stat.label}</div>
+                <div className="text-3xl font-bold text-slate-900 dark:text-white">{stat.value}</div>
+                <div className="text-slate-600 dark:text-slate-400">{t(`stats.${stat.labelKey}`)}</div>
               </div>
             ))}
           </div>
@@ -50,27 +61,14 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-[#0c0a1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">Our Values</h2>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-12">{t('ourValues')}</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Integrity',
-                description: 'We provide honest assessments and advice, even when it\'s not what you want to hear. Your trust is our priority.'
-              },
-              {
-                title: 'Expertise',
-                description: 'Our team stays current with market trends, regulations, and best practices to give you informed guidance.'
-              },
-              {
-                title: 'Client Focus',
-                description: 'Your goals are our goals. We take time to understand your needs and tailor our advice accordingly.'
-              }
-            ].map((value, i) => (
-              <div key={i} className="text-center p-6">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{value.title}</h3>
-                <p className="text-slate-600">{value.description}</p>
+            {values.map((value, i) => (
+              <div key={i} className="text-center p-6 rounded-xl bg-slate-50 dark:bg-[#13102b] border border-transparent dark:border-[#2d2a4a]">
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">{t(`values.${value.titleKey}`)}</h3>
+                <p className="text-slate-600 dark:text-slate-400">{t(`values.${value.descriptionKey}`)}</p>
               </div>
             ))}
           </div>
@@ -78,15 +76,15 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-slate-900 text-white">
+      <section className="py-16 bg-slate-900 dark:bg-[#13102b] dark:border-t dark:border-[#2d2a4a] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Let's Work Together</h2>
-          <p className="text-slate-300 mb-6">Schedule a consultation and see how we can help.</p>
+          <h2 className="text-2xl font-bold mb-4">{t('ctaTitle')}</h2>
+          <p className="text-slate-300 dark:text-slate-400 mb-6">{t('ctaDescription')}</p>
           <Link
             href="/book"
             className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 px-8 py-3 rounded-lg font-semibold transition"
           >
-            Book Consultation
+            {t('ctaButton')}
           </Link>
         </div>
       </section>

@@ -658,6 +658,64 @@
       }
     }
   },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Trusted real estate consultants dedicated to helping you make informed decisions",
+    "ourStory": "Our Story",
+    "storyParagraph1": "Premier Realty was founded with a simple mission: to provide honest, expert real estate guidance that puts clients first. With years of experience in the local market, we've helped hundreds of families and investors make confident property decisions.",
+    "storyParagraph2": "We believe that buying or selling property should be an informed decision, not a stressful gamble. That's why we focus on education, transparency, and personalized service for every client.",
+    "stats": {
+      "clientsServed": "Clients Served",
+      "yearsExperience": "Years Experience",
+      "satisfactionRate": "Satisfaction Rate",
+      "responseTime": "Response Time"
+    },
+    "ourValues": "Our Values",
+    "values": {
+      "integrity": "Integrity",
+      "integrityDescription": "We provide honest assessments and advice, even when it's not what you want to hear. Your trust is our priority.",
+      "expertise": "Expertise",
+      "expertiseDescription": "Our team stays current with market trends, regulations, and best practices to give you informed guidance.",
+      "clientFocus": "Client Focus",
+      "clientFocusDescription": "Your goals are our goals. We take time to understand your needs and tailor our advice accordingly."
+    },
+    "ctaTitle": "Let's Work Together",
+    "ctaDescription": "Schedule a consultation and see how we can help.",
+    "ctaButton": "Book Consultation"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive real estate consultation services tailored to your needs",
+    "items": {
+      "propertyValuation": {
+        "title": "Property Valuation",
+        "description": "Get an accurate market value assessment of your property based on current market conditions, comparable sales, and property features."
+      },
+      "investmentAnalysis": {
+        "title": "Investment Analysis",
+        "description": "Comprehensive analysis of potential real estate investments including ROI projections, market trends, and risk assessment."
+      },
+      "marketResearch": {
+        "title": "Market Research",
+        "description": "Detailed reports on local market conditions, neighborhood analysis, and future development plans that may affect property values."
+      },
+      "buyingConsultation": {
+        "title": "Buying Consultation",
+        "description": "Expert guidance through the property buying process, from identifying suitable properties to negotiating the best deal."
+      },
+      "sellingStrategy": {
+        "title": "Selling Strategy",
+        "description": "Strategic advice on preparing your property for sale, pricing strategy, and marketing to achieve the best possible outcome."
+      },
+      "financialPlanning": {
+        "title": "Financial Planning",
+        "description": "Help understanding mortgage options, financing strategies, and long-term financial implications of real estate decisions."
+      }
+    },
+    "ctaTitle": "Ready to Get Started?",
+    "ctaDescription": "Book a free consultation to discuss your real estate needs.",
+    "ctaButton": "Book Consultation"
+  },
   "blog": {
     "title": "Our Blog",
     "subtitle": "Insights, tips, and news from the real estate world",
