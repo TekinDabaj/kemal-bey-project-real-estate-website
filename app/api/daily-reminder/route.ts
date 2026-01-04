@@ -16,8 +16,10 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Get today's date in YYYY-MM-DD format
-    const today = new Date().toISOString().split('T')[0]
+    // Get today's date in YYYY-MM-DD format (UTC+02:00 timezone)
+    const now = new Date()
+    const utcPlus2 = new Date(now.getTime() + (2 * 60 * 60 * 1000))
+    const today = utcPlus2.toISOString().split('T')[0]
 
     // Fetch today's appointments (pending or confirmed only)
     const { data: appointments, error } = await supabase
