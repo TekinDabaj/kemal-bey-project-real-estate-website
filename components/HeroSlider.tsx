@@ -59,11 +59,35 @@ const ARTICLES = [
   },
 ];
 
+const THIRD_VIEW_DATA = [
+  {
+    title: 'Start Your Journey Today',
+    subtitle: 'Let us guide you home',
+  },
+  {
+    title: 'Build Your Portfolio',
+    subtitle: 'Smart investments start here',
+  },
+  {
+    title: 'Experience Excellence',
+    subtitle: 'Luxury is just the beginning',
+  },
+  {
+    title: 'Partner With Experts',
+    subtitle: 'Your success is our priority',
+  },
+  {
+    title: 'Make It Happen',
+    subtitle: 'Your dream awaits',
+  },
+];
+
 export default function HeroSlider({ slides }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
+  const [showThirdView, setShowThirdView] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
@@ -93,6 +117,9 @@ export default function HeroSlider({ slides }: Props) {
     gsap.set(containerRef.current.querySelectorAll('.slider-slice-imageContainer.image--active'), { xPercent: 0 });
     gsap.set(containerRef.current.querySelectorAll('.text-container:not(.text--active) .text-main-wrapper'), { xPercent: 100 });
 
+    // Show container after initial states are set (prevents flash of unstyled content)
+    setIsInitialized(true);
+
     const tl = gsap.timeline({ delay: 0.5 });
     const delayOpening = 0.05;
 
@@ -103,8 +130,7 @@ export default function HeroSlider({ slides }: Props) {
 
     tl.fromTo(textWrappers, { xPercent: -100 }, { xPercent: 0, duration: 1, ease: 'power2.inOut', stagger: 0.2 }, '-=1')
       .fromTo(label, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 })
-      .fromTo(ctas, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 })
-      .call(() => setIsInitialized(true));
+      .fromTo(ctas, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 });
 
     return () => {
       tl.kill();
@@ -203,59 +229,240 @@ export default function HeroSlider({ slides }: Props) {
   };
 
   const handleDown = () => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
 
     const heroContainer = containerRef.current.querySelector('.hero-container');
+    const articleSection = containerRef.current.querySelector('.article-section');
     const activeImages = containerRef.current.querySelectorAll('.image--active');
     const activeTextWrappers = containerRef.current.querySelectorAll('.text--active .text-main-wrapper');
     const activeLabel = containerRef.current.querySelector('.text--active .text-label');
     const overlay = containerRef.current.querySelector('.slider-overlay');
     const ctas = containerRef.current.querySelectorAll('.cta');
 
-    const delays = [0, 0.06, 0.12, 0.18];
+    const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
+    const delayMultiplier = 0.05;
+
+    // Show article section immediately (it will be revealed as hero slides up)
+    setShowArticle(true);
 
     const tl = gsap.timeline({
       onComplete: () => {
-        gsap.set(heroContainer, { autoAlpha: 0 });
-        setShowArticle(true);
+        setIsMoving(false);
       },
     });
 
-    tl.to(ctas, { autoAlpha: 0, duration: 0.2 });
+    // Fade out CTAs first
+    tl.to(ctas, { autoAlpha: 0, duration: 0.2 }, 0);
 
+    // Fade in article section
+    tl.fromTo(articleSection,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      0.1
+    );
+
+    // Slide hero images up with staggered animation
     activeImages.forEach((el, i) => {
-      tl.to(el, { yPercent: -101, duration: 0.8, ease: 'power2.inOut' }, delays[i % 4]);
+      tl.to(el, { yPercent: -101, duration: 0.8, ease: 'power2.inOut' }, sliceDelays[i] * delayMultiplier);
     });
 
+    // Slide text up
     activeTextWrappers.forEach((el, i) => {
-      tl.to(el, { yPercent: -110, duration: 0.8, ease: 'power2.inOut' }, 0.2 + delays[i % 4]);
+      tl.to(el, { yPercent: -110, duration: 0.8, ease: 'power2.inOut' }, 0.1 + (i * 0.06));
     });
 
-    tl.to(activeLabel, { top: -40, duration: 0.8, ease: 'power2.inOut' }, '-=0.8')
-      .to(overlay, { autoAlpha: 0, duration: 0.2 }, '-=0.5');
+    // Label and overlay
+    tl.to(activeLabel, { autoAlpha: 0, duration: 0.4, ease: 'power2.inOut' }, 0.1)
+      .to(overlay, { autoAlpha: 0, duration: 0.3 }, 0.2)
+      .set(heroContainer, { autoAlpha: 0 });
   };
 
   const handleBackToSlider = () => {
-    setShowArticle(false);
-    // Reset and replay opening animation
-    setTimeout(() => {
-      if (containerRef.current) {
-        const heroContainer = containerRef.current.querySelector('.hero-container');
-        gsap.set(heroContainer, { autoAlpha: 1 });
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
 
-        const imageContainers = containerRef.current.querySelectorAll('.slider-slice-imageContainer.image--active');
-        const textWrappers = containerRef.current.querySelectorAll('.text-container.text--active .text-main-wrapper');
-        const label = containerRef.current.querySelector('.text--active .text-label');
-        const ctas = containerRef.current.querySelectorAll('.cta');
-        const overlay = containerRef.current.querySelector('.slider-overlay');
+    const heroContainer = containerRef.current.querySelector('.hero-container');
+    const articleSection = containerRef.current.querySelector('.article-section');
+    const activeImages = containerRef.current.querySelectorAll('.slider-slice-imageContainer.image--active');
+    const activeTextWrappers = containerRef.current.querySelectorAll('.text-container.text--active .text-main-wrapper');
+    const activeLabel = containerRef.current.querySelector('.text--active .text-label');
+    const overlay = containerRef.current.querySelector('.slider-overlay');
+    const ctas = containerRef.current.querySelectorAll('.cta');
 
-        gsap.set(imageContainers, { yPercent: 0 });
-        gsap.set(textWrappers, { yPercent: 0, xPercent: 0 });
-        gsap.set(label, { top: 100, autoAlpha: 1 });
-        gsap.set(overlay, { autoAlpha: 1 });
-        gsap.set(ctas, { autoAlpha: 1 });
-      }
-    }, 100);
+    const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
+    const delayMultiplier = 0.05;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+        setShowArticle(false);
+      },
+    });
+
+    // First, show the hero container
+    tl.set(heroContainer, { autoAlpha: 1 });
+
+    // Fade out article section
+    tl.to(articleSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+
+    // Slide hero images back down with staggered animation (reverse of handleDown)
+    activeImages.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: -101 },
+        { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
+        0.2 + sliceDelays[i] * delayMultiplier
+      );
+    });
+
+    // Slide text back down (reverse of handleDown)
+    activeTextWrappers.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: -110 },
+        { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
+        0.3 + (i * 0.06)
+      );
+    });
+
+    // Fade in label and overlay
+    tl.to(activeLabel, { autoAlpha: 1, duration: 0.4, ease: 'power2.out' }, 0.6)
+      .to(overlay, { autoAlpha: 0.2, duration: 0.3 }, 0.4)
+      .to(ctas, { autoAlpha: 0.5, duration: 0.4 }, 0.8);
+  };
+
+  const handleDownToThird = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const articleSection = containerRef.current.querySelector('.article-section');
+    const thirdViewSection = containerRef.current.querySelector('.third-view-section');
+    const articleBackBtn = containerRef.current.querySelector('.article-section .back-button');
+    const articleDownBtn = containerRef.current.querySelector('.article-down-button');
+    const articleSliceInners = containerRef.current.querySelectorAll('.article-slice-inner');
+    const articleTitle = containerRef.current.querySelector('.page-container h1');
+    const articleParagraphs = containerRef.current.querySelectorAll('.page-container p');
+    const thirdTitleSlices = containerRef.current.querySelectorAll('.third-view-title-slice span');
+    const thirdSubtitle = containerRef.current.querySelector('.third-view-subtitle');
+
+    // Same staggered pattern as hero slider (12 slices)
+    const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
+    const delayMultiplier = 0.05;
+
+    // Show third view section immediately (it will be revealed as article slides up)
+    setShowThirdView(true);
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+      },
+    });
+
+    // Fade out buttons first (like CTAs in handleDown)
+    tl.to(articleDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(articleBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+
+    // Fade in third view section (like article section fades in)
+    tl.fromTo(thirdViewSection,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      0.1
+    );
+
+    // Slide article SLICE INNERS up with staggered animation (exactly like hero images)
+    articleSliceInners.forEach((el, i) => {
+      tl.to(el, { yPercent: -101, duration: 0.8, ease: 'power2.inOut' }, sliceDelays[i] * delayMultiplier);
+    });
+
+    // Slide article text up earlier so it's gone before slices finish
+    tl.to(articleTitle, { yPercent: -110, duration: 0.5, ease: 'power2.in' }, 0);
+    articleParagraphs.forEach((el, i) => {
+      tl.to(el, { yPercent: -110, duration: 0.5, ease: 'power2.in' }, i * 0.03);
+    });
+
+    // Slide third view text up into position (like text wrappers in handleDown)
+    thirdTitleSlices.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: 101 },
+        { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
+        0.1 + (i * 0.06)
+      );
+    });
+
+    // Subtitle follows
+    tl.fromTo(thirdSubtitle,
+      { yPercent: 101 },
+      { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
+      0.1 + (thirdTitleSlices.length * 0.06)
+    );
+
+    // Hide article section at the end
+    tl.set(articleSection, { autoAlpha: 0 });
+  };
+
+  const handleBackToArticle = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const articleSection = containerRef.current.querySelector('.article-section');
+    const articleBackBtn = containerRef.current.querySelector('.article-section .back-button');
+    const articleDownBtn = containerRef.current.querySelector('.article-down-button');
+    const articleSliceInners = containerRef.current.querySelectorAll('.article-slice-inner');
+    const articleTitle = containerRef.current.querySelector('.page-container h1');
+    const articleParagraphs = containerRef.current.querySelectorAll('.page-container p');
+    const thirdViewSection = containerRef.current.querySelector('.third-view-section');
+    const thirdTitleSlices = containerRef.current.querySelectorAll('.third-view-title-slice span');
+    const thirdSubtitle = containerRef.current.querySelector('.third-view-subtitle');
+
+    // Same staggered pattern as hero slider
+    const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
+    const delayMultiplier = 0.05;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+        setShowThirdView(false);
+      },
+    });
+
+    // First, show the article section
+    tl.set(articleSection, { autoAlpha: 1 });
+
+    // Fade out third view section
+    tl.to(thirdViewSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+
+    // Slide article SLICE INNERS back down with staggered animation (reverse of going up)
+    articleSliceInners.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: -101 },
+        { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
+        0.2 + sliceDelays[i] * delayMultiplier
+      );
+    });
+
+    // Slide article text back down later (after slices are mostly visible)
+    tl.fromTo(articleTitle,
+      { yPercent: -110 },
+      { yPercent: 0, duration: 0.5, ease: 'power2.out' },
+      0.6
+    );
+
+    articleParagraphs.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: -110 },
+        { yPercent: 0, duration: 0.5, ease: 'power2.out' },
+        0.65 + (i * 0.03)
+      );
+    });
+
+    // Slide third view text down (reverse of coming in)
+    thirdTitleSlices.forEach((el, i) => {
+      tl.to(el, { yPercent: 101, duration: 0.6, ease: 'power2.inOut' }, i * 0.04);
+    });
+    tl.to(thirdSubtitle, { yPercent: 101, duration: 0.6, ease: 'power2.inOut' }, 0);
+
+    // Show buttons at the end
+    tl.to(articleBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+    tl.to(articleDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
   return (
@@ -282,6 +489,11 @@ export default function HeroSlider({ slides }: Props) {
           background: #0a0a0a;
           overflow: hidden;
           z-index: 10;
+          opacity: 0;
+        }
+
+        .wild-slider-container.initialized {
+          opacity: 1;
         }
 
         .hero-container {
@@ -296,8 +508,8 @@ export default function HeroSlider({ slides }: Props) {
         .divider {
           position: absolute;
           display: inline-block;
-          background: rgba(130, 130, 130, 0.12);
-          z-index: 200;
+          background: rgba(130, 130, 130, 0.2);
+          z-index: 300;
           pointer-events: none;
         }
 
@@ -314,6 +526,11 @@ export default function HeroSlider({ slides }: Props) {
           bottom: 40%;
           font-family: 'Biryani', sans-serif;
           color: white;
+          visibility: hidden;
+        }
+
+        .text-wrapper.visible {
+          visibility: visible;
         }
 
         .text-container {
@@ -513,70 +730,308 @@ export default function HeroSlider({ slides }: Props) {
           transform: translateY(4%);
         }
 
+        .article-section {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: transparent;
+          z-index: 50;
+          overflow: hidden;
+          visibility: hidden;
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .article-section.active {
+          pointer-events: auto;
+        }
+
+        .article-slices-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .article-slice {
+          position: absolute;
+          width: 25%;
+          height: 33.34%;
+          overflow: hidden;
+        }
+
+        .article-slice-inner {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+        }
+
+        :global(.dark) .article-slice-inner {
+          background: #0c0a1d;
+        }
+
+        .article-slice:nth-child(1) { left: 0; top: 0; }
+        .article-slice:nth-child(2) { left: 25%; top: 0; }
+        .article-slice:nth-child(3) { left: 50%; top: 0; }
+        .article-slice:nth-child(4) { left: 75%; top: 0; }
+        .article-slice:nth-child(5) { left: 0; top: 33.34%; }
+        .article-slice:nth-child(6) { left: 25%; top: 33.34%; }
+        .article-slice:nth-child(7) { left: 50%; top: 33.34%; }
+        .article-slice:nth-child(8) { left: 75%; top: 33.34%; }
+        .article-slice:nth-child(9) { left: 0; top: 66.68%; }
+        .article-slice:nth-child(10) { left: 25%; top: 66.68%; }
+        .article-slice:nth-child(11) { left: 50%; top: 66.68%; }
+        .article-slice:nth-child(12) { left: 75%; top: 66.68%; }
+
         .page-container {
           position: relative;
-          max-width: 700px;
+          max-width: 600px;
           width: 90%;
-          margin: 150px auto 100px auto;
-          z-index: 50;
+          padding: 120px 40px 60px 60px;
+          z-index: 10;
         }
 
         .page-container h1 {
           font-family: 'Biryani', sans-serif;
-          font-size: 60px;
-          line-height: 63px;
+          font-size: 48px;
+          line-height: 52px;
           font-weight: 700;
           margin-bottom: 30px;
+          color: #1a1a2e;
+        }
+
+        :global(.dark) .page-container h1 {
           color: white;
         }
 
         @media screen and (max-width: 600px) {
+          .page-container {
+            padding: 100px 20px 40px 20px;
+          }
           .page-container h1 {
-            font-size: 36px;
-            line-height: 42px;
+            font-size: 32px;
+            line-height: 38px;
           }
         }
 
-        .page-container h3 {
-          font-family: 'Biryani', sans-serif;
-          opacity: 0.4;
-          font-weight: 400;
-          margin-top: 40px;
-          margin-bottom: 5px;
-          font-size: 32px;
-          color: white;
+        .page-container h1 {
+          overflow: hidden;
         }
 
         .page-container p {
           margin-top: 0;
-          margin-bottom: 29px;
-          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 24px;
+          color: #4a4a5a;
+          font-size: 18px;
+          line-height: 1.7;
+          overflow: hidden;
+        }
+
+        :global(.dark) .page-container p {
+          color: rgba(255, 255, 255, 0.75);
+        }
+
+        .article-content-wrapper {
+          overflow: hidden;
         }
 
         .back-button {
-          position: absolute;
-          top: 20px;
-          left: 20px;
-          z-index: 1000;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          position: fixed;
+          top: 100px;
+          right: 40px;
+          z-index: 100;
+          background: #1a1a2e;
+          border: none;
           color: white;
-          padding: 10px 20px;
-          border-radius: 25px;
+          padding: 12px 24px;
+          border-radius: 30px;
           cursor: pointer;
           font-family: 'Biryani', sans-serif;
           font-size: 12px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          transition: all 0.3s;
+          transition: background 0.3s;
+        }
+
+        :global(.dark) .back-button {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .back-button:hover {
+          background: #2a2a4e;
+        }
+
+        :global(.dark) .back-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .article-down-button {
+          position: fixed;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          z-index: 100;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        :global(.dark) .article-down-button {
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .article-down-button svg {
+          transition: all 0.2s ease-in-out;
+        }
+
+        .article-down-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .article-down-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .article-down-button:hover svg {
+          transform: translateY(4px);
+        }
+
+        :global(.dark) .article-down-button svg path {
+          fill: white;
+        }
+
+        .third-view-section {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+          z-index: 45;
+          visibility: hidden;
+          opacity: 0;
+          pointer-events: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+          padding-bottom: 15vh;
+        }
+
+        .third-view-section.active {
+          pointer-events: auto;
+        }
+
+        :global(.dark) .third-view-section {
+          background: linear-gradient(135deg, #0c0a1d 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .third-view-content {
+          text-align: center;
+          color: white;
+          max-width: 90%;
+        }
+
+        .third-view-title {
+          font-family: 'Biryani', sans-serif;
+          font-size: 64px;
+          line-height: 1.1;
+          font-weight: 900;
+          margin-bottom: 20px;
+          text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0 16px;
+        }
+
+        .third-view-title-slice {
+          overflow: hidden;
+          display: inline-block;
+        }
+
+        .third-view-title-slice span {
+          display: inline-block;
+        }
+
+        @media screen and (max-width: 1000px) {
+          .third-view-title {
+            font-size: 48px;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          .third-view-title {
+            font-size: 32px;
+            gap: 0 8px;
+          }
+          .third-view-section {
+            padding-bottom: 20vh;
+          }
+        }
+
+        .third-view-subtitle-wrapper {
+          overflow: hidden;
+        }
+
+        .third-view-subtitle {
+          font-family: 'Georgia', serif;
+          font-size: 24px;
+          font-style: italic;
+          opacity: 0.85;
+          letter-spacing: 2px;
+        }
+
+        @media screen and (max-width: 600px) {
+          .third-view-subtitle {
+            font-size: 18px;
+          }
+        }
+
+        .third-view-back-button {
+          position: fixed;
+          top: 100px;
+          right: 40px;
+          z-index: 1000;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: white;
+          padding: 12px 24px;
+          border-radius: 30px;
+          cursor: pointer;
+          font-family: 'Biryani', sans-serif;
+          font-size: 12px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          transition: background 0.3s;
+        }
+
+        .third-view-back-button:hover {
           background: rgba(255, 255, 255, 0.2);
         }
       `}</style>
 
-      <div ref={containerRef} className="wild-slider-container">
+      <div ref={containerRef} className={`wild-slider-container ${isInitialized ? 'initialized' : ''}`}>
         {/* Dividers */}
         <div className="divider divider--vertical"></div>
         <div className="divider divider--vertical"></div>
@@ -604,7 +1059,7 @@ export default function HeroSlider({ slides }: Props) {
           </div>
 
           {/* Text Wrapper */}
-          <div className="text-wrapper">
+          <div className={`text-wrapper ${isInitialized ? 'visible' : ''}`}>
             {SLIDE_DATA.map((slide, index) => (
               <div
                 key={index}
@@ -669,22 +1124,53 @@ export default function HeroSlider({ slides }: Props) {
           </div>
         </div>
 
-        {/* Article Section */}
-        {showArticle && (
-          <>
-            <button className="back-button" onClick={handleBackToSlider}>
-              ← Back to Slider
-            </button>
-            <section className="page-container">
-              <article>
-                <h1>{ARTICLES[currentSlide].title}</h1>
-                {ARTICLES[currentSlide].content.map((para, index) => (
-                  <p key={index}>{para}</p>
-                ))}
-              </article>
-            </section>
-          </>
-        )}
+        {/* Article Section - Always rendered, visibility controlled by GSAP */}
+        <div className={`article-section ${showArticle ? 'active' : ''}`}>
+          {/* Article Slices - 12 blocks that animate like hero slices */}
+          <div className="article-slices-container">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <div key={index} className="article-slice">
+                <div className="article-slice-inner" />
+              </div>
+            ))}
+          </div>
+          <button className="back-button" onClick={handleBackToSlider}>
+            ← Back
+          </button>
+          <section className="page-container">
+            <article>
+              <h1>{ARTICLES[currentSlide].title}</h1>
+              {ARTICLES[currentSlide].content.map((para, index) => (
+                <p key={index}>{para}</p>
+              ))}
+            </article>
+          </section>
+          {/* Down arrow to third view */}
+          <button className="article-down-button" onClick={handleDownToThird}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 50 50">
+              <path fill="#1a1a2e" d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Third View Section */}
+        <div className={`third-view-section ${showThirdView ? 'active' : ''}`}>
+          <button className="third-view-back-button" onClick={handleBackToArticle}>
+            ← Back
+          </button>
+          <div className="third-view-content">
+            <h1 className="third-view-title">
+              {THIRD_VIEW_DATA[currentSlide].title.split(' ').map((word, index) => (
+                <div key={index} className="third-view-title-slice">
+                  <span>{word}</span>
+                </div>
+              ))}
+            </h1>
+            <div className="third-view-subtitle-wrapper">
+              <p className="third-view-subtitle">{THIRD_VIEW_DATA[currentSlide].subtitle}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
