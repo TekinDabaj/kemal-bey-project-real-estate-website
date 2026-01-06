@@ -2425,9 +2425,12 @@ export default function HeroSlider({
         }
 
         .cta--down {
-          bottom: 20px;
+          position: fixed;
+          bottom: 30px;
           left: 50%;
           transform: translateX(-50%);
+          z-index: 200;
+          pointer-events: auto;
         }
 
         .cta--down:hover svg {
@@ -2603,7 +2606,7 @@ export default function HeroSlider({
           position: fixed;
           top: 100px;
           right: 40px;
-          z-index: 100;
+          z-index: 200;
           background: #1a1a2e;
           border: none;
           color: white;
@@ -2615,6 +2618,7 @@ export default function HeroSlider({
           letter-spacing: 2px;
           text-transform: uppercase;
           transition: background 0.3s;
+          pointer-events: auto;
         }
 
         :global(.dark) .back-button {
@@ -2638,7 +2642,7 @@ export default function HeroSlider({
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          z-index: 100;
+          z-index: 200;
           overflow: hidden;
           border: solid 2px #1a1a2e;
           opacity: 0.6;
@@ -2648,6 +2652,7 @@ export default function HeroSlider({
           display: flex;
           align-items: center;
           justify-content: center;
+          pointer-events: auto;
         }
 
         :global(.dark) .article-down-button {
@@ -2790,6 +2795,7 @@ export default function HeroSlider({
           letter-spacing: 2px;
           text-transform: uppercase;
           transition: background 0.3s;
+          pointer-events: auto;
         }
 
         :global(.dark) .third-view-back-button {
@@ -3163,6 +3169,7 @@ export default function HeroSlider({
           letter-spacing: 2px;
           text-transform: uppercase;
           transition: background 0.3s;
+          pointer-events: auto;
         }
 
         :global(.dark) .fourth-view-back-button {
@@ -3412,7 +3419,7 @@ export default function HeroSlider({
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          z-index: 100;
+          z-index: 200;
           overflow: hidden;
           border: solid 2px #1a1a2e;
           opacity: 0.6;
@@ -3422,6 +3429,7 @@ export default function HeroSlider({
           display: flex;
           align-items: center;
           justify-content: center;
+          pointer-events: auto;
         }
 
         :global(.dark) .third-view-down-button {
@@ -3572,6 +3580,7 @@ export default function HeroSlider({
           letter-spacing: 2px;
           text-transform: uppercase;
           transition: background 0.3s;
+          pointer-events: auto;
         }
 
         :global(.dark) .fifth-view-back-button {
@@ -3841,7 +3850,7 @@ export default function HeroSlider({
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          z-index: 100;
+          z-index: 200;
           overflow: hidden;
           border: solid 2px #1a1a2e;
           opacity: 0.6;
@@ -3851,6 +3860,7 @@ export default function HeroSlider({
           display: flex;
           align-items: center;
           justify-content: center;
+          pointer-events: auto;
         }
 
         :global(.dark) .fourth-view-down-button {
@@ -3962,6 +3972,7 @@ export default function HeroSlider({
           letter-spacing: 2px;
           text-transform: uppercase;
           transition: background 0.3s;
+          pointer-events: auto;
         }
 
         :global(.dark) .sixth-view-back-button {
@@ -4310,7 +4321,7 @@ export default function HeroSlider({
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          z-index: 100;
+          z-index: 200;
           overflow: hidden;
           border: solid 2px #1a1a2e;
           opacity: 0.6;
@@ -4320,6 +4331,7 @@ export default function HeroSlider({
           display: flex;
           align-items: center;
           justify-content: center;
+          pointer-events: auto;
         }
 
         :global(.dark) .fifth-view-down-button {
