@@ -373,10 +373,10 @@ export default function HeroSlider({ slides }: Props) {
       tl.to(el, { yPercent: -101, duration: 0.8, ease: 'power2.inOut' }, sliceDelays[i] * delayMultiplier);
     });
 
-    // Slide article text up earlier so it's gone before slices finish
-    tl.to(articleTitle, { yPercent: -110, duration: 0.5, ease: 'power2.in' }, 0);
+    // Slide article text up quickly so it's gone before slices reveal third view
+    tl.to(articleTitle, { yPercent: -110, autoAlpha: 0, duration: 0.25, ease: 'power2.in' }, 0);
     articleParagraphs.forEach((el, i) => {
-      tl.to(el, { yPercent: -110, duration: 0.5, ease: 'power2.in' }, i * 0.03);
+      tl.to(el, { yPercent: -110, autoAlpha: 0, duration: 0.25, ease: 'power2.in' }, i * 0.02);
     });
 
     // Slide third view text up into position (like text wrappers in handleDown)
@@ -439,18 +439,18 @@ export default function HeroSlider({ slides }: Props) {
       );
     });
 
-    // Slide article text back down later (after slices are mostly visible)
+    // Slide article text back down after slices have covered the background
     tl.fromTo(articleTitle,
-      { yPercent: -110 },
-      { yPercent: 0, duration: 0.5, ease: 'power2.out' },
-      0.6
+      { yPercent: -110, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      0.85
     );
 
     articleParagraphs.forEach((el, i) => {
       tl.fromTo(el,
-        { yPercent: -110 },
-        { yPercent: 0, duration: 0.5, ease: 'power2.out' },
-        0.65 + (i * 0.03)
+        { yPercent: -110, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+        0.9 + (i * 0.03)
       );
     });
 
