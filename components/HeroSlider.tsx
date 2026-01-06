@@ -15,6 +15,12 @@ import {
   Shield,
   Award,
   Users,
+  Home,
+  TrendingUp,
+  FileText,
+  Handshake,
+  Building,
+  Globe,
 } from "lucide-react";
 
 type Props = {
@@ -114,6 +120,7 @@ export default function HeroSlider({
   const [showArticle, setShowArticle] = useState(false);
   const [showThirdView, setShowThirdView] = useState(false);
   const [showFourthView, setShowFourthView] = useState(false);
+  const [showFifthView, setShowFifthView] = useState(false);
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
@@ -952,6 +959,120 @@ export default function HeroSlider({
     // Show buttons at the end
     tl.to(thirdBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
     tl.to(thirdDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
+  };
+
+  const handleDownToFifth = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const fourthViewSection = containerRef.current.querySelector('.fourth-view-section');
+    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
+    const fourthBackBtn = containerRef.current.querySelector('.fourth-view-back-button');
+    const fourthDownBtn = containerRef.current.querySelector('.fourth-view-down-button');
+    const fourthLeft = containerRef.current.querySelector('.fourth-view-left');
+    const fourthRight = containerRef.current.querySelector('.fourth-view-right');
+    const fifthTitle = containerRef.current.querySelector('.fifth-view-title');
+    const fifthSubtitle = containerRef.current.querySelector('.fifth-view-subtitle');
+    const fifthServiceCards = containerRef.current.querySelectorAll('.fifth-view-service-card');
+
+    setShowFifthView(true);
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+      },
+    });
+
+    // Fade out buttons first
+    tl.to(fourthDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(fourthBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+
+    // Fade in fifth view section
+    tl.fromTo(fifthViewSection,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      0.1
+    );
+
+    // Slide fourth view content up
+    tl.to(fourthLeft, { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: 'power2.inOut' }, 0.1);
+    tl.to(fourthRight, { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: 'power2.inOut' }, 0.15);
+
+    // Animate fifth view content in
+    tl.fromTo(fifthTitle,
+      { yPercent: 50, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out' },
+      0.3
+    );
+
+    tl.fromTo(fifthSubtitle,
+      { yPercent: 50, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out' },
+      0.4
+    );
+
+    // Animate service cards one by one
+    fifthServiceCards.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: 30, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.4)' },
+        0.5 + (i * 0.1)
+      );
+    });
+
+    // Hide fourth view section at the end
+    tl.set(fourthViewSection, { autoAlpha: 0 });
+  };
+
+  const handleBackToFourth = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const fourthViewSection = containerRef.current.querySelector('.fourth-view-section');
+    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
+    const fourthBackBtn = containerRef.current.querySelector('.fourth-view-back-button');
+    const fourthDownBtn = containerRef.current.querySelector('.fourth-view-down-button');
+    const fourthLeft = containerRef.current.querySelector('.fourth-view-left');
+    const fourthRight = containerRef.current.querySelector('.fourth-view-right');
+    const fifthTitle = containerRef.current.querySelector('.fifth-view-title');
+    const fifthSubtitle = containerRef.current.querySelector('.fifth-view-subtitle');
+    const fifthServiceCards = containerRef.current.querySelectorAll('.fifth-view-service-card');
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+        setShowFifthView(false);
+      },
+    });
+
+    // Show fourth view section
+    tl.set(fourthViewSection, { autoAlpha: 1 });
+
+    // Fade out fifth view section
+    tl.to(fifthViewSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+
+    // Animate fifth view content out
+    tl.to(fifthTitle, { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+    tl.to(fifthSubtitle, { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0.05);
+    fifthServiceCards.forEach((el, i) => {
+      tl.to(el, { yPercent: 30, autoAlpha: 0, duration: 0.3, ease: 'power2.in' }, i * 0.03);
+    });
+
+    // Slide fourth view content back down
+    tl.fromTo(fourthLeft,
+      { yPercent: -100, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
+      0.3
+    );
+    tl.fromTo(fourthRight,
+      { yPercent: -100, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
+      0.35
+    );
+
+    // Show buttons at the end
+    tl.to(fourthBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+    tl.to(fourthDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
   const scrollProperties = (direction: "left" | "right") => {
@@ -2317,33 +2438,45 @@ export default function HeroSlider({
         }
 
         .third-view-down-button {
-          position: absolute;
-          bottom: 15px;
+          position: fixed;
+          bottom: 30px;
           left: 50%;
           transform: translateX(-50%);
-          z-index: 1000;
-          background: rgba(255, 255, 255, 0.9);
-          border: 1px solid #e2e8f0;
+          width: 50px;
+          height: 50px;
           border-radius: 50%;
+          z-index: 100;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
           cursor: pointer;
-          padding: 12px;
-          width: 48px;
-          height: 48px;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.3s;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         :global(.dark) .third-view-down-button {
-          background: rgba(26, 26, 46, 0.9);
-          border-color: #2d2a4a;
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .third-view-down-button svg {
+          transition: all 0.2s ease-in-out;
         }
 
         .third-view-down-button:hover {
-          transform: translateX(-50%) translateY(3px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .third-view-down-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .third-view-down-button:hover svg {
+          transform: translateY(4px);
         }
 
         .third-view-down-button svg path {
@@ -2413,13 +2546,267 @@ export default function HeroSlider({
             font-size: 11px;
           }
         }
+
+        /* Fifth View Section - Our Services */
+        .fifth-view-section {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+          z-index: 90;
+          visibility: hidden;
+          opacity: 0;
+          overflow: hidden;
+        }
+
+        :global(.dark) .fifth-view-section {
+          background: #0c0a1d;
+        }
+
+        .fifth-view-section.active {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .fifth-view-back-button {
+          position: fixed;
+          top: 100px;
+          right: 40px;
+          z-index: 1000;
+          background: #1a1a2e;
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 30px;
+          cursor: pointer;
+          font-family: "Biryani", sans-serif;
+          font-size: 12px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          transition: background 0.3s;
+        }
+
+        :global(.dark) .fifth-view-back-button {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .fifth-view-back-button:hover {
+          background: #2a2a4e;
+        }
+
+        :global(.dark) .fifth-view-back-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .fifth-view-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 80px 40px 40px;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+
+        .fifth-view-header {
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        .fifth-view-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 48px;
+          font-weight: 900;
+          color: #1a1a2e;
+          margin: 0 0 12px 0;
+          line-height: 1.1;
+        }
+
+        :global(.dark) .fifth-view-title {
+          color: white;
+        }
+
+        .fifth-view-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 17px;
+          font-style: italic;
+          color: #64748b;
+          margin: 0;
+          letter-spacing: 1px;
+        }
+
+        :global(.dark) .fifth-view-subtitle {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .fifth-view-services-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          max-width: 1100px;
+          width: 100%;
+        }
+
+        .fifth-view-service-card {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          padding: 28px;
+          text-align: center;
+          transition: all 0.3s;
+        }
+
+        :global(.dark) .fifth-view-service-card {
+          background: #13102b;
+          border-color: #2d2a4a;
+        }
+
+        .fifth-view-service-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        :global(.dark) .fifth-view-service-card:hover {
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .fifth-view-service-icon {
+          width: 56px;
+          height: 56px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          margin: 0 auto 16px;
+        }
+
+        .fifth-view-service-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 8px 0;
+        }
+
+        :global(.dark) .fifth-view-service-title {
+          color: white;
+        }
+
+        .fifth-view-service-desc {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #64748b;
+          margin: 0;
+        }
+
+        :global(.dark) .fifth-view-service-desc {
+          color: #94a3b8;
+        }
+
+        .fourth-view-down-button {
+          position: fixed;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          z-index: 100;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        :global(.dark) .fourth-view-down-button {
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .fourth-view-down-button svg {
+          transition: all 0.2s ease-in-out;
+        }
+
+        .fourth-view-down-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .fourth-view-down-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .fourth-view-down-button:hover svg {
+          transform: translateY(4px);
+        }
+
+        .fourth-view-down-button svg path {
+          fill: #1a1a2e;
+        }
+
+        :global(.dark) .fourth-view-down-button svg path {
+          fill: white;
+        }
+
+        @media screen and (max-width: 1000px) {
+          .fifth-view-content {
+            padding: 80px 20px 20px;
+          }
+
+          .fifth-view-title {
+            font-size: 32px;
+          }
+
+          .fifth-view-subtitle {
+            font-size: 14px;
+          }
+
+          .fifth-view-header {
+            margin-bottom: 24px;
+          }
+
+          .fifth-view-services-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+
+          .fifth-view-service-card {
+            padding: 20px;
+          }
+
+          .fifth-view-service-icon {
+            width: 48px;
+            height: 48px;
+          }
+
+          .fifth-view-service-title {
+            font-size: 16px;
+          }
+
+          .fifth-view-service-desc {
+            font-size: 12px;
+          }
+        }
       `}</style>
 
       <div ref={containerRef} className="wild-slider-container">
         {/* Dividers */}
         <div
           className={`divider divider--vertical ${
-            showFourthView
+            showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2428,7 +2815,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--vertical ${
-            showFourthView
+            showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2437,7 +2824,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--vertical ${
-            showFourthView
+            showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2446,7 +2833,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--horizontal ${
-            showFourthView
+            showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2455,7 +2842,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--horizontal ${
-            showFourthView
+            showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2789,7 +3176,10 @@ export default function HeroSlider({
               height="24"
               viewBox="0 0 50 50"
             >
-              <path d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z" />
+              <path
+                fill="#1a1a2e"
+                d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z"
+              />
             </svg>
           </button>
         </div>
@@ -2894,6 +3284,85 @@ export default function HeroSlider({
             <div className="fourth-view-right">
               <div className="fourth-view-gallery">
                 <AboutUsImageGallery title="" />
+              </div>
+            </div>
+          </div>
+
+          {/* Down arrow to View 5 */}
+          <button className="fourth-view-down-button" onClick={handleDownToFifth}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Fifth View Section - Our Services */}
+        <div className={`fifth-view-section ${showFifthView ? 'active' : ''}`}>
+          <button className="fifth-view-back-button" onClick={handleBackToFourth}>
+            ← Back
+          </button>
+
+          <div className="fifth-view-content">
+            <div className="fifth-view-header">
+              <h1 className="fifth-view-title">Our Services</h1>
+              <p className="fifth-view-subtitle">Comprehensive real estate solutions tailored to your needs</p>
+            </div>
+
+            <div className="fifth-view-services-grid">
+              <div className="fifth-view-service-card">
+                <div className="fifth-view-service-icon">
+                  <Home size={28} />
+                </div>
+                <h3 className="fifth-view-service-title">Property Sales</h3>
+                <p className="fifth-view-service-desc">Expert guidance through the entire buying and selling process, ensuring you get the best value for your investment.</p>
+              </div>
+
+              <div className="fifth-view-service-card">
+                <div className="fifth-view-service-icon">
+                  <Building size={28} />
+                </div>
+                <h3 className="fifth-view-service-title">Property Management</h3>
+                <p className="fifth-view-service-desc">Comprehensive management services for landlords, from tenant screening to maintenance coordination.</p>
+              </div>
+
+              <div className="fifth-view-service-card">
+                <div className="fifth-view-service-icon">
+                  <TrendingUp size={28} />
+                </div>
+                <h3 className="fifth-view-service-title">Investment Advisory</h3>
+                <p className="fifth-view-service-desc">Strategic investment guidance to help you build a profitable real estate portfolio with confidence.</p>
+              </div>
+
+              <div className="fifth-view-service-card">
+                <div className="fifth-view-service-icon">
+                  <Globe size={28} />
+                </div>
+                <h3 className="fifth-view-service-title">International Properties</h3>
+                <p className="fifth-view-service-desc">Access to exclusive properties worldwide, with local expertise in key global markets.</p>
+              </div>
+
+              <div className="fifth-view-service-card">
+                <div className="fifth-view-service-icon">
+                  <FileText size={28} />
+                </div>
+                <h3 className="fifth-view-service-title">Legal Consultation</h3>
+                <p className="fifth-view-service-desc">Navigate complex property laws and regulations with our experienced legal advisory team.</p>
+              </div>
+
+              <div className="fifth-view-service-card">
+                <div className="fifth-view-service-icon">
+                  <Handshake size={28} />
+                </div>
+                <h3 className="fifth-view-service-title">Relocation Services</h3>
+                <p className="fifth-view-service-desc">Seamless relocation support for individuals and families moving to new cities or countries.</p>
               </div>
             </div>
           </div>
