@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import WorldMap from './worldmap';
 import { Property } from '@/types/database';
-import { Bath, BedDouble, Expand, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Bath, BedDouble, Expand, MapPin, ChevronLeft, ChevronRight, Shield, Award, Users } from 'lucide-react';
+import Image from 'next/image';
 
 type Props = {
   slideImages: string[];
@@ -74,6 +75,18 @@ const BG_PATTERNS = [
   [0, 3, 6, 9, 5],         // Pattern 3: left column + center
   [2, 5, 8, 11, 4],        // Pattern 4: right side
   [1, 4, 7, 10, 6],        // Pattern 5: middle column + extras
+];
+
+const GALLERY_IMAGES = [
+  { src: "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=300&h=300&fit=crop", alt: "Office workspace" },
+  { src: "https://images.unsplash.com/photo-1515260268569-9271009adfdb?w=300&h=300&fit=crop", alt: "City skyline" },
+  { src: "https://images.unsplash.com/photo-1506045412240-22980140a405?w=300&h=300&fit=crop", alt: "Tokyo streets" },
+  { src: "https://images.unsplash.com/photo-1514041181368-bca62cceffcd?w=300&h=300&fit=crop", alt: "Car interior" },
+  { src: "https://images.unsplash.com/photo-1445810694374-0a94739e4a03?w=300&h=300&fit=crop", alt: "New York street" },
+  { src: "https://images.unsplash.com/photo-1486334803289-1623f249dd1e?w=300&h=300&fit=crop", alt: "Musician" },
+  { src: "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=300&h=300&fit=crop", alt: "Office workspace 2" },
+  { src: "https://images.unsplash.com/photo-1515260268569-9271009adfdb?w=300&h=300&fit=crop", alt: "City skyline 2" },
+  { src: "https://images.unsplash.com/photo-1506045412240-22980140a405?w=300&h=300&fit=crop", alt: "Tokyo streets 2" },
 ];
 
 export default function HeroSliderMobile({ slideImages, properties = [] }: Props) {
@@ -897,6 +910,229 @@ export default function HeroSliderMobile({ slideImages, properties = [] }: Props
         :global(.dark) .mobile-no-properties {
           color: #94a3b8;
         }
+
+        /* Fourth View Section - About Us */
+        .mobile-fourth-view {
+          position: relative;
+          background: white;
+          padding: 24px 16px;
+          overflow: hidden;
+        }
+
+        :global(.dark) .mobile-fourth-view {
+          background: #0c0a1d;
+        }
+
+        .mobile-fourth-header {
+          margin-bottom: 16px;
+        }
+
+        .mobile-fourth-title {
+          font-family: 'Biryani', sans-serif;
+          font-size: 28px;
+          font-weight: 900;
+          color: #1a1a2e;
+          margin: 0 0 6px 0;
+          line-height: 1.1;
+        }
+
+        :global(.dark) .mobile-fourth-title {
+          color: white;
+        }
+
+        .mobile-fourth-subtitle {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 13px;
+          font-style: italic;
+          color: #64748b;
+          margin: 0;
+        }
+
+        :global(.dark) .mobile-fourth-subtitle {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-fourth-body {
+          margin-bottom: 20px;
+        }
+
+        .mobile-fourth-text {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 14px;
+          line-height: 1.6;
+          color: #475569;
+          margin: 0;
+        }
+
+        :global(.dark) .mobile-fourth-text {
+          color: #94a3b8;
+        }
+
+        .mobile-fourth-values {
+          margin-bottom: 20px;
+        }
+
+        .mobile-fourth-values-title {
+          font-family: 'Biryani', sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 12px 0;
+        }
+
+        :global(.dark) .mobile-fourth-values-title {
+          color: white;
+        }
+
+        .mobile-fourth-values-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .mobile-fourth-value-card {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 12px;
+          background: #f8fafc;
+          border-radius: 8px;
+          border: 1px solid #e2e8f0;
+        }
+
+        :global(.dark) .mobile-fourth-value-card {
+          background: #13102b;
+          border-color: #2d2a4a;
+        }
+
+        .mobile-fourth-value-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          flex-shrink: 0;
+        }
+
+        .mobile-fourth-value-content {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .mobile-fourth-value-title {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 13px;
+          font-weight: 600;
+          color: #1a1a2e;
+          margin: 0 0 2px 0;
+        }
+
+        :global(.dark) .mobile-fourth-value-title {
+          color: white;
+        }
+
+        .mobile-fourth-value-desc {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 11px;
+          color: #64748b;
+          margin: 0;
+          line-height: 1.3;
+        }
+
+        :global(.dark) .mobile-fourth-value-desc {
+          color: #94a3b8;
+        }
+
+        .mobile-fourth-stats {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+
+        .mobile-fourth-stat {
+          text-align: left;
+        }
+
+        .mobile-fourth-stat-number {
+          font-family: 'Biryani', sans-serif;
+          font-size: 20px;
+          font-weight: 900;
+          color: #f59e0b;
+          line-height: 1;
+          margin-bottom: 2px;
+        }
+
+        .mobile-fourth-stat-label {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 9px;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        :global(.dark) .mobile-fourth-stat-label {
+          color: #94a3b8;
+        }
+
+        /* Mobile Gallery - Horizontally Scrollable */
+        .mobile-fourth-gallery {
+          margin: 0 -16px;
+          padding: 0 16px;
+        }
+
+        .mobile-fourth-gallery-title {
+          font-family: 'Biryani', sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 12px 0;
+        }
+
+        :global(.dark) .mobile-fourth-gallery-title {
+          color: white;
+        }
+
+        .mobile-fourth-gallery-scroll {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          margin: 0 -16px;
+          padding: 0 16px;
+        }
+
+        .mobile-fourth-gallery-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
+        .mobile-fourth-gallery-grid {
+          display: flex;
+          gap: 10px;
+          padding-bottom: 4px;
+        }
+
+        .mobile-fourth-gallery-item {
+          flex-shrink: 0;
+          width: 110px;
+          height: 110px;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        :global(.dark) .mobile-fourth-gallery-item {
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-fourth-gallery-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       `}</style>
 
       <div className="mobile-container">
@@ -1094,6 +1330,91 @@ export default function HeroSliderMobile({ slideImages, properties = [] }: Props
                 No properties available at the moment.
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Fourth View Section - About Us */}
+        <section className="mobile-fourth-view">
+          <div className="mobile-fourth-header">
+            <h2 className="mobile-fourth-title">About Us</h2>
+            <p className="mobile-fourth-subtitle">Your trusted partner in global real estate since 2010</p>
+          </div>
+
+          <div className="mobile-fourth-body">
+            <p className="mobile-fourth-text">
+              We are a premier international real estate consultancy dedicated to helping clients find their perfect property anywhere in the world. With over a decade of experience, we&apos;ve built a reputation for excellence, integrity, and personalized service.
+            </p>
+          </div>
+
+          <div className="mobile-fourth-values">
+            <h3 className="mobile-fourth-values-title">Our Core Values</h3>
+            <div className="mobile-fourth-values-grid">
+              <div className="mobile-fourth-value-card">
+                <div className="mobile-fourth-value-icon">
+                  <Shield size={18} />
+                </div>
+                <div className="mobile-fourth-value-content">
+                  <h4 className="mobile-fourth-value-title">Trust & Integrity</h4>
+                  <p className="mobile-fourth-value-desc">Building lasting relationships through honesty and transparency.</p>
+                </div>
+              </div>
+              <div className="mobile-fourth-value-card">
+                <div className="mobile-fourth-value-icon">
+                  <Award size={18} />
+                </div>
+                <div className="mobile-fourth-value-content">
+                  <h4 className="mobile-fourth-value-title">Excellence</h4>
+                  <p className="mobile-fourth-value-desc">Delivering exceptional results and service quality.</p>
+                </div>
+              </div>
+              <div className="mobile-fourth-value-card">
+                <div className="mobile-fourth-value-icon">
+                  <Users size={18} />
+                </div>
+                <div className="mobile-fourth-value-content">
+                  <h4 className="mobile-fourth-value-title">Client First</h4>
+                  <p className="mobile-fourth-value-desc">Your goals are our priority, tailored to your needs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mobile-fourth-stats">
+            <div className="mobile-fourth-stat">
+              <div className="mobile-fourth-stat-number">500+</div>
+              <div className="mobile-fourth-stat-label">Properties Sold</div>
+            </div>
+            <div className="mobile-fourth-stat">
+              <div className="mobile-fourth-stat-number">15+</div>
+              <div className="mobile-fourth-stat-label">Years Experience</div>
+            </div>
+            <div className="mobile-fourth-stat">
+              <div className="mobile-fourth-stat-number">30+</div>
+              <div className="mobile-fourth-stat-label">Countries</div>
+            </div>
+            <div className="mobile-fourth-stat">
+              <div className="mobile-fourth-stat-number">98%</div>
+              <div className="mobile-fourth-stat-label">Client Satisfaction</div>
+            </div>
+          </div>
+
+          <div className="mobile-fourth-gallery">
+            <h3 className="mobile-fourth-gallery-title">Our Journey</h3>
+            <div className="mobile-fourth-gallery-scroll">
+              <div className="mobile-fourth-gallery-grid">
+                {GALLERY_IMAGES.map((image, index) => (
+                  <div key={index} className="mobile-fourth-gallery-item">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={110}
+                      height={110}
+                      unoptimized
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </div>
