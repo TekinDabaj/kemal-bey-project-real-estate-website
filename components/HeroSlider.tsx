@@ -541,8 +541,116 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         @media screen and (max-width: 768px) {
           .wild-slider-container {
-            --container-height: 65vh;
-            --row-height: 21.67vh;
+            position: relative;
+            height: auto;
+            min-height: 100vh;
+            overflow: visible;
+          }
+
+          .hero-container {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+          }
+
+          .slider-container,
+          .slider-container > div:first-child {
+            height: 100%;
+          }
+
+          /* Hide slices on mobile, show single background */
+          .slider-slice {
+            display: none;
+          }
+
+          .slider-slice:first-child {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+
+          .slider-slice:first-child .slider-slice-imageContainer {
+            background-size: cover !important;
+            background-position: center !important;
+          }
+
+          /* Hide dividers on mobile */
+          .divider {
+            display: none;
+          }
+
+          /* Hide navigation CTAs on mobile */
+          .cta {
+            display: none;
+          }
+
+          /* Text wrapper adjustments */
+          .text-wrapper {
+            left: 5%;
+            bottom: 15%;
+            right: 5%;
+          }
+
+          .text-slice {
+            width: 100%;
+          }
+
+          .text-slice:nth-of-type(2),
+          .text-slice:nth-of-type(3) {
+            display: none;
+          }
+
+          .text-slice:nth-of-type(1) .text-main-inner {
+            transform: none;
+          }
+
+          /* Article section mobile */
+          .article-section {
+            position: relative !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            min-height: auto;
+            padding: 40px 0;
+          }
+
+          .article-slices-container {
+            display: none;
+          }
+
+          .article-section .back-button,
+          .article-down-button {
+            display: none;
+          }
+
+          .page-container {
+            padding: 20px;
+            max-width: 100%;
+          }
+
+          /* Third view section mobile */
+          .third-view-section {
+            position: relative !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            min-height: 50vh;
+            padding: 60px 20px;
+            justify-content: center;
+          }
+
+          .third-view-back-button {
+            display: none;
+          }
+
+          .third-view-worldmap-wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0.12;
           }
         }
 
@@ -621,24 +729,17 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         @media screen and (max-width: 768px) {
           .text-main-wrapper {
-            font-size: 42px;
-            line-height: 48px;
-            padding-top: 20px;
-          }
-          .text-wrapper {
-            bottom: 35%;
+            font-size: 32px;
+            line-height: 38px;
+            padding-top: 10px;
           }
         }
 
         @media screen and (max-width: 480px) {
           .text-main-wrapper {
-            font-size: 28px;
-            line-height: 34px;
-            padding-top: 15px;
-          }
-          .text-wrapper {
-            left: 6%;
-            bottom: 30%;
+            font-size: 24px;
+            line-height: 30px;
+            padding-top: 8px;
           }
         }
 
@@ -947,23 +1048,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         @media screen and (max-width: 768px) {
           .page-container {
-            padding: 80px 20px 30px 20px;
-          }
-          .page-container h1 {
-            font-size: 28px;
-            line-height: 34px;
-            margin-bottom: 20px;
-          }
-          .page-container p {
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 16px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .page-container {
-            padding: 70px 16px 20px 16px;
+            padding: 0 20px;
           }
           .page-container h1 {
             font-size: 22px;
@@ -974,6 +1059,22 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
             font-size: 13px;
             line-height: 1.5;
             margin-bottom: 12px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .page-container {
+            padding: 0 16px;
+          }
+          .page-container h1 {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 12px;
+          }
+          .page-container p {
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 10px;
           }
         }
 
@@ -1171,27 +1272,23 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         @media screen and (max-width: 768px) {
           .third-view-title {
-            font-size: 36px;
-            gap: 0 10px;
-          }
-          .third-view-section {
-            padding-bottom: 15vh;
+            font-size: 28px;
+            gap: 0 8px;
+            margin-bottom: 12px;
           }
           .third-view-subtitle {
-            font-size: 18px;
+            font-size: 14px;
           }
         }
 
         @media screen and (max-width: 480px) {
           .third-view-title {
-            font-size: 26px;
-            gap: 0 6px;
-          }
-          .third-view-section {
-            padding-bottom: 12vh;
+            font-size: 22px;
+            gap: 0 5px;
+            margin-bottom: 10px;
           }
           .third-view-subtitle {
-            font-size: 14px;
+            font-size: 12px;
             letter-spacing: 1px;
           }
         }
