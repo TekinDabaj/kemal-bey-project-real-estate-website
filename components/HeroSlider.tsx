@@ -115,11 +115,14 @@ export default function HeroSlider({ slides }: Props) {
     if (isMoving || !containerRef.current) return;
     setIsMoving(true);
 
-    const from = fromRight ? 105 : -105;
+    const from = fromRight ? 100 : -100;
     const to = fromRight ? -100 : 100;
-    const delays = [0, 0.06, 0.12, 0.18];
-    const durationSlide = 0.8;
-    const durationText = 0.8;
+
+    // Same staggered pattern as opening animation
+    const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
+    const delayMultiplier = 0.05;
+    const durationSlide = 1;
+    const durationText = 1;
 
     const slices = containerRef.current.querySelectorAll('.slider-slice');
     const textContainers = containerRef.current.querySelectorAll('.text-container');
@@ -137,7 +140,7 @@ export default function HeroSlider({ slides }: Props) {
       },
     });
 
-    // Animate image slices
+    // Animate image slices - same staggered pattern as opening
     slices.forEach((slice, sliceIndex) => {
       const activeImage = slice.querySelector('.image--active');
       const nextImage = fromRight
@@ -145,16 +148,28 @@ export default function HeroSlider({ slides }: Props) {
         : activeImage?.previousElementSibling || slice.querySelector('.slider-slice-imageContainer:last-child');
 
       if (activeImage && nextImage) {
-        const delayIndex = sliceIndex % 4;
-        tl.to(activeImage, { xPercent: to, duration: durationSlide * 1.1, ease: 'power2.inOut' }, delays[delayIndex])
-          .fromTo(nextImage, { xPercent: from }, { xPercent: 0, duration: durationSlide, ease: 'power2.inOut' }, delays[delayIndex]);
+        const delay = sliceDelays[sliceIndex] * delayMultiplier;
+
+        // Outgoing image slides out
+        tl.to(activeImage, {
+          xPercent: to,
+          duration: durationSlide,
+          ease: 'power2.inOut'
+        }, delay);
+
+        // Incoming image slides in (same pattern as opening)
+        tl.fromTo(nextImage,
+          { xPercent: from },
+          { xPercent: 0, duration: durationSlide, ease: 'power2.inOut' },
+          delay
+        );
 
         activeImage.classList.remove('image--active');
         nextImage.classList.add('image--active');
       }
     });
 
-    // Animate text
+    // Animate text - same style as opening
     const activeText = containerRef.current.querySelector('.text-container.text--active');
     const nextText = fromRight
       ? activeText?.nextElementSibling || textContainers[0]
@@ -164,12 +179,22 @@ export default function HeroSlider({ slides }: Props) {
       const activeWrappers = activeText.querySelectorAll('.text-main-wrapper');
       const nextWrappers = nextText.querySelectorAll('.text-main-wrapper');
 
+      // Animate out current text
       activeWrappers.forEach((wrapper, i) => {
-        tl.to(wrapper, { xPercent: to, duration: durationText, ease: 'power2.inOut' }, delays[i] * 1.2);
+        tl.to(wrapper, {
+          xPercent: to,
+          duration: durationText,
+          ease: 'power2.inOut'
+        }, i * 0.2);
       });
 
+      // Animate in new text (staggered like opening)
       nextWrappers.forEach((wrapper, i) => {
-        tl.fromTo(wrapper, { xPercent: from }, { xPercent: 0, duration: durationText, ease: 'power2.inOut' }, delays[i] * 1.2);
+        tl.fromTo(wrapper,
+          { xPercent: from },
+          { xPercent: 0, duration: durationText, ease: 'power2.inOut' },
+          i * 0.2
+        );
       });
 
       activeText.classList.remove('text--active');
