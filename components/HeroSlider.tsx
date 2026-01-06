@@ -511,6 +511,14 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css?family=Biryani:400,900');
 
+        /* Prevent horizontal scroll on mobile */
+        @media screen and (max-width: 768px) {
+          html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+          }
+        }
+
         .wild-slider-container * {
           margin: 0;
           padding: 0;
@@ -539,37 +547,44 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           opacity: 1;
         }
 
+        /* ========== MOBILE STYLES ========== */
         @media screen and (max-width: 768px) {
           .wild-slider-container {
-            position: relative;
-            height: auto;
-            min-height: 100vh;
-            overflow: visible;
+            position: relative !important;
+            height: auto !important;
+            overflow-x: hidden !important;
           }
 
+          /* Hero section - normal height */
           .hero-container {
-            position: relative;
-            height: 60vh;
-            min-height: 400px;
+            position: relative !important;
+            height: 45vh !important;
+            min-height: 280px !important;
+            max-height: 350px !important;
           }
 
-          .slider-container,
+          .slider-container {
+            height: 100% !important;
+          }
+
           .slider-container > div:first-child {
-            height: 100%;
+            height: 100% !important;
+            display: block !important;
           }
 
-          /* Hide slices on mobile, show single background */
+          /* Single full image on mobile */
           .slider-slice {
-            display: none;
+            display: none !important;
           }
 
           .slider-slice:first-child {
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            float: none !important;
           }
 
           .slider-slice:first-child .slider-slice-imageContainer {
@@ -577,82 +592,122 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
             background-position: center !important;
           }
 
-          /* Hide dividers on mobile */
+          /* Hide grid elements */
           .divider {
-            display: none;
+            display: none !important;
           }
 
-          /* Hide navigation CTAs on mobile */
-          .cta {
-            display: none;
+          /* Hide ALL navigation buttons */
+          .cta,
+          .cta--prev,
+          .cta--next,
+          .cta--down,
+          .back-button,
+          .article-down-button,
+          .third-view-back-button {
+            display: none !important;
           }
 
-          /* Text wrapper adjustments */
+          /* Hero text */
           .text-wrapper {
-            left: 5%;
-            bottom: 15%;
-            right: 5%;
+            left: 16px !important;
+            right: 16px !important;
+            bottom: 20px !important;
           }
 
           .text-slice {
-            width: 100%;
+            width: 100% !important;
+            padding: 5px 0 !important;
           }
 
           .text-slice:nth-of-type(2),
           .text-slice:nth-of-type(3) {
-            display: none;
+            display: none !important;
           }
 
-          .text-slice:nth-of-type(1) .text-main-inner {
-            transform: none;
+          .text-slice:first-child .text-main-inner {
+            transform: none !important;
           }
 
-          /* Article section mobile */
+          .text-main-wrapper {
+            font-size: 22px !important;
+            line-height: 26px !important;
+            padding-top: 0 !important;
+          }
+
+          .text-label-container {
+            display: none !important;
+          }
+
+          /* Article section - always visible */
           .article-section {
             position: relative !important;
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
-            min-height: auto;
-            padding: 40px 0;
+            height: auto !important;
+            background: white !important;
+          }
+
+          :global(.dark) .article-section {
+            background: #0c0a1d !important;
           }
 
           .article-slices-container {
-            display: none;
-          }
-
-          .article-section .back-button,
-          .article-down-button {
-            display: none;
+            display: none !important;
           }
 
           .page-container {
-            padding: 20px;
-            max-width: 100%;
+            padding: 30px 16px !important;
+            max-width: 100% !important;
+            width: 100% !important;
           }
 
-          /* Third view section mobile */
+          .page-container h1 {
+            font-size: 18px !important;
+            line-height: 22px !important;
+            margin-bottom: 12px !important;
+          }
+
+          .page-container p {
+            font-size: 13px !important;
+            line-height: 1.5 !important;
+            margin-bottom: 10px !important;
+          }
+
+          /* Third view - always visible */
           .third-view-section {
             position: relative !important;
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
-            min-height: 50vh;
-            padding: 60px 20px;
-            justify-content: center;
-          }
-
-          .third-view-back-button {
-            display: none;
+            height: auto !important;
+            min-height: 200px !important;
+            padding: 40px 16px !important;
+            justify-content: center !important;
           }
 
           .third-view-worldmap-wrapper {
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            opacity: 0.12;
+            transform: translate(-50%, -50%) scale(0.5) !important;
+            opacity: 0.1 !important;
+          }
+
+          .third-view-title {
+            font-size: 20px !important;
+            gap: 0 5px !important;
+            margin-bottom: 8px !important;
+          }
+
+          .third-view-subtitle {
+            font-size: 12px !important;
+            letter-spacing: 1px !important;
+          }
+
+          .third-view-content {
+            max-width: 100% !important;
           }
         }
+        /* ========== END MOBILE STYLES ========== */
 
         .hero-container {
           position: absolute;
@@ -727,21 +782,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           }
         }
 
-        @media screen and (max-width: 768px) {
-          .text-main-wrapper {
-            font-size: 32px;
-            line-height: 38px;
-            padding-top: 10px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .text-main-wrapper {
-            font-size: 24px;
-            line-height: 30px;
-            padding-top: 8px;
-          }
-        }
 
         .text-label-container {
           position: absolute;
@@ -913,32 +953,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           transform: translateY(4%);
         }
 
-        @media screen and (max-width: 768px) {
-          .cta {
-            width: 40px;
-            height: 40px;
-          }
-          .cta--down {
-            bottom: 15px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .cta {
-            width: 36px;
-            height: 36px;
-          }
-          .cta--prev {
-            left: 10px;
-          }
-          .cta--next {
-            right: 10px;
-          }
-          .cta--down {
-            bottom: 10px;
-          }
-        }
-
         .article-section {
           position: absolute;
           top: 0;
@@ -1046,38 +1060,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           color: #ffffff;
         }
 
-        @media screen and (max-width: 768px) {
-          .page-container {
-            padding: 0 20px;
-          }
-          .page-container h1 {
-            font-size: 22px;
-            line-height: 28px;
-            margin-bottom: 16px;
-          }
-          .page-container p {
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 12px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .page-container {
-            padding: 0 16px;
-          }
-          .page-container h1 {
-            font-size: 18px;
-            line-height: 24px;
-            margin-bottom: 12px;
-          }
-          .page-container p {
-            font-size: 12px;
-            line-height: 1.5;
-            margin-bottom: 10px;
-          }
-        }
-
         .page-container h1 {
           overflow: hidden;
         }
@@ -1130,24 +1112,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           background: rgba(255, 255, 255, 0.2);
         }
 
-        @media screen and (max-width: 768px) {
-          .back-button {
-            top: 80px;
-            right: 20px;
-            padding: 10px 18px;
-            font-size: 10px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .back-button {
-            top: 60px;
-            right: 15px;
-            padding: 8px 14px;
-            font-size: 9px;
-          }
-        }
-
         .article-down-button {
           position: fixed;
           bottom: 30px;
@@ -1192,22 +1156,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         :global(.dark) .article-down-button svg path {
           fill: white;
-        }
-
-        @media screen and (max-width: 768px) {
-          .article-down-button {
-            width: 40px;
-            height: 40px;
-            bottom: 20px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .article-down-button {
-            width: 36px;
-            height: 36px;
-            bottom: 15px;
-          }
         }
 
         .third-view-section {
@@ -1270,29 +1218,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           }
         }
 
-        @media screen and (max-width: 768px) {
-          .third-view-title {
-            font-size: 28px;
-            gap: 0 8px;
-            margin-bottom: 12px;
-          }
-          .third-view-subtitle {
-            font-size: 14px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .third-view-title {
-            font-size: 22px;
-            gap: 0 5px;
-            margin-bottom: 10px;
-          }
-          .third-view-subtitle {
-            font-size: 12px;
-            letter-spacing: 1px;
-          }
-        }
-
         .third-view-subtitle-wrapper {
           overflow: hidden;
         }
@@ -1333,24 +1258,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           background: rgba(255, 255, 255, 0.2);
         }
 
-        @media screen and (max-width: 768px) {
-          .third-view-back-button {
-            top: 80px;
-            right: 20px;
-            padding: 10px 18px;
-            font-size: 10px;
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .third-view-back-button {
-            top: 60px;
-            right: 15px;
-            padding: 8px 14px;
-            font-size: 9px;
-          }
-        }
-
         .third-view-worldmap-wrapper {
           position: absolute;
           top: 35%;
@@ -1369,13 +1276,6 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         @media screen and (max-width: 1000px) {
           .third-view-worldmap-wrapper {
             transform: translate(-50%, -50%) scale(1.3);
-          }
-        }
-
-        @media screen and (max-width: 600px) {
-          .third-view-worldmap-wrapper {
-            transform: translate(-50%, -50%) scale(0.9);
-            top: 30%;
           }
         }
       `}</style>
