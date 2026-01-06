@@ -21,6 +21,12 @@ import {
   Handshake,
   Building,
   Globe,
+  Mail,
+  Phone,
+  Send,
+  Clock,
+  CheckCircle,
+  Loader2,
 } from "lucide-react";
 
 type Props = {
@@ -121,6 +127,17 @@ export default function HeroSlider({
   const [showThirdView, setShowThirdView] = useState(false);
   const [showFourthView, setShowFourthView] = useState(false);
   const [showFifthView, setShowFifthView] = useState(false);
+  const [showSixthView, setShowSixthView] = useState(false);
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactError, setContactError] = useState("");
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
@@ -792,9 +809,9 @@ export default function HeroSlider({
     fourthValueCards.forEach((el, i) => {
       tl.fromTo(
         el,
-        { xPercent: -20, autoAlpha: 0 },
-        { xPercent: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" },
-        0.65 + i * 0.08
+        { y: 40, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
+        0.65 + i * 0.1
       );
     });
 
@@ -914,8 +931,8 @@ export default function HeroSlider({
     fourthValueCards.forEach((el, i) => {
       tl.to(
         el,
-        { xPercent: -20, autoAlpha: 0, duration: 0.25, ease: "power2.in" },
-        i * 0.02
+        { y: 40, autoAlpha: 0, duration: 0.3, ease: "power2.in" },
+        i * 0.03
       );
     });
     fourthStats.forEach((el, i) => {
@@ -973,7 +990,7 @@ export default function HeroSlider({
     const fourthRight = containerRef.current.querySelector('.fourth-view-right');
     const fifthTitle = containerRef.current.querySelector('.fifth-view-title');
     const fifthSubtitle = containerRef.current.querySelector('.fifth-view-subtitle');
-    const fifthServiceCards = containerRef.current.querySelectorAll('.fifth-view-service-card');
+    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
 
     setShowFifthView(true);
 
@@ -1011,12 +1028,12 @@ export default function HeroSlider({
       0.4
     );
 
-    // Animate service cards one by one
-    fifthServiceCards.forEach((el, i) => {
+    // Animate bento cards one by one
+    bentoCards.forEach((el, i) => {
       tl.fromTo(el,
-        { yPercent: 30, autoAlpha: 0 },
-        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.4)' },
-        0.5 + (i * 0.1)
+        { y: 40, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.out' },
+        0.45 + (i * 0.08)
       );
     });
 
@@ -1036,7 +1053,7 @@ export default function HeroSlider({
     const fourthRight = containerRef.current.querySelector('.fourth-view-right');
     const fifthTitle = containerRef.current.querySelector('.fifth-view-title');
     const fifthSubtitle = containerRef.current.querySelector('.fifth-view-subtitle');
-    const fifthServiceCards = containerRef.current.querySelectorAll('.fifth-view-service-card');
+    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -1054,8 +1071,8 @@ export default function HeroSlider({
     // Animate fifth view content out
     tl.to(fifthTitle, { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
     tl.to(fifthSubtitle, { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0.05);
-    fifthServiceCards.forEach((el, i) => {
-      tl.to(el, { yPercent: 30, autoAlpha: 0, duration: 0.3, ease: 'power2.in' }, i * 0.03);
+    bentoCards.forEach((el, i) => {
+      tl.to(el, { y: 40, autoAlpha: 0, duration: 0.3, ease: 'power2.in' }, i * 0.03);
     });
 
     // Slide fourth view content back down
@@ -1073,6 +1090,127 @@ export default function HeroSlider({
     // Show buttons at the end
     tl.to(fourthBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
     tl.to(fourthDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
+  };
+
+  // Navigate from Fifth View to Sixth View (Contact)
+  const handleGoToSixth = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
+    const sixthViewSection = containerRef.current.querySelector('.sixth-view-section');
+    const fifthBackBtn = containerRef.current.querySelector('.fifth-view-back-button');
+    const fifthDownBtn = containerRef.current.querySelector('.fifth-view-down-button');
+    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
+    const contactCard = containerRef.current.querySelector('.contact-main-card');
+
+    setShowSixthView(true);
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+      },
+    });
+
+    // Fade out buttons first
+    tl.to(fifthDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(fifthBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+
+    // Fade in sixth view section
+    tl.fromTo(sixthViewSection,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      0.1
+    );
+
+    // Animate bento cards out
+    bentoCards.forEach((el, i) => {
+      tl.to(el, { yPercent: -30, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, i * 0.05);
+    });
+
+    // Animate contact card in with scale and fade
+    tl.fromTo(contactCard,
+      { scale: 0.9, autoAlpha: 0 },
+      { scale: 1, autoAlpha: 1, duration: 0.6, ease: 'back.out(1.4)' },
+      0.4
+    );
+
+    // Hide fifth view section at the end
+    tl.set(fifthViewSection, { autoAlpha: 0 });
+  };
+
+  // Navigate back from Sixth View to Fifth View
+  const handleBackToFifth = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
+    const sixthViewSection = containerRef.current.querySelector('.sixth-view-section');
+    const fifthBackBtn = containerRef.current.querySelector('.fifth-view-back-button');
+    const fifthDownBtn = containerRef.current.querySelector('.fifth-view-down-button');
+    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
+    const contactCard = containerRef.current.querySelector('.contact-main-card');
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+        setShowSixthView(false);
+      },
+    });
+
+    // Show fifth view section
+    tl.set(fifthViewSection, { autoAlpha: 1 });
+
+    // Fade out sixth view section
+    tl.to(sixthViewSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+
+    // Animate contact card out
+    tl.to(contactCard, { scale: 0.9, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+
+    // Animate bento cards back in
+    bentoCards.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: -30, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.4)' },
+        0.3 + (i * 0.08)
+      );
+    });
+
+    // Show buttons at the end
+    tl.to(fifthBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.5);
+    tl.to(fifthDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+  };
+
+  // Handle contact form submission
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setContactLoading(true);
+    setContactError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactForm),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setContactSuccess(true);
+      setContactForm({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch {
+      setContactError("Failed to send message. Please try again.");
+    } finally {
+      setContactLoading(false);
+    }
   };
 
   const scrollProperties = (direction: "left" | "right") => {
@@ -2333,40 +2471,73 @@ export default function HeroSlider({
         }
 
         .fourth-view-values-grid {
-          display: flex;
-          flex-direction: column;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto;
           gap: 12px;
         }
 
         .fourth-view-value-card {
-          background: #f8fafc;
-          border-radius: 10px;
-          padding: 14px 18px;
+          border-radius: 16px;
+          padding: 18px;
           display: flex;
-          align-items: center;
-          gap: 14px;
-          border: 1px solid #e2e8f0;
+          flex-direction: column;
+          gap: 12px;
+          border: none;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s ease;
         }
 
-        :global(.dark) .fourth-view-value-card {
-          background: #13102b;
-          border-color: #2d2a4a;
+        .fourth-view-value-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+          pointer-events: none;
+        }
+
+        .fourth-view-value-card:hover {
+          transform: scale(1.02);
+        }
+
+        /* Trust - Large card spanning 2 columns */
+        .fourth-view-value-card.value-trust {
+          grid-column: span 2;
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+          flex-direction: row;
+          align-items: center;
+        }
+
+        /* Excellence - Amber */
+        .fourth-view-value-card.value-excellence {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        /* Client First - Emerald */
+        .fourth-view-value-card.value-client {
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         }
 
         .fourth-view-value-icon {
           width: 40px;
           height: 40px;
           flex-shrink: 0;
-          background: #fef3c7;
-          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #f59e0b;
+          color: white;
+          backdrop-filter: blur(10px);
         }
 
-        :global(.dark) .fourth-view-value-icon {
-          background: rgba(245, 158, 11, 0.2);
+        .fourth-view-value-card.value-trust .fourth-view-value-icon {
+          width: 48px;
+          height: 48px;
         }
 
         .fourth-view-value-content {
@@ -2377,24 +2548,20 @@ export default function HeroSlider({
           font-family: "Biryani", sans-serif;
           font-size: 15px;
           font-weight: 700;
-          color: #1a1a2e;
-          margin: 0 0 2px;
+          color: white;
+          margin: 0 0 4px;
         }
 
-        :global(.dark) .fourth-view-value-title {
-          color: white;
+        .fourth-view-value-card.value-trust .fourth-view-value-title {
+          font-size: 17px;
         }
 
         .fourth-view-value-desc {
           font-family: "Montserrat", sans-serif;
           font-size: 12px;
-          color: #64748b;
+          color: rgba(255, 255, 255, 0.85);
           margin: 0;
           line-height: 1.4;
-        }
-
-        :global(.dark) .fourth-view-value-desc {
-          color: #94a3b8;
         }
 
         .fourth-view-gallery {
@@ -2529,17 +2696,36 @@ export default function HeroSlider({
             font-size: 18px;
           }
 
+          .fourth-view-values-grid {
+            grid-template-columns: 1fr;
+          }
+
           .fourth-view-value-card {
-            padding: 10px 14px;
+            padding: 14px;
+          }
+
+          .fourth-view-value-card.value-trust {
+            grid-column: span 1;
+            flex-direction: column;
+            align-items: flex-start;
           }
 
           .fourth-view-value-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
+          }
+
+          .fourth-view-value-card.value-trust .fourth-view-value-icon {
+            width: 40px;
+            height: 40px;
           }
 
           .fourth-view-value-title {
             font-size: 13px;
+          }
+
+          .fourth-view-value-card.value-trust .fourth-view-value-title {
+            font-size: 14px;
           }
 
           .fourth-view-value-desc {
@@ -2547,14 +2733,14 @@ export default function HeroSlider({
           }
         }
 
-        /* Fifth View Section - Our Services */
+        /* Fifth View Section - Our Services (Bento Grid) */
         .fifth-view-section {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: white;
+          background: #f5f5f7;
           z-index: 90;
           visibility: hidden;
           opacity: 0;
@@ -2608,23 +2794,24 @@ export default function HeroSlider({
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 80px 40px 40px;
+          padding: 100px 60px 60px;
           box-sizing: border-box;
           overflow: hidden;
         }
 
         .fifth-view-header {
           text-align: center;
-          margin-bottom: 40px;
+          margin-bottom: 50px;
         }
 
         .fifth-view-title {
           font-family: "Biryani", sans-serif;
-          font-size: 48px;
+          font-size: 52px;
           font-weight: 900;
           color: #1a1a2e;
-          margin: 0 0 12px 0;
-          line-height: 1.1;
+          margin: 0 0 8px 0;
+          line-height: 1;
+          letter-spacing: -1px;
         }
 
         :global(.dark) .fifth-view-title {
@@ -2633,82 +2820,213 @@ export default function HeroSlider({
 
         .fifth-view-subtitle {
           font-family: "Montserrat", sans-serif;
-          font-size: 17px;
-          font-style: italic;
+          font-size: 16px;
           color: #64748b;
           margin: 0;
-          letter-spacing: 1px;
+          font-weight: 400;
         }
 
         :global(.dark) .fifth-view-subtitle {
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.6);
         }
 
-        .fifth-view-services-grid {
+        .bento-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-          max-width: 1100px;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(2, 200px);
+          gap: 16px;
+          max-width: 1200px;
           width: 100%;
         }
 
-        .fifth-view-service-card {
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 16px;
+        .bento-card {
+          border-radius: 24px;
           padding: 28px;
-          text-align: center;
-          transition: all 0.3s;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
         }
 
-        :global(.dark) .fifth-view-service-card {
-          background: #13102b;
-          border-color: #2d2a4a;
+        .bento-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+          pointer-events: none;
         }
 
-        .fifth-view-service-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        .bento-card:hover {
+          transform: scale(1.02);
         }
 
-        :global(.dark) .fifth-view-service-card:hover {
-          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        /* Card 1 - Property Sales (Large, spans 2 cols) */
+        .bento-card-1 {
+          grid-column: span 2;
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
         }
 
-        .fifth-view-service-icon {
-          width: 56px;
-          height: 56px;
-          border-radius: 12px;
+        /* Card 2 - Property Management */
+        .bento-card-2 {
           background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        /* Card 3 - Investment Advisory */
+        .bento-card-3 {
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        }
+
+        /* Card 4 - International Properties */
+        .bento-card-4 {
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        /* Card 5 - Legal Consultation */
+        .bento-card-5 {
+          background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        /* Card 6 - Relocation Services (Large, spans 2 cols) */
+        .bento-card-6 {
+          grid-column: span 2;
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        }
+
+        .bento-card-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.2);
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
-          margin: 0 auto 16px;
+          backdrop-filter: blur(10px);
         }
 
-        .fifth-view-service-title {
+        .bento-card-1 .bento-card-icon,
+        .bento-card-6 .bento-card-icon {
+          width: 56px;
+          height: 56px;
+        }
+
+        .bento-card-content {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .bento-card-title {
           font-family: "Biryani", sans-serif;
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 700;
-          color: #1a1a2e;
-          margin: 0 0 8px 0;
-        }
-
-        :global(.dark) .fifth-view-service-title {
           color: white;
+          margin: 0;
+          line-height: 1.2;
         }
 
-        .fifth-view-service-desc {
+        .bento-card-1 .bento-card-title,
+        .bento-card-6 .bento-card-title {
+          font-size: 26px;
+        }
+
+        .bento-card-desc {
           font-family: "Montserrat", sans-serif;
           font-size: 13px;
-          line-height: 1.6;
-          color: #64748b;
+          line-height: 1.5;
+          color: rgba(255, 255, 255, 0.8);
           margin: 0;
+          max-width: 280px;
         }
 
-        :global(.dark) .fifth-view-service-desc {
-          color: #94a3b8;
+        .bento-card-1 .bento-card-desc,
+        .bento-card-6 .bento-card-desc {
+          font-size: 14px;
+          max-width: 400px;
+        }
+
+        .bento-card-arrow {
+          position: absolute;
+          bottom: 24px;
+          right: 24px;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          opacity: 0;
+          transform: translateX(-10px);
+          transition: all 0.3s;
+        }
+
+        .bento-card:hover .bento-card-arrow {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        /* Responsive - Tablet */
+        @media (max-width: 1024px) {
+          .bento-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 160px);
+          }
+
+          .bento-card-1,
+          .bento-card-6 {
+            grid-column: span 2;
+          }
+
+          .fifth-view-title {
+            font-size: 42px;
+          }
+
+          .fifth-view-content {
+            padding: 100px 30px 30px;
+          }
+        }
+
+        /* Responsive - Mobile */
+        @media (max-width: 640px) {
+          .bento-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(6, 150px);
+            gap: 12px;
+          }
+
+          .bento-card-1,
+          .bento-card-6 {
+            grid-column: span 1;
+          }
+
+          .bento-card-1 .bento-card-title,
+          .bento-card-6 .bento-card-title {
+            font-size: 22px;
+          }
+
+          .bento-card-title {
+            font-size: 18px;
+          }
+
+          .fifth-view-title {
+            font-size: 32px;
+          }
+
+          .fifth-view-header {
+            margin-bottom: 30px;
+          }
+
+          .fifth-view-content {
+            padding: 90px 20px 20px;
+          }
         }
 
         .fourth-view-down-button {
@@ -2800,13 +3118,503 @@ export default function HeroSlider({
             font-size: 12px;
           }
         }
+
+        /* Sixth View Section - Contact */
+        .sixth-view-section {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+          z-index: 95;
+          visibility: hidden;
+          opacity: 0;
+          overflow: hidden;
+        }
+
+        :global(.dark) .sixth-view-section {
+          background: #0c0a1d;
+        }
+
+        .sixth-view-section.active {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .sixth-view-back-button {
+          position: fixed;
+          top: 100px;
+          right: 40px;
+          z-index: 1000;
+          background: #1a1a2e;
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 30px;
+          cursor: pointer;
+          font-family: "Biryani", sans-serif;
+          font-size: 12px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          transition: background 0.3s;
+        }
+
+        :global(.dark) .sixth-view-back-button {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sixth-view-back-button:hover {
+          background: #2a2a4e;
+        }
+
+        :global(.dark) .sixth-view-back-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sixth-view-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 80px 40px;
+          box-sizing: border-box;
+        }
+
+        /* Main Contact Card - Floating above grid */
+        .contact-main-card {
+          position: relative;
+          z-index: 350;
+          width: 100%;
+          max-width: 900px;
+          background: white;
+          border-radius: 32px;
+          overflow: hidden;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        :global(.dark) .contact-main-card {
+          background: #13102b;
+          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Left Side - Info */
+        .contact-left {
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+          padding: 48px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .contact-left::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .contact-left-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 32px;
+          font-weight: 900;
+          color: white;
+          margin: 0 0 8px 0;
+          line-height: 1.1;
+        }
+
+        .contact-left-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.6);
+          margin: 0 0 36px 0;
+        }
+
+        .contact-info-list {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .contact-info-row {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .contact-info-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: rgba(245, 158, 11, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f59e0b;
+          flex-shrink: 0;
+        }
+
+        .contact-info-row span {
+          font-family: "Montserrat", sans-serif;
+          font-size: 15px;
+          color: white;
+        }
+
+        .contact-info-row a {
+          font-family: "Montserrat", sans-serif;
+          font-size: 15px;
+          color: white;
+          text-decoration: none;
+          transition: color 0.3s;
+        }
+
+        .contact-info-row a:hover {
+          color: #f59e0b;
+        }
+
+        /* Right Side - Form */
+        .contact-right {
+          padding: 48px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .contact-form-header {
+          margin-bottom: 24px;
+        }
+
+        .contact-form-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 4px 0;
+        }
+
+        :global(.dark) .contact-form-title {
+          color: white;
+        }
+
+        .contact-form-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          color: #64748b;
+          margin: 0;
+        }
+
+        :global(.dark) .contact-form-subtitle {
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+
+        .form-input,
+        .form-textarea {
+          font-family: "Montserrat", sans-serif;
+          font-size: 14px;
+          padding: 14px 16px;
+          border: 2px solid #e2e8f0;
+          border-radius: 12px;
+          background: #f8fafc;
+          color: #1a1a2e;
+          transition: all 0.3s;
+          outline: none;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        :global(.dark) .form-input,
+        :global(.dark) .form-textarea {
+          background: #1a1735;
+          border-color: #2d2a4a;
+          color: white;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+          border-color: #f59e0b;
+          background: white;
+        }
+
+        :global(.dark) .form-input:focus,
+        :global(.dark) .form-textarea:focus {
+          border-color: #f59e0b;
+          background: #0c0a1d;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+          color: #94a3b8;
+        }
+
+        :global(.dark) .form-input::placeholder,
+        :global(.dark) .form-textarea::placeholder {
+          color: #64748b;
+        }
+
+        .form-textarea {
+          min-height: 100px;
+          resize: none;
+        }
+
+        .form-submit {
+          font-family: "Biryani", sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          padding: 16px 32px;
+          border: none;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 8px;
+        }
+
+        .form-submit:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+        }
+
+        .form-submit:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .form-error {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          color: #ef4444;
+          text-align: center;
+          padding: 12px;
+          background: rgba(239, 68, 68, 0.1);
+          border-radius: 8px;
+        }
+
+        /* Success Message */
+        .contact-success {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 40px 20px;
+        }
+
+        .success-icon {
+          width: 72px;
+          height: 72px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          margin-bottom: 20px;
+        }
+
+        .success-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 22px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 8px 0;
+        }
+
+        :global(.dark) .success-title {
+          color: white;
+        }
+
+        .success-message {
+          font-family: "Montserrat", sans-serif;
+          font-size: 14px;
+          color: #64748b;
+          margin: 0 0 24px 0;
+          line-height: 1.6;
+        }
+
+        :global(.dark) .success-message {
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        .success-btn {
+          font-family: "Biryani", sans-serif;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          padding: 12px 24px;
+          border: 2px solid #1a1a2e;
+          border-radius: 8px;
+          background: transparent;
+          color: #1a1a2e;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        :global(.dark) .success-btn {
+          border-color: rgba(255, 255, 255, 0.3);
+          color: white;
+        }
+
+        .success-btn:hover {
+          background: #1a1a2e;
+          color: white;
+        }
+
+        :global(.dark) .success-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Fifth View Down Button */
+        .fifth-view-down-button {
+          position: fixed;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          z-index: 100;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        :global(.dark) .fifth-view-down-button {
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .fifth-view-down-button svg {
+          width: 52px;
+          height: 52px;
+        }
+
+        .fifth-view-down-button:hover {
+          opacity: 1;
+          border-color: #1a1a2e;
+        }
+
+        :global(.dark) .fifth-view-down-button:hover {
+          border-color: white;
+        }
+
+        .fifth-view-down-button:hover svg {
+          animation: bounce 0.6s infinite;
+        }
+
+        .fifth-view-down-button svg path {
+          fill: #1a1a2e;
+        }
+
+        :global(.dark) .fifth-view-down-button svg path {
+          fill: white;
+        }
+
+        /* Responsive - Tablet */
+        @media (max-width: 900px) {
+          .contact-main-card {
+            grid-template-columns: 1fr;
+            max-width: 500px;
+          }
+
+          .contact-left {
+            padding: 36px 32px;
+          }
+
+          .contact-left-title {
+            font-size: 26px;
+          }
+
+          .contact-info-list {
+            gap: 16px;
+          }
+
+          .contact-right {
+            padding: 36px 32px;
+          }
+
+          .form-row {
+            grid-template-columns: 1fr;
+          }
+
+          .sixth-view-content {
+            padding: 100px 24px 40px;
+            overflow-y: auto;
+          }
+        }
+
+        /* Responsive - Mobile */
+        @media (max-width: 640px) {
+          .sixth-view-content {
+            padding: 90px 16px 30px;
+          }
+
+          .contact-main-card {
+            border-radius: 24px;
+          }
+
+          .contact-left,
+          .contact-right {
+            padding: 28px 24px;
+          }
+
+          .contact-left-title {
+            font-size: 22px;
+          }
+
+          .contact-form-title {
+            font-size: 20px;
+          }
+
+          .sixth-view-back-button {
+            top: 80px;
+            right: 16px;
+            padding: 10px 18px;
+            font-size: 11px;
+          }
+        }
       `}</style>
 
       <div ref={containerRef} className="wild-slider-container">
         {/* Dividers */}
         <div
           className={`divider divider--vertical ${
-            showFifthView || showFourthView
+            showSixthView || showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2815,7 +3623,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--vertical ${
-            showFifthView || showFourthView
+            showSixthView || showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2824,7 +3632,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--vertical ${
-            showFifthView || showFourthView
+            showSixthView || showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2833,7 +3641,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--horizontal ${
-            showFifthView || showFourthView
+            showSixthView || showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -2842,7 +3650,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--horizontal ${
-            showFifthView || showFourthView
+            showSixthView || showFifthView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -3218,9 +4026,9 @@ export default function HeroSlider({
               <div className="fourth-view-values">
                 <h2 className="fourth-view-values-title">Our Core Values</h2>
                 <div className="fourth-view-values-grid">
-                  <div className="fourth-view-value-card">
+                  <div className="fourth-view-value-card value-trust">
                     <div className="fourth-view-value-icon">
-                      <Shield size={20} />
+                      <Shield size={22} />
                     </div>
                     <div className="fourth-view-value-content">
                       <h3 className="fourth-view-value-title">
@@ -3232,7 +4040,7 @@ export default function HeroSlider({
                       </p>
                     </div>
                   </div>
-                  <div className="fourth-view-value-card">
+                  <div className="fourth-view-value-card value-excellence">
                     <div className="fourth-view-value-icon">
                       <Award size={20} />
                     </div>
@@ -3243,7 +4051,7 @@ export default function HeroSlider({
                       </p>
                     </div>
                   </div>
-                  <div className="fourth-view-value-card">
+                  <div className="fourth-view-value-card value-client">
                     <div className="fourth-view-value-icon">
                       <Users size={20} />
                     </div>
@@ -3316,53 +4124,211 @@ export default function HeroSlider({
               <p className="fifth-view-subtitle">Comprehensive real estate solutions tailored to your needs</p>
             </div>
 
-            <div className="fifth-view-services-grid">
-              <div className="fifth-view-service-card">
-                <div className="fifth-view-service-icon">
+            <div className="bento-grid">
+              <div className="bento-card bento-card-1">
+                <div className="bento-card-icon">
                   <Home size={28} />
                 </div>
-                <h3 className="fifth-view-service-title">Property Sales</h3>
-                <p className="fifth-view-service-desc">Expert guidance through the entire buying and selling process, ensuring you get the best value for your investment.</p>
-              </div>
-
-              <div className="fifth-view-service-card">
-                <div className="fifth-view-service-icon">
-                  <Building size={28} />
+                <div className="bento-card-content">
+                  <h3 className="bento-card-title">Property Sales</h3>
+                  <p className="bento-card-desc">Expert guidance through the entire buying and selling process, ensuring you get the best value for your investment.</p>
                 </div>
-                <h3 className="fifth-view-service-title">Property Management</h3>
-                <p className="fifth-view-service-desc">Comprehensive management services for landlords, from tenant screening to maintenance coordination.</p>
+                <div className="bento-card-arrow">→</div>
               </div>
 
-              <div className="fifth-view-service-card">
-                <div className="fifth-view-service-icon">
-                  <TrendingUp size={28} />
+              <div className="bento-card bento-card-2">
+                <div className="bento-card-icon">
+                  <Building size={24} />
                 </div>
-                <h3 className="fifth-view-service-title">Investment Advisory</h3>
-                <p className="fifth-view-service-desc">Strategic investment guidance to help you build a profitable real estate portfolio with confidence.</p>
-              </div>
-
-              <div className="fifth-view-service-card">
-                <div className="fifth-view-service-icon">
-                  <Globe size={28} />
+                <div className="bento-card-content">
+                  <h3 className="bento-card-title">Property Management</h3>
+                  <p className="bento-card-desc">Comprehensive management services for landlords.</p>
                 </div>
-                <h3 className="fifth-view-service-title">International Properties</h3>
-                <p className="fifth-view-service-desc">Access to exclusive properties worldwide, with local expertise in key global markets.</p>
+                <div className="bento-card-arrow">→</div>
               </div>
 
-              <div className="fifth-view-service-card">
-                <div className="fifth-view-service-icon">
-                  <FileText size={28} />
+              <div className="bento-card bento-card-3">
+                <div className="bento-card-icon">
+                  <TrendingUp size={24} />
                 </div>
-                <h3 className="fifth-view-service-title">Legal Consultation</h3>
-                <p className="fifth-view-service-desc">Navigate complex property laws and regulations with our experienced legal advisory team.</p>
+                <div className="bento-card-content">
+                  <h3 className="bento-card-title">Investment Advisory</h3>
+                  <p className="bento-card-desc">Strategic guidance to build your portfolio.</p>
+                </div>
+                <div className="bento-card-arrow">→</div>
               </div>
 
-              <div className="fifth-view-service-card">
-                <div className="fifth-view-service-icon">
+              <div className="bento-card bento-card-4">
+                <div className="bento-card-icon">
+                  <Globe size={24} />
+                </div>
+                <div className="bento-card-content">
+                  <h3 className="bento-card-title">International Properties</h3>
+                  <p className="bento-card-desc">Exclusive properties worldwide.</p>
+                </div>
+                <div className="bento-card-arrow">→</div>
+              </div>
+
+              <div className="bento-card bento-card-5">
+                <div className="bento-card-icon">
+                  <FileText size={24} />
+                </div>
+                <div className="bento-card-content">
+                  <h3 className="bento-card-title">Legal Consultation</h3>
+                  <p className="bento-card-desc">Navigate complex property laws.</p>
+                </div>
+                <div className="bento-card-arrow">→</div>
+              </div>
+
+              <div className="bento-card bento-card-6">
+                <div className="bento-card-icon">
                   <Handshake size={28} />
                 </div>
-                <h3 className="fifth-view-service-title">Relocation Services</h3>
-                <p className="fifth-view-service-desc">Seamless relocation support for individuals and families moving to new cities or countries.</p>
+                <div className="bento-card-content">
+                  <h3 className="bento-card-title">Relocation Services</h3>
+                  <p className="bento-card-desc">Seamless relocation support for individuals and families moving to new cities or countries worldwide.</p>
+                </div>
+                <div className="bento-card-arrow">→</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Down arrow to View 6 */}
+          <button className="fifth-view-down-button" onClick={handleGoToSixth}>
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill="#1a1a2e"
+                d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Sixth View Section - Contact */}
+        <div className={`sixth-view-section ${showSixthView ? 'active' : ''}`}>
+          <button className="sixth-view-back-button" onClick={handleBackToFifth}>
+            ← Back
+          </button>
+
+          <div className="sixth-view-content">
+            <div className="contact-main-card">
+              {/* Left Side - Contact Info */}
+              <div className="contact-left">
+                <h2 className="contact-left-title">Let&apos;s Start a Conversation</h2>
+                <p className="contact-left-subtitle">We&apos;re here to help with your real estate journey</p>
+
+                <div className="contact-info-list">
+                  <div className="contact-info-row">
+                    <div className="contact-info-icon">
+                      <MapPin size={20} />
+                    </div>
+                    <span>123 Premier Avenue, Istanbul</span>
+                  </div>
+                  <div className="contact-info-row">
+                    <div className="contact-info-icon">
+                      <Phone size={20} />
+                    </div>
+                    <a href="tel:+905551234567">+90 555 123 4567</a>
+                  </div>
+                  <div className="contact-info-row">
+                    <div className="contact-info-icon">
+                      <Mail size={20} />
+                    </div>
+                    <a href="mailto:info@premierrealty.com">info@premierrealty.com</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Form */}
+              <div className="contact-right">
+                {contactSuccess ? (
+                  <div className="contact-success">
+                    <div className="success-icon">
+                      <CheckCircle size={36} />
+                    </div>
+                    <h3 className="success-title">Message Sent!</h3>
+                    <p className="success-message">
+                      Thank you for reaching out. We&apos;ll get back to you within 24 hours.
+                    </p>
+                    <button
+                      className="success-btn"
+                      onClick={() => setContactSuccess(false)}
+                    >
+                      Send Another
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="contact-form-header">
+                      <h3 className="contact-form-title">Send a Message</h3>
+                      <p className="contact-form-subtitle">Fill out the form and we&apos;ll respond promptly</p>
+                    </div>
+
+                    <form className="contact-form" onSubmit={handleContactSubmit}>
+                      <div className="form-row">
+                        <input
+                          type="text"
+                          className="form-input"
+                          placeholder="Your Name"
+                          required
+                          value={contactForm.name}
+                          onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                        />
+                        <input
+                          type="email"
+                          className="form-input"
+                          placeholder="Email Address"
+                          required
+                          value={contactForm.email}
+                          onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <input
+                          type="tel"
+                          className="form-input"
+                          placeholder="Phone Number"
+                          required
+                          value={contactForm.phone}
+                          onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          className="form-input"
+                          placeholder="Subject"
+                          required
+                          value={contactForm.subject}
+                          onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
+                        />
+                      </div>
+
+                      <textarea
+                        className="form-textarea"
+                        placeholder="Your message..."
+                        required
+                        value={contactForm.message}
+                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                      />
+
+                      {contactError && <div className="form-error">{contactError}</div>}
+
+                      <button type="submit" className="form-submit" disabled={contactLoading}>
+                        {contactLoading ? (
+                          <>
+                            <Loader2 size={18} className="animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send size={18} />
+                            Send Message
+                          </>
+                        )}
+                      </button>
+                    </form>
+                  </>
+                )}
               </div>
             </div>
           </div>
