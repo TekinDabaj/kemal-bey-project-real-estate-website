@@ -518,11 +518,13 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         }
 
         .wild-slider-container {
+          --container-height: 100vh;
+          --row-height: 33.33vh;
           position: fixed;
           top: 0;
           left: 0;
           width: 100vw;
-          height: 100vh;
+          height: var(--container-height);
           font-family: 'Georgia', serif;
           font-size: 21px;
           line-height: 34px;
@@ -535,6 +537,13 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         .wild-slider-container.initialized {
           opacity: 1;
+        }
+
+        @media screen and (max-width: 768px) {
+          .wild-slider-container {
+            --container-height: 65vh;
+            --row-height: 21.67vh;
+          }
         }
 
         .hero-container {
@@ -557,8 +566,8 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         .divider--vertical:nth-of-type(1) { left: 25%; width: 2px; top: 0; height: 100%; }
         .divider--vertical:nth-of-type(2) { left: 50%; width: 2px; top: 0; height: 100%; }
         .divider--vertical:nth-of-type(3) { left: 75%; width: 2px; top: 0; height: 100%; }
-        .divider--horizontal:nth-of-type(4) { top: 33.33vh; width: 100%; height: 2px; }
-        .divider--horizontal:nth-of-type(5) { top: 66.66vh; width: 100%; height: 2px; }
+        .divider--horizontal:nth-of-type(4) { top: var(--row-height); width: 100%; height: 2px; }
+        .divider--horizontal:nth-of-type(5) { top: calc(var(--row-height) * 2); width: 100%; height: 2px; }
 
         .text-wrapper {
           position: absolute;
@@ -610,10 +619,26 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           }
         }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
           .text-main-wrapper {
-            font-size: 36px;
-            line-height: 42px;
+            font-size: 42px;
+            line-height: 48px;
+            padding-top: 20px;
+          }
+          .text-wrapper {
+            bottom: 35%;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .text-main-wrapper {
+            font-size: 28px;
+            line-height: 34px;
+            padding-top: 15px;
+          }
+          .text-wrapper {
+            left: 6%;
+            bottom: 30%;
           }
         }
 
@@ -695,7 +720,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         .slider-slice {
           position: relative;
           width: 25%;
-          height: 33.33vh;
+          height: var(--row-height);
           float: left;
           overflow: hidden;
         }
@@ -707,7 +732,23 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           position: absolute;
           top: 0;
           left: 0;
+          background-size: 100vw var(--container-height);
+          background-repeat: no-repeat;
         }
+
+        /* Background positions for each slice based on row/col */
+        .slider-slice-imageContainer[data-row="0"][data-col="0"] { background-position: 0vw 0; }
+        .slider-slice-imageContainer[data-row="0"][data-col="1"] { background-position: -25vw 0; }
+        .slider-slice-imageContainer[data-row="0"][data-col="2"] { background-position: -50vw 0; }
+        .slider-slice-imageContainer[data-row="0"][data-col="3"] { background-position: -75vw 0; }
+        .slider-slice-imageContainer[data-row="1"][data-col="0"] { background-position: 0vw calc(var(--row-height) * -1); }
+        .slider-slice-imageContainer[data-row="1"][data-col="1"] { background-position: -25vw calc(var(--row-height) * -1); }
+        .slider-slice-imageContainer[data-row="1"][data-col="2"] { background-position: -50vw calc(var(--row-height) * -1); }
+        .slider-slice-imageContainer[data-row="1"][data-col="3"] { background-position: -75vw calc(var(--row-height) * -1); }
+        .slider-slice-imageContainer[data-row="2"][data-col="0"] { background-position: 0vw calc(var(--row-height) * -2); }
+        .slider-slice-imageContainer[data-row="2"][data-col="1"] { background-position: -25vw calc(var(--row-height) * -2); }
+        .slider-slice-imageContainer[data-row="2"][data-col="2"] { background-position: -50vw calc(var(--row-height) * -2); }
+        .slider-slice-imageContainer[data-row="2"][data-col="3"] { background-position: -75vw calc(var(--row-height) * -2); }
 
         .cta {
           position: absolute;
@@ -771,6 +812,32 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           transform: translateY(4%);
         }
 
+        @media screen and (max-width: 768px) {
+          .cta {
+            width: 40px;
+            height: 40px;
+          }
+          .cta--down {
+            bottom: 15px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .cta {
+            width: 36px;
+            height: 36px;
+          }
+          .cta--prev {
+            left: 10px;
+          }
+          .cta--next {
+            right: 10px;
+          }
+          .cta--down {
+            bottom: 10px;
+          }
+        }
+
         .article-section {
           position: absolute;
           top: 0;
@@ -802,7 +869,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         .article-slice {
           position: absolute;
           width: 25%;
-          height: 33.34%;
+          height: var(--row-height);
           overflow: hidden;
         }
 
@@ -848,14 +915,14 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         .article-slice:nth-child(2) { left: 25%; top: 0; }
         .article-slice:nth-child(3) { left: 50%; top: 0; }
         .article-slice:nth-child(4) { left: 75%; top: 0; }
-        .article-slice:nth-child(5) { left: 0; top: 33.34%; }
-        .article-slice:nth-child(6) { left: 25%; top: 33.34%; }
-        .article-slice:nth-child(7) { left: 50%; top: 33.34%; }
-        .article-slice:nth-child(8) { left: 75%; top: 33.34%; }
-        .article-slice:nth-child(9) { left: 0; top: 66.68%; }
-        .article-slice:nth-child(10) { left: 25%; top: 66.68%; }
-        .article-slice:nth-child(11) { left: 50%; top: 66.68%; }
-        .article-slice:nth-child(12) { left: 75%; top: 66.68%; }
+        .article-slice:nth-child(5) { left: 0; top: var(--row-height); }
+        .article-slice:nth-child(6) { left: 25%; top: var(--row-height); }
+        .article-slice:nth-child(7) { left: 50%; top: var(--row-height); }
+        .article-slice:nth-child(8) { left: 75%; top: var(--row-height); }
+        .article-slice:nth-child(9) { left: 0; top: calc(var(--row-height) * 2); }
+        .article-slice:nth-child(10) { left: 25%; top: calc(var(--row-height) * 2); }
+        .article-slice:nth-child(11) { left: 50%; top: calc(var(--row-height) * 2); }
+        .article-slice:nth-child(12) { left: 75%; top: calc(var(--row-height) * 2); }
 
         .page-container {
           position: relative;
@@ -878,13 +945,35 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           color: #ffffff;
         }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
           .page-container {
-            padding: 100px 20px 40px 20px;
+            padding: 80px 20px 30px 20px;
           }
           .page-container h1 {
-            font-size: 32px;
-            line-height: 38px;
+            font-size: 28px;
+            line-height: 34px;
+            margin-bottom: 20px;
+          }
+          .page-container p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .page-container {
+            padding: 70px 16px 20px 16px;
+          }
+          .page-container h1 {
+            font-size: 22px;
+            line-height: 28px;
+            margin-bottom: 16px;
+          }
+          .page-container p {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 12px;
           }
         }
 
@@ -940,6 +1029,24 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           background: rgba(255, 255, 255, 0.2);
         }
 
+        @media screen and (max-width: 768px) {
+          .back-button {
+            top: 80px;
+            right: 20px;
+            padding: 10px 18px;
+            font-size: 10px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .back-button {
+            top: 60px;
+            right: 15px;
+            padding: 8px 14px;
+            font-size: 9px;
+          }
+        }
+
         .article-down-button {
           position: fixed;
           bottom: 30px;
@@ -984,6 +1091,22 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         :global(.dark) .article-down-button svg path {
           fill: white;
+        }
+
+        @media screen and (max-width: 768px) {
+          .article-down-button {
+            width: 40px;
+            height: 40px;
+            bottom: 20px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .article-down-button {
+            width: 36px;
+            height: 36px;
+            bottom: 15px;
+          }
         }
 
         .third-view-section {
@@ -1046,13 +1169,30 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           }
         }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
           .third-view-title {
-            font-size: 32px;
-            gap: 0 8px;
+            font-size: 36px;
+            gap: 0 10px;
           }
           .third-view-section {
-            padding-bottom: 20vh;
+            padding-bottom: 15vh;
+          }
+          .third-view-subtitle {
+            font-size: 18px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .third-view-title {
+            font-size: 26px;
+            gap: 0 6px;
+          }
+          .third-view-section {
+            padding-bottom: 12vh;
+          }
+          .third-view-subtitle {
+            font-size: 14px;
+            letter-spacing: 1px;
           }
         }
 
@@ -1094,6 +1234,24 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
         .third-view-back-button:hover {
           background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media screen and (max-width: 768px) {
+          .third-view-back-button {
+            top: 80px;
+            right: 20px;
+            padding: 10px 18px;
+            font-size: 10px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          .third-view-back-button {
+            top: 60px;
+            right: 15px;
+            padding: 8px 14px;
+            font-size: 9px;
+          }
         }
 
         .third-view-worldmap-wrapper {
@@ -1202,11 +1360,10 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
                       <div
                         key={imgIndex}
                         className={`slider-slice-imageContainer image--${imgIndex} ${imgIndex === 0 ? 'image--active' : ''}`}
+                        data-row={row}
+                        data-col={col}
                         style={{
                           backgroundImage: `url(${img})`,
-                          backgroundSize: '100vw 100vh',
-                          backgroundPosition: `${-col * 25}vw ${-row * 33.33}vh`,
-                          backgroundRepeat: 'no-repeat'
                         }}
                       />
                     ))}
