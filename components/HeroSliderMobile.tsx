@@ -67,6 +67,7 @@ const THIRD_VIEW_DATA = [
 export default function HeroSliderMobile({ slideImages }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLDivElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -237,6 +238,20 @@ export default function HeroSliderMobile({ slideImages }: Props) {
 
       activeArticle.classList.remove('article--active');
       nextArticle.classList.add('article--active');
+    }
+
+    // Animate divider color
+    if (dividerRef.current) {
+      const nextSlideIndex = fromRight
+        ? (currentSlide + 1) % SLIDE_DATA.length
+        : (currentSlide - 1 + SLIDE_DATA.length) % SLIDE_DATA.length;
+      const nextColor = SLIDE_DATA[nextSlideIndex].color;
+
+      tl.to(dividerRef.current, {
+        backgroundColor: nextColor,
+        duration: 0.5,
+        ease: 'power2.inOut'
+      }, 0.2);
     }
   };
 
@@ -435,6 +450,12 @@ export default function HeroSliderMobile({ slideImages }: Props) {
           right: 10px;
         }
 
+        /* Colored Divider Line */
+        .mobile-divider {
+          width: 100%;
+          height: 4px;
+        }
+
         /* Article Section */
         .mobile-article {
           position: relative;
@@ -613,6 +634,13 @@ export default function HeroSliderMobile({ slideImages }: Props) {
             ))}
           </div>
         </section>
+
+        {/* Colored Divider Line */}
+        <div
+          ref={dividerRef}
+          className="mobile-divider"
+          style={{ backgroundColor: SLIDE_DATA[0].color }}
+        />
 
         {/* Article Section */}
         <section ref={articleRef} className="mobile-article">
