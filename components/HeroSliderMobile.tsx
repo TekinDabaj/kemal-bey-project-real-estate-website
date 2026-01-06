@@ -499,26 +499,18 @@ export default function HeroSliderMobile({ slideImages }: Props) {
         .mobile-article-bg-slice {
           position: relative;
           overflow: hidden;
+          border: 1px solid transparent;
+          transition: border-color 0.6s ease, background-color 0.6s ease;
         }
 
-        .mobile-article-bg-image {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-size: cover;
-          background-position: center;
-          opacity: 0;
-          transition: opacity 0.6s ease;
+        .mobile-article-bg-slice.visible {
+          border-color: rgba(0, 0, 0, 0.08);
+          background-color: rgba(0, 0, 0, 0.02);
         }
 
-        .mobile-article-bg-image.visible {
-          opacity: 0.08;
-        }
-
-        :global(.dark) .mobile-article-bg-image.visible {
-          opacity: 0.12;
+        :global(.dark) .mobile-article-bg-slice.visible {
+          border-color: rgba(255, 255, 255, 0.1);
+          background-color: rgba(255, 255, 255, 0.02);
         }
 
         .mobile-article-container {
@@ -698,15 +690,13 @@ export default function HeroSliderMobile({ slideImages }: Props) {
 
         {/* Article Section */}
         <section ref={articleRef} className="mobile-article">
-          {/* Background Grid */}
+          {/* Background Grid Lines */}
           <div className="mobile-article-bg">
             {Array.from({ length: 12 }).map((_, sliceIndex) => (
-              <div key={sliceIndex} className="mobile-article-bg-slice">
-                <div
-                  className={`mobile-article-bg-image ${visibleSlices.includes(sliceIndex) ? 'visible' : ''}`}
-                  style={{ backgroundImage: `url(${slideImages[currentSlide] || slideImages[0]})` }}
-                />
-              </div>
+              <div
+                key={sliceIndex}
+                className={`mobile-article-bg-slice ${visibleSlices.includes(sliceIndex) ? 'visible' : ''}`}
+              />
             ))}
           </div>
 
