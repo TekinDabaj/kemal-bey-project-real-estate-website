@@ -3,7 +3,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Inter } from 'next/font/google';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import ConditionalFooter from '@/components/ConditionalFooter';
 import { locales, type Locale } from '@/i18n/config';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 
@@ -40,7 +40,7 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             <Header />
             <main className="flex-grow">{children}</main>
-            <Footer />
+            <ConditionalFooter />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
