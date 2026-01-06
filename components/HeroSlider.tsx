@@ -7,6 +7,7 @@ import WorldMap from './worldmap';
 
 type Props = {
   slides: HeroSlide[];
+  propertyImages?: string[];
 };
 
 const SLIDE_DATA = [
@@ -83,7 +84,15 @@ const THIRD_VIEW_DATA = [
   },
 ];
 
-export default function HeroSlider({ slides }: Props) {
+// Map slice indices (0-indexed) to property image indices
+const PROPERTY_SLICE_MAP: Record<number, number> = {
+  2: 0,  // Slice 3 -> property image 0
+  5: 1,  // Slice 6 -> property image 1
+  7: 2,  // Slice 8 -> property image 2
+  10: 3, // Slice 11 -> property image 3
+};
+
+export default function HeroSlider({ slides, propertyImages = [] }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
@@ -240,6 +249,7 @@ export default function HeroSlider({ slides }: Props) {
     const activeLabel = containerRef.current.querySelector('.text--active .text-label');
     const overlay = containerRef.current.querySelector('.slider-overlay');
     const ctas = containerRef.current.querySelectorAll('.cta');
+    const articleSliceInners = containerRef.current.querySelectorAll('.article-slice-inner');
 
     const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
     const delayMultiplier = 0.05;
@@ -262,6 +272,15 @@ export default function HeroSlider({ slides }: Props) {
       { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
       0.1
     );
+
+    // Slide article slices up into view with staggered animation
+    articleSliceInners.forEach((el, i) => {
+      tl.fromTo(el,
+        { yPercent: 101 },
+        { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
+        sliceDelays[i] * delayMultiplier
+      );
+    });
 
     // Slide hero images up with staggered animation
     activeImages.forEach((el, i) => {
@@ -290,6 +309,7 @@ export default function HeroSlider({ slides }: Props) {
     const activeLabel = containerRef.current.querySelector('.text--active .text-label');
     const overlay = containerRef.current.querySelector('.slider-overlay');
     const ctas = containerRef.current.querySelectorAll('.cta');
+    const articleSliceInners = containerRef.current.querySelectorAll('.article-slice-inner');
 
     const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
     const delayMultiplier = 0.05;
@@ -304,6 +324,11 @@ export default function HeroSlider({ slides }: Props) {
     // First, show the hero container
     tl.set(heroContainer, { autoAlpha: 1 });
 
+    // Slide article slices down (out of view) with staggered animation
+    articleSliceInners.forEach((el, i) => {
+      tl.to(el, { yPercent: 101, duration: 0.8, ease: 'power2.inOut' }, sliceDelays[i] * delayMultiplier);
+    });
+
     // Fade out article section
     tl.to(articleSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
 
@@ -312,7 +337,7 @@ export default function HeroSlider({ slides }: Props) {
       tl.fromTo(el,
         { yPercent: -101 },
         { yPercent: 0, duration: 0.8, ease: 'power2.inOut' },
-        0.2 + sliceDelays[i] * delayMultiplier
+        sliceDelays[i] * delayMultiplier
       );
     });
 
@@ -794,6 +819,31 @@ export default function HeroSlider({ slides }: Props) {
           background: #0c0a1d;
         }
 
+        .article-slice-inner.has-image {
+          background-color: transparent;
+          opacity: 1;
+        }
+
+        .article-slice-inner.has-image::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.45);
+          pointer-events: none;
+        }
+
+        :global(.dark) .article-slice-inner.has-image {
+          background-color: transparent;
+          opacity: 0.6;
+        }
+
+        :global(.dark) .article-slice-inner.has-image::after {
+          background: transparent;
+        }
+
         .article-slice:nth-child(1) { left: 0; top: 0; }
         .article-slice:nth-child(2) { left: 25%; top: 0; }
         .article-slice:nth-child(3) { left: 50%; top: 0; }
@@ -821,11 +871,11 @@ export default function HeroSlider({ slides }: Props) {
           line-height: 52px;
           font-weight: 700;
           margin-bottom: 30px;
-          color: #1a1a2e;
+          color: #000000;
         }
 
         :global(.dark) .page-container h1 {
-          color: white;
+          color: #ffffff;
         }
 
         @media screen and (max-width: 600px) {
@@ -845,14 +895,14 @@ export default function HeroSlider({ slides }: Props) {
         .page-container p {
           margin-top: 0;
           margin-bottom: 24px;
-          color: #4a4a5a;
+          color: #000000;
           font-size: 18px;
           line-height: 1.7;
           overflow: hidden;
         }
 
         :global(.dark) .page-container p {
-          color: rgba(255, 255, 255, 0.75);
+          color: #ffffff;
         }
 
         .article-content-wrapper {
@@ -1172,11 +1222,23 @@ export default function HeroSlider({ slides }: Props) {
         <div className={`article-section ${showArticle ? 'active' : ''}`}>
           {/* Article Slices - 12 blocks that animate like hero slices */}
           <div className="article-slices-container">
-            {Array.from({ length: 12 }).map((_, index) => (
-              <div key={index} className="article-slice">
-                <div className="article-slice-inner" />
-              </div>
-            ))}
+            {Array.from({ length: 12 }).map((_, index) => {
+              const propertyImageIndex = PROPERTY_SLICE_MAP[index];
+              const hasPropertyImage = propertyImageIndex !== undefined && propertyImages[propertyImageIndex];
+
+              return (
+                <div key={index} className="article-slice">
+                  <div
+                    className={`article-slice-inner ${hasPropertyImage ? 'has-image' : ''}`}
+                    style={hasPropertyImage ? {
+                      backgroundImage: `url(${bucketUrl}${propertyImages[propertyImageIndex]})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    } : undefined}
+                  />
+                </div>
+              );
+            })}
           </div>
           <button className="back-button" onClick={handleBackToSlider}>
             ← Back
