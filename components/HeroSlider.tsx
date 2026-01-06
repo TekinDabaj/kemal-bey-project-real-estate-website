@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";
 import { HeroSlide, Property } from "@/types/database";
 import WorldMap from "./worldmap";
@@ -138,6 +139,716 @@ export default function HeroSlider({
   const [contactLoading, setContactLoading] = useState(false);
   const [contactSuccess, setContactSuccess] = useState(false);
   const [contactError, setContactError] = useState("");
+
+  // Go to first view with smooth animation
+  const goToFirstView = useCallback(() => {
+    if (!containerRef.current) return;
+
+    // Kill ALL GSAP animations in the container to ensure clean slate
+    gsap.killTweensOf(containerRef.current.querySelectorAll("*"));
+
+    setIsMoving(true);
+
+    // Get all elements
+    const heroContainer = containerRef.current.querySelector(".hero-container");
+    const activeImages = containerRef.current.querySelectorAll(
+      ".slider-slice-imageContainer.image--active"
+    );
+    const activeTextWrappers = containerRef.current.querySelectorAll(
+      ".text-container.text--active .text-main-wrapper"
+    );
+    const activeLabel = containerRef.current.querySelector(
+      ".text--active .text-label"
+    );
+    const overlay = containerRef.current.querySelector(".slider-overlay");
+    const ctas = containerRef.current.querySelectorAll(".cta");
+    const downBtn = containerRef.current.querySelector(".scroll-down-button");
+
+    // Get all view sections and their content elements
+    const articleSection =
+      containerRef.current.querySelector(".article-section");
+    const articleSliceInners = containerRef.current.querySelectorAll(
+      ".article-slice-inner"
+    );
+    const articleTitle =
+      containerRef.current.querySelector(".page-container h1");
+    const articleParagraphs =
+      containerRef.current.querySelectorAll(".page-container p");
+    const articleDownBtn = containerRef.current.querySelector(
+      ".article-down-button"
+    );
+    const articleBackBtn = containerRef.current.querySelector(
+      ".article-section .back-button"
+    );
+
+    // Third view elements
+    const thirdViewSection = containerRef.current.querySelector(
+      ".third-view-section"
+    );
+    const thirdTitleSlices = containerRef.current.querySelectorAll(
+      ".third-view-title-slice span"
+    );
+    const thirdSubtitle = containerRef.current.querySelector(
+      ".third-view-subtitle"
+    );
+    const thirdWorldmap = containerRef.current.querySelector(
+      ".third-view-worldmap-wrapper"
+    );
+    const thirdTop = containerRef.current.querySelector(".third-view-top");
+    const thirdProperties = containerRef.current.querySelector(
+      ".third-view-properties"
+    );
+    const thirdDownBtn = containerRef.current.querySelector(
+      ".third-view-down-button"
+    );
+    const thirdBackBtn = containerRef.current.querySelector(
+      ".third-view-back-button"
+    );
+
+    // Fourth view elements
+    const fourthViewSection = containerRef.current.querySelector(
+      ".fourth-view-section"
+    );
+    const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
+    const fourthRight =
+      containerRef.current.querySelector(".fourth-view-right");
+    const fourthTitle =
+      containerRef.current.querySelector(".fourth-view-title");
+    const fourthSubtitle = containerRef.current.querySelector(
+      ".fourth-view-subtitle"
+    );
+    const fourthParagraphs =
+      containerRef.current.querySelectorAll(".fourth-view-text");
+    const fourthStats =
+      containerRef.current.querySelectorAll(".fourth-view-stat");
+    const fourthValuesTitle = containerRef.current.querySelector(
+      ".fourth-view-values-title"
+    );
+    const fourthValueCards = containerRef.current.querySelectorAll(
+      ".fourth-view-value-card"
+    );
+    const fourthDownBtn = containerRef.current.querySelector(
+      ".fourth-view-down-button"
+    );
+    const fourthBackBtn = containerRef.current.querySelector(
+      ".fourth-view-back-button"
+    );
+
+    // Fifth view elements
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const fifthTitle = containerRef.current.querySelector(".fifth-view-title");
+    const fifthSubtitle = containerRef.current.querySelector(
+      ".fifth-view-subtitle"
+    );
+    const bentoCards = containerRef.current.querySelectorAll(".bento-card");
+    const fifthDownBtn = containerRef.current.querySelector(
+      ".fifth-view-down-button"
+    );
+    const fifthBackBtn = containerRef.current.querySelector(
+      ".fifth-view-back-button"
+    );
+
+    // Sixth view
+    const sixthViewSection = containerRef.current.querySelector(
+      ".sixth-view-section"
+    );
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // Reset all states after animation completes
+        setShowArticle(false);
+        setShowThirdView(false);
+        setShowFourthView(false);
+        setShowFifthView(false);
+        setShowSixthView(false);
+        setContactForm({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+        setContactSuccess(false);
+        setContactError("");
+        setIsMoving(false);
+      },
+    });
+
+    // Fade out ALL views unconditionally (harmless if already hidden)
+    tl.to(
+      sixthViewSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
+    tl.to(
+      fifthViewSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
+    tl.to(
+      fourthViewSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
+    tl.to(
+      thirdViewSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
+    tl.to(
+      articleSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
+
+    // Reset ALL elements to initial state (run after fade out)
+    // Article section elements
+    tl.set(articleSliceInners, { yPercent: 101 }, 0.4);
+    tl.set(articleTitle, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(articleParagraphs, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(articleDownBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(articleBackBtn, { autoAlpha: 1 }, 0.4);
+
+    // Third view elements - reset to initial positions
+    tl.set(thirdTitleSlices, { yPercent: 101 }, 0.4);
+    tl.set(thirdSubtitle, { yPercent: 101 }, 0.4);
+    tl.set(thirdWorldmap, { autoAlpha: 0, scale: 0.8 }, 0.4);
+    // These get hidden by handleDownToFourth - must reset them!
+    tl.set(thirdTop, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(thirdProperties, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(thirdDownBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(thirdBackBtn, { autoAlpha: 1 }, 0.4);
+
+    // Fourth view elements - reset content that gets animated in
+    tl.set(fourthTitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
+    tl.set(fourthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
+    tl.set(fourthParagraphs, { yPercent: 30, autoAlpha: 0 }, 0.4);
+    tl.set(fourthStats, { yPercent: 30, autoAlpha: 0 }, 0.4);
+    tl.set(fourthValuesTitle, { yPercent: 30, autoAlpha: 0 }, 0.4);
+    tl.set(fourthValueCards, { y: 40, autoAlpha: 0 }, 0.4);
+    // These get hidden by handleDownToFifth - must reset them!
+    tl.set(fourthLeft, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(fourthRight, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(fourthDownBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(fourthBackBtn, { autoAlpha: 1 }, 0.4);
+
+    // Fifth view elements - reset content
+    tl.set(fifthTitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
+    tl.set(fifthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
+    tl.set(bentoCards, { y: 40, autoAlpha: 0 }, 0.4);
+    tl.set(fifthDownBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(fifthBackBtn, { autoAlpha: 1 }, 0.4);
+
+    // Show hero container
+    tl.set(heroContainer, { autoAlpha: 1 }, 0.2);
+
+    // Reset and animate hero images back
+    activeImages.forEach((el, i) => {
+      tl.fromTo(
+        el,
+        { yPercent: -101 },
+        { yPercent: 0, duration: 0.6, ease: "power2.out" },
+        0.3 + i * 0.03
+      );
+    });
+
+    // Reset and animate text wrappers back
+    activeTextWrappers.forEach((el, i) => {
+      tl.fromTo(
+        el,
+        { yPercent: -110 },
+        { yPercent: 0, duration: 0.6, ease: "power2.out" },
+        0.35 + i * 0.05
+      );
+    });
+
+    // Fade in label, overlay, ctas, and down button
+    tl.to(
+      activeLabel,
+      { autoAlpha: 1, duration: 0.4, ease: "power2.out" },
+      0.5
+    );
+    tl.to(overlay, { autoAlpha: 0.2, duration: 0.3, ease: "power2.out" }, 0.4);
+    tl.to(ctas, { autoAlpha: 0.5, duration: 0.4, ease: "power2.out" }, 0.6);
+    tl.to(downBtn, { autoAlpha: 1, duration: 0.4, ease: "power2.out" }, 0.6);
+  }, []);
+
+  // Listen for goToFirstView event from Header
+  useEffect(() => {
+    const handleGoToFirstView = () => {
+      if (!containerRef.current) return;
+      goToFirstView();
+    };
+    window.addEventListener("goToFirstView", handleGoToFirstView);
+    return () =>
+      window.removeEventListener("goToFirstView", handleGoToFirstView);
+  }, [goToFirstView]);
+
+  // Go to a specific view (4 = About, 5 = Services, 6 = Contact)
+  const goToView = useCallback((targetView: number) => {
+    if (!containerRef.current || targetView < 1 || targetView > 6) return;
+
+    // Kill ALL GSAP animations in the container
+    gsap.killTweensOf(containerRef.current.querySelectorAll("*"));
+
+    // Reset all view states first
+    setShowArticle(false);
+    setShowThirdView(false);
+    setShowFourthView(false);
+    setShowFifthView(false);
+    setShowSixthView(false);
+    setIsMoving(true);
+
+    // Get all elements needed
+    const heroContainer = containerRef.current.querySelector(".hero-container");
+    const activeImages = containerRef.current.querySelectorAll(
+      ".slider-slice-imageContainer.image--active"
+    );
+    const activeTextWrappers = containerRef.current.querySelectorAll(
+      ".text-container.text--active .text-main-wrapper"
+    );
+    const activeLabel = containerRef.current.querySelector(
+      ".text--active .text-label"
+    );
+    const overlay = containerRef.current.querySelector(".slider-overlay");
+    const ctas = containerRef.current.querySelectorAll(".cta");
+    const downBtn = containerRef.current.querySelector(".scroll-down-button");
+
+    // Article section elements
+    const articleSection =
+      containerRef.current.querySelector(".article-section");
+    const articleSliceInners = containerRef.current.querySelectorAll(
+      ".article-slice-inner"
+    );
+    const articleTitle =
+      containerRef.current.querySelector(".page-container h1");
+    const articleParagraphs =
+      containerRef.current.querySelectorAll(".page-container p");
+    const articleDownBtn = containerRef.current.querySelector(
+      ".article-down-button"
+    );
+    const articleBackBtn = containerRef.current.querySelector(
+      ".article-section .back-button"
+    );
+
+    // Third view elements
+    const thirdViewSection = containerRef.current.querySelector(
+      ".third-view-section"
+    );
+    const thirdTitleSlices = containerRef.current.querySelectorAll(
+      ".third-view-title-slice span"
+    );
+    const thirdSubtitle = containerRef.current.querySelector(
+      ".third-view-subtitle"
+    );
+    const thirdWorldmap = containerRef.current.querySelector(
+      ".third-view-worldmap-wrapper"
+    );
+    const thirdTop = containerRef.current.querySelector(".third-view-top");
+    const thirdProperties = containerRef.current.querySelector(
+      ".third-view-properties"
+    );
+    const thirdDownBtn = containerRef.current.querySelector(
+      ".third-view-down-button"
+    );
+    const thirdBackBtn = containerRef.current.querySelector(
+      ".third-view-back-button"
+    );
+
+    // Fourth view elements
+    const fourthViewSection = containerRef.current.querySelector(
+      ".fourth-view-section"
+    );
+    const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
+    const fourthRight =
+      containerRef.current.querySelector(".fourth-view-right");
+    const fourthTitle =
+      containerRef.current.querySelector(".fourth-view-title");
+    const fourthSubtitle = containerRef.current.querySelector(
+      ".fourth-view-subtitle"
+    );
+    const fourthParagraphs =
+      containerRef.current.querySelectorAll(".fourth-view-text");
+    const fourthStats =
+      containerRef.current.querySelectorAll(".fourth-view-stat");
+    const fourthValuesTitle = containerRef.current.querySelector(
+      ".fourth-view-values-title"
+    );
+    const fourthValueCards = containerRef.current.querySelectorAll(
+      ".fourth-view-value-card"
+    );
+    const fourthDownBtn = containerRef.current.querySelector(
+      ".fourth-view-down-button"
+    );
+    const fourthBackBtn = containerRef.current.querySelector(
+      ".fourth-view-back-button"
+    );
+
+    // Fifth view elements
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const fifthTitle = containerRef.current.querySelector(".fifth-view-title");
+    const fifthSubtitle = containerRef.current.querySelector(
+      ".fifth-view-subtitle"
+    );
+    const bentoCards = containerRef.current.querySelectorAll(".bento-card");
+    const fifthDownBtn = containerRef.current.querySelector(
+      ".fifth-view-down-button"
+    );
+    const fifthBackBtn = containerRef.current.querySelector(
+      ".fifth-view-back-button"
+    );
+
+    // Sixth view elements
+    const sixthViewSection = containerRef.current.querySelector(
+      ".sixth-view-section"
+    );
+    const sixthTitle = containerRef.current.querySelector(".sixth-view-title");
+    const sixthSubtitle = containerRef.current.querySelector(
+      ".sixth-view-subtitle"
+    );
+    const contactFormWrapper = containerRef.current.querySelector(
+      ".contact-form-wrapper"
+    );
+    const contactInfo = containerRef.current.querySelector(".contact-info");
+    const contactCard =
+      containerRef.current.querySelector(".contact-main-card");
+
+    // Stagger delays for slice animations (same pattern as existing)
+    const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
+    const delayMultiplier = 0.05;
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+      },
+    });
+
+    // Phase 0: Instantly hide hero - keep it hidden to avoid flash
+    gsap.set(heroContainer, { autoAlpha: 0 });
+    gsap.set(activeImages, { yPercent: -101 });
+    gsap.set(activeTextWrappers, { yPercent: -110 });
+    gsap.set(activeLabel, { autoAlpha: 0 });
+    gsap.set(overlay, { autoAlpha: 0 });
+    gsap.set(ctas, { autoAlpha: 0 });
+    gsap.set(downBtn, { autoAlpha: 0 });
+
+    // Hide all view sections initially
+    gsap.set(articleSection, { autoAlpha: 0 });
+    gsap.set(thirdViewSection, { autoAlpha: 0 });
+    gsap.set(fourthViewSection, { autoAlpha: 0 });
+    gsap.set(fifthViewSection, { autoAlpha: 0 });
+    gsap.set(sixthViewSection, { autoAlpha: 0 });
+
+    // Set target states for proper rendering (React state)
+    if (targetView >= 2) setShowArticle(true);
+    if (targetView >= 3) setShowThirdView(true);
+    if (targetView >= 4) setShowFourthView(true);
+    if (targetView >= 5) setShowFifthView(true);
+    if (targetView >= 6) setShowSixthView(true);
+
+    // Set up views in their exact "naturally scrolled past" states
+    // This ensures back handlers work correctly
+
+    // Article section (view 2) - set passed state matching handleDownToThird end state
+    if (targetView >= 3) {
+      // Article was scrolled past - section hidden, elements in "scrolled up" state
+      tl.set(articleSection, { autoAlpha: 0 }, 0);
+      tl.set(articleSliceInners, { yPercent: -101 }, 0);
+      tl.set(articleTitle, { yPercent: -110, autoAlpha: 0 }, 0);
+      tl.set(articleParagraphs, { yPercent: -110, autoAlpha: 0 }, 0);
+      tl.set(articleDownBtn, { autoAlpha: 0 }, 0);
+      tl.set(articleBackBtn, { autoAlpha: 0 }, 0);
+    } else if (targetView === 2) {
+      // View 2 is target - animate article in
+      tl.set(articleSection, { autoAlpha: 1 }, 0);
+      tl.set(articleSliceInners, { yPercent: 101 }, 0);
+      tl.set(articleTitle, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(articleParagraphs, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(articleDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(articleBackBtn, { autoAlpha: 1 }, 0);
+      articleSliceInners.forEach((el, i) => {
+        tl.to(
+          el,
+          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
+          0.1 + sliceDelays[i] * delayMultiplier
+        );
+      });
+    }
+
+    // Third view - set passed state matching handleDownToFourth end state
+    if (targetView >= 4) {
+      // Third was scrolled past - section hidden, but title/subtitle/worldmap stay visible!
+      // handleDownToFourth only hides thirdTop and thirdProperties
+      tl.set(thirdViewSection, { autoAlpha: 0 }, 0);
+      // Content stays visible (handleBackToThird expects this)
+      tl.set(thirdTitleSlices, { yPercent: 0 }, 0);
+      tl.set(thirdSubtitle, { yPercent: 0 }, 0);
+      tl.set(thirdWorldmap, { autoAlpha: 1, scale: 1 }, 0);
+      // Only thirdTop and thirdProperties are hidden
+      tl.set(thirdTop, { yPercent: -100, autoAlpha: 0 }, 0);
+      tl.set(thirdProperties, { yPercent: -100, autoAlpha: 0 }, 0);
+      tl.set(thirdDownBtn, { autoAlpha: 0 }, 0);
+      tl.set(thirdBackBtn, { autoAlpha: 0 }, 0);
+    } else if (targetView === 3) {
+      // View 3 is target - show and animate content in
+      tl.set(thirdViewSection, { autoAlpha: 1 }, 0);
+      tl.set(thirdTop, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(thirdProperties, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(thirdDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(thirdBackBtn, { autoAlpha: 1 }, 0);
+      thirdTitleSlices.forEach((el, i) => {
+        tl.fromTo(
+          el,
+          { yPercent: 101 },
+          { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
+          0.1 + i * 0.06
+        );
+      });
+      tl.fromTo(
+        thirdSubtitle,
+        { yPercent: 101 },
+        { yPercent: 0, duration: 0.8, ease: "power2.inOut" },
+        0.3
+      );
+      tl.fromTo(
+        thirdWorldmap,
+        { autoAlpha: 0, scale: 0.8 },
+        { autoAlpha: 1, scale: 1, duration: 1, ease: "power2.out" },
+        0.2
+      );
+    }
+
+    // Fourth view (About) - set passed state matching handleDownToFifth end state
+    if (targetView >= 5) {
+      // Fourth was scrolled past - section hidden, but CONTENT stays visible!
+      // handleDownToFifth only hides left/right, not the text content
+      tl.set(fourthViewSection, { autoAlpha: 0 }, 0);
+      // Content stays visible (handleBackToFourth expects this)
+      tl.set(fourthTitle, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthSubtitle, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthParagraphs, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthStats, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthValuesTitle, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthValueCards, { y: 0, autoAlpha: 1 }, 0);
+      // Only left/right are hidden
+      tl.set(fourthLeft, { yPercent: -100, autoAlpha: 0 }, 0);
+      tl.set(fourthRight, { yPercent: -100, autoAlpha: 0 }, 0);
+      tl.set(fourthDownBtn, { autoAlpha: 0 }, 0);
+      tl.set(fourthBackBtn, { autoAlpha: 0 }, 0);
+    } else if (targetView === 4) {
+      // View 4 is target - show and animate content in
+      tl.set(fourthViewSection, { autoAlpha: 1 }, 0);
+      tl.set(fourthLeft, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthRight, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(fourthBackBtn, { autoAlpha: 1 }, 0);
+      tl.fromTo(
+        fourthTitle,
+        { yPercent: 50, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+        0.1
+      );
+      tl.fromTo(
+        fourthSubtitle,
+        { yPercent: 50, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+        0.2
+      );
+      fourthParagraphs.forEach((el, i) => {
+        tl.fromTo(
+          el,
+          { yPercent: 30, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+          0.3 + i * 0.1
+        );
+      });
+      tl.fromTo(
+        fourthValuesTitle,
+        { yPercent: 30, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" },
+        0.4
+      );
+      fourthValueCards.forEach((el, i) => {
+        tl.fromTo(
+          el,
+          { y: 40, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
+          0.45 + i * 0.1
+        );
+      });
+      fourthStats.forEach((el, i) => {
+        tl.fromTo(
+          el,
+          { yPercent: 30, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" },
+          0.5 + i * 0.08
+        );
+      });
+    }
+
+    // Fifth view (Services) - set passed state matching handleGoToSixth end state
+    if (targetView >= 6) {
+      // Fifth was scrolled past - section hidden, but title/subtitle stay visible!
+      // handleGoToSixth only hides bentoCards
+      tl.set(fifthViewSection, { autoAlpha: 0 }, 0);
+      // Content stays visible (handleBackToFifth expects this)
+      tl.set(fifthTitle, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fifthSubtitle, { yPercent: 0, autoAlpha: 1 }, 0);
+      // Only bentoCards are hidden
+      tl.set(bentoCards, { yPercent: -30, autoAlpha: 0 }, 0);
+      tl.set(fifthDownBtn, { autoAlpha: 0 }, 0);
+      tl.set(fifthBackBtn, { autoAlpha: 0 }, 0);
+    } else if (targetView === 5) {
+      // View 5 is target - show and animate content in
+      tl.set(fifthViewSection, { autoAlpha: 1 }, 0);
+      tl.set(fifthDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(fifthBackBtn, { autoAlpha: 1 }, 0);
+      tl.fromTo(
+        fifthTitle,
+        { yPercent: 50, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+        0.1
+      );
+      tl.fromTo(
+        fifthSubtitle,
+        { yPercent: 50, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+        0.2
+      );
+      bentoCards.forEach((el, i) => {
+        tl.fromTo(
+          el,
+          { y: 40, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
+          0.25 + i * 0.08
+        );
+      });
+    }
+
+    // Sixth view (Contact) - animate in if target
+    if (targetView === 6) {
+      tl.set(sixthViewSection, { autoAlpha: 1 }, 0);
+      // Animate contact card in with scale and fade (like handleGoToSixth)
+      if (contactCard) {
+        tl.fromTo(
+          contactCard,
+          { scale: 0.9, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(1.4)" },
+          0.1
+        );
+      }
+      if (sixthTitle) {
+        tl.fromTo(
+          sixthTitle,
+          { yPercent: 50, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+          0.1
+        );
+      }
+      if (sixthSubtitle) {
+        tl.fromTo(
+          sixthSubtitle,
+          { yPercent: 50, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+          0.2
+        );
+      }
+      if (contactFormWrapper) {
+        tl.fromTo(
+          contactFormWrapper,
+          { y: 40, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+          0.3
+        );
+      }
+      if (contactInfo) {
+        tl.fromTo(
+          contactInfo,
+          { y: 40, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+          0.4
+        );
+      }
+    }
+
+    // Set up views AFTER the target in their initial states
+    // This ensures down handlers work correctly when going to next view
+
+    // If target is less than 5, set up view 5 (Services) initial state
+    if (targetView < 5) {
+      tl.set(fifthViewSection, { autoAlpha: 0 }, 0);
+      tl.set(fifthTitle, { yPercent: 50, autoAlpha: 0 }, 0);
+      tl.set(fifthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0);
+      tl.set(bentoCards, { y: 40, autoAlpha: 0 }, 0);
+      tl.set(fifthDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(fifthBackBtn, { autoAlpha: 1 }, 0);
+    }
+
+    // If target is less than 6, set up view 6 (Contact) initial state
+    if (targetView < 6) {
+      tl.set(sixthViewSection, { autoAlpha: 0 }, 0);
+      if (sixthTitle) tl.set(sixthTitle, { yPercent: 50, autoAlpha: 0 }, 0);
+      if (sixthSubtitle) tl.set(sixthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0);
+      if (contactFormWrapper) tl.set(contactFormWrapper, { y: 40, autoAlpha: 0 }, 0);
+      if (contactInfo) tl.set(contactInfo, { y: 40, autoAlpha: 0 }, 0);
+      if (contactCard) tl.set(contactCard, { scale: 0.9, autoAlpha: 0 }, 0);
+    }
+
+    // If target is less than 4, set up view 4 (About) initial state
+    if (targetView < 4) {
+      tl.set(fourthViewSection, { autoAlpha: 0 }, 0);
+      tl.set(fourthTitle, { yPercent: 50, autoAlpha: 0 }, 0);
+      tl.set(fourthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0);
+      tl.set(fourthParagraphs, { yPercent: 30, autoAlpha: 0 }, 0);
+      tl.set(fourthStats, { yPercent: 30, autoAlpha: 0 }, 0);
+      tl.set(fourthValuesTitle, { yPercent: 30, autoAlpha: 0 }, 0);
+      tl.set(fourthValueCards, { y: 40, autoAlpha: 0 }, 0);
+      tl.set(fourthLeft, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthRight, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(fourthDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(fourthBackBtn, { autoAlpha: 1 }, 0);
+    }
+
+    // If target is less than 3, set up view 3 initial state
+    if (targetView < 3) {
+      tl.set(thirdViewSection, { autoAlpha: 0 }, 0);
+      tl.set(thirdTitleSlices, { yPercent: 101 }, 0);
+      tl.set(thirdSubtitle, { yPercent: 101 }, 0);
+      tl.set(thirdWorldmap, { autoAlpha: 0, scale: 0.8 }, 0);
+      tl.set(thirdTop, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(thirdProperties, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(thirdDownBtn, { autoAlpha: 1 }, 0);
+      tl.set(thirdBackBtn, { autoAlpha: 1 }, 0);
+    }
+  }, []);
+
+  // Listen for goToView event from Header
+  useEffect(() => {
+    const handleGoToView = (e: CustomEvent<{ view: number }>) => {
+      if (!containerRef.current) return;
+      goToView(e.detail.view);
+    };
+    window.addEventListener("goToView", handleGoToView as EventListener);
+    return () =>
+      window.removeEventListener("goToView", handleGoToView as EventListener);
+  }, [goToView]);
+
+  // Check for target view from sessionStorage (when navigating from another page)
+  useEffect(() => {
+    const targetView = sessionStorage.getItem("targetView");
+    if (targetView) {
+      sessionStorage.removeItem("targetView");
+      // Small delay to ensure component is mounted
+      const timer = setTimeout(() => {
+        goToView(parseInt(targetView, 10));
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [goToView]);
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
@@ -982,15 +1693,26 @@ export default function HeroSlider({
     if (!containerRef.current || isMoving) return;
     setIsMoving(true);
 
-    const fourthViewSection = containerRef.current.querySelector('.fourth-view-section');
-    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
-    const fourthBackBtn = containerRef.current.querySelector('.fourth-view-back-button');
-    const fourthDownBtn = containerRef.current.querySelector('.fourth-view-down-button');
-    const fourthLeft = containerRef.current.querySelector('.fourth-view-left');
-    const fourthRight = containerRef.current.querySelector('.fourth-view-right');
-    const fifthTitle = containerRef.current.querySelector('.fifth-view-title');
-    const fifthSubtitle = containerRef.current.querySelector('.fifth-view-subtitle');
-    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
+    const fourthViewSection = containerRef.current.querySelector(
+      ".fourth-view-section"
+    );
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const fourthBackBtn = containerRef.current.querySelector(
+      ".fourth-view-back-button"
+    );
+    const fourthDownBtn = containerRef.current.querySelector(
+      ".fourth-view-down-button"
+    );
+    const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
+    const fourthRight =
+      containerRef.current.querySelector(".fourth-view-right");
+    const fifthTitle = containerRef.current.querySelector(".fifth-view-title");
+    const fifthSubtitle = containerRef.current.querySelector(
+      ".fifth-view-subtitle"
+    );
+    const bentoCards = containerRef.current.querySelectorAll(".bento-card");
 
     setShowFifthView(true);
 
@@ -1005,35 +1727,47 @@ export default function HeroSlider({
     tl.to(fourthBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in fifth view section
-    tl.fromTo(fifthViewSection,
+    tl.fromTo(
+      fifthViewSection,
       { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      { autoAlpha: 1, duration: 0.5, ease: "power2.out" },
       0.1
     );
 
     // Slide fourth view content up
-    tl.to(fourthLeft, { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: 'power2.inOut' }, 0.1);
-    tl.to(fourthRight, { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: 'power2.inOut' }, 0.15);
+    tl.to(
+      fourthLeft,
+      { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
+      0.1
+    );
+    tl.to(
+      fourthRight,
+      { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
+      0.15
+    );
 
     // Animate fifth view content in
-    tl.fromTo(fifthTitle,
+    tl.fromTo(
+      fifthTitle,
       { yPercent: 50, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out' },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
       0.3
     );
 
-    tl.fromTo(fifthSubtitle,
+    tl.fromTo(
+      fifthSubtitle,
       { yPercent: 50, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out' },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
       0.4
     );
 
     // Animate bento cards one by one
     bentoCards.forEach((el, i) => {
-      tl.fromTo(el,
+      tl.fromTo(
+        el,
         { y: 40, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.5, ease: 'power3.out' },
-        0.45 + (i * 0.08)
+        { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
+        0.45 + i * 0.08
       );
     });
 
@@ -1045,15 +1779,26 @@ export default function HeroSlider({
     if (!containerRef.current || isMoving) return;
     setIsMoving(true);
 
-    const fourthViewSection = containerRef.current.querySelector('.fourth-view-section');
-    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
-    const fourthBackBtn = containerRef.current.querySelector('.fourth-view-back-button');
-    const fourthDownBtn = containerRef.current.querySelector('.fourth-view-down-button');
-    const fourthLeft = containerRef.current.querySelector('.fourth-view-left');
-    const fourthRight = containerRef.current.querySelector('.fourth-view-right');
-    const fifthTitle = containerRef.current.querySelector('.fifth-view-title');
-    const fifthSubtitle = containerRef.current.querySelector('.fifth-view-subtitle');
-    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
+    const fourthViewSection = containerRef.current.querySelector(
+      ".fourth-view-section"
+    );
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const fourthBackBtn = containerRef.current.querySelector(
+      ".fourth-view-back-button"
+    );
+    const fourthDownBtn = containerRef.current.querySelector(
+      ".fourth-view-down-button"
+    );
+    const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
+    const fourthRight =
+      containerRef.current.querySelector(".fourth-view-right");
+    const fifthTitle = containerRef.current.querySelector(".fifth-view-title");
+    const fifthSubtitle = containerRef.current.querySelector(
+      ".fifth-view-subtitle"
+    );
+    const bentoCards = containerRef.current.querySelectorAll(".bento-card");
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -1066,24 +1811,42 @@ export default function HeroSlider({
     tl.set(fourthViewSection, { autoAlpha: 1 });
 
     // Fade out fifth view section
-    tl.to(fifthViewSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+    tl.to(
+      fifthViewSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
 
     // Animate fifth view content out
-    tl.to(fifthTitle, { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
-    tl.to(fifthSubtitle, { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0.05);
+    tl.to(
+      fifthTitle,
+      { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
+    tl.to(
+      fifthSubtitle,
+      { yPercent: 50, autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0.05
+    );
     bentoCards.forEach((el, i) => {
-      tl.to(el, { y: 40, autoAlpha: 0, duration: 0.3, ease: 'power2.in' }, i * 0.03);
+      tl.to(
+        el,
+        { y: 40, autoAlpha: 0, duration: 0.3, ease: "power2.in" },
+        i * 0.03
+      );
     });
 
     // Slide fourth view content back down
-    tl.fromTo(fourthLeft,
+    tl.fromTo(
+      fourthLeft,
       { yPercent: -100, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
+      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
       0.3
     );
-    tl.fromTo(fourthRight,
+    tl.fromTo(
+      fourthRight,
       { yPercent: -100, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
+      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
       0.35
     );
 
@@ -1097,12 +1860,21 @@ export default function HeroSlider({
     if (!containerRef.current || isMoving) return;
     setIsMoving(true);
 
-    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
-    const sixthViewSection = containerRef.current.querySelector('.sixth-view-section');
-    const fifthBackBtn = containerRef.current.querySelector('.fifth-view-back-button');
-    const fifthDownBtn = containerRef.current.querySelector('.fifth-view-down-button');
-    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
-    const contactCard = containerRef.current.querySelector('.contact-main-card');
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const sixthViewSection = containerRef.current.querySelector(
+      ".sixth-view-section"
+    );
+    const fifthBackBtn = containerRef.current.querySelector(
+      ".fifth-view-back-button"
+    );
+    const fifthDownBtn = containerRef.current.querySelector(
+      ".fifth-view-down-button"
+    );
+    const bentoCards = containerRef.current.querySelectorAll(".bento-card");
+    const contactCard =
+      containerRef.current.querySelector(".contact-main-card");
 
     setShowSixthView(true);
 
@@ -1117,21 +1889,27 @@ export default function HeroSlider({
     tl.to(fifthBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in sixth view section
-    tl.fromTo(sixthViewSection,
+    tl.fromTo(
+      sixthViewSection,
       { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.5, ease: 'power2.out' },
+      { autoAlpha: 1, duration: 0.5, ease: "power2.out" },
       0.1
     );
 
     // Animate bento cards out
     bentoCards.forEach((el, i) => {
-      tl.to(el, { yPercent: -30, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, i * 0.05);
+      tl.to(
+        el,
+        { yPercent: -30, autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+        i * 0.05
+      );
     });
 
     // Animate contact card in with scale and fade
-    tl.fromTo(contactCard,
+    tl.fromTo(
+      contactCard,
       { scale: 0.9, autoAlpha: 0 },
-      { scale: 1, autoAlpha: 1, duration: 0.6, ease: 'back.out(1.4)' },
+      { scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(1.4)" },
       0.4
     );
 
@@ -1144,12 +1922,21 @@ export default function HeroSlider({
     if (!containerRef.current || isMoving) return;
     setIsMoving(true);
 
-    const fifthViewSection = containerRef.current.querySelector('.fifth-view-section');
-    const sixthViewSection = containerRef.current.querySelector('.sixth-view-section');
-    const fifthBackBtn = containerRef.current.querySelector('.fifth-view-back-button');
-    const fifthDownBtn = containerRef.current.querySelector('.fifth-view-down-button');
-    const bentoCards = containerRef.current.querySelectorAll('.bento-card');
-    const contactCard = containerRef.current.querySelector('.contact-main-card');
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const sixthViewSection = containerRef.current.querySelector(
+      ".sixth-view-section"
+    );
+    const fifthBackBtn = containerRef.current.querySelector(
+      ".fifth-view-back-button"
+    );
+    const fifthDownBtn = containerRef.current.querySelector(
+      ".fifth-view-down-button"
+    );
+    const bentoCards = containerRef.current.querySelectorAll(".bento-card");
+    const contactCard =
+      containerRef.current.querySelector(".contact-main-card");
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -1162,17 +1949,26 @@ export default function HeroSlider({
     tl.set(fifthViewSection, { autoAlpha: 1 });
 
     // Fade out sixth view section
-    tl.to(sixthViewSection, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+    tl.to(
+      sixthViewSection,
+      { autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
 
     // Animate contact card out
-    tl.to(contactCard, { scale: 0.9, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, 0);
+    tl.to(
+      contactCard,
+      { scale: 0.9, autoAlpha: 0, duration: 0.4, ease: "power2.in" },
+      0
+    );
 
     // Animate bento cards back in
     bentoCards.forEach((el, i) => {
-      tl.fromTo(el,
+      tl.fromTo(
+        el,
         { yPercent: -30, autoAlpha: 0 },
-        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.4)' },
-        0.3 + (i * 0.08)
+        { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "back.out(1.4)" },
+        0.3 + i * 0.08
       );
     });
 
@@ -2490,13 +3286,17 @@ export default function HeroSlider({
         }
 
         .fourth-view-value-card::before {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            transparent 50%
+          );
           pointer-events: none;
         }
 
@@ -2852,13 +3652,17 @@ export default function HeroSlider({
         }
 
         .bento-card::before {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          );
           pointer-events: none;
         }
 
@@ -3214,13 +4018,17 @@ export default function HeroSlider({
         }
 
         .contact-left::before {
-          content: '';
+          content: "";
           position: absolute;
           top: -50%;
           right: -50%;
           width: 100%;
           height: 100%;
-          background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+          background: radial-gradient(
+            circle,
+            rgba(245, 158, 11, 0.15) 0%,
+            transparent 70%
+          );
           pointer-events: none;
         }
 
@@ -3897,9 +4705,12 @@ export default function HeroSlider({
                     >
                       <div className="property-card-image">
                         {property.images && property.images.length > 0 ? (
-                          <img
+                          <Image
                             src={`${bucketUrl}${property.images[0]}`}
                             alt={property.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 300px"
+                            style={{ objectFit: "cover" }}
                           />
                         ) : (
                           <div
@@ -4097,7 +4908,10 @@ export default function HeroSlider({
           </div>
 
           {/* Down arrow to View 5 */}
-          <button className="fourth-view-down-button" onClick={handleDownToFifth}>
+          <button
+            className="fourth-view-down-button"
+            onClick={handleDownToFifth}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -4113,15 +4927,20 @@ export default function HeroSlider({
         </div>
 
         {/* Fifth View Section - Our Services */}
-        <div className={`fifth-view-section ${showFifthView ? 'active' : ''}`}>
-          <button className="fifth-view-back-button" onClick={handleBackToFourth}>
+        <div className={`fifth-view-section ${showFifthView ? "active" : ""}`}>
+          <button
+            className="fifth-view-back-button"
+            onClick={handleBackToFourth}
+          >
             ← Back
           </button>
 
           <div className="fifth-view-content">
             <div className="fifth-view-header">
               <h1 className="fifth-view-title">Our Services</h1>
-              <p className="fifth-view-subtitle">Comprehensive real estate solutions tailored to your needs</p>
+              <p className="fifth-view-subtitle">
+                Comprehensive real estate solutions tailored to your needs
+              </p>
             </div>
 
             <div className="bento-grid">
@@ -4131,7 +4950,11 @@ export default function HeroSlider({
                 </div>
                 <div className="bento-card-content">
                   <h3 className="bento-card-title">Property Sales</h3>
-                  <p className="bento-card-desc">Expert guidance through the entire buying and selling process, ensuring you get the best value for your investment.</p>
+                  <p className="bento-card-desc">
+                    Expert guidance through the entire buying and selling
+                    process, ensuring you get the best value for your
+                    investment.
+                  </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
               </div>
@@ -4142,7 +4965,9 @@ export default function HeroSlider({
                 </div>
                 <div className="bento-card-content">
                   <h3 className="bento-card-title">Property Management</h3>
-                  <p className="bento-card-desc">Comprehensive management services for landlords.</p>
+                  <p className="bento-card-desc">
+                    Comprehensive management services for landlords.
+                  </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
               </div>
@@ -4153,7 +4978,9 @@ export default function HeroSlider({
                 </div>
                 <div className="bento-card-content">
                   <h3 className="bento-card-title">Investment Advisory</h3>
-                  <p className="bento-card-desc">Strategic guidance to build your portfolio.</p>
+                  <p className="bento-card-desc">
+                    Strategic guidance to build your portfolio.
+                  </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
               </div>
@@ -4164,7 +4991,9 @@ export default function HeroSlider({
                 </div>
                 <div className="bento-card-content">
                   <h3 className="bento-card-title">International Properties</h3>
-                  <p className="bento-card-desc">Exclusive properties worldwide.</p>
+                  <p className="bento-card-desc">
+                    Exclusive properties worldwide.
+                  </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
               </div>
@@ -4175,7 +5004,9 @@ export default function HeroSlider({
                 </div>
                 <div className="bento-card-content">
                   <h3 className="bento-card-title">Legal Consultation</h3>
-                  <p className="bento-card-desc">Navigate complex property laws.</p>
+                  <p className="bento-card-desc">
+                    Navigate complex property laws.
+                  </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
               </div>
@@ -4186,7 +5017,10 @@ export default function HeroSlider({
                 </div>
                 <div className="bento-card-content">
                   <h3 className="bento-card-title">Relocation Services</h3>
-                  <p className="bento-card-desc">Seamless relocation support for individuals and families moving to new cities or countries worldwide.</p>
+                  <p className="bento-card-desc">
+                    Seamless relocation support for individuals and families
+                    moving to new cities or countries worldwide.
+                  </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
               </div>
@@ -4205,8 +5039,11 @@ export default function HeroSlider({
         </div>
 
         {/* Sixth View Section - Contact */}
-        <div className={`sixth-view-section ${showSixthView ? 'active' : ''}`}>
-          <button className="sixth-view-back-button" onClick={handleBackToFifth}>
+        <div className={`sixth-view-section ${showSixthView ? "active" : ""}`}>
+          <button
+            className="sixth-view-back-button"
+            onClick={handleBackToFifth}
+          >
             ← Back
           </button>
 
@@ -4214,8 +5051,12 @@ export default function HeroSlider({
             <div className="contact-main-card">
               {/* Left Side - Contact Info */}
               <div className="contact-left">
-                <h2 className="contact-left-title">Let&apos;s Start a Conversation</h2>
-                <p className="contact-left-subtitle">We&apos;re here to help with your real estate journey</p>
+                <h2 className="contact-left-title">
+                  Let&apos;s Start a Conversation
+                </h2>
+                <p className="contact-left-subtitle">
+                  We&apos;re here to help with your real estate journey
+                </p>
 
                 <div className="contact-info-list">
                   <div className="contact-info-row">
@@ -4234,7 +5075,9 @@ export default function HeroSlider({
                     <div className="contact-info-icon">
                       <Mail size={20} />
                     </div>
-                    <a href="mailto:info@premierrealty.com">info@premierrealty.com</a>
+                    <a href="mailto:info@premierrealty.com">
+                      info@premierrealty.com
+                    </a>
                   </div>
                 </div>
               </div>
@@ -4248,7 +5091,8 @@ export default function HeroSlider({
                     </div>
                     <h3 className="success-title">Message Sent!</h3>
                     <p className="success-message">
-                      Thank you for reaching out. We&apos;ll get back to you within 24 hours.
+                      Thank you for reaching out. We&apos;ll get back to you
+                      within 24 hours.
                     </p>
                     <button
                       className="success-btn"
@@ -4261,10 +5105,15 @@ export default function HeroSlider({
                   <>
                     <div className="contact-form-header">
                       <h3 className="contact-form-title">Send a Message</h3>
-                      <p className="contact-form-subtitle">Fill out the form and we&apos;ll respond promptly</p>
+                      <p className="contact-form-subtitle">
+                        Fill out the form and we&apos;ll respond promptly
+                      </p>
                     </div>
 
-                    <form className="contact-form" onSubmit={handleContactSubmit}>
+                    <form
+                      className="contact-form"
+                      onSubmit={handleContactSubmit}
+                    >
                       <div className="form-row">
                         <input
                           type="text"
@@ -4272,7 +5121,12 @@ export default function HeroSlider({
                           placeholder="Your Name"
                           required
                           value={contactForm.name}
-                          onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                          onChange={(e) =>
+                            setContactForm({
+                              ...contactForm,
+                              name: e.target.value,
+                            })
+                          }
                         />
                         <input
                           type="email"
@@ -4280,7 +5134,12 @@ export default function HeroSlider({
                           placeholder="Email Address"
                           required
                           value={contactForm.email}
-                          onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                          onChange={(e) =>
+                            setContactForm({
+                              ...contactForm,
+                              email: e.target.value,
+                            })
+                          }
                         />
                       </div>
 
@@ -4291,7 +5150,12 @@ export default function HeroSlider({
                           placeholder="Phone Number"
                           required
                           value={contactForm.phone}
-                          onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                          onChange={(e) =>
+                            setContactForm({
+                              ...contactForm,
+                              phone: e.target.value,
+                            })
+                          }
                         />
                         <input
                           type="text"
@@ -4299,7 +5163,12 @@ export default function HeroSlider({
                           placeholder="Subject"
                           required
                           value={contactForm.subject}
-                          onChange={(e) => setContactForm({ ...contactForm, subject: e.target.value })}
+                          onChange={(e) =>
+                            setContactForm({
+                              ...contactForm,
+                              subject: e.target.value,
+                            })
+                          }
                         />
                       </div>
 
@@ -4308,12 +5177,23 @@ export default function HeroSlider({
                         placeholder="Your message..."
                         required
                         value={contactForm.message}
-                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                        onChange={(e) =>
+                          setContactForm({
+                            ...contactForm,
+                            message: e.target.value,
+                          })
+                        }
                       />
 
-                      {contactError && <div className="form-error">{contactError}</div>}
+                      {contactError && (
+                        <div className="form-error">{contactError}</div>
+                      )}
 
-                      <button type="submit" className="form-submit" disabled={contactLoading}>
+                      <button
+                        type="submit"
+                        className="form-submit"
+                        disabled={contactLoading}
+                      >
                         {contactLoading ? (
                           <>
                             <Loader2 size={18} className="animate-spin" />
