@@ -2,6 +2,15 @@
 
 import { useMemo } from "react";
 
+// Location labels with positions (percentages) and colors
+const LOCATION_LABELS = [
+  { name: 'USA', top: '30%', left: '22%', color: '#169216' },
+  { name: 'UK', top: '18%', left: '47%', color: '#C9567D' },
+  { name: 'Cyprus', top: '35%', left: '57%', color: '#24c7c0' },
+  { name: 'Dubai', top: '40%', left: '68%', color: '#6593d6' },
+  { name: 'Singapore', top: '56%', left: '82%', color: '#1fbeca' },
+];
+
 const continents: Record<string, number[]> = {
   northAmerica: [
     19, 20, 21, 73, 74, 75, 76, 77, 123, 124, 127, 128, 129, 130, 131, 132, 177,
@@ -110,7 +119,7 @@ export default function WorldMap() {
   }, []);
 
   return (
-    <div className="world-map-container">
+    <div className="world-map-wrapper">
       <style jsx global>{`
         @keyframes dot-pulse {
           0% {
@@ -122,7 +131,12 @@ export default function WorldMap() {
         }
       `}</style>
       <style jsx>{`
-        .world-map-container {
+        .world-map-wrapper {
+          position: relative;
+          display: inline-block;
+        }
+
+        .world-map-grid {
           display: inline-grid;
           grid-template-columns: repeat(55, 1fr);
           grid-template-rows: repeat(35, 1fr);
@@ -141,24 +155,106 @@ export default function WorldMap() {
           border-radius: 50%;
           background-color: #333;
         }
-      `}</style>
 
-      {cells.map(({ index, continent, delay, duration }) => {
-        if (!continent) {
-          return <div key={index} className="cell" />;
+        .location-label {
+          position: absolute;
+          padding: 2px 5px;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 6px;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          color: white;
+          border-radius: 2px;
+          white-space: nowrap;
+          transform: translate(-50%, -100%);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+          z-index: 10;
         }
 
-        return (
+        .location-label::after {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border-left: 3px solid transparent;
+          border-right: 3px solid transparent;
+          border-top: 3px solid currentColor;
+        }
+
+        .location-dot {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 11;
+          animation: dot-blink 2s ease-in-out infinite;
+        }
+
+        @keyframes dot-blink {
+          0%, 100% {
+            opacity: 1;
+            box-shadow: 0 0 0 0 currentColor;
+          }
+          50% {
+            opacity: 0.8;
+            box-shadow: 0 0 0 3px currentColor;
+          }
+        }
+      `}</style>
+
+      {/* Location Labels */}
+      {LOCATION_LABELS.map((location, index) => (
+        <div key={location.name}>
+          {/* Label */}
           <div
-            key={index}
-            className="cell dot"
+            className="location-label"
             style={{
-              animation: `dot-pulse ${duration}s linear infinite`,
-              animationDelay: `${delay}s`,
+              top: location.top,
+              left: location.left,
+              backgroundColor: location.color,
+              color: location.color,
+            }}
+          >
+            <span style={{ color: 'white' }}>{location.name}</span>
+          </div>
+          {/* Dot marker */}
+          <div
+            className="location-dot"
+            style={{
+              top: location.top,
+              left: location.left,
+              backgroundColor: location.color,
+              color: `${location.color}40`,
+              animationDelay: `${index * 0.4}s`,
             }}
           />
-        );
-      })}
+        </div>
+      ))}
+
+      {/* Map Grid */}
+      <div className="world-map-grid">
+        {cells.map(({ index, continent, delay, duration }) => {
+          if (!continent) {
+            return <div key={index} className="cell" />;
+          }
+
+          return (
+            <div
+              key={index}
+              className="cell dot"
+              style={{
+                animation: `dot-pulse ${duration}s linear infinite`,
+                animationDelay: `${delay}s`,
+              }}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
