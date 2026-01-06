@@ -64,6 +64,15 @@ const THIRD_VIEW_DATA = [
   { title: 'Make It Happen', subtitle: 'Your dream awaits' },
 ];
 
+// Different patterns for which slices are visible (indices 0-11 for 4x3 grid)
+const BG_PATTERNS = [
+  [0, 2, 5, 7, 10],        // Pattern 1: diagonal-ish
+  [1, 3, 4, 8, 11],        // Pattern 2: alternate
+  [0, 3, 6, 9, 5],         // Pattern 3: left column + center
+  [2, 5, 8, 11, 4],        // Pattern 4: right side
+  [1, 4, 7, 10, 6],        // Pattern 5: middle column + extras
+];
+
 export default function HeroSliderMobile({ slideImages }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLDivElement>(null);
@@ -71,6 +80,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [visibleSlices, setVisibleSlices] = useState<number[]>(BG_PATTERNS[0]);
 
   // Opening animation
   useEffect(() => {
@@ -252,6 +262,9 @@ export default function HeroSliderMobile({ slideImages }: Props) {
         duration: 0.5,
         ease: 'power2.inOut'
       }, 0.2);
+
+      // Update visible slices pattern for article background
+      setVisibleSlices(BG_PATTERNS[nextSlideIndex]);
     }
   };
 
@@ -462,10 +475,50 @@ export default function HeroSliderMobile({ slideImages }: Props) {
           background: white;
           padding: 32px 16px;
           overflow: hidden;
+          min-height: 280px;
         }
 
         :global(.dark) .mobile-article {
           background: #0c0a1d;
+        }
+
+        /* Article Background Grid */
+        .mobile-article-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .mobile-article-bg-slice {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .mobile-article-bg-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          opacity: 0;
+          transition: opacity 0.6s ease;
+        }
+
+        .mobile-article-bg-image.visible {
+          opacity: 0.08;
+        }
+
+        :global(.dark) .mobile-article-bg-image.visible {
+          opacity: 0.12;
         }
 
         .mobile-article-container {
@@ -475,6 +528,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
           right: 16px;
           pointer-events: none;
           opacity: 0;
+          z-index: 1;
         }
 
         .mobile-article-container.article--active {
@@ -644,6 +698,18 @@ export default function HeroSliderMobile({ slideImages }: Props) {
 
         {/* Article Section */}
         <section ref={articleRef} className="mobile-article">
+          {/* Background Grid */}
+          <div className="mobile-article-bg">
+            {Array.from({ length: 12 }).map((_, sliceIndex) => (
+              <div key={sliceIndex} className="mobile-article-bg-slice">
+                <div
+                  className={`mobile-article-bg-image ${visibleSlices.includes(sliceIndex) ? 'visible' : ''}`}
+                  style={{ backgroundImage: `url(${slideImages[currentSlide] || slideImages[0]})` }}
+                />
+              </div>
+            ))}
+          </div>
+
           {ARTICLES.map((article, articleIndex) => (
             <div
               key={articleIndex}
