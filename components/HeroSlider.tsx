@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { HeroSlide } from '@/types/database';
+import WorldMap from './worldmap';
 
 type Props = {
   slides: HeroSlide[];
@@ -343,6 +344,7 @@ export default function HeroSlider({ slides }: Props) {
     const articleParagraphs = containerRef.current.querySelectorAll('.page-container p');
     const thirdTitleSlices = containerRef.current.querySelectorAll('.third-view-title-slice span');
     const thirdSubtitle = containerRef.current.querySelector('.third-view-subtitle');
+    const thirdWorldmap = containerRef.current.querySelector('.third-view-worldmap-wrapper');
 
     // Same staggered pattern as hero slider (12 slices)
     const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
@@ -395,6 +397,13 @@ export default function HeroSlider({ slides }: Props) {
       0.1 + (thirdTitleSlices.length * 0.06)
     );
 
+    // Worldmap fades in with scale
+    tl.fromTo(thirdWorldmap,
+      { autoAlpha: 0, scale: 1.4 },
+      { autoAlpha: 0.5, scale: 1.8, duration: 1.2, ease: 'power2.out' },
+      0.2
+    );
+
     // Hide article section at the end
     tl.set(articleSection, { autoAlpha: 0 });
   };
@@ -412,6 +421,7 @@ export default function HeroSlider({ slides }: Props) {
     const thirdViewSection = containerRef.current.querySelector('.third-view-section');
     const thirdTitleSlices = containerRef.current.querySelectorAll('.third-view-title-slice span');
     const thirdSubtitle = containerRef.current.querySelector('.third-view-subtitle');
+    const thirdWorldmap = containerRef.current.querySelector('.third-view-worldmap-wrapper');
 
     // Same staggered pattern as hero slider
     const sliceDelays = [1, 2, 3, 4, 2, 3, 5, 5, 3, 4, 5, 6];
@@ -459,6 +469,12 @@ export default function HeroSlider({ slides }: Props) {
       tl.to(el, { yPercent: 101, duration: 0.6, ease: 'power2.inOut' }, i * 0.04);
     });
     tl.to(thirdSubtitle, { yPercent: 101, duration: 0.6, ease: 'power2.inOut' }, 0);
+
+    // Worldmap fades out with scale
+    tl.to(thirdWorldmap,
+      { autoAlpha: 0, scale: 1.4, duration: 0.6, ease: 'power2.in' },
+      0
+    );
 
     // Show buttons at the end
     tl.to(articleBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
@@ -1029,6 +1045,34 @@ export default function HeroSlider({ slides }: Props) {
         .third-view-back-button:hover {
           background: rgba(255, 255, 255, 0.2);
         }
+
+        .third-view-worldmap-wrapper {
+          position: absolute;
+          top: 35%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(1.8);
+          opacity: 0.5;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .third-view-content {
+          position: relative;
+          z-index: 2;
+        }
+
+        @media screen and (max-width: 1000px) {
+          .third-view-worldmap-wrapper {
+            transform: translate(-50%, -50%) scale(1.3);
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          .third-view-worldmap-wrapper {
+            transform: translate(-50%, -50%) scale(0.9);
+            top: 30%;
+          }
+        }
       `}</style>
 
       <div ref={containerRef} className={`wild-slider-container ${isInitialized ? 'initialized' : ''}`}>
@@ -1158,6 +1202,9 @@ export default function HeroSlider({ slides }: Props) {
           <button className="third-view-back-button" onClick={handleBackToArticle}>
             ← Back
           </button>
+          <div className="third-view-worldmap-wrapper">
+            <WorldMap />
+          </div>
           <div className="third-view-content">
             <h1 className="third-view-title">
               {THIRD_VIEW_DATA[currentSlide].title.split(' ').map((word, index) => (
