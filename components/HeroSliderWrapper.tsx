@@ -3,16 +3,17 @@
 import { useEffect, useState } from 'react';
 import HeroSlider from './HeroSlider';
 import HeroSliderMobile from './HeroSliderMobile';
-import { HeroSlide } from '@/types/database';
+import { HeroSlide, Property } from '@/types/database';
 
 type Props = {
   slides: HeroSlide[];
   propertyImages: string[];
+  properties?: Property[];
 };
 
 const MOBILE_BREAKPOINT = 768;
 
-export default function HeroSliderWrapper({ slides, propertyImages }: Props) {
+export default function HeroSliderWrapper({ slides, propertyImages, properties = [] }: Props) {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
@@ -56,8 +57,8 @@ export default function HeroSliderWrapper({ slides, propertyImages }: Props) {
   }
 
   if (isMobile) {
-    return <HeroSliderMobile slideImages={slideImages} propertyImages={propertyImages} />;
+    return <HeroSliderMobile slideImages={slideImages} propertyImages={propertyImages} properties={properties} />;
   }
 
-  return <HeroSlider slides={slides} propertyImages={propertyImages} />;
+  return <HeroSlider slides={slides} propertyImages={propertyImages} properties={properties} />;
 }

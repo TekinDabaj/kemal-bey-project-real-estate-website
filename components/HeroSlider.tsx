@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { HeroSlide } from '@/types/database';
+import { HeroSlide, Property } from '@/types/database';
 import WorldMap from './worldmap';
+import { Bath, BedDouble, Expand, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Props = {
   slides: HeroSlide[];
   propertyImages?: string[];
+  properties?: Property[];
 };
 
 const SLIDE_DATA = [
@@ -92,7 +94,8 @@ const PROPERTY_SLICE_MAP: Record<number, number> = {
   10: 3, // Slice 11 -> property image 3
 };
 
-export default function HeroSlider({ slides, propertyImages = [] }: Props) {
+export default function HeroSlider({ slides, propertyImages = [], properties = [] }: Props) {
+  const propertyScrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
@@ -424,8 +427,8 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
     // Worldmap fades in with scale
     tl.fromTo(thirdWorldmap,
-      { autoAlpha: 0, scale: 1.4 },
-      { autoAlpha: 0.5, scale: 1.8, duration: 1.2, ease: 'power2.out' },
+      { autoAlpha: 0, scale: 1.2 },
+      { autoAlpha: 1, scale: 1.5, duration: 1.2, ease: 'power2.out' },
       0.2
     );
 
@@ -497,7 +500,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
 
     // Worldmap fades out with scale
     tl.to(thirdWorldmap,
-      { autoAlpha: 0, scale: 1.4, duration: 0.6, ease: 'power2.in' },
+      { autoAlpha: 0, scale: 1.2, duration: 0.6, ease: 'power2.in' },
       0
     );
 
@@ -505,6 +508,18 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
     tl.to(articleBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
     tl.to(articleDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
+
+  const scrollProperties = (direction: 'left' | 'right') => {
+    if (!propertyScrollRef.current) return;
+    const scrollAmount = 320; // Card width + gap
+    const newScrollLeft = direction === 'left'
+      ? propertyScrollRef.current.scrollLeft - scrollAmount
+      : propertyScrollRef.current.scrollLeft + scrollAmount;
+    propertyScrollRef.current.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+  };
+
+  // Limit properties to 15 for view 3
+  const displayProperties = properties.slice(0, 15);
 
   return (
     <>
@@ -554,6 +569,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           background: rgba(130, 130, 130, 0.2);
           z-index: 300;
           pointer-events: none;
+          transition: mask-image 0.5s ease, -webkit-mask-image 0.5s ease;
         }
 
         .divider--vertical:nth-of-type(1) { left: 25%; width: 2px; top: 0; height: 100%; }
@@ -561,6 +577,18 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         .divider--vertical:nth-of-type(3) { left: 75%; width: 2px; top: 0; height: 100%; }
         .divider--horizontal:nth-of-type(4) { top: var(--row-height); width: 100%; height: 2px; }
         .divider--horizontal:nth-of-type(5) { top: calc(var(--row-height) * 2); width: 100%; height: 2px; }
+
+        /* Fade out dividers at bottom half when third view is active */
+        .divider.fade-bottom {
+          -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 55%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 55%, transparent 100%);
+        }
+
+        .divider--horizontal.fade-bottom {
+          -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+          opacity: 0;
+        }
 
         .text-wrapper {
           position: absolute;
@@ -995,16 +1023,13 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+          background: white;
           z-index: 45;
           visibility: hidden;
           opacity: 0;
           pointer-events: none;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          justify-content: flex-end;
-          padding-bottom: 15vh;
         }
 
         .third-view-section.active {
@@ -1012,26 +1037,56 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         }
 
         :global(.dark) .third-view-section {
-          background: linear-gradient(135deg, #0c0a1d 0%, #1a1a2e 50%, #16213e 100%);
+          background: #0c0a1d;
+        }
+
+        .third-view-top {
+          display: flex;
+          flex: 1;
+          min-height: 0;
+        }
+
+        .third-view-globe-area {
+          width: 50%;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .third-view-worldmap-wrapper {
+          transform: scale(1.5);
+          opacity: 1;
+          pointer-events: none;
+        }
+
+        .third-view-content-area {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 60px 40px 40px 20px;
         }
 
         .third-view-content {
-          text-align: center;
+          text-align: left;
+          color: #1a1a2e;
+        }
+
+        :global(.dark) .third-view-content {
           color: white;
-          max-width: 90%;
         }
 
         .third-view-title {
           font-family: 'Biryani', sans-serif;
-          font-size: 64px;
+          font-size: 56px;
           line-height: 1.1;
           font-weight: 900;
-          margin-bottom: 20px;
-          text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+          margin-bottom: 16px;
           display: flex;
           flex-wrap: wrap;
-          justify-content: center;
-          gap: 0 16px;
+          gap: 0 14px;
         }
 
         .third-view-title-slice {
@@ -1043,28 +1098,21 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           display: inline-block;
         }
 
-        @media screen and (max-width: 1000px) {
-          .third-view-title {
-            font-size: 48px;
-          }
-        }
-
         .third-view-subtitle-wrapper {
           overflow: hidden;
         }
 
         .third-view-subtitle {
           font-family: 'Montserrat', sans-serif;
-          font-size: 24px;
+          font-size: 20px;
           font-style: italic;
-          opacity: 0.85;
+          opacity: 0.7;
           letter-spacing: 2px;
+          color: #64748b;
         }
 
-        @media screen and (max-width: 600px) {
-          .third-view-subtitle {
-            font-size: 18px;
-          }
+        :global(.dark) .third-view-subtitle {
+          color: rgba(255, 255, 255, 0.7);
         }
 
         .third-view-back-button {
@@ -1072,8 +1120,8 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           top: 100px;
           right: 40px;
           z-index: 1000;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          background: #1a1a2e;
+          border: none;
           color: white;
           padding: 12px 24px;
           border-radius: 30px;
@@ -1085,39 +1133,342 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           transition: background 0.3s;
         }
 
+        :global(.dark) .third-view-back-button {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
         .third-view-back-button:hover {
+          background: #2a2a4e;
+        }
+
+        :global(.dark) .third-view-back-button:hover {
           background: rgba(255, 255, 255, 0.2);
         }
 
-        .third-view-worldmap-wrapper {
-          position: absolute;
-          top: 35%;
-          left: 50%;
-          transform: translate(-50%, -50%) scale(1.8);
-          opacity: 0.5;
-          pointer-events: none;
-          z-index: 1;
+        /* Property Cards Section */
+        .third-view-properties {
+          padding: 20px 0 30px;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          background: #f8fafc;
         }
 
-        .third-view-content {
+        :global(.dark) .third-view-properties {
+          border-top-color: #2d2a4a;
+          background: #13102b;
+        }
+
+        .properties-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 40px;
+          margin-bottom: 16px;
+        }
+
+        .properties-title {
+          font-family: 'Biryani', sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0;
+        }
+
+        :global(.dark) .properties-title {
+          color: white;
+        }
+
+        .properties-nav {
+          display: flex;
+          gap: 8px;
+        }
+
+        .properties-nav-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 1px solid #e2e8f0;
+          background: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+          color: #64748b;
+        }
+
+        :global(.dark) .properties-nav-btn {
+          border-color: #2d2a4a;
+          background: #1a1735;
+          color: #94a3b8;
+        }
+
+        .properties-nav-btn:hover {
+          background: #f1f5f9;
+          border-color: #cbd5e1;
+          color: #1a1a2e;
+        }
+
+        :global(.dark) .properties-nav-btn:hover {
+          background: #2d2a4a;
+          border-color: #3d3a5a;
+          color: white;
+        }
+
+        .properties-scroll-container {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0 40px;
+        }
+
+        .properties-scroll-container::-webkit-scrollbar {
+          display: none;
+        }
+
+        .properties-grid {
+          display: flex;
+          gap: 16px;
+          padding-bottom: 8px;
+        }
+
+        .property-card {
+          flex-shrink: 0;
+          width: 340px;
+          background: white;
+          border-radius: 8px;
+          overflow: hidden;
+          border: 1px solid #f1f5f9;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          transition: all 0.2s;
+          text-decoration: none;
+          color: inherit;
+          display: block;
+          font-family: 'Montserrat', sans-serif;
+        }
+
+        :global(.dark) .property-card {
+          background: #13102b;
+          border-color: #2d2a4a;
+        }
+
+        .property-card:hover {
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        :global(.dark) .property-card:hover {
+          box-shadow: 0 4px 6px -1px rgba(128, 90, 213, 0.2);
+        }
+
+        .property-card-image {
           position: relative;
-          z-index: 2;
+          aspect-ratio: 16/10;
+          background: #e2e8f0;
+          overflow: hidden;
+        }
+
+        :global(.dark) .property-card-image {
+          background: #1a1735;
+        }
+
+        .property-card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s;
+        }
+
+        .property-card:hover .property-card-image img {
+          transform: scale(1.05);
+        }
+
+        .property-card-badge {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: 500;
+          background: #f59e0b;
+          color: #0f172a;
+        }
+
+        .property-card-price {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+          padding: 20px 12px 8px;
+        }
+
+        .property-card-price p {
+          font-size: 18px;
+          font-weight: 700;
+          color: white;
+          margin: 0;
+        }
+
+        .property-card-price span {
+          font-size: 14px;
+          font-weight: 400;
+          opacity: 0.8;
+        }
+
+        .property-card-content {
+          padding: 16px;
+        }
+
+        .property-card-title {
+          font-family: inherit;
+          font-size: 16px;
+          font-weight: 600;
+          color: #0f172a;
+          margin: 0 0 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          transition: color 0.2s;
+        }
+
+        :global(.dark) .property-card-title {
+          color: white;
+        }
+
+        .property-card:hover .property-card-title {
+          color: #d97706;
+        }
+
+        :global(.dark) .property-card:hover .property-card-title {
+          color: #fbbf24;
+        }
+
+        .property-card-location {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 12px;
+          color: #64748b;
+          margin-bottom: 8px;
+        }
+
+        :global(.dark) .property-card-location {
+          color: #94a3b8;
+        }
+
+        .property-card-description {
+          font-size: 12px;
+          color: #475569;
+          margin-bottom: 12px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          line-height: 1.5;
+        }
+
+        :global(.dark) .property-card-description {
+          color: #94a3b8;
+        }
+
+        .property-card-features {
+          display: flex;
+          gap: 12px;
+          font-size: 12px;
+          color: #64748b;
+          border-top: 1px solid #f1f5f9;
+          padding-top: 12px;
+        }
+
+        :global(.dark) .property-card-features {
+          color: #94a3b8;
+          border-top-color: #2d2a4a;
+        }
+
+        .property-card-feature {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .property-card-feature svg {
+          color: #94a3b8;
+        }
+
+        :global(.dark) .property-card-feature svg {
+          color: #64748b;
+        }
+
+        .no-properties-message {
+          padding: 40px;
+          text-align: center;
+          color: #64748b;
+          font-family: 'Montserrat', sans-serif;
+        }
+
+        :global(.dark) .no-properties-message {
+          color: #94a3b8;
         }
 
         @media screen and (max-width: 1000px) {
+          .third-view-top {
+            flex-direction: column;
+          }
+
+          .third-view-globe-area {
+            width: 100%;
+            height: 40%;
+          }
+
           .third-view-worldmap-wrapper {
-            transform: translate(-50%, -50%) scale(1.3);
+            transform: scale(1.1);
+          }
+
+          .third-view-content-area {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+          }
+
+          .third-view-content {
+            text-align: center;
+          }
+
+          .third-view-title {
+            font-size: 36px;
+            justify-content: center;
+          }
+
+          .third-view-subtitle {
+            font-size: 16px;
+          }
+
+          .property-card {
+            width: 300px;
+          }
+
+          .properties-header {
+            padding: 0 20px;
+          }
+
+          .properties-scroll-container {
+            padding: 0 20px;
           }
         }
       `}</style>
 
       <div ref={containerRef} className={`wild-slider-container ${isInitialized ? 'initialized' : ''}`}>
         {/* Dividers */}
-        <div className="divider divider--vertical"></div>
-        <div className="divider divider--vertical"></div>
-        <div className="divider divider--vertical"></div>
-        <div className="divider divider--horizontal"></div>
-        <div className="divider divider--horizontal"></div>
+        <div className={`divider divider--vertical ${showThirdView ? 'fade-bottom' : ''}`}></div>
+        <div className={`divider divider--vertical ${showThirdView ? 'fade-bottom' : ''}`}></div>
+        <div className={`divider divider--vertical ${showThirdView ? 'fade-bottom' : ''}`}></div>
+        <div className={`divider divider--horizontal ${showThirdView ? 'fade-bottom' : ''}`}></div>
+        <div className={`divider divider--horizontal ${showThirdView ? 'fade-bottom' : ''}`}></div>
 
         {/* Hero Container */}
         <div className="hero-container">
@@ -1249,20 +1600,116 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
           <button className="third-view-back-button" onClick={handleBackToArticle}>
             ← Back
           </button>
-          <div className="third-view-worldmap-wrapper">
-            <WorldMap />
-          </div>
-          <div className="third-view-content">
-            <h1 className="third-view-title">
-              {THIRD_VIEW_DATA[currentSlide].title.split(' ').map((word, index) => (
-                <div key={index} className="third-view-title-slice">
-                  <span>{word}</span>
-                </div>
-              ))}
-            </h1>
-            <div className="third-view-subtitle-wrapper">
-              <p className="third-view-subtitle">{THIRD_VIEW_DATA[currentSlide].subtitle}</p>
+
+          {/* Top area: Globe left, Content right */}
+          <div className="third-view-top">
+            <div className="third-view-globe-area">
+              <div className="third-view-worldmap-wrapper">
+                <WorldMap />
+              </div>
             </div>
+            <div className="third-view-content-area">
+              <div className="third-view-content">
+                <h1 className="third-view-title">
+                  {['Your', 'Dream', 'Home,', 'Anywhere'].map((word, index) => (
+                    <div key={index} className="third-view-title-slice">
+                      <span>{word}</span>
+                    </div>
+                  ))}
+                </h1>
+                <div className="third-view-subtitle-wrapper">
+                  <p className="third-view-subtitle">From London to Dubai, Cyprus to Singapore — we connect you with premium properties worldwide</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Property Cards Section */}
+          <div className="third-view-properties">
+            <div className="properties-header">
+              <h3 className="properties-title">Featured Properties</h3>
+              {displayProperties.length > 0 && (
+                <div className="properties-nav">
+                  <button className="properties-nav-btn" onClick={() => scrollProperties('left')}>
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button className="properties-nav-btn" onClick={() => scrollProperties('right')}>
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              )}
+            </div>
+            {displayProperties.length > 0 ? (
+              <div className="properties-scroll-container" ref={propertyScrollRef}>
+                <div className="properties-grid">
+                  {displayProperties.map((property) => (
+                    <a
+                      key={property.id}
+                      href={`/properties/${property.id}`}
+                      className="property-card"
+                    >
+                      <div className="property-card-image">
+                        {property.images && property.images.length > 0 ? (
+                          <img
+                            src={`${bucketUrl}${property.images[0]}`}
+                            alt={property.title}
+                          />
+                        ) : (
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '12px' }}>
+                            No image
+                          </div>
+                        )}
+                        {property.type && (
+                          <div className="property-card-badge">
+                            {property.type === 'sale' ? 'For Sale' : 'For Rent'}
+                          </div>
+                        )}
+                        {property.price && (
+                          <div className="property-card-price">
+                            <p>
+                              ${property.price.toLocaleString()}
+                              {property.type === 'rent' && <span>/mo</span>}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      <div className="property-card-content">
+                        <h4 className="property-card-title">{property.title}</h4>
+                        {property.location && (
+                          <div className="property-card-location">
+                            <MapPin size={12} /> {property.location}
+                          </div>
+                        )}
+                        {property.description && (
+                          <p className="property-card-description">{property.description}</p>
+                        )}
+                        <div className="property-card-features">
+                          {property.bedrooms && (
+                            <span className="property-card-feature">
+                              <BedDouble size={14} /> {property.bedrooms} beds
+                            </span>
+                          )}
+                          {property.bathrooms && (
+                            <span className="property-card-feature">
+                              <Bath size={14} /> {property.bathrooms} baths
+                            </span>
+                          )}
+                          {property.area && (
+                            <span className="property-card-feature">
+                              <Expand size={14} /> {property.area} m²
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="no-properties-message">
+                No properties available at the moment.
+              </div>
+            )}
           </div>
         </div>
       </div>

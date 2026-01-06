@@ -3,11 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import WorldMap from './worldmap';
+import { Property } from '@/types/database';
+import { Bath, BedDouble, Expand, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Props = {
   slideImages: string[];
   propertyImages?: string[];
   currentSlide?: number;
+  properties?: Property[];
 };
 
 const SLIDE_DATA = [
@@ -73,14 +76,28 @@ const BG_PATTERNS = [
   [1, 4, 7, 10, 6],        // Pattern 5: middle column + extras
 ];
 
-export default function HeroSliderMobile({ slideImages }: Props) {
+export default function HeroSliderMobile({ slideImages, properties = [] }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
+  const propertyScrollRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [visibleSlices, setVisibleSlices] = useState<number[]>(BG_PATTERNS[0]);
+
+  const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
+
+  const scrollProperties = (direction: 'left' | 'right') => {
+    if (!propertyScrollRef.current) return;
+    const scrollAmount = 270;
+    const newScrollLeft = direction === 'left'
+      ? propertyScrollRef.current.scrollLeft - scrollAmount
+      : propertyScrollRef.current.scrollLeft + scrollAmount;
+    propertyScrollRef.current.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+  };
+
+  const displayProperties = properties.slice(0, 15);
 
   // Opening animation
   useEffect(() => {
@@ -578,52 +595,307 @@ export default function HeroSliderMobile({ slideImages }: Props) {
         /* Third View Section */
         .mobile-third-view {
           position: relative;
-          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-          padding: 48px 16px;
-          min-height: 200px;
+          background: white;
+          padding: 0;
+          overflow: hidden;
+        }
+
+        :global(.dark) .mobile-third-view {
+          background: #0c0a1d;
+        }
+
+        .mobile-third-top {
           display: flex;
-          flex-direction: column;
+          padding: 24px 16px;
+          gap: 12px;
+          align-items: center;
+        }
+
+        .mobile-third-globe-area {
+          flex-shrink: 0;
+          width: 140px;
+          height: 120px;
+          display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
         }
 
-        :global(.dark) .mobile-third-view {
-          background: linear-gradient(135deg, #0c0a1d 0%, #1a1a2e 50%, #16213e 100%);
-        }
-
         .mobile-worldmap {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) scale(0.55);
-          opacity: 0.12;
+          transform: scale(0.45);
           pointer-events: none;
         }
 
         .mobile-third-content {
-          position: relative;
-          z-index: 2;
-          text-align: center;
+          flex: 1;
+          min-width: 0;
         }
 
         .mobile-third-title {
           font-family: 'Biryani', sans-serif;
-          font-size: 22px;
+          font-size: 20px;
           line-height: 1.2;
           font-weight: 900;
+          color: #1a1a2e;
+          margin: 0 0 6px 0;
+        }
+
+        :global(.dark) .mobile-third-title {
           color: white;
-          margin: 0 0 8px 0;
-          text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
 
         .mobile-third-subtitle {
           font-family: 'Montserrat', sans-serif;
-          font-size: 14px;
+          font-size: 11px;
           font-style: italic;
-          color: rgba(255,255,255,0.85);
+          color: #64748b;
           margin: 0;
-          letter-spacing: 1px;
+          letter-spacing: 0.5px;
+          line-height: 1.4;
+        }
+
+        :global(.dark) .mobile-third-subtitle {
+          color: rgba(255,255,255,0.7);
+        }
+
+        /* Mobile Property Cards Section */
+        .mobile-third-properties {
+          padding: 16px 0 24px;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          background: #f8fafc;
+        }
+
+        :global(.dark) .mobile-third-properties {
+          border-top-color: #2d2a4a;
+          background: #13102b;
+        }
+
+        .mobile-properties-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 16px;
+          margin-bottom: 12px;
+        }
+
+        .mobile-properties-title {
+          font-family: 'Biryani', sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0;
+        }
+
+        :global(.dark) .mobile-properties-title {
+          color: white;
+        }
+
+        .mobile-properties-nav {
+          display: flex;
+          gap: 6px;
+        }
+
+        .mobile-properties-nav-btn {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 1px solid #e2e8f0;
+          background: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+          color: #64748b;
+        }
+
+        :global(.dark) .mobile-properties-nav-btn {
+          border-color: #2d2a4a;
+          background: #1a1735;
+          color: #94a3b8;
+        }
+
+        .mobile-properties-nav-btn:active {
+          background: #f1f5f9;
+        }
+
+        :global(.dark) .mobile-properties-nav-btn:active {
+          background: #2d2a4a;
+        }
+
+        .mobile-properties-scroll {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding: 0 16px;
+        }
+
+        .mobile-properties-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
+        .mobile-properties-grid {
+          display: flex;
+          gap: 12px;
+          padding-bottom: 4px;
+        }
+
+        .mobile-property-card {
+          flex-shrink: 0;
+          width: 260px;
+          background: white;
+          border-radius: 8px;
+          overflow: hidden;
+          border: 1px solid #f1f5f9;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          text-decoration: none;
+          color: inherit;
+          display: block;
+          font-family: 'Montserrat', sans-serif;
+        }
+
+        :global(.dark) .mobile-property-card {
+          background: #13102b;
+          border-color: #2d2a4a;
+        }
+
+        .mobile-property-card-image {
+          position: relative;
+          aspect-ratio: 16/10;
+          background: #e2e8f0;
+          overflow: hidden;
+        }
+
+        :global(.dark) .mobile-property-card-image {
+          background: #1a1735;
+        }
+
+        .mobile-property-card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .mobile-property-card-badge {
+          position: absolute;
+          top: 6px;
+          right: 6px;
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-size: 10px;
+          font-weight: 500;
+          background: #f59e0b;
+          color: #0f172a;
+        }
+
+        .mobile-property-card-price {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+          padding: 16px 10px 6px;
+        }
+
+        .mobile-property-card-price p {
+          font-size: 15px;
+          font-weight: 700;
+          color: white;
+          margin: 0;
+        }
+
+        .mobile-property-card-price span {
+          font-size: 12px;
+          font-weight: 400;
+          opacity: 0.8;
+        }
+
+        .mobile-property-card-content {
+          padding: 12px;
+        }
+
+        .mobile-property-card-title {
+          font-size: 13px;
+          font-weight: 600;
+          color: #0f172a;
+          margin: 0 0 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        :global(.dark) .mobile-property-card-title {
+          color: white;
+        }
+
+        .mobile-property-card-location {
+          display: flex;
+          align-items: center;
+          gap: 3px;
+          font-size: 11px;
+          color: #64748b;
+          margin-bottom: 8px;
+        }
+
+        :global(.dark) .mobile-property-card-location {
+          color: #94a3b8;
+        }
+
+        .mobile-property-card-description {
+          font-size: 11px;
+          color: #475569;
+          margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          line-height: 1.4;
+        }
+
+        :global(.dark) .mobile-property-card-description {
+          color: #94a3b8;
+        }
+
+        .mobile-property-card-features {
+          display: flex;
+          gap: 10px;
+          font-size: 10px;
+          color: #64748b;
+          border-top: 1px solid #f1f5f9;
+          padding-top: 10px;
+        }
+
+        :global(.dark) .mobile-property-card-features {
+          color: #94a3b8;
+          border-top-color: #2d2a4a;
+        }
+
+        .mobile-property-card-feature {
+          display: flex;
+          align-items: center;
+          gap: 3px;
+        }
+
+        .mobile-property-card-feature svg {
+          color: #94a3b8;
+        }
+
+        :global(.dark) .mobile-property-card-feature svg {
+          color: #64748b;
+        }
+
+        .mobile-no-properties {
+          padding: 32px 16px;
+          text-align: center;
+          color: #64748b;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 13px;
+        }
+
+        :global(.dark) .mobile-no-properties {
+          color: #94a3b8;
         }
       `}</style>
 
@@ -723,12 +995,105 @@ export default function HeroSliderMobile({ slideImages }: Props) {
 
         {/* Third View Section */}
         <section className="mobile-third-view">
-          <div className="mobile-worldmap">
-            <WorldMap />
+          {/* Top area: Globe left, Content right */}
+          <div className="mobile-third-top">
+            <div className="mobile-third-globe-area">
+              <div className="mobile-worldmap">
+                <WorldMap />
+              </div>
+            </div>
+            <div className="mobile-third-content">
+              <h2 className="mobile-third-title">Your Dream Home, Anywhere</h2>
+              <p className="mobile-third-subtitle">From London to Dubai, Cyprus to Singapore — we connect you with premium properties worldwide</p>
+            </div>
           </div>
-          <div className="mobile-third-content">
-            <h2 className="mobile-third-title">{THIRD_VIEW_DATA[currentSlide].title}</h2>
-            <p className="mobile-third-subtitle">{THIRD_VIEW_DATA[currentSlide].subtitle}</p>
+
+          {/* Property Cards Section */}
+          <div className="mobile-third-properties">
+            <div className="mobile-properties-header">
+              <h3 className="mobile-properties-title">Featured Properties</h3>
+              {displayProperties.length > 0 && (
+                <div className="mobile-properties-nav">
+                  <button className="mobile-properties-nav-btn" onClick={() => scrollProperties('left')}>
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button className="mobile-properties-nav-btn" onClick={() => scrollProperties('right')}>
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              )}
+            </div>
+            {displayProperties.length > 0 ? (
+              <div className="mobile-properties-scroll" ref={propertyScrollRef}>
+                <div className="mobile-properties-grid">
+                  {displayProperties.map((property) => (
+                    <a
+                      key={property.id}
+                      href={`/properties/${property.id}`}
+                      className="mobile-property-card"
+                    >
+                      <div className="mobile-property-card-image">
+                        {property.images && property.images.length > 0 ? (
+                          <img
+                            src={`${bucketUrl}${property.images[0]}`}
+                            alt={property.title}
+                          />
+                        ) : (
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '11px' }}>
+                            No image
+                          </div>
+                        )}
+                        {property.type && (
+                          <div className="mobile-property-card-badge">
+                            {property.type === 'sale' ? 'For Sale' : 'For Rent'}
+                          </div>
+                        )}
+                        {property.price && (
+                          <div className="mobile-property-card-price">
+                            <p>
+                              ${property.price.toLocaleString()}
+                              {property.type === 'rent' && <span>/mo</span>}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      <div className="mobile-property-card-content">
+                        <h4 className="mobile-property-card-title">{property.title}</h4>
+                        {property.location && (
+                          <div className="mobile-property-card-location">
+                            <MapPin size={10} /> {property.location}
+                          </div>
+                        )}
+                        {property.description && (
+                          <p className="mobile-property-card-description">{property.description}</p>
+                        )}
+                        <div className="mobile-property-card-features">
+                          {property.bedrooms && (
+                            <span className="mobile-property-card-feature">
+                              <BedDouble size={12} /> {property.bedrooms} beds
+                            </span>
+                          )}
+                          {property.bathrooms && (
+                            <span className="mobile-property-card-feature">
+                              <Bath size={12} /> {property.bathrooms} baths
+                            </span>
+                          )}
+                          {property.area && (
+                            <span className="mobile-property-card-feature">
+                              <Expand size={12} /> {property.area} m²
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="mobile-no-properties">
+                No properties available at the moment.
+              </div>
+            )}
           </div>
         </section>
       </div>
