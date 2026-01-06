@@ -46,16 +46,16 @@ export default function LanguageSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-800 transition text-sm"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-800 transition text-sm text-white"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <Globe size={18} />
+        <Globe size={18} className="text-white" />
         <span className="hidden sm:inline">{localeFlags[locale]}</span>
-        <span className="hidden md:inline">{localeNames[locale]}</span>
+        <span className="hidden md:inline text-white">{localeNames[locale]}</span>
         <ChevronDown
           size={16}
-          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`transition-transform text-white ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 

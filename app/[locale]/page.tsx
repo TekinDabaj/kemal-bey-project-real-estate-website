@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { createClient } from '@/lib/supabase/server';
-import HeroSlider from '@/components/HeroSlider';
+import HeroSliderWrapper from '@/components/HeroSliderWrapper';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -39,5 +39,5 @@ export default async function HomePage({ params }: Props) {
     }
   }
 
-  return <HeroSlider slides={heroSlides || []} propertyImages={propertyImages} />;
+  return <HeroSliderWrapper slides={heroSlides || []} propertyImages={propertyImages} />;
 }
