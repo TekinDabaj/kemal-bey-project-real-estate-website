@@ -509,7 +509,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css?family=Biryani:400,900');
+        @import url('https://fonts.googleapis.com/css?family=Biryani:400,900&family=Montserrat:400,500');
 
         .wild-slider-container * {
           margin: 0;
@@ -895,6 +895,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         }
 
         .page-container p {
+          font-family: 'Montserrat', sans-serif;
           margin-top: 0;
           margin-bottom: 24px;
           color: #000000;
@@ -1053,7 +1054,7 @@ export default function HeroSlider({ slides, propertyImages = [] }: Props) {
         }
 
         .third-view-subtitle {
-          font-family: 'Georgia', serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 24px;
           font-style: italic;
           opacity: 0.85;

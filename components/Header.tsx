@@ -12,8 +12,8 @@ export default function Header() {
   const t = useTranslations('navigation');
 
   return (
-    <header className="fixed bottom-4 md:bottom-auto md:top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
-      <nav className="bg-slate-900/80 dark:bg-[#0c0a1d]/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg shadow-black/10">
+    <header className="fixed bottom-4 md:bottom-auto md:top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl font-[family-name:var(--font-montserrat)]">
+      <nav className="bg-slate-900/80 dark:bg-[#0c0a1d]/80 backdrop-blur-xl border border-white/10 dark:border-white dark:md:border-white/10 rounded-2xl shadow-lg shadow-black/10">
         <div className="px-6 py-3 flex flex-col">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl font-semibold text-amber-400">

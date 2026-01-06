@@ -66,24 +66,29 @@ const THIRD_VIEW_DATA = [
 
 export default function HeroSliderMobile({ slideImages }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
+  const articleRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Opening animation
   useEffect(() => {
-    if (!heroRef.current) return;
+    if (!heroRef.current || !articleRef.current) return;
 
     const imageContainers = heroRef.current.querySelectorAll('.mobile-slice-imageContainer.image--active');
     const textWrappers = heroRef.current.querySelectorAll('.mobile-text-container.text--active .mobile-text-main-wrapper');
     const label = heroRef.current.querySelector('.text--active .mobile-text-label');
 
-    // Set initial states
+    // Set initial states for hero
     gsap.set(heroRef.current.querySelectorAll('.mobile-slice-imageContainer'), { xPercent: 100 });
     gsap.set(heroRef.current.querySelectorAll('.mobile-slice-imageContainer.image--active'), { xPercent: 0 });
     gsap.set(heroRef.current.querySelectorAll('.mobile-text-main-wrapper'), { xPercent: -100 });
     gsap.set(heroRef.current.querySelectorAll('.mobile-text-container:not(.text--active) .mobile-text-main-wrapper'), { xPercent: 100 });
     gsap.set(heroRef.current.querySelectorAll('.mobile-text-label'), { autoAlpha: 0 });
+
+    // Set initial states for article
+    gsap.set(articleRef.current.querySelectorAll('.mobile-article-container:not(.article--active) .mobile-article-text-inner'), { xPercent: 100 });
+    gsap.set(articleRef.current.querySelectorAll('.mobile-article-container.article--active .mobile-article-text-inner'), { xPercent: 0 });
 
     setIsInitialized(true);
 
@@ -105,7 +110,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
   }, []);
 
   const slideBackground = (fromRight: boolean) => {
-    if (isMoving || !heroRef.current) return;
+    if (isMoving || !heroRef.current || !articleRef.current) return;
     setIsMoving(true);
 
     const from = fromRight ? 100 : -100;
@@ -118,6 +123,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
 
     const slices = heroRef.current.querySelectorAll('.mobile-slice');
     const textContainers = heroRef.current.querySelectorAll('.mobile-text-container');
+    const articleContainers = articleRef.current.querySelectorAll('.mobile-article-container');
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -159,7 +165,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
       }
     });
 
-    // Animate text
+    // Animate hero text
     const activeText = heroRef.current.querySelector('.mobile-text-container.text--active');
     const nextText = fromRight
       ? activeText?.nextElementSibling || textContainers[0]
@@ -200,12 +206,44 @@ export default function HeroSliderMobile({ slideImages }: Props) {
       activeText.classList.remove('text--active');
       nextText.classList.add('text--active');
     }
+
+    // Animate article content with sliced effect
+    const activeArticle = articleRef.current.querySelector('.mobile-article-container.article--active');
+    const nextArticle = fromRight
+      ? activeArticle?.nextElementSibling || articleContainers[0]
+      : activeArticle?.previousElementSibling || articleContainers[articleContainers.length - 1];
+
+    if (activeArticle && nextArticle) {
+      const activeArticleInners = activeArticle.querySelectorAll('.mobile-article-text-inner');
+      const nextArticleInners = nextArticle.querySelectorAll('.mobile-article-text-inner');
+
+      // Animate out current article with staggered timing
+      activeArticleInners.forEach((inner, i) => {
+        tl.to(inner, {
+          xPercent: to,
+          duration: 0.6,
+          ease: 'power2.inOut'
+        }, i * 0.08);
+      });
+
+      // Animate in new article with staggered timing
+      nextArticleInners.forEach((inner, i) => {
+        tl.fromTo(inner,
+          { xPercent: from },
+          { xPercent: 0, duration: 0.6, ease: 'power2.inOut' },
+          i * 0.08
+        );
+      });
+
+      activeArticle.classList.remove('article--active');
+      nextArticle.classList.add('article--active');
+    }
   };
 
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css?family=Biryani:400,900');
+        @import url('https://fonts.googleapis.com/css?family=Biryani:400,900&family=Montserrat:400,500');
       `}</style>
       <style jsx>{`
         .mobile-container {
@@ -301,25 +339,25 @@ export default function HeroSliderMobile({ slideImages }: Props) {
           width: 100%;
           white-space: nowrap;
           overflow: hidden;
-          padding: 8px 0;
+          padding: 2px 0;
         }
 
         .mobile-text-main-wrapper {
-          font-size: 28px;
-          line-height: 32px;
+          font-size: 24px;
+          line-height: 28px;
           font-weight: 900;
           text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
           overflow: hidden;
         }
 
         .mobile-text-label-container {
-          position: absolute;
+          position: relative;
           display: inline-block;
           overflow: hidden;
           width: 0;
           height: 22px;
           left: -6px;
-          top: 70px;
+          top: 4px;
           transition: all 0.8s 0s;
         }
 
@@ -399,12 +437,37 @@ export default function HeroSliderMobile({ slideImages }: Props) {
 
         /* Article Section */
         .mobile-article {
+          position: relative;
           background: white;
           padding: 32px 16px;
+          overflow: hidden;
         }
 
         :global(.dark) .mobile-article {
           background: #0c0a1d;
+        }
+
+        .mobile-article-container {
+          position: absolute;
+          top: 32px;
+          left: 16px;
+          right: 16px;
+          pointer-events: none;
+          opacity: 0;
+        }
+
+        .mobile-article-container.article--active {
+          position: relative;
+          top: 0;
+          left: 0;
+          right: 0;
+          pointer-events: auto;
+          opacity: 1;
+        }
+
+        .mobile-article-title-wrapper {
+          overflow: hidden;
+          margin-bottom: 16px;
         }
 
         .mobile-article-title {
@@ -412,7 +475,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
           font-size: 20px;
           line-height: 1.3;
           font-weight: 700;
-          margin: 0 0 16px 0;
+          margin: 0;
           color: #000;
         }
 
@@ -420,20 +483,29 @@ export default function HeroSliderMobile({ slideImages }: Props) {
           color: #fff;
         }
 
+        .mobile-article-text-wrapper {
+          overflow: hidden;
+          margin-bottom: 12px;
+        }
+
+        .mobile-article-text-wrapper:last-child {
+          margin-bottom: 0;
+        }
+
+        .mobile-article-text-inner {
+          display: block;
+        }
+
         .mobile-article-text {
-          font-family: 'Georgia', serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 14px;
           line-height: 1.6;
           color: #000;
-          margin: 0 0 12px 0;
+          margin: 0;
         }
 
         :global(.dark) .mobile-article-text {
           color: #fff;
-        }
-
-        .mobile-article-text:last-child {
-          margin-bottom: 0;
         }
 
         /* Third View Section */
@@ -479,7 +551,7 @@ export default function HeroSliderMobile({ slideImages }: Props) {
         }
 
         .mobile-third-subtitle {
-          font-family: 'Georgia', serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 14px;
           font-style: italic;
           color: rgba(255,255,255,0.85);
@@ -543,10 +615,25 @@ export default function HeroSliderMobile({ slideImages }: Props) {
         </section>
 
         {/* Article Section */}
-        <section className="mobile-article">
-          <h2 className="mobile-article-title">{ARTICLES[currentSlide].title}</h2>
-          {ARTICLES[currentSlide].content.map((para, index) => (
-            <p key={index} className="mobile-article-text">{para}</p>
+        <section ref={articleRef} className="mobile-article">
+          {ARTICLES.map((article, articleIndex) => (
+            <div
+              key={articleIndex}
+              className={`mobile-article-container ${articleIndex === 0 ? 'article--active' : ''}`}
+            >
+              <div className="mobile-article-title-wrapper">
+                <div className="mobile-article-text-inner">
+                  <h2 className="mobile-article-title">{article.title}</h2>
+                </div>
+              </div>
+              {article.content.map((para, paraIndex) => (
+                <div key={paraIndex} className="mobile-article-text-wrapper">
+                  <div className="mobile-article-text-inner">
+                    <p className="mobile-article-text">{para}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           ))}
         </section>
 
