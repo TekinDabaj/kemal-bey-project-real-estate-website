@@ -1133,6 +1133,42 @@ export default function HeroSliderMobile({ slideImages, properties = [] }: Props
           height: 100%;
           object-fit: cover;
         }
+
+        /* Fourth View Background Grid */
+        .mobile-fourth-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .mobile-fourth-bg-slice {
+          position: relative;
+          overflow: hidden;
+          border: 1px solid transparent;
+          transition: border-color 0.6s ease, background-color 0.6s ease;
+        }
+
+        .mobile-fourth-bg-slice.visible {
+          border-color: rgba(0, 0, 0, 0.06);
+          background-color: rgba(0, 0, 0, 0.015);
+        }
+
+        :global(.dark) .mobile-fourth-bg-slice.visible {
+          border-color: rgba(255, 255, 255, 0.08);
+          background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .mobile-fourth-content {
+          position: relative;
+          z-index: 1;
+        }
       `}</style>
 
       <div className="mobile-container">
@@ -1335,6 +1371,17 @@ export default function HeroSliderMobile({ slideImages, properties = [] }: Props
 
         {/* Fourth View Section - About Us */}
         <section className="mobile-fourth-view">
+          {/* Background Grid */}
+          <div className="mobile-fourth-bg">
+            {Array.from({ length: 12 }).map((_, sliceIndex) => (
+              <div
+                key={sliceIndex}
+                className={`mobile-fourth-bg-slice ${[1, 3, 5, 7, 9, 11].includes(sliceIndex) ? 'visible' : ''}`}
+              />
+            ))}
+          </div>
+
+          <div className="mobile-fourth-content">
           <div className="mobile-fourth-header">
             <h2 className="mobile-fourth-title">About Us</h2>
             <p className="mobile-fourth-subtitle">Your trusted partner in global real estate since 2010</p>
@@ -1415,6 +1462,7 @@ export default function HeroSliderMobile({ slideImages, properties = [] }: Props
                 ))}
               </div>
             </div>
+          </div>
           </div>
         </section>
       </div>
