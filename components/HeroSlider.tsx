@@ -2197,6 +2197,7 @@ export default function HeroSlider({
           font-family: "Biryani", sans-serif;
           color: white;
           visibility: hidden;
+          pointer-events: none;
         }
 
         .text-wrapper.visible {
@@ -2291,6 +2292,7 @@ export default function HeroSlider({
           position: relative;
           overflow: hidden;
           height: 100%;
+          pointer-events: none;
         }
 
         .slider-container > div:first-child {
@@ -2376,7 +2378,7 @@ export default function HeroSlider({
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          z-index: 100;
+          z-index: 500;
           overflow: hidden;
           transform: translateZ(0);
           border: solid 2px white;
@@ -2387,6 +2389,7 @@ export default function HeroSlider({
           display: flex;
           align-items: center;
           justify-content: center;
+          pointer-events: auto;
         }
 
         .cta svg {
@@ -2426,11 +2429,12 @@ export default function HeroSlider({
 
         .cta--down {
           position: fixed;
-          bottom: 30px;
+          bottom: 20px;
           left: 50%;
           transform: translateX(-50%);
-          z-index: 200;
-          pointer-events: auto;
+          z-index: 9999;
+          pointer-events: auto !important;
+          cursor: pointer;
         }
 
         .cta--down:hover svg {
@@ -4507,20 +4511,6 @@ export default function HeroSlider({
               />
             </svg>
           </div>
-          <div className="cta cta--down" onClick={handleDown}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="50"
-              height="50"
-              viewBox="0 0 50 50"
-            >
-              <path
-                fill="#ffffff"
-                d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z"
-              />
-            </svg>
-          </div>
-
           {/* Text Wrapper */}
           <div className="text-wrapper">
             {SLIDE_DATA.map((slide, index) => (
@@ -4588,6 +4578,21 @@ export default function HeroSlider({
             </div>
             <div className="slider-overlay"></div>
           </div>
+        </div>
+
+        {/* Down Arrow Button - Outside hero-container to avoid stacking context issues */}
+        <div className="cta cta--down" onClick={handleDown}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50"
+            height="50"
+            viewBox="0 0 50 50"
+          >
+            <path
+              fill="#ffffff"
+              d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z"
+            />
+          </svg>
         </div>
 
         {/* Article Section - Always rendered, visibility controlled by GSAP */}
