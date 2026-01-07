@@ -505,6 +505,7 @@ export default function HeroSliderMobile({
         .mobile-container {
           width: 100%;
           overflow-x: hidden;
+          padding-bottom: 80px;
         }
 
         /* Hero Section with Slices */
