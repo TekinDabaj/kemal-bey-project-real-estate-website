@@ -14,6 +14,17 @@ import {
   Shield,
   Award,
   Users,
+  Home,
+  Building,
+  TrendingUp,
+  Globe,
+  FileText,
+  Handshake,
+  Mail,
+  Phone,
+  Send,
+  CheckCircle,
+  Loader2,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -158,6 +169,16 @@ export default function HeroSliderMobile({
   const [isMoving, setIsMoving] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [visibleSlices, setVisibleSlices] = useState<number[]>(BG_PATTERNS[0]);
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactError, setContactError] = useState("");
 
   const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
@@ -175,6 +196,34 @@ export default function HeroSliderMobile({
   };
 
   const displayProperties = properties.slice(0, 15);
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setContactLoading(true);
+    setContactError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactForm),
+      });
+
+      if (!response.ok) throw new Error("Failed to send");
+
+      setContactSuccess(true);
+      setContactForm({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch {
+      setContactError("Failed to send message. Please try again.");
+    }
+    setContactLoading(false);
+  };
 
   // Opening animation
   useEffect(() => {
@@ -1342,6 +1391,426 @@ export default function HeroSliderMobile({
           position: relative;
           z-index: 1;
         }
+
+        /* Fifth View Section - Services */
+        .mobile-fifth-view {
+          position: relative;
+          background: #f5f5f7;
+          padding: 24px 16px;
+          overflow: hidden;
+        }
+
+        :global(.dark) .mobile-fifth-view {
+          background: #0c0a1d;
+        }
+
+        .mobile-fifth-header {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        .mobile-fifth-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 24px;
+          font-weight: 900;
+          color: #1a1a2e;
+          margin: 0 0 4px 0;
+          line-height: 1.1;
+        }
+
+        :global(.dark) .mobile-fifth-title {
+          color: white;
+        }
+
+        .mobile-fifth-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 12px;
+          color: #64748b;
+          margin: 0;
+        }
+
+        :global(.dark) .mobile-fifth-subtitle {
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mobile-services-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .mobile-service-card {
+          border-radius: 16px;
+          padding: 16px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          transition: transform 0.3s;
+        }
+
+        .mobile-service-card:active {
+          transform: scale(0.98);
+        }
+
+        .mobile-service-card-1 {
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        }
+
+        .mobile-service-card-2 {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .mobile-service-card-3 {
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        }
+
+        .mobile-service-card-4 {
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .mobile-service-card-5 {
+          background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .mobile-service-card-6 {
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        }
+
+        .mobile-service-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          flex-shrink: 0;
+        }
+
+        .mobile-service-content {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .mobile-service-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          color: white;
+          margin: 0 0 2px 0;
+          line-height: 1.2;
+        }
+
+        .mobile-service-desc {
+          font-family: "Montserrat", sans-serif;
+          font-size: 11px;
+          line-height: 1.4;
+          color: rgba(255, 255, 255, 0.8);
+          margin: 0;
+        }
+
+        /* Sixth View Section - Contact */
+        .mobile-sixth-view {
+          position: relative;
+          background: white;
+          padding: 24px 16px;
+          overflow: hidden;
+        }
+
+        :global(.dark) .mobile-sixth-view {
+          background: #0c0a1d;
+        }
+
+        .mobile-contact-card {
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        :global(.dark) .mobile-contact-card {
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-contact-top {
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+          padding: 20px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .mobile-contact-top::before {
+          content: "";
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(
+            circle,
+            rgba(245, 158, 11, 0.15) 0%,
+            transparent 70%
+          );
+          pointer-events: none;
+        }
+
+        .mobile-contact-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 20px;
+          font-weight: 900;
+          color: white;
+          margin: 0 0 4px 0;
+          line-height: 1.1;
+        }
+
+        .mobile-contact-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.6);
+          margin: 0 0 16px 0;
+        }
+
+        .mobile-contact-info-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .mobile-contact-info-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .mobile-contact-info-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          background: rgba(245, 158, 11, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f59e0b;
+          flex-shrink: 0;
+        }
+
+        .mobile-contact-info-row span,
+        .mobile-contact-info-row a {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          color: white;
+          text-decoration: none;
+        }
+
+        .mobile-contact-bottom {
+          background: white;
+          padding: 20px;
+        }
+
+        :global(.dark) .mobile-contact-bottom {
+          background: #13102b;
+        }
+
+        .mobile-form-header {
+          margin-bottom: 16px;
+        }
+
+        .mobile-form-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 2px 0;
+        }
+
+        :global(.dark) .mobile-form-title {
+          color: white;
+        }
+
+        .mobile-form-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 11px;
+          color: #64748b;
+          margin: 0;
+        }
+
+        :global(.dark) .mobile-form-subtitle {
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        .mobile-contact-form {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .mobile-form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+
+        .mobile-form-input,
+        .mobile-form-textarea {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          padding: 12px 14px;
+          border: 2px solid #e2e8f0;
+          border-radius: 10px;
+          background: #f8fafc;
+          color: #1a1a2e;
+          transition: all 0.3s;
+          outline: none;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        :global(.dark) .mobile-form-input,
+        :global(.dark) .mobile-form-textarea {
+          background: #1a1735;
+          border-color: #2d2a4a;
+          color: white;
+        }
+
+        .mobile-form-input:focus,
+        .mobile-form-textarea:focus {
+          border-color: #f59e0b;
+          background: white;
+        }
+
+        :global(.dark) .mobile-form-input:focus,
+        :global(.dark) .mobile-form-textarea:focus {
+          border-color: #f59e0b;
+          background: #0c0a1d;
+        }
+
+        .mobile-form-input::placeholder,
+        .mobile-form-textarea::placeholder {
+          color: #94a3b8;
+        }
+
+        :global(.dark) .mobile-form-input::placeholder,
+        :global(.dark) .mobile-form-textarea::placeholder {
+          color: #64748b;
+        }
+
+        .mobile-form-textarea {
+          min-height: 80px;
+          resize: none;
+        }
+
+        .mobile-form-submit {
+          font-family: "Biryani", sans-serif;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          padding: 14px 24px;
+          border: none;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 4px;
+        }
+
+        .mobile-form-submit:active:not(:disabled) {
+          transform: scale(0.98);
+        }
+
+        .mobile-form-submit:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .mobile-form-error {
+          font-family: "Montserrat", sans-serif;
+          font-size: 12px;
+          color: #ef4444;
+          text-align: center;
+          padding: 10px;
+          background: rgba(239, 68, 68, 0.1);
+          border-radius: 8px;
+        }
+
+        .mobile-contact-success {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 24px 16px;
+        }
+
+        .mobile-success-icon {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          margin-bottom: 16px;
+        }
+
+        .mobile-success-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 6px 0;
+        }
+
+        :global(.dark) .mobile-success-title {
+          color: white;
+        }
+
+        .mobile-success-message {
+          font-family: "Montserrat", sans-serif;
+          font-size: 12px;
+          color: #64748b;
+          margin: 0 0 16px 0;
+          line-height: 1.5;
+        }
+
+        :global(.dark) .mobile-success-message {
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mobile-success-btn {
+          font-family: "Biryani", sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          padding: 10px 20px;
+          border: 2px solid #1a1a2e;
+          border-radius: 8px;
+          background: transparent;
+          color: #1a1a2e;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        :global(.dark) .mobile-success-btn {
+          border-color: rgba(255, 255, 255, 0.3);
+          color: white;
+        }
+
+        .mobile-success-btn:active {
+          background: #1a1a2e;
+          color: white;
+        }
+
+        :global(.dark) .mobile-success-btn:active {
+          background: rgba(255, 255, 255, 0.1);
+        }
       `}</style>
 
       <div className="mobile-container">
@@ -1709,6 +2178,257 @@ export default function HeroSliderMobile({
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Fifth View Section - Our Services */}
+        <section className="mobile-fifth-view">
+          <div className="mobile-fifth-header">
+            <h1 className="mobile-fifth-title">Our Services</h1>
+            <p className="mobile-fifth-subtitle">
+              Comprehensive real estate solutions tailored to your needs
+            </p>
+          </div>
+
+          <div className="mobile-services-grid">
+            <div className="mobile-service-card mobile-service-card-1">
+              <div className="mobile-service-icon">
+                <Home size={20} />
+              </div>
+              <div className="mobile-service-content">
+                <h3 className="mobile-service-title">Property Sales</h3>
+                <p className="mobile-service-desc">
+                  Expert guidance through the entire buying and selling process.
+                </p>
+              </div>
+            </div>
+
+            <div className="mobile-service-card mobile-service-card-2">
+              <div className="mobile-service-icon">
+                <Building size={20} />
+              </div>
+              <div className="mobile-service-content">
+                <h3 className="mobile-service-title">Property Management</h3>
+                <p className="mobile-service-desc">
+                  Comprehensive management services for landlords.
+                </p>
+              </div>
+            </div>
+
+            <div className="mobile-service-card mobile-service-card-3">
+              <div className="mobile-service-icon">
+                <TrendingUp size={20} />
+              </div>
+              <div className="mobile-service-content">
+                <h3 className="mobile-service-title">Investment Advisory</h3>
+                <p className="mobile-service-desc">
+                  Strategic guidance to build your portfolio.
+                </p>
+              </div>
+            </div>
+
+            <div className="mobile-service-card mobile-service-card-4">
+              <div className="mobile-service-icon">
+                <Globe size={20} />
+              </div>
+              <div className="mobile-service-content">
+                <h3 className="mobile-service-title">International Properties</h3>
+                <p className="mobile-service-desc">
+                  Exclusive properties worldwide.
+                </p>
+              </div>
+            </div>
+
+            <div className="mobile-service-card mobile-service-card-5">
+              <div className="mobile-service-icon">
+                <FileText size={20} />
+              </div>
+              <div className="mobile-service-content">
+                <h3 className="mobile-service-title">Legal Consultation</h3>
+                <p className="mobile-service-desc">
+                  Navigate complex property laws.
+                </p>
+              </div>
+            </div>
+
+            <div className="mobile-service-card mobile-service-card-6">
+              <div className="mobile-service-icon">
+                <Handshake size={20} />
+              </div>
+              <div className="mobile-service-content">
+                <h3 className="mobile-service-title">Relocation Services</h3>
+                <p className="mobile-service-desc">
+                  Seamless relocation support for individuals and families.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sixth View Section - Contact */}
+        <section className="mobile-sixth-view">
+          <div className="mobile-contact-card">
+            {/* Top - Contact Info */}
+            <div className="mobile-contact-top">
+              <h2 className="mobile-contact-title">
+                Let&apos;s Start a Conversation
+              </h2>
+              <p className="mobile-contact-subtitle">
+                We&apos;re here to help with your real estate journey
+              </p>
+
+              <div className="mobile-contact-info-list">
+                <div className="mobile-contact-info-row">
+                  <div className="mobile-contact-info-icon">
+                    <MapPin size={16} />
+                  </div>
+                  <span>123 Premier Avenue, Istanbul</span>
+                </div>
+                <div className="mobile-contact-info-row">
+                  <div className="mobile-contact-info-icon">
+                    <Phone size={16} />
+                  </div>
+                  <a href="tel:+905551234567">+90 555 123 4567</a>
+                </div>
+                <div className="mobile-contact-info-row">
+                  <div className="mobile-contact-info-icon">
+                    <Mail size={16} />
+                  </div>
+                  <a href="mailto:info@premierrealty.com">
+                    info@premierrealty.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom - Form */}
+            <div className="mobile-contact-bottom">
+              {contactSuccess ? (
+                <div className="mobile-contact-success">
+                  <div className="mobile-success-icon">
+                    <CheckCircle size={28} />
+                  </div>
+                  <h3 className="mobile-success-title">Message Sent!</h3>
+                  <p className="mobile-success-message">
+                    Thank you for reaching out. We&apos;ll get back to you
+                    within 24 hours.
+                  </p>
+                  <button
+                    className="mobile-success-btn"
+                    onClick={() => setContactSuccess(false)}
+                  >
+                    Send Another
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="mobile-form-header">
+                    <h3 className="mobile-form-title">Send a Message</h3>
+                    <p className="mobile-form-subtitle">
+                      Fill out the form and we&apos;ll respond promptly
+                    </p>
+                  </div>
+
+                  <form
+                    className="mobile-contact-form"
+                    onSubmit={handleContactSubmit}
+                  >
+                    <div className="mobile-form-row">
+                      <input
+                        type="text"
+                        className="mobile-form-input"
+                        placeholder="Your Name"
+                        required
+                        value={contactForm.name}
+                        onChange={(e) =>
+                          setContactForm({
+                            ...contactForm,
+                            name: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="email"
+                        className="mobile-form-input"
+                        placeholder="Email"
+                        required
+                        value={contactForm.email}
+                        onChange={(e) =>
+                          setContactForm({
+                            ...contactForm,
+                            email: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="mobile-form-row">
+                      <input
+                        type="tel"
+                        className="mobile-form-input"
+                        placeholder="Phone"
+                        required
+                        value={contactForm.phone}
+                        onChange={(e) =>
+                          setContactForm({
+                            ...contactForm,
+                            phone: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="mobile-form-input"
+                        placeholder="Subject"
+                        required
+                        value={contactForm.subject}
+                        onChange={(e) =>
+                          setContactForm({
+                            ...contactForm,
+                            subject: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <textarea
+                      className="mobile-form-textarea"
+                      placeholder="Your message..."
+                      required
+                      value={contactForm.message}
+                      onChange={(e) =>
+                        setContactForm({
+                          ...contactForm,
+                          message: e.target.value,
+                        })
+                      }
+                    />
+
+                    {contactError && (
+                      <div className="mobile-form-error">{contactError}</div>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="mobile-form-submit"
+                      disabled={contactLoading}
+                    >
+                      {contactLoading ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} />
+                          Send Message
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         </section>
