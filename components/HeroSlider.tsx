@@ -282,15 +282,16 @@ export default function HeroSlider({
     tl.set(fifthDownBtn, { autoAlpha: 1 }, 0.4);
     tl.set(fifthBackBtn, { autoAlpha: 1 }, 0.4);
 
-    // Show hero container
-    tl.set(heroContainer, { autoAlpha: 1 }, 0.2);
+    // Show hero container immediately (like handleBackToSlider)
+    tl.set(heroContainer, { autoAlpha: 1 }, 0);
 
     // Reset and animate hero images back
+    // Ensure xPercent is 0 in case opening animation was interrupted
     activeImages.forEach((el, i) => {
       tl.fromTo(
         el,
-        { yPercent: -101 },
-        { yPercent: 0, duration: 0.6, ease: "power2.out" },
+        { yPercent: -101, xPercent: 0 },
+        { yPercent: 0, xPercent: 0, duration: 0.6, ease: "power2.out" },
         0.3 + i * 0.03
       );
     });

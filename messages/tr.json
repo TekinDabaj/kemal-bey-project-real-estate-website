@@ -1,204 +1,204 @@
 {
   "metadata": {
-    "title": "Premier Realty | Gayrimenkul Danismanlik",
-    "description": "Profesyonel gayrimenkul danismanlik hizmetleri"
+    "title": "Premier Realty | Gayrimenkul Danışmanlık",
+    "description": "Profesyonel gayrimenkul danışmanlık hizmetleri"
   },
   "navigation": {
     "home": "Ana Sayfa",
     "properties": "Emlaklar",
     "services": "Hizmetler",
-    "about": "Hakkimizda",
+    "about": "Hakkımızda",
     "blog": "Blog",
-    "contact": "Iletisim",
+    "contact": "İletişim",
     "bookConsultation": "Randevu Al",
     "brandName": "Premier Realty"
   },
   "home": {
     "stats": {
-      "propertiesSold": "Satilan Emlak",
-      "clientSatisfaction": "Musteri Memnuniyeti",
-      "yearsExperience": "Yillik Deneyim",
-      "awardsWon": "Kazanilan Odul"
+      "propertiesSold": "Satılan Emlak",
+      "clientSatisfaction": "Müşteri Memnuniyeti",
+      "yearsExperience": "Yıllık Deneyim",
+      "awardsWon": "Kazanılan Ödül"
     },
     "featuredProperties": {
-      "subtitle": "One Cikan Ilanlar",
-      "title": "Hayalinizdeki Mulku Kesfedin",
-      "description": "Yasam tarziniza ve yatirim hedeflerinize uygun, ozenle secilmis premium emlak koleksiyonumuzu kesfedi.",
-      "viewAll": "Tum Emlaklari Gor",
-      "forSale": "Satilik",
-      "forRent": "Kiralik",
-      "featured": "One Cikan"
+      "subtitle": "Öne Çıkan İlanlar",
+      "title": "Hayalinizdeki Mülkü Keşfedin",
+      "description": "Yaşam tarzınıza ve yatırım hedeflerinize uygun, özenle seçilmiş premium emlak koleksiyonumuzu keşfedin.",
+      "viewAll": "Tüm Emlakları Gör",
+      "forSale": "Satılık",
+      "forRent": "Kiralık",
+      "featured": "Öne Çıkan"
     },
     "whyChooseUs": {
-      "subtitle": "Neden Bizi Secmelisiniz",
-      "title": "Gayrimenkulde Guvenilir Ortaginiz",
-      "description": "Yillarin deneyimi ve mukemmellige olan bagliligimizla, bilinçli gayrimenkul kararlari almaniza yardimci olmak icin kisisellestirilmis rehberlik sunuyoruz.",
-      "learnMore": "Hakkimizda Daha Fazla",
-      "watchVideo": "Hikayemizi Izleyin",
-      "certified": "Sertifikali Danismanlar",
-      "trusted": "Guvenilir Hizmet",
-      "topRated": "En Iyi Derecelendirme"
+      "subtitle": "Neden Bizi Seçmelisiniz",
+      "title": "Gayrimenkulde Güvenilir Ortağınız",
+      "description": "Yılların deneyimi ve mükemmelliğe olan bağlılığımızla, bilinçli gayrimenkul kararları almanıza yardımcı olmak için kişiselleştirilmiş rehberlik sunuyoruz.",
+      "learnMore": "Hakkımızda Daha Fazla",
+      "watchVideo": "Hikayemizi İzleyin",
+      "certified": "Sertifikalı Danışmanlar",
+      "trusted": "Güvenilir Hizmet",
+      "topRated": "En İyi Derecelendirme"
     },
     "features": {
       "marketExpertise": {
-        "title": "Piyasa Uzmanligi",
-        "description": "Yerel ve bolgesel gayrimenkul piyasalari hakkinda derin bilgi"
+        "title": "Piyasa Uzmanlığı",
+        "description": "Yerel ve bölgesel gayrimenkul piyasaları hakkında derin bilgi"
       },
       "personalApproach": {
-        "title": "Kisisel Yaklasim",
-        "description": "Benzersiz ihtiyac ve hedeflerinize gore ozellestirilmis tavsiyeler"
+        "title": "Kişisel Yaklaşım",
+        "description": "Benzersiz ihtiyaç ve hedeflerinize göre özelleştirilmiş tavsiyeler"
       },
       "dataDriven": {
-        "title": "Veri Odakli",
-        "description": "Kapsamli piyasa analizleriyle desteklenen kararlar"
+        "title": "Veri Odaklı",
+        "description": "Kapsamlı piyasa analizleriyle desteklenen kararlar"
       },
       "flexibleHours": {
         "title": "Esnek Saatler",
-        "description": "Pazartesi - Cumartesi, 08:00 - 20:00 arasi hizmetinizdeyiz"
+        "description": "Pazartesi - Cumartesi, 08:00 - 20:00 arası hizmetinizdeyiz"
       }
     },
     "ourServices": {
       "subtitle": "Neler Sunuyoruz",
-      "title": "Kapsamli Gayrimenkul Hizmetleri",
-      "description": "Ilk evinizi satin almaktan yatirim portfoylerini yonetmeye kadar, ihtiyaclariniza ozel uctan uca cozumler sunuyoruz.",
+      "title": "Kapsamlı Gayrimenkul Hizmetleri",
+      "description": "İlk evinizi satın almaktan yatırım portföylerini yönetmeye kadar, ihtiyaçlarınıza özel uçtan uca çözümler sunuyoruz.",
       "learnMore": "Daha Fazla"
     },
     "services": {
       "buying": {
-        "title": "Emlak Satin Alma",
-        "description": "Hayalinizdeki mulku satin almanin her adiminda uzman rehberlik."
+        "title": "Emlak Satın Alma",
+        "description": "Hayalinizdeki mülkü satın almanın her adımında uzman rehberlik."
       },
       "selling": {
-        "title": "Emlak Satisi",
-        "description": "Mulkunuzun degerini maksimize etmek icin stratejik pazarlama ve muzakere."
+        "title": "Emlak Satışı",
+        "description": "Mülkünüzün değerini maksimize etmek için stratejik pazarlama ve müzakere."
       },
       "renting": {
         "title": "Kiralama Hizmetleri",
-        "description": "Mukemmel kiralik bulmak veya kiralama portfoyunuzu yonetmek icin buradayiz."
+        "description": "Mükemmel kiralık bulmak veya kiralama portföyünüzü yönetmek için buradayız."
       },
       "investment": {
-        "title": "Yatirim Danismanligi",
-        "description": "Gayrimenkul ile servet olusturmaniza yardimci olacak veri odakli icgoruler."
+        "title": "Yatırım Danışmanlığı",
+        "description": "Gayrimenkul ile servet oluşturmanıza yardımcı olacak veri odaklı içgörüler."
       }
     },
     "testimonials": {
       "subtitle": "Referanslar",
-      "title": "Musterilerimiz Ne Diyor",
+      "title": "Müşterilerimiz Ne Diyor",
       "reviews": {
         "1": {
-          "name": "Ayse Yilmaz",
+          "name": "Ayşe Yılmaz",
           "role": "Ev Sahibi",
-          "text": "Ekip, ev satin alma deneyimimizi sorunsuz hale getirdi. Piyasa bilgileri ve ozverileri beklentilerimizi asti."
+          "text": "Ekip, ev satın alma deneyimimizi sorunsuz hale getirdi. Piyasa bilgileri ve özverileri beklentilerimizi aştı."
         },
         "2": {
           "name": "Mehmet Kaya",
-          "role": "Gayrimenkul Yatirimcisi",
-          "text": "Karli bir gayrimenkul portfoyu olusturmama yardimci olan olağanustu yatirim tavsiyeleri. Hizmetlerini siddetle tavsiye ederim."
+          "role": "Gayrimenkul Yatırımcısı",
+          "text": "Karlı bir gayrimenkul portföyü oluşturmama yardımcı olan olağanüstü yatırım tavsiyeleri. Hizmetlerini şiddetle tavsiye ederim."
         },
         "3": {
           "name": "Zeynep Demir",
-          "role": "Ilk Kez Alan",
-          "text": "Ilk kez alici olarak gergindim, ancak her adimda sabir ve uzmanlikla bana rehberlik ettiler."
+          "role": "İlk Kez Alan",
+          "text": "İlk kez alıcı olarak gergindim, ancak her adımda sabır ve uzmanlıkla bana rehberlik ettiler."
         }
       }
     },
     "cta": {
-      "badge": "Yolculugunuza Bugun Baslayin",
-      "title": "Baslamaya Hazir misiniz?",
-      "description": "Bugün ücretsiz danismanlik randevusu alin ve gayrimenkul hedeflerinize dogru ilk adimi atin.",
+      "badge": "Yolculuğunuza Bugün Başlayın",
+      "title": "Başlamaya Hazır mısınız?",
+      "description": "Bugün ücretsiz danışmanlık randevusu alın ve gayrimenkul hedeflerinize doğru ilk adımı atın.",
       "button": "Randevu Planla",
-      "browseProperties": "Emlaklara Goz At"
+      "browseProperties": "Emlaklara Göz At"
     }
   },
   "booking": {
-    "title": "Danismanlik Randevusu",
-    "subtitle": "Gayrimenkul uzmanlarimizla ucretsiz gorusmenizi planlayin",
-    "selectDate": "Tarih Secin",
-    "selectTime": "Saat Secin",
+    "title": "Danışmanlık Randevusu",
+    "subtitle": "Gayrimenkul uzmanlarımızla ücretsiz görüşmenizi planlayın",
+    "selectDate": "Tarih Seçin",
+    "selectTime": "Saat Seçin",
     "yourDetails": "Bilgileriniz",
-    "step": "Adim",
+    "step": "Adım",
     "of": "/",
     "name": "Ad Soyad",
     "email": "E-posta Adresi",
-    "phone": "Telefon Numarasi",
+    "phone": "Telefon Numarası",
     "message": "Mesaj",
-    "messagePlaceholder": "Gayrimenkul ihtiyaclarinizi veya sorularinizi bize iletin...",
-    "optional": "istege bagli",
+    "messagePlaceholder": "Gayrimenkul ihtiyaçlarınızı veya sorularınızı bize iletin...",
+    "optional": "isteğe bağlı",
     "required": "zorunlu",
     "confirmBooking": "Randevuyu Onayla",
-    "booking": "Randevu aliniyor...",
+    "booking": "Randevu alınıyor...",
     "booked": "Dolu",
-    "available": "Musait",
-    "unavailable": "Musait Degil",
+    "available": "Müsait",
+    "unavailable": "Müsait Değil",
     "success": {
-      "title": "Randevu Onaylandi!",
-      "subtitle": "Gorusmeniz basariyla planlandi",
+      "title": "Randevu Onaylandı!",
+      "subtitle": "Görüşmeniz başarıyla planlandı",
       "scheduledFor": "Tarih",
       "at": "Saat",
-      "confirmationSent": "Onay e-postasi gonderildi",
-      "whatNext": "Sirada ne var?",
-      "step1": "Toplanti detaylarini iceren bir onay e-postasi alacaksiniz",
-      "step2": "Danismanlarimiz gorusmeniz icin hazirlik yapacak",
-      "step3": "Planlanan saatte gorusmenize katilin",
-      "backToHome": "Ana Sayfaya Don"
+      "confirmationSent": "Onay e-postası gönderildi",
+      "whatNext": "Sırada ne var?",
+      "step1": "Toplantı detaylarını içeren bir onay e-postası alacaksınız",
+      "step2": "Danışmanlarımız görüşmeniz için hazırlık yapacak",
+      "step3": "Planlanan saatte görüşmenize katılın",
+      "backToHome": "Ana Sayfaya Dön"
     },
     "error": {
-      "title": "Bir hata olustu",
-      "description": "Lutfen tekrar deneyin veya dogrudan bizimle iletisime gecin.",
+      "title": "Bir hata oluştu",
+      "description": "Lütfen tekrar deneyin veya doğrudan bizimle iletişime geçin.",
       "tryAgain": "Tekrar Dene"
     },
     "workingHours": "Pazartesi - Cumartesi, 08:00 - 20:00",
-    "freeConsultation": "Ucretsiz 30 dakikalik gorusme",
-    "noObligation": "Baglayici degil, istediginiz zaman iptal edebilirsiniz"
+    "freeConsultation": "Ücretsiz 30 dakikalık görüşme",
+    "noObligation": "Bağlayıcı değil, istediğiniz zaman iptal edebilirsiniz"
   },
   "properties": {
-    "title": "Emlaklarimiz",
-    "subtitle": "Satilik ve kiralik emlak seceneklerimizi inceleyin",
-    "noProperties": "Su anda mevcut emlak bulunmamaktadir.",
-    "noResultsWithFilters": "Filtrelerinize uygun emlak bulunamadi.",
-    "clearFilters": "Tum filtreleri temizle",
+    "title": "Emlaklarımız",
+    "subtitle": "Satılık ve kiralık emlak seçeneklerimizi inceleyin",
+    "noProperties": "Şu anda mevcut emlak bulunmamaktadır.",
+    "noResultsWithFilters": "Filtrelerinize uygun emlak bulunamadı.",
+    "clearFilters": "Tüm filtreleri temizle",
     "resultsFound": "{count} emlak bulundu",
-    "contactForListings": "Yeni ilanlar icin bizimle iletisime gecin",
-    "forSale": "Satilik",
-    "forRent": "Kiralik",
-    "sold": "Satildi",
-    "rented": "Kiralandi",
+    "contactForListings": "Yeni ilanlar için bizimle iletişime geçin",
+    "forSale": "Satılık",
+    "forRent": "Kiralık",
+    "sold": "Satıldı",
+    "rented": "Kiralandı",
     "beds": "Yatak",
     "baths": "Banyo",
     "perMonth": "/ay",
-    "interestedTitle": "Bir Emlakla Ilgileniyor musunuz?",
-    "interestedDescription": "Seceneklerinizi gorusmek icin bir danismanlik randevusu alin.",
+    "interestedTitle": "Bir Emlakla İlgileniyor musunuz?",
+    "interestedDescription": "Seçeneklerinizi görüşmek için bir danışmanlık randevusu alın.",
     "bookConsultation": "Randevu Al",
-    "noImage": "Gorsel yok",
+    "noImage": "Görsel yok",
     "filters": {
-      "allTypes": "Tum Turler",
-      "forSale": "Satilik",
-      "forRent": "Kiralik",
-      "allPropertyTypes": "Tum Emlak Turleri",
+      "allTypes": "Tüm Türler",
+      "forSale": "Satılık",
+      "forRent": "Kiralık",
+      "allPropertyTypes": "Tüm Emlak Türleri",
       "minPrice": "Min Fiyat",
       "maxPrice": "Max Fiyat",
       "minArea": "Min m²",
       "maxArea": "Max m²",
-      "bedrooms": "Yatak Odasi",
+      "bedrooms": "Yatak Odası",
       "bathrooms": "Banyo",
-      "yearBuilt": "Yapi Yili",
-      "from": "Baslangic",
-      "to": "Bitis",
-      "furnished": "Esyali",
-      "furnishedYes": "Esyali",
-      "furnishedNo": "Esyasiz",
+      "yearBuilt": "Yapı Yılı",
+      "from": "Başlangıç",
+      "to": "Bitiş",
+      "furnished": "Eşyalı",
+      "furnishedYes": "Eşyalı",
+      "furnishedNo": "Eşyasız",
       "amenities": "Olanaklar",
-      "any": "Tumu",
+      "any": "Tümü",
       "moreFilters": "Daha Fazla Filtre",
       "search": "Ara",
       "clear": "Temizle",
       "propertyTypes": {
         "apartment": "Daire",
         "villa": "Villa",
-        "house": "Mustakil Ev",
-        "penthouse": "Cati Kati",
-        "studio": "Studyo",
-        "duplex": "Dublex",
+        "house": "Müstakil Ev",
+        "penthouse": "Çatı Katı",
+        "studio": "Stüdyo",
+        "duplex": "Dubleks",
         "land": "Arsa",
         "commercial": "Ticari",
         "office": "Ofis"
@@ -207,101 +207,101 @@
         "pool": "Havuz",
         "gym": "Spor Salonu",
         "parking": "Otopark",
-        "security": "Guvenlik",
-        "elevator": "Asansor",
+        "security": "Güvenlik",
+        "elevator": "Asansör",
         "balcony": "Balkon",
-        "garden": "Bahce",
-        "sea_view": "Deniz Manzarasi",
-        "city_view": "Sehir Manzarasi",
+        "garden": "Bahçe",
+        "sea_view": "Deniz Manzarası",
+        "city_view": "Şehir Manzarası",
         "air_conditioning": "Klima",
-        "heating": "Isitma",
+        "heating": "Isıtma",
         "storage": "Depo"
       }
     },
     "pagination": {
-      "showing": "Gosterilen",
+      "showing": "Gösterilen",
       "of": "/",
       "properties": "emlak",
-      "first": "Ilk sayfa",
-      "previous": "Onceki sayfa",
+      "first": "İlk sayfa",
+      "previous": "Önceki sayfa",
       "next": "Sonraki sayfa",
       "last": "Son sayfa",
-      "loading": "Yukleniyor..."
+      "loading": "Yükleniyor..."
     }
   },
   "common": {
     "learnMore": "Daha Fazla",
-    "viewAll": "Tumunu Gor",
-    "readMore": "Devamini Oku",
-    "submit": "Gonder",
-    "cancel": "Iptal",
+    "viewAll": "Tümünü Gör",
+    "readMore": "Devamını Oku",
+    "submit": "Gönder",
+    "cancel": "İptal",
     "close": "Kapat",
-    "loading": "Yukleniyor...",
-    "error": "Bir hata olustu",
-    "success": "Basarili"
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "success": "Başarılı"
   },
   "propertyDetail": {
-    "backToProperties": "Emlaklara Don",
-    "featured": "One Cikan",
+    "backToProperties": "Emlaklara Dön",
+    "featured": "Öne Çıkan",
     "status": {
       "active": "Aktif",
-      "sold": "Satildi",
-      "rented": "Kiralandi",
+      "sold": "Satıldı",
+      "rented": "Kiralandı",
       "inactive": "Pasif"
     },
-    "forSale": "Satilik",
-    "forRent": "Kiralik",
-    "perMonth": "aylik",
-    "bedrooms": "Yatak Odasi",
+    "forSale": "Satılık",
+    "forRent": "Kiralık",
+    "perMonth": "aylık",
+    "bedrooms": "Yatak Odası",
     "bathrooms": "Banyo",
     "area": "Alan",
     "parking": "Otopark",
-    "description": "Aciklama",
-    "specifications": "Ozellikler",
+    "description": "Açıklama",
+    "specifications": "Özellikler",
     "propertyType": "Emlak Tipi",
-    "yearBuilt": "Yapi Yili",
+    "yearBuilt": "Yapı Yılı",
     "floor": "Kat",
-    "furnished": "Esyali",
-    "heating": "Isitma",
-    "cooling": "Sogutma",
-    "roomDetails": "Oda Detaylari",
+    "furnished": "Eşyalı",
+    "heating": "Isıtma",
+    "cooling": "Soğutma",
+    "roomDetails": "Oda Detayları",
     "amenities": "Olanaklar",
-    "floorPlans": "Kat Planlari",
+    "floorPlans": "Kat Planları",
     "location": "Konum",
     "interested": "Bu emlakla ilgileniyor musunuz?",
-    "interestedDescription": "Daha fazla bilgi almak ve seceneklerinizi gorusmek icin randevu alin.",
+    "interestedDescription": "Daha fazla bilgi almak ve seçeneklerinizi görüşmek için randevu alın.",
     "bookConsultation": "Randevu Al",
-    "contactUs": "Iletisim",
-    "highlights": "Emlak Ozellikleri",
-    "availableForPurchase": "Satin alinabilir",
+    "contactUs": "İletişim",
+    "highlights": "Emlak Özellikleri",
+    "availableForPurchase": "Satın alınabilir",
     "availableForRent": "Kiralanabilir",
-    "bedroomsShort": "yatak odasi",
+    "bedroomsShort": "yatak odası",
     "bathroomsShort": "banyo",
-    "livingSpace": "yasam alani",
-    "builtIn": "Yapi yili",
+    "livingSpace": "yaşam alanı",
+    "builtIn": "Yapı yılı",
     "parkingSpaces": "otopark",
     "propertyId": "Emlak ID",
     "relatedProperties": "Benzer Emlaklar",
-    "noImage": "Gorsel yok"
+    "noImage": "Görsel yok"
   },
   "admin": {
-    "title": "Yonetim Paneli",
-    "logout": "Cikis Yap",
+    "title": "Yönetim Paneli",
+    "logout": "Çıkış Yap",
     "login": {
-      "title": "Yonetici Girisi",
+      "title": "Yönetici Girişi",
       "email": "E-posta",
-      "password": "Sifre",
-      "signIn": "Giris Yap",
-      "signingIn": "Giris yapiliyor...",
-      "invalidCredentials": "Gecersiz e-posta veya sifre",
-      "noAccess": "Yonetici erisim yetkiniz yok",
-      "subtitle": "Yonetici paneline erismek icin kimlik bilgilerinizi girin",
-      "secureConnection": "Guvenli baglanti"
+      "password": "Şifre",
+      "signIn": "Giriş Yap",
+      "signingIn": "Giriş yapılıyor...",
+      "invalidCredentials": "Geçersiz e-posta veya şifre",
+      "noAccess": "Yönetici erişim yetkiniz yok",
+      "subtitle": "Yönetici paneline erişmek için kimlik bilgilerinizi girin",
+      "secureConnection": "Güvenli bağlantı"
     },
     "tabs": {
       "reservations": "Randevular",
       "properties": "Emlaklar",
-      "content": "Gorseller",
+      "content": "Görseller",
       "blog": "Blog"
     },
     "reservations": {
@@ -310,129 +310,129 @@
         "total": "Toplam",
         "pending": "Bekleyen",
         "confirmed": "Onaylanan",
-        "cancelled": "Iptal Edilen"
+        "cancelled": "İptal Edilen"
       },
       "filter": {
-        "all": "Tumu",
+        "all": "Tümü",
         "pending": "Bekleyen",
         "confirmed": "Onaylanan",
-        "cancelled": "Iptal Edilen"
+        "cancelled": "İptal Edilen"
       },
-      "noReservations": "Randevu bulunamadi",
+      "noReservations": "Randevu bulunamadı",
       "booked": "Rezerve Edildi",
       "actions": {
         "confirm": "Onayla",
-        "cancel": "Iptal Et",
+        "cancel": "İptal Et",
         "delete": "Sil"
       },
-      "confirmDelete": "Bu randevuyu silmek istediginizden emin misiniz?",
+      "confirmDelete": "Bu randevuyu silmek istediğinizden emin misiniz?",
       "calendar": {
         "title": "Randevu Takvimi",
-        "today": "Bugun",
+        "today": "Bugün",
         "noAppointments": "Randevu yok",
         "appointments": "randevu"
       },
       "notifications": {
-        "enabled": "Bildirimler Acik",
-        "disabled": "Bildirimler Kapali",
-        "turnOn": "Bildirimleri ac",
+        "enabled": "Bildirimler Açık",
+        "disabled": "Bildirimler Kapalı",
+        "turnOn": "Bildirimleri aç",
         "turnOff": "Bildirimleri kapat",
-        "notSupported": "Bu tarayicida bildirimler desteklenmiyor",
-        "permissionDenied": "Bildirim izni reddedildi. Lutfen tarayici ayarlarindan etkinlestirin.",
-        "enabledTitle": "Bildirimler Etkinlestirildi",
-        "enabledBody": "Artik 1 saat icindeki randevular icin bildirim alacaksiniz.",
-        "upcomingTitle": "Yaklasan Randevu",
-        "upcomingBody": "{name} adli kisinin {minutes} dakika icinde randevusu var (saat {time})"
+        "notSupported": "Bu tarayıcıda bildirimler desteklenmiyor",
+        "permissionDenied": "Bildirim izni reddedildi. Lütfen tarayıcı ayarlarından etkinleştirin.",
+        "enabledTitle": "Bildirimler Etkinleştirildi",
+        "enabledBody": "Artık 1 saat içindeki randevular için bildirim alacaksınız.",
+        "upcomingTitle": "Yaklaşan Randevu",
+        "upcomingBody": "{name} adlı kişinin {minutes} dakika içinde randevusu var (saat {time})"
       }
     },
     "properties": {
-      "title": "Emlak Yonetimi",
+      "title": "Emlak Yönetimi",
       "addProperty": "Emlak Ekle",
-      "editProperty": "Emlak Duzenle",
-      "noProperties": "Henuz emlak yok. Ilk emlakinizi ekleyin.",
-      "images": "Gorseller",
-      "propertyTitle": "Baslik",
-      "description": "Aciklama",
+      "editProperty": "Emlak Düzenle",
+      "noProperties": "Henüz emlak yok. İlk emlakınızı ekleyin.",
+      "images": "Görseller",
+      "propertyTitle": "Başlık",
+      "description": "Açıklama",
       "price": "Fiyat",
       "location": "Konum",
-      "bedrooms": "Yatak Odasi",
+      "bedrooms": "Yatak Odası",
       "bathrooms": "Banyo",
       "area": "Alan",
-      "type": "Tur",
-      "forSale": "Satilik",
-      "forRent": "Kiralik",
+      "type": "Tür",
+      "forSale": "Satılık",
+      "forRent": "Kiralık",
       "status": "Durum",
       "active": "Aktif",
-      "sold": "Satildi",
-      "rented": "Kiralandi",
+      "sold": "Satıldı",
+      "rented": "Kiralandı",
       "inactive": "Pasif",
-      "featured": "One Cikan",
-      "featuredDescription": "One cikan emlak (ilk sirada gosterilir)",
-      "createProperty": "Emlak Olustur",
-      "updateProperty": "Emlak Guncelle",
-      "confirmDelete": "Bu emlaki silmek istediginizden emin misiniz?",
+      "featured": "Öne Çıkan",
+      "featuredDescription": "Öne çıkan emlak (ilk sırada gösterilir)",
+      "createProperty": "Emlak Oluştur",
+      "updateProperty": "Emlak Güncelle",
+      "confirmDelete": "Bu emlakı silmek istediğinizden emin misiniz?",
       "noLocation": "Konum yok",
       "beds": "yatak",
       "baths": "banyo",
-      "uploadFailed": "Yukleme basarisiz",
-      "updateFailed": "Emlak guncellenemedi",
-      "createFailed": "Emlak olusturulamadi",
+      "uploadFailed": "Yükleme başarısız",
+      "updateFailed": "Emlak güncellenemedi",
+      "createFailed": "Emlak oluşturulamadı",
       "deleteFailed": "Emlak silinemedi"
     },
     "listProperty": {
       "pageTitle": "Yeni Emlak Ekle",
-      "editPageTitle": "Emlak Duzenle",
-      "backToProperties": "Emlaklara Don",
+      "editPageTitle": "Emlak Düzenle",
+      "backToProperties": "Emlaklara Dön",
       "sections": {
         "basicInfo": "Temel Bilgiler",
         "location": "Konum ve Harita",
-        "media": "Fotograflar ve Medya",
-        "specifications": "Ozellikler",
-        "rooms": "Oda Detaylari",
-        "amenities": "Olanaklar ve Ozellikler"
+        "media": "Fotoğraflar ve Medya",
+        "specifications": "Özellikler",
+        "rooms": "Oda Detayları",
+        "amenities": "Olanaklar ve Özellikler"
       },
       "fields": {
-        "title": "Emlak Basligi",
-        "titlePlaceholder": "Ornegin: Sehir Merkezinde Modern 3+1 Daire",
-        "description": "Aciklama",
-        "descriptionPlaceholder": "Emlaki detayli olarak tanimlayin...",
+        "title": "Emlak Başlığı",
+        "titlePlaceholder": "Örneğin: Şehir Merkezinde Modern 3+1 Daire",
+        "description": "Açıklama",
+        "descriptionPlaceholder": "Emlakı detaylı olarak tanımlayın...",
         "price": "Fiyat",
         "pricePlaceholder": "Fiyat girin",
         "currency": "USD",
-        "type": "Ilan Turu",
-        "forSale": "Satilik",
-        "forRent": "Kiralik",
+        "type": "İlan Türü",
+        "forSale": "Satılık",
+        "forRent": "Kiralık",
         "status": "Durum",
         "active": "Aktif",
-        "sold": "Satildi",
-        "rented": "Kiralandi",
+        "sold": "Satıldı",
+        "rented": "Kiralandı",
         "inactive": "Pasif (Taslak)",
-        "featured": "One Cikan Emlak",
-        "featuredHelp": "One cikan emlaklar listelerde ilk sirada gosterilir"
+        "featured": "Öne Çıkan Emlak",
+        "featuredHelp": "Öne çıkan emlaklar listelerde ilk sırada gösterilir"
       },
       "location": {
         "address": "Adres",
         "addressPlaceholder": "Tam adresi girin",
-        "pinOnMap": "Haritada Isaretle",
-        "selectLocation": "Haritada Konum Sec",
+        "pinOnMap": "Haritada İşaretle",
+        "selectLocation": "Haritada Konum Seç",
         "coordinates": "Koordinatlar",
         "latitude": "Enlem",
         "longitude": "Boylam",
-        "mapInstructions": "Emlak konumunu belirlemek icin haritaya tiklayin",
+        "mapInstructions": "Emlak konumunu belirlemek için haritaya tıklayın",
         "confirmLocation": "Konumu Onayla",
         "closeMap": "Kapat"
       },
       "media": {
-        "propertyImages": "Emlak Fotograflari",
-        "propertyImagesHelp": "Emlakin fotograflarini yukleyin (ilk gorsel kapak olur)",
-        "floorPlans": "Kat Planlari",
-        "floorPlansHelp": "Kat plani gorsellerini yukleyin (istege bagli)",
-        "dragDrop": "Surukle-birak veya yuklemek icin tikla",
-        "maxSize": "Gorsel basina maksimum 10MB",
-        "uploading": "Yukleniyor...",
-        "uploadProgress": "Yukleniyor: {progress}%",
-        "uploadComplete": "Yukleme tamamlandi",
-        "removeImage": "Kaldir",
+        "propertyImages": "Emlak Fotoğrafları",
+        "propertyImagesHelp": "Emlakın fotoğraflarını yükleyin (ilk görsel kapak olur)",
+        "floorPlans": "Kat Planları",
+        "floorPlansHelp": "Kat planı görsellerini yükleyin (isteğe bağlı)",
+        "dragDrop": "Sürükle-bırak veya yüklemek için tıkla",
+        "maxSize": "Görsel başına maksimum 10MB",
+        "uploading": "Yükleniyor...",
+        "uploadProgress": "Yükleniyor: {progress}%",
+        "uploadComplete": "Yükleme tamamlandı",
+        "removeImage": "Kaldır",
         "setCover": "Kapak yap",
         "cover": "Kapak"
       },
@@ -440,37 +440,37 @@
         "propertyType": "Emlak Tipi",
         "types": {
           "apartment": "Daire",
-          "house": "Mustakil Ev",
+          "house": "Müstakil Ev",
           "villa": "Villa",
-          "penthouse": "Cati Kati",
-          "studio": "Studyo",
-          "duplex": "Dublex",
-          "townhouse": "Sira Ev",
+          "penthouse": "Çatı Katı",
+          "studio": "Stüdyo",
+          "duplex": "Dubleks",
+          "townhouse": "Sıra Ev",
           "land": "Arsa",
           "commercial": "Ticari",
           "office": "Ofis"
         },
-        "bedrooms": "Yatak Odasi",
+        "bedrooms": "Yatak Odası",
         "bathrooms": "Banyo",
         "totalArea": "Toplam Alan (m²)",
-        "yearBuilt": "Yapi Yili",
-        "floorNumber": "Bulundugu Kat",
+        "yearBuilt": "Yapı Yılı",
+        "floorNumber": "Bulunduğu Kat",
         "totalFloors": "Toplam Kat",
         "parkingSpaces": "Otopark",
-        "furnished": "Esyali",
+        "furnished": "Eşyalı",
         "furnishedOptions": {
-          "yes": "Esyali",
-          "no": "Esyasiz",
-          "partial": "Kismi Esyali"
+          "yes": "Eşyalı",
+          "no": "Eşyasız",
+          "partial": "Kısmi Eşyalı"
         },
-        "heatingType": "Isitma",
+        "heatingType": "Isıtma",
         "heatingTypes": {
           "central": "Merkezi",
           "individual": "Bireysel",
-          "floor": "Yerden Isitma",
+          "floor": "Yerden Isıtma",
           "none": "Yok"
         },
-        "coolingType": "Sogutma",
+        "coolingType": "Soğutma",
         "coolingTypes": {
           "central": "Merkezi Klima",
           "split": "Split Klima",
@@ -478,15 +478,15 @@
         }
       },
       "rooms": {
-        "title": "Oda Ozellikleri",
-        "help": "Her odanin boyutunu ekleyin (istege bagli)",
+        "title": "Oda Özellikleri",
+        "help": "Her odanın boyutunu ekleyin (isteğe bağlı)",
         "addRoom": "Oda Ekle",
-        "roomName": "Oda Adi",
+        "roomName": "Oda Adı",
         "roomArea": "Alan (m²)",
-        "removeRoom": "Kaldir",
+        "removeRoom": "Kaldır",
         "commonRooms": {
-          "livingRoom": "Oturma Odasi",
-          "bedroom": "Yatak Odasi",
+          "livingRoom": "Oturma Odası",
+          "bedroom": "Yatak Odası",
           "kitchen": "Mutfak",
           "bathroom": "Banyo",
           "balcony": "Balkon",
@@ -494,166 +494,166 @@
           "garage": "Garaj",
           "storage": "Depo",
           "office": "Ofis",
-          "diningRoom": "Yemek Odasi"
+          "diningRoom": "Yemek Odası"
         }
       },
       "amenities": {
         "title": "Olanaklar",
-        "help": "Mevcut olanaklari secin",
-        "pool": "Yuzme Havuzu",
+        "help": "Mevcut olanakları seçin",
+        "pool": "Yüzme Havuzu",
         "gym": "Spor Salonu",
         "sauna": "Sauna",
-        "garden": "Bahce",
-        "elevator": "Asansor",
-        "security": "7/24 Guvenlik",
-        "concierge": "Kapici",
+        "garden": "Bahçe",
+        "elevator": "Asansör",
+        "security": "7/24 Güvenlik",
+        "concierge": "Kapıcı",
         "parking": "Otopark",
         "balcony": "Balkon",
         "terrace": "Teras",
-        "fireplace": "Somine",
+        "fireplace": "Şömine",
         "airConditioning": "Klima",
-        "heating": "Merkezi Isitma",
-        "laundry": "Camasir Odasi",
+        "heating": "Merkezi Isıtma",
+        "laundry": "Çamaşır Odası",
         "storage": "Depo",
         "petFriendly": "Evcil Hayvan Dostu",
-        "seaView": "Deniz Manzarasi",
-        "cityView": "Sehir Manzarasi",
-        "mountainView": "Dag Manzarasi",
-        "smartHome": "Akilli Ev",
-        "solarPanels": "Gunes Paneli",
-        "generator": "Jenerator"
+        "seaView": "Deniz Manzarası",
+        "cityView": "Şehir Manzarası",
+        "mountainView": "Dağ Manzarası",
+        "smartHome": "Akıllı Ev",
+        "solarPanels": "Güneş Paneli",
+        "generator": "Jeneratör"
       },
       "actions": {
         "saveDraft": "Taslak Olarak Kaydet",
-        "publish": "Emlaki Yayinla",
-        "update": "Emlaki Guncelle",
+        "publish": "Emlakı Yayınla",
+        "update": "Emlakı Güncelle",
         "saving": "Kaydediliyor...",
-        "publishing": "Yayinlaniyor..."
+        "publishing": "Yayınlanıyor..."
       },
       "validation": {
-        "titleRequired": "Baslik zorunludur",
+        "titleRequired": "Başlık zorunludur",
         "priceRequired": "Fiyat zorunludur",
-        "descriptionRequired": "Aciklama zorunludur",
+        "descriptionRequired": "Açıklama zorunludur",
         "locationRequired": "Konum zorunludur",
-        "typeRequired": "Ilan turu zorunludur",
-        "imagesRequired": "En az bir gorsel zorunludur"
+        "typeRequired": "İlan türü zorunludur",
+        "imagesRequired": "En az bir görsel zorunludur"
       },
       "success": {
-        "created": "Emlak basariyla olusturuldu",
-        "updated": "Emlak basariyla guncellendi"
+        "created": "Emlak başarıyla oluşturuldu",
+        "updated": "Emlak başarıyla güncellendi"
       },
       "error": {
-        "createFailed": "Emlak olusturulamadi",
-        "updateFailed": "Emlak guncellenemedi",
-        "uploadFailed": "Gorsel yuklenemedi"
+        "createFailed": "Emlak oluşturulamadı",
+        "updateFailed": "Emlak güncellenemedi",
+        "uploadFailed": "Görsel yüklenemedi"
       }
     },
     "content": {
       "heroSlider": {
-        "title": "Ana Sayfa Slaytlari",
-        "description": "Ana sayfadaki banner gorselleri ve metinleri",
+        "title": "Ana Sayfa Slaytları",
+        "description": "Ana sayfadaki banner görselleri ve metinleri",
         "addSlide": "Slayt Ekle",
-        "editSlide": "Slayt Duzenle",
-        "noSlides": "Henuz slayt yok. Ilk slaydinizi ekleyin.",
-        "backgroundImage": "Arka Plan Gorseli",
-        "slideTitle": "Baslik",
-        "titlePlaceholder": "Guvenebileceginiz Uzman Gayrimenkul Rehberligi",
+        "editSlide": "Slayt Düzenle",
+        "noSlides": "Henüz slayt yok. İlk slaydınızı ekleyin.",
+        "backgroundImage": "Arka Plan Görseli",
+        "slideTitle": "Başlık",
+        "titlePlaceholder": "Güvenebileceğiniz Uzman Gayrimenkul Rehberliği",
         "highlight": "Vurgulanan Metin",
         "highlightPlaceholder": "Uzman",
-        "highlightDescription": "Bu metin amber rengiyle vurgulanacak. Basligin bir parcasi olmali.",
-        "subtitle": "Alt Baslik",
-        "subtitlePlaceholder": "Satin aliyor, satiyor veya yatirim yapiyor olun...",
-        "activeLabel": "Aktif (ana sayfada gorunur)",
-        "createSlide": "Slayt Olustur",
-        "updateSlide": "Slayt Guncelle",
+        "highlightDescription": "Bu metin amber rengiyle vurgulanacak. Başlığın bir parçası olmalı.",
+        "subtitle": "Alt Başlık",
+        "subtitlePlaceholder": "Satın alıyor, satıyor veya yatırım yapıyor olun...",
+        "activeLabel": "Aktif (ana sayfada görünür)",
+        "createSlide": "Slayt Oluştur",
+        "updateSlide": "Slayt Güncelle",
         "activate": "Aktif Et",
         "deactivate": "Pasif Et",
-        "changeImage": "Gorsel Degistir",
-        "uploadImage": "Gorsel yuklemek icin tiklayin",
-        "recommendedSize": "Onerilen: 1920x1080",
-        "uploading": "Yukleniyor...",
-        "pleaseUpload": "Lutfen bir gorsel yukleyin",
-        "updateFailed": "Slayt guncellenemedi",
-        "createFailed": "Slayt olusturulamadi",
+        "changeImage": "Görsel Değiştir",
+        "uploadImage": "Görsel yüklemek için tıklayın",
+        "recommendedSize": "Önerilen: 1920x1080",
+        "uploading": "Yükleniyor...",
+        "pleaseUpload": "Lütfen bir görsel yükleyin",
+        "updateFailed": "Slayt güncellenemedi",
+        "createFailed": "Slayt oluşturulamadı",
         "deleteFailed": "Slayt silinemedi",
-        "confirmDelete": "Bu slayti silmek istediginizden emin misiniz?"
+        "confirmDelete": "Bu slaytı silmek istediğinizden emin misiniz?"
       }
     },
     "blog": {
-      "title": "Blog Yazilari",
-      "createNew": "Yeni Olustur",
-      "noPosts": "Henuz blog yazisi yok. Ilk yazinizi olusturun.",
-      "noExcerpt": "Ozet yok",
-      "published": "Yayinda",
+      "title": "Blog Yazıları",
+      "createNew": "Yeni Oluştur",
+      "noPosts": "Henüz blog yazısı yok. İlk yazınızı oluşturun.",
+      "noExcerpt": "Özet yok",
+      "published": "Yayında",
       "draft": "Taslak",
-      "featured": "One Cikan",
+      "featured": "Öne Çıkan",
       "by": "Yazar:",
-      "view": "Goruntule",
-      "edit": "Duzenle",
+      "view": "Görüntüle",
+      "edit": "Düzenle",
       "delete": "Sil",
-      "confirmDelete": "Bu blog yazisini silmek istediginizden emin misiniz?",
-      "deleteFailed": "Blog yazisi silinemedi"
+      "confirmDelete": "Bu blog yazısını silmek istediğinizden emin misiniz?",
+      "deleteFailed": "Blog yazısı silinemedi"
     },
     "blogEditor": {
-      "pageTitle": "Blog Yazisi Olustur",
-      "editPageTitle": "Blog Yazisini Duzenle",
-      "backToBlog": "Bloga Don",
-      "title": "Baslik",
-      "titlePlaceholder": "Blog yazisi basligini girin...",
-      "slug": "URL Kisaltmasi",
+      "pageTitle": "Blog Yazısı Oluştur",
+      "editPageTitle": "Blog Yazısını Düzenle",
+      "backToBlog": "Bloga Dön",
+      "title": "Başlık",
+      "titlePlaceholder": "Blog yazısı başlığını girin...",
+      "slug": "URL Kısaltması",
       "slugPlaceholder": "url-dostu-kisaltma",
-      "excerpt": "Ozet",
-      "excerptPlaceholder": "Yazinin kisa aciklamasi...",
-      "content": "Icerik",
-      "contentPlaceholder": "Blog yazinizi yazmaya baslayin...",
-      "featuredImage": "One Cikan Gorsel",
-      "uploadImage": "Yuklemek icin tiklayin",
-      "changeImage": "Degistir",
-      "removeImage": "Kaldir",
+      "excerpt": "Özet",
+      "excerptPlaceholder": "Yazının kısa açıklaması...",
+      "content": "İçerik",
+      "contentPlaceholder": "Blog yazınızı yazmaya başlayın...",
+      "featuredImage": "Öne Çıkan Görsel",
+      "uploadImage": "Yüklemek için tıklayın",
+      "changeImage": "Değiştir",
+      "removeImage": "Kaldır",
       "author": "Yazar",
-      "authorPlaceholder": "Yazar adi",
+      "authorPlaceholder": "Yazar adı",
       "status": "Durum",
-      "published": "Yayinda",
+      "published": "Yayında",
       "draft": "Taslak",
-      "featured": "One Cikan Yazi",
-      "featuredDescription": "One cikan yazilar ilk sirada gosterilir",
+      "featured": "Öne Çıkan Yazı",
+      "featuredDescription": "Öne çıkan yazılar ilk sırada gösterilir",
       "saveDraft": "Taslak Kaydet",
-      "publish": "Yayinla",
-      "update": "Guncelle",
+      "publish": "Yayınla",
+      "update": "Güncelle",
       "saving": "Kaydediliyor...",
-      "publishing": "Yayinlaniyor...",
+      "publishing": "Yayınlanıyor...",
       "validation": {
-        "titleRequired": "Baslik zorunludur",
-        "slugRequired": "URL kisaltmasi zorunludur",
-        "contentRequired": "Icerik zorunludur",
+        "titleRequired": "Başlık zorunludur",
+        "slugRequired": "URL kısaltması zorunludur",
+        "contentRequired": "İçerik zorunludur",
         "authorRequired": "Yazar zorunludur"
       },
       "success": {
-        "created": "Blog yazisi basariyla olusturuldu",
-        "updated": "Blog yazisi basariyla guncellendi"
+        "created": "Blog yazısı başarıyla oluşturuldu",
+        "updated": "Blog yazısı başarıyla güncellendi"
       },
       "error": {
-        "createFailed": "Blog yazisi olusturulamadi",
-        "updateFailed": "Blog yazisi guncellenemedi",
-        "uploadFailed": "Gorsel yuklenemedi"
+        "createFailed": "Blog yazısı oluşturulamadı",
+        "updateFailed": "Blog yazısı güncellenemedi",
+        "uploadFailed": "Görsel yüklenemedi"
       },
       "toolbar": {
-        "bold": "Kalin",
-        "italic": "Italik",
-        "underline": "Alti Cizili",
-        "strikethrough": "Ustu Cizili",
-        "heading1": "Baslik 1",
-        "heading2": "Baslik 2",
-        "heading3": "Baslik 3",
+        "bold": "Kalın",
+        "italic": "İtalik",
+        "underline": "Altı Çizili",
+        "strikethrough": "Üstü Çizili",
+        "heading1": "Başlık 1",
+        "heading2": "Başlık 2",
+        "heading3": "Başlık 3",
         "bulletList": "Madde Listesi",
-        "orderedList": "Numarali Liste",
+        "orderedList": "Numaralı Liste",
         "alignLeft": "Sola Hizala",
         "alignCenter": "Ortala",
-        "alignRight": "Saga Hizala",
-        "link": "Baglanti Ekle",
-        "image": "Gorsel Ekle",
-        "code": "Kod Blogu",
-        "quote": "Alinti",
+        "alignRight": "Sağa Hizala",
+        "link": "Bağlantı Ekle",
+        "image": "Görsel Ekle",
+        "code": "Kod Bloğu",
+        "quote": "Alıntı",
         "undo": "Geri Al",
         "redo": "Yinele",
         "textColor": "Metin Rengi"
@@ -661,76 +661,76 @@
     }
   },
   "about": {
-    "title": "Hakkimizda",
-    "subtitle": "Bilinçli kararlar almaniza yardimci olmaya adanmis guvenilir gayrimenkul danismanlari",
+    "title": "Hakkımızda",
+    "subtitle": "Bilinçli kararlar almanıza yardımcı olmaya adanmış güvenilir gayrimenkul danışmanları",
     "ourStory": "Hikayemiz",
-    "storyParagraph1": "Premier Realty, basit bir misyonla kuruldu: musterileri on plana koyan durust ve uzman gayrimenkul rehberligi saglamak. Yerel pazardaki yillarin deneyimiyle, yutzlerce aile ve yatirimcinin guvenlé emlak kararlari almasina yardimci olduk.",
-    "storyParagraph2": "Emlak alim veya satiminin stresli bir kumar degil, bilinçli bir karar olmasi gerektigine inaniyoruz. Bu nedenle her musterimiz icin egitim, seffaflik ve kisisellestirilmis hizmete odaklaniyoruz.",
+    "storyParagraph1": "Premier Realty, basit bir misyonla kuruldu: müşterileri ön plana koyan dürüst ve uzman gayrimenkul rehberliği sağlamak. Yerel pazardaki yılların deneyimiyle, yüzlerce aile ve yatırımcının güvenle emlak kararları almasına yardımcı olduk.",
+    "storyParagraph2": "Emlak alım veya satımının stresli bir kumar değil, bilinçli bir karar olması gerektiğine inanıyoruz. Bu nedenle her müşterimiz için eğitim, şeffaflık ve kişiselleştirilmiş hizmete odaklanıyoruz.",
     "stats": {
-      "clientsServed": "Hizmet Verilen Musteri",
-      "yearsExperience": "Yillik Deneyim",
-      "satisfactionRate": "Memnuniyet Orani",
-      "responseTime": "Yanit Suresi"
+      "clientsServed": "Hizmet Verilen Müşteri",
+      "yearsExperience": "Yıllık Deneyim",
+      "satisfactionRate": "Memnuniyet Oranı",
+      "responseTime": "Yanıt Süresi"
     },
-    "ourValues": "Degerlerimiz",
+    "ourValues": "Değerlerimiz",
     "values": {
-      "integrity": "Durustluk",
-      "integrityDescription": "Duymak istemedikleriniz olsa bile, durut degerlendirmeler ve tavsiyeler sunuyoruz. Guveniniz bizim onceliğimizdir.",
-      "expertise": "Uzmanlik",
-      "expertiseDescription": "Ekibimiz, size bilinçli rehberlik saglamak icin piyasa trendleri, mevzuat ve en iyi uygulamalar konusunda guncel kaliyor.",
-      "clientFocus": "Musteri Odaklilik",
-      "clientFocusDescription": "Hedefleriniz bizim hedeflerimizdir. Ihtiyaçlarinizi anlamak ve tavsiyelerimizi buna gore uyarlamak icin zaman ayiriyoruz."
+      "integrity": "Dürüstlük",
+      "integrityDescription": "Duymak istemedikleriniz olsa bile, dürüst değerlendirmeler ve tavsiyeler sunuyoruz. Güveniniz bizim önceliğimizdir.",
+      "expertise": "Uzmanlık",
+      "expertiseDescription": "Ekibimiz, size bilinçli rehberlik sağlamak için piyasa trendleri, mevzuat ve en iyi uygulamalar konusunda güncel kalıyor.",
+      "clientFocus": "Müşteri Odaklılık",
+      "clientFocusDescription": "Hedefleriniz bizim hedeflerimizdir. İhtiyaçlarınızı anlamak ve tavsiyelerimizi buna göre uyarlamak için zaman ayırıyoruz."
     },
-    "ctaTitle": "Birlikte Calisalim",
-    "ctaDescription": "Bir danismanlik randevusu planlayin ve size nasil yardimci olabilecegimizi gorun.",
+    "ctaTitle": "Birlikte Çalışalım",
+    "ctaDescription": "Bir danışmanlık randevusu planlayın ve size nasıl yardımcı olabileceğimizi görün.",
     "ctaButton": "Randevu Al"
   },
   "services": {
     "title": "Hizmetlerimiz",
-    "subtitle": "Ihtiyaçlariniza gore ozellestirilmis kapsamli gayrimenkul danismanlik hizmetleri",
+    "subtitle": "İhtiyaçlarınıza göre özelleştirilmiş kapsamlı gayrimenkul danışmanlık hizmetleri",
     "items": {
       "propertyValuation": {
-        "title": "Emlak Degerleme",
-        "description": "Mevcut piyasa kosullari, karsilastirmali satislar ve emlak ozelliklerine dayali olarak mulkunuzun dogru piyasa degerini alin."
+        "title": "Emlak Değerleme",
+        "description": "Mevcut piyasa koşulları, karşılaştırmalı satışlar ve emlak özelliklerine dayalı olarak mülkünüzün doğru piyasa değerini alın."
       },
       "investmentAnalysis": {
-        "title": "Yatirim Analizi",
-        "description": "ROI projeksiyonlari, piyasa trendleri ve risk degerlendirmesi dahil potansiyel gayrimenkul yatirimlarinin kapsamli analizi."
+        "title": "Yatırım Analizi",
+        "description": "ROI projeksiyonları, piyasa trendleri ve risk değerlendirmesi dahil potansiyel gayrimenkul yatırımlarının kapsamlı analizi."
       },
       "marketResearch": {
-        "title": "Piyasa Arastirmasi",
-        "description": "Yerel piyasa kosullari, mahalle analizi ve emlak degerlerini etkileyebilecek gelecekteki gelisme planlari hakkinda detayli raporlar."
+        "title": "Piyasa Araştırması",
+        "description": "Yerel piyasa koşulları, mahalle analizi ve emlak değerlerini etkileyebilecek gelecekteki gelişme planları hakkında detaylı raporlar."
       },
       "buyingConsultation": {
-        "title": "Satin Alma Danismanligi",
-        "description": "Uygun mulklerin belirlenmesinden en iyi anlasmanin muzakeresine kadar emlak satin alma surecinde uzman rehberlik."
+        "title": "Satın Alma Danışmanlığı",
+        "description": "Uygun mülklerin belirlenmesinden en iyi anlaşmanın müzakeresine kadar emlak satın alma sürecinde uzman rehberlik."
       },
       "sellingStrategy": {
-        "title": "Satis Stratejisi",
-        "description": "Mulkunuzu satisa hazirlamak, fiyatlandirma stratejisi ve en iyi sonucu elde etmek icin pazarlama konusunda stratejik tavsiyeler."
+        "title": "Satış Stratejisi",
+        "description": "Mülkünüzü satışa hazırlamak, fiyatlandırma stratejisi ve en iyi sonucu elde etmek için pazarlama konusunda stratejik tavsiyeler."
       },
       "financialPlanning": {
         "title": "Finansal Planlama",
-        "description": "Ipotek seceneklerini, finansman stratejilerini ve gayrimenkul kararlarinin uzun vadeli finansal etkilerini anlamaniza yardim."
+        "description": "İpotek seçeneklerini, finansman stratejilerini ve gayrimenkul kararlarının uzun vadeli finansal etkilerini anlamanıza yardım."
       }
     },
-    "ctaTitle": "Baslamaya Hazir misiniz?",
-    "ctaDescription": "Gayrimenkul ihtiyaclarinizi gorusmek icin ucretsiz danismanlik randevusu alin.",
+    "ctaTitle": "Başlamaya Hazır mısınız?",
+    "ctaDescription": "Gayrimenkul ihtiyaçlarınızı görüşmek için ücretsiz danışmanlık randevusu alın.",
     "ctaButton": "Randevu Al"
   },
   "blog": {
     "title": "Blogumuz",
-    "subtitle": "Gayrimenkul dunyasindan bilgiler, ipuclari ve haberler",
-    "noPosts": "Su anda mevcut blog yazisi bulunmamaktadir.",
-    "checkBackSoon": "Guncellemeler icin yakinda tekrar kontrol edin!",
-    "featured": "One Cikan",
+    "subtitle": "Gayrimenkul dünyasından bilgiler, ipuçları ve haberler",
+    "noPosts": "Şu anda mevcut blog yazısı bulunmamaktadır.",
+    "checkBackSoon": "Güncellemeler için yakında tekrar kontrol edin!",
+    "featured": "Öne Çıkan",
     "minRead": "dk okuma",
-    "readMore": "Devamini Oku",
-    "latestArticles": "Son Yazilar",
-    "backToBlog": "Bloga Don",
-    "relatedPosts": "Ilgili Yazilar",
-    "ctaTitle": "Baslamaya Hazir misiniz?",
-    "ctaDescription": "Gayrimenkul uzmanlarimizla bir gorusme planlayin.",
+    "readMore": "Devamını Oku",
+    "latestArticles": "Son Yazılar",
+    "backToBlog": "Bloga Dön",
+    "relatedPosts": "İlgili Yazılar",
+    "ctaTitle": "Başlamaya Hazır mısınız?",
+    "ctaDescription": "Gayrimenkul uzmanlarımızla bir görüşme planlayın.",
     "ctaButton": "Randevu Al"
   },
   "heroSlider": {
@@ -739,148 +739,148 @@
       "slide1": {
         "title": "Hayalinizdeki",
         "subtitle": "evi bulun",
-        "label": "kesfet"
+        "label": "keşfet"
       },
       "slide2": {
-        "title": "Geleceginize",
-        "subtitle": "yatirim yapin",
-        "label": "firsat"
+        "title": "Geleceğinize",
+        "subtitle": "yatırım yapın",
+        "label": "fırsat"
       },
       "slide3": {
-        "title": "Luks",
-        "subtitle": "yasam sizi bekliyor",
+        "title": "Lüks",
+        "subtitle": "yaşam sizi bekliyor",
         "label": "premium"
       },
       "slide4": {
         "title": "Uzman",
         "subtitle": "rehberlik",
-        "label": "guvenilir"
+        "label": "güvenilir"
       },
       "slide5": {
         "title": "Sizin Vizyonunuz",
         "subtitle": "bizim misyonumuz",
-        "label": "ortaklik"
+        "label": "ortaklık"
       }
     },
     "articles": {
       "article1": {
         "title": "Hayalinizdeki Evi Bulun",
-        "content1": "Mukemmel eviniz sizi bekliyor. Ister sicak bir baslangic evi, ister genis bir aile konutu veya luks bir malikane ariyor olun, ekibimiz tam olarak aradiginizi bulmaniza yardimci olmaya kararlidir.",
-        "content2": "Ev almanin hayatinizda vereceginiz en buyuk kararlardan biri oldugunu biliyoruz. Bu nedenle, sizi gercekten eviniz gibi hissettirecek mulklerle eslestirmek icin benzersiz ihtiyaclarinizi, tercihlerinizi ve yasam tarzinizi anlamak icin zaman ayiriyoruz.",
-        "content3": "Ilk gosteriden son kapanisa kadar, sorunsuz ve stressiz bir ev alma deneyimi saglamak icin her adimda yaninizdayiz."
+        "content1": "Mükemmel eviniz sizi bekliyor. İster sıcak bir başlangıç evi, ister geniş bir aile konutu veya lüks bir malikane arıyor olun, ekibimiz tam olarak aradığınızı bulmanıza yardımcı olmaya kararlıdır.",
+        "content2": "Ev almanın hayatınızda vereceğiniz en büyük kararlardan biri olduğunu biliyoruz. Bu nedenle, sizi gerçekten eviniz gibi hissettirecek mülklerle eşleştirmek için benzersiz ihtiyaçlarınızı, tercihlerinizi ve yaşam tarzınızı anlamak için zaman ayırıyoruz.",
+        "content3": "İlk gösterimden son kapanışa kadar, sorunsuz ve stressiz bir ev alma deneyimi sağlamak için her adımda yanınızdayız."
       },
       "article2": {
-        "title": "Geleceginize Yatirim Yapin",
-        "content1": "Gayrimenkul, uzun vadeli servet olusturmanin en guvenilir yollarindan biri olmaya devam ediyor. Ister ilk kez yatirim yapan biri olun ister portfoyunuzu genisletiyor olun, akilli yatirim kararlari vermeniz icin gereken icgoruleri ve uzmanligi sagliyoruz.",
-        "content2": "Piyasa analiz araclarimiz ve yerel bilgimiz, guclu deger artis potansiyeli ve mukemmel kira getirisi olan mulkleri belirlemenize yardimci olur.",
-        "content3": "Gayrimenkulu finansal geleceginizin temeli haline getirmenize yardimci olalim."
+        "title": "Geleceğinize Yatırım Yapın",
+        "content1": "Gayrimenkul, uzun vadeli servet oluşturmanın en güvenilir yollarından biri olmaya devam ediyor. İster ilk kez yatırım yapan biri olun ister portföyünüzü genişletiyor olun, akıllı yatırım kararları vermeniz için gereken içgörüleri ve uzmanlığı sağlıyoruz.",
+        "content2": "Piyasa analiz araçlarımız ve yerel bilgimiz, güçlü değer artış potansiyeli ve mükemmel kira getirisi olan mülkleri belirlemenize yardımcı olur.",
+        "content3": "Gayrimenkulü finansal geleceğinizin temeli haline getirmenize yardımcı olalım."
       },
       "article3": {
-        "title": "Luks Yasam Sizi Bekliyor",
-        "content1": "Piyasamizin sundugu en iyi mulkleri deneyimleyin. Panoramik manzarali sasirtici cati katlarindan dunya standartlarinda olanaklara sahip zarif malikânelere kadar, secici alicilari olaganustu evlerle bulusturma konusunda uzmaniz.",
-        "content2": "Luks portfoyumuz, tasarim, iscilik ve konumun zirvesini temsil eden mulkler icerir.",
-        "content3": "Premium mulk secmelerimizle sofistike ve konforlu bir yasam tarzi kesfedin."
+        "title": "Lüks Yaşam Sizi Bekliyor",
+        "content1": "Piyasamızın sunduğu en iyi mülkleri deneyimleyin. Panoramik manzaralı şaşırtıcı çatı katlarından dünya standartlarında olanaklara sahip zarif malikânelere kadar, seçici alıcıları olağanüstü evlerle buluşturma konusunda uzmanız.",
+        "content2": "Lüks portföyümüz, tasarım, işçilik ve konumun zirvesini temsil eden mülkler içerir.",
+        "content3": "Premium mülk seçmelerimizle sofistike ve konforlu bir yaşam tarzı keşfedin."
       },
       "article4": {
-        "title": "Guvenebileceginiz Uzman Rehberlik",
-        "content1": "Gayrimenkul piyasasinda gezinmek uzmanlik, icgoru ve ozveri gerektirir. Deneyimli danismanlarimizdan olusan ekibimiz, her isleme onlarca yillik birlesik deneyim getirir.",
-        "content2": "Piyasa trendlerinin onunde kaliyoruz, mahalle dinamiklerini anliyoruz ve size mumkun olan en iyi sonucu almak icin muzakere becerilerine sahibiz.",
-        "content3": "Bizimle calistiginizda, basariniza adanmis guvenilir bir ortak kazanirsiniz."
+        "title": "Güvenebileceğiniz Uzman Rehberlik",
+        "content1": "Gayrimenkul piyasasında gezinmek uzmanlık, içgörü ve özveri gerektirir. Deneyimli danışmanlarımızdan oluşan ekibimiz, her işleme onlarca yıllık birleşik deneyim getirir.",
+        "content2": "Piyasa trendlerinin önünde kalıyoruz, mahalle dinamiklerini anlıyoruz ve size mümkün olan en iyi sonucu almak için müzakere becerilerine sahibiz.",
+        "content3": "Bizimle çalıştığınızda, başarınıza adanmış güvenilir bir ortak kazanırsınız."
       },
       "article5": {
         "title": "Sizin Vizyonunuz, Bizim Misyonumuz",
-        "content1": "Her musterinin gayrimenkul yolculugu icin benzersiz bir vizyonu vardir. Aile evinizi satiyor, mukemmel yatirim mulkunu ariyor veya yeni bir sehre tasiniyor olsaniz da, hedeflerinizi onceliklimiz yapiyoruz.",
-        "content2": "Kisisellestirilmis yaklasimimiz, tum gayrimenkul deneyiminiz boyunca ozellestirilmis tavsiye ve ozverili destek almanizi saglar.",
-        "content3": "Birlikte, gayrimenkul hayallerinizi gercege donusturecegiz."
+        "content1": "Her müşterinin gayrimenkul yolculuğu için benzersiz bir vizyonu vardır. Aile evinizi satıyor, mükemmel yatırım mülkünü arıyor veya yeni bir şehre taşınıyor olsanız da, hedeflerinizi önceliğimiz yapıyoruz.",
+        "content2": "Kişiselleştirilmiş yaklaşımımız, tüm gayrimenkul deneyiminiz boyunca özelleştirilmiş tavsiye ve özveri destek almanızı sağlar.",
+        "content3": "Birlikte, gayrimenkul hayallerinizi gerçeğe dönüştüreceğiz."
       }
     },
     "thirdView": {
       "titleWords": ["Hayalinizdeki", "Eviniz,", "Her", "Yerde"],
-      "subtitle": "Londra'dan Dubai'ye, Kibris'tan Singapur'a — sizi dunya genelinde premium mulklerle bulusturuyoruz",
-      "featuredProperties": "One Cikan Mulkler",
-      "noImage": "Gorsel yok",
-      "forSale": "Satilik",
-      "forRent": "Kiralik",
+      "subtitle": "Londra'dan Dubai'ye, Kıbrıs'tan Singapur'a — sizi dünya genelinde premium mülklerle buluşturuyoruz",
+      "featuredProperties": "Öne Çıkan Mülkler",
+      "noImage": "Görsel yok",
+      "forSale": "Satılık",
+      "forRent": "Kiralık",
       "perMonth": "/ay",
       "beds": "yatak",
       "baths": "banyo",
-      "noProperties": "Su anda mevcut mulk bulunmamaktadir."
+      "noProperties": "Şu anda mevcut mülk bulunmamaktadır."
     },
     "fourthView": {
-      "title": "Hakkimizda",
-      "subtitle": "2010'dan beri kuresel gayrimenkulde guvenilir ortaginiz",
-      "description": "Dunyanin her yerinde musterilerin mukemmel mulklerini bulmalarına yardimci olmaya adanmis birinci sinif uluslararasi bir gayrimenkul danismanligiyiz. On yili askin deneyimimizle, mukemmellik, durustluk ve kisisellestirilmis hizmet konusunda bir itibar olusturduk.",
-      "coreValues": "Temel Degerlerimiz",
+      "title": "Hakkımızda",
+      "subtitle": "2010'dan beri küresel gayrimenkulde güvenilir ortağınız",
+      "description": "Dünyanın her yerinde müşterilerin mükemmel mülklerini bulmalarına yardımcı olmaya adanmış birinci sınıf uluslararası bir gayrimenkul danışmanlığıyız. On yılı aşkın deneyimimizle, mükemmellik, dürüstlük ve kişiselleştirilmiş hizmet konusunda bir itibar oluşturduk.",
+      "coreValues": "Temel Değerlerimiz",
       "values": {
         "trust": {
-          "title": "Guven ve Durustluk",
-          "description": "Durustluk ve seffaflik yoluyla kalici iliskiler kurmak."
+          "title": "Güven ve Dürüstlük",
+          "description": "Dürüstlük ve şeffaflık yoluyla kalıcı ilişkiler kurmak."
         },
         "excellence": {
-          "title": "Mukemmellik",
-          "description": "Olaganustu sonuclar ve hizmet kalitesi sunmak."
+          "title": "Mükemmellik",
+          "description": "Olağanüstü sonuçlar ve hizmet kalitesi sunmak."
         },
         "clientFirst": {
-          "title": "Once Musteri",
-          "description": "Hedefleriniz bizim onceligigimiz, ihtiyaclariniza gore uyarlanmis."
+          "title": "Önce Müşteri",
+          "description": "Hedefleriniz bizim önceliğimiz, ihtiyaçlarınıza göre uyarlanmış."
         }
       },
       "stats": {
-        "propertiesSold": "Satilan Mulk",
-        "yearsExperience": "Yillik Deneyim",
-        "countries": "Ulke",
-        "clientSatisfaction": "Musteri Memnuniyeti"
+        "propertiesSold": "Satılan Mülk",
+        "yearsExperience": "Yıllık Deneyim",
+        "countries": "Ülke",
+        "clientSatisfaction": "Müşteri Memnuniyeti"
       },
-      "ourJourney": "Yolculugumuz"
+      "ourJourney": "Yolculuğumuz"
     },
     "fifthView": {
       "title": "Hizmetlerimiz",
-      "subtitle": "Ihtiyaclariniza gore uyarlanmis kapsamli gayrimenkul cozumleri",
+      "subtitle": "İhtiyaçlarınıza göre uyarlanmış kapsamlı gayrimenkul çözümleri",
       "services": {
         "propertySales": {
-          "title": "Mulk Satisi",
-          "description": "Yatiriminizdan en iyi degeri almanizi saglayan, tum alis ve satis surecinde uzman rehberlik."
+          "title": "Mülk Satışı",
+          "description": "Yatırımınızdan en iyi değeri almanızı sağlayan, tüm alış ve satış sürecinde uzman rehberlik."
         },
         "propertyManagement": {
-          "title": "Mulk Yonetimi",
-          "description": "Ev sahipleri icin kapsamli yonetim hizmetleri."
+          "title": "Mülk Yönetimi",
+          "description": "Ev sahipleri için kapsamlı yönetim hizmetleri."
         },
         "investmentAdvisory": {
-          "title": "Yatirim Danismanligi",
-          "description": "Portfoyunuzu olusturmak icin stratejik rehberlik."
+          "title": "Yatırım Danışmanlığı",
+          "description": "Portföyünüzü oluşturmak için stratejik rehberlik."
         },
         "internationalProperties": {
-          "title": "Uluslararasi Mulkler",
-          "description": "Dunya genelinde ozel mulkler."
+          "title": "Uluslararası Mülkler",
+          "description": "Dünya genelinde özel mülkler."
         },
         "legalConsultation": {
-          "title": "Hukuki Danismanlik",
-          "description": "Karmasik mulk yasalarinda gezinme."
+          "title": "Hukuki Danışmanlık",
+          "description": "Karmaşık mülk yasalarında gezinme."
         },
         "relocationServices": {
-          "title": "Yer Degistirme Hizmetleri",
-          "description": "Dunya genelinde yeni sehirlere veya ulkelere tasinan bireyler ve aileler icin sorunsuz tasinma destegi."
+          "title": "Yer Değiştirme Hizmetleri",
+          "description": "Dünya genelinde yeni şehirlere veya ülkelere taşınan bireyler ve aileler için sorunsuz taşınma desteği."
         }
       }
     },
     "sixthView": {
-      "title": "Bir Sohbet Baslatalim",
-      "subtitle": "Gayrimenkul yolculugunuzda size yardimci olmak icin buradayiz",
-      "address": "123 Premier Caddesi, Istanbul",
-      "successTitle": "Mesaj Gonderildi!",
-      "successMessage": "Bize ulastiginiz icin tesekkurler. 24 saat icinde size donecegiz.",
-      "sendAnother": "Baska Gonder",
-      "formTitle": "Mesaj Gonder",
-      "formSubtitle": "Formu doldurun, hizlica yanit verecegiz",
+      "title": "Bir Sohbet Başlatalım",
+      "subtitle": "Gayrimenkul yolculuğunuzda size yardımcı olmak için buradayız",
+      "address": "123 Premier Caddesi, İstanbul",
+      "successTitle": "Mesaj Gönderildi!",
+      "successMessage": "Bize ulaştığınız için teşekkürler. 24 saat içinde size döneceğiz.",
+      "sendAnother": "Başka Gönder",
+      "formTitle": "Mesaj Gönder",
+      "formSubtitle": "Formu doldurun, hızlıca yanıt vereceğiz",
       "placeholders": {
-        "name": "Adiniz",
+        "name": "Adınız",
         "email": "E-posta Adresi",
-        "phone": "Telefon Numarasi",
+        "phone": "Telefon Numarası",
         "subject": "Konu",
-        "message": "Mesajiniz..."
+        "message": "Mesajınız..."
       },
-      "sending": "Gonderiliyor...",
-      "sendMessage": "Mesaj Gonder"
+      "sending": "Gönderiliyor...",
+      "sendMessage": "Mesaj Gönder"
     }
   }
 }
