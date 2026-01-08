@@ -28,10 +28,18 @@ export default async function BlogPage() {
   return (
     <div className="bg-white dark:bg-[#0c0a1d]">
       {/* Hero */}
-      <section className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-12 pt-24 md:pt-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative text-white py-30 pt-40 md:pt-54 pb-28">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/cityskyline.png"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-slate-900/70 dark:bg-[#0c0a1d]/80"></div>
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl font-bold mb-3">{t('title')}</h1>
-          <p className="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto text-sm">
+          <p className="text-slate-300 max-w-2xl mx-auto text-sm">
             {t('subtitle')}
           </p>
         </div>
@@ -113,7 +121,7 @@ export default async function BlogPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-12 bg-white dark:bg-[#13102b] dark:border-t dark:border-[#2d2a4a]">
+      <section className="py-12 bg-slate-50 dark:bg-[#0c0a1d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{t('ctaTitle')}</h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm mb-5">{t('ctaDescription')}</p>
