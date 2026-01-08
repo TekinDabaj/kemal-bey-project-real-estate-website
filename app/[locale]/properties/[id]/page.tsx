@@ -521,9 +521,9 @@ export default async function PropertyDetailPage({ params }: Props) {
           {/* Right Side - Related Properties Column (Desktop only) */}
           {shuffledProperties.length > 0 && (
             <div className="hidden xl:block w-[280px] flex-shrink-0">
-              <div className="sticky top-28">
+              <div>
                 <h2 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm">{t('relatedProperties')}</h2>
-                <div className="space-y-3 max-h-[calc(100vh-140px)] overflow-y-auto pr-1 scrollbar-thin">
+                <div className="space-y-3">
                   {shuffledProperties.map((relatedProperty) => (
                     <Link
                       key={relatedProperty.id}
