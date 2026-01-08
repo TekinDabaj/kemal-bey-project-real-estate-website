@@ -335,9 +335,9 @@ export default function BlogEditor({ post, t }: Props) {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0c0a1d]">
+    <div className="min-h-screen bg-slate-900 dark:bg-[#0c0a1d] pt-20 md:pt-24">
       {/* Header */}
-      <div className="bg-white dark:bg-[#13102b] border-b border-slate-200 dark:border-[#2d2a4a] sticky top-0 z-10">
+      <div className="bg-white dark:bg-[#13102b] border-b border-slate-200 dark:border-[#2d2a4a] sticky top-20 md:top-24 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
@@ -369,6 +369,7 @@ export default function BlogEditor({ post, t }: Props) {
         </div>
       </div>
 
+      <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-[calc(100vh-12rem)]">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
           {isEditing ? t.editPageTitle : t.pageTitle}
@@ -785,6 +786,7 @@ export default function BlogEditor({ post, t }: Props) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

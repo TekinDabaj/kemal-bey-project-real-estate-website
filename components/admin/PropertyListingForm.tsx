@@ -205,7 +205,7 @@ export default function PropertyListingForm({ property, t }: Props) {
   )
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-[#0c0a1d]">
+    <div className="min-h-screen bg-slate-900 dark:bg-[#0c0a1d] pt-20 md:pt-24">
       {/* Header */}
       <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
         <div className="max-w-5xl mx-auto flex items-center gap-4">
@@ -224,6 +224,7 @@ export default function PropertyListingForm({ property, t }: Props) {
       </div>
 
       {/* Form */}
+      <div className="bg-slate-100 dark:bg-[#0c0a1d] min-h-[calc(100vh-12rem)]">
       <form onSubmit={(e) => { e.preventDefault(); handleSubmit(false) }} className="max-w-5xl mx-auto px-4 py-6 space-y-4">
         {/* Basic Info Section */}
         <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
@@ -690,6 +691,7 @@ export default function PropertyListingForm({ property, t }: Props) {
           </button>
         </div>
       </form>
+      </div>
 
       {/* Map Picker Modal */}
       <MapPicker

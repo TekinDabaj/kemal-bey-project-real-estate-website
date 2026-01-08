@@ -349,7 +349,7 @@ export default function AdminDashboard({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0c0a1d] overflow-x-hidden">
+    <div className="min-h-screen bg-slate-900 dark:bg-[#0c0a1d] overflow-x-hidden pt-20 md:pt-24">
       {/* Header */}
       <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8">
@@ -411,6 +411,7 @@ export default function AdminDashboard({
         </div>
       </div>
 
+      <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-[calc(100vh-12rem)]">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {activeTab === "reservations" && (
           <>
@@ -750,6 +751,7 @@ export default function AdminDashboard({
         {activeTab === "blog" && (
           <BlogManager initialPosts={blogPosts} />
         )}
+      </div>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ export default async function BlogPage() {
   return (
     <div className="bg-white dark:bg-[#0c0a1d]">
       {/* Hero */}
-      <section className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-12">
+      <section className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-12 pt-24 md:pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl font-bold mb-3">{t('title')}</h1>
           <p className="text-slate-300 dark:text-slate-400 max-w-2xl mx-auto text-sm">
