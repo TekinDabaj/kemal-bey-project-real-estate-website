@@ -122,9 +122,9 @@ export default async function PropertyDetailPage({ params }: Props) {
   const hasCoordinates = property.latitude && property.longitude
 
   return (
-    <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-screen pt-20 md:pt-24">
+    <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-screen pt-16 md:pt-24">
       {/* Header */}
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3 md:px-4 py-2 md:py-3 flex items-center justify-between">
           <Link
             href={`/${locale}/properties`}
             className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition text-sm font-medium"
@@ -145,9 +145,9 @@ export default async function PropertyDetailPage({ params }: Props) {
           </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-6xl mx-auto px-3 md:px-4 py-4 md:py-6">
         {/* Image Gallery */}
-        <div className="mb-4">
+        <div className="mb-3 md:mb-4">
           <ImageGallery
             images={property.images || []}
             title={property.title}
@@ -155,12 +155,12 @@ export default async function PropertyDetailPage({ params }: Props) {
           />
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-4">
+        <div className="grid lg:grid-cols-3 gap-3 md:gap-4">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-3 md:space-y-4">
             {/* Title & Price Card */}
-            <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-              <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+              <div className="flex flex-wrap items-start justify-between gap-2 md:gap-3 mb-2 md:mb-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1.5">
                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
@@ -176,7 +176,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                       </span>
                     )}
                   </div>
-                  <h1 className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white leading-tight">{property.title}</h1>
+                  <h1 className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white leading-tight">{property.title}</h1>
                   {property.location && (
                     <p className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm mt-1">
                       <MapPin size={14} /> {property.location}
@@ -185,7 +185,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                 </div>
                 {property.price && (
                   <div className="text-right shrink-0">
-                    <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+                    <p className="text-xl md:text-2xl font-bold text-amber-600 dark:text-amber-400">
                       ${property.price.toLocaleString()}
                     </p>
                     {property.type === 'rent' && (
@@ -196,48 +196,48 @@ export default async function PropertyDetailPage({ params }: Props) {
               </div>
 
               {/* Quick Stats */}
-              <div className="flex flex-wrap gap-4 py-3 border-t border-slate-100 dark:border-[#2d2a4a]">
+              <div className="flex flex-wrap gap-3 md:gap-4 py-2.5 md:py-3 border-t border-slate-100 dark:border-[#2d2a4a]">
                 {property.bedrooms && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
-                      <BedDouble size={16} className="text-slate-600 dark:text-slate-400" />
+                  <div className="flex items-center gap-1.5 md:gap-2">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
+                      <BedDouble size={14} className="md:w-4 md:h-4 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 dark:text-slate-500">{t('bedrooms')}</p>
-                      <p className="font-semibold text-slate-900 dark:text-white text-sm">{property.bedrooms}</p>
+                      <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('bedrooms')}</p>
+                      <p className="font-semibold text-slate-900 dark:text-white text-xs md:text-sm">{property.bedrooms}</p>
                     </div>
                   </div>
                 )}
                 {property.bathrooms && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
-                      <Bath size={16} className="text-slate-600 dark:text-slate-400" />
+                  <div className="flex items-center gap-1.5 md:gap-2">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
+                      <Bath size={14} className="md:w-4 md:h-4 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 dark:text-slate-500">{t('bathrooms')}</p>
-                      <p className="font-semibold text-slate-900 dark:text-white text-sm">{property.bathrooms}</p>
+                      <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('bathrooms')}</p>
+                      <p className="font-semibold text-slate-900 dark:text-white text-xs md:text-sm">{property.bathrooms}</p>
                     </div>
                   </div>
                 )}
                 {property.area && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
-                      <Expand size={16} className="text-slate-600 dark:text-slate-400" />
+                  <div className="flex items-center gap-1.5 md:gap-2">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
+                      <Expand size={14} className="md:w-4 md:h-4 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 dark:text-slate-500">{t('area')}</p>
-                      <p className="font-semibold text-slate-900 dark:text-white text-sm">{property.area} m²</p>
+                      <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('area')}</p>
+                      <p className="font-semibold text-slate-900 dark:text-white text-xs md:text-sm">{property.area} m²</p>
                     </div>
                   </div>
                 )}
                 {property.parking_spaces && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
-                      <Car size={16} className="text-slate-600 dark:text-slate-400" />
+                  <div className="flex items-center gap-1.5 md:gap-2">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-slate-100 dark:bg-[#1a1735] flex items-center justify-center">
+                      <Car size={14} className="md:w-4 md:h-4 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 dark:text-slate-500">{t('parking')}</p>
-                      <p className="font-semibold text-slate-900 dark:text-white text-sm">{property.parking_spaces}</p>
+                      <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('parking')}</p>
+                      <p className="font-semibold text-slate-900 dark:text-white text-xs md:text-sm">{property.parking_spaces}</p>
                     </div>
                   </div>
                 )}
@@ -246,41 +246,41 @@ export default async function PropertyDetailPage({ params }: Props) {
 
             {/* Description */}
             {property.description && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-                <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-2 uppercase tracking-wide">{t('description')}</h2>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed whitespace-pre-line">{property.description}</p>
+              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                <h2 className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2 uppercase tracking-wide">{t('description')}</h2>
+                <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed whitespace-pre-line">{property.description}</p>
               </div>
             )}
 
             {/* Specifications */}
             {hasSpecs && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-                <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 uppercase tracking-wide">{t('specifications')}</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                <h2 className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white mb-2 md:mb-3 uppercase tracking-wide">{t('specifications')}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
                   {property.property_type && (
-                    <div className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <Building2 size={16} className="text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 md:gap-2 p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <Building2 size={14} className="md:w-4 md:h-4 text-amber-500 shrink-0" />
                       <div className="min-w-0">
-                        <p className="text-xs text-slate-500 dark:text-slate-500">{t('propertyType')}</p>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{propertyTypeLabels[property.property_type] || property.property_type}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('propertyType')}</p>
+                        <p className="text-xs md:text-sm font-medium text-slate-900 dark:text-white truncate">{propertyTypeLabels[property.property_type] || property.property_type}</p>
                       </div>
                     </div>
                   )}
                   {property.year_built && (
-                    <div className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <Clock size={16} className="text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 md:gap-2 p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <Clock size={14} className="md:w-4 md:h-4 text-amber-500 shrink-0" />
                       <div>
-                        <p className="text-xs text-slate-500 dark:text-slate-500">{t('yearBuilt')}</p>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">{property.year_built}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('yearBuilt')}</p>
+                        <p className="text-xs md:text-sm font-medium text-slate-900 dark:text-white">{property.year_built}</p>
                       </div>
                     </div>
                   )}
                   {(property.floor_number || property.total_floors) && (
-                    <div className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <Layers size={16} className="text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 md:gap-2 p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <Layers size={14} className="md:w-4 md:h-4 text-amber-500 shrink-0" />
                       <div>
-                        <p className="text-xs text-slate-500 dark:text-slate-500">{t('floor')}</p>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">
+                        <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('floor')}</p>
+                        <p className="text-xs md:text-sm font-medium text-slate-900 dark:text-white">
                           {property.floor_number && property.total_floors
                             ? `${property.floor_number} / ${property.total_floors}`
                             : property.floor_number || property.total_floors
@@ -290,29 +290,29 @@ export default async function PropertyDetailPage({ params }: Props) {
                     </div>
                   )}
                   {property.furnished !== null && (
-                    <div className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <Sofa size={16} className="text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 md:gap-2 p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <Sofa size={14} className="md:w-4 md:h-4 text-amber-500 shrink-0" />
                       <div>
-                        <p className="text-xs text-slate-500 dark:text-slate-500">{t('furnished')}</p>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">{furnishedLabels[String(property.furnished)] || '-'}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('furnished')}</p>
+                        <p className="text-xs md:text-sm font-medium text-slate-900 dark:text-white">{furnishedLabels[String(property.furnished)] || '-'}</p>
                       </div>
                     </div>
                   )}
                   {property.heating_type && (
-                    <div className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <Flame size={16} className="text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 md:gap-2 p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <Flame size={14} className="md:w-4 md:h-4 text-amber-500 shrink-0" />
                       <div>
-                        <p className="text-xs text-slate-500 dark:text-slate-500">{t('heating')}</p>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">{heatingLabels[property.heating_type] || property.heating_type}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('heating')}</p>
+                        <p className="text-xs md:text-sm font-medium text-slate-900 dark:text-white">{heatingLabels[property.heating_type] || property.heating_type}</p>
                       </div>
                     </div>
                   )}
                   {property.cooling_type && (
-                    <div className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <Snowflake size={16} className="text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-1.5 md:gap-2 p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <Snowflake size={14} className="md:w-4 md:h-4 text-amber-500 shrink-0" />
                       <div>
-                        <p className="text-xs text-slate-500 dark:text-slate-500">{t('cooling')}</p>
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">{coolingLabels[property.cooling_type] || property.cooling_type}</p>
+                        <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-500">{t('cooling')}</p>
+                        <p className="text-xs md:text-sm font-medium text-slate-900 dark:text-white">{coolingLabels[property.cooling_type] || property.cooling_type}</p>
                       </div>
                     </div>
                   )}
@@ -322,13 +322,13 @@ export default async function PropertyDetailPage({ params }: Props) {
 
             {/* Room Details */}
             {hasRooms && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-                <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 uppercase tracking-wide">{t('roomDetails')}</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                <h2 className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white mb-2 md:mb-3 uppercase tracking-wide">{t('roomDetails')}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2">
                   {(property.rooms as RoomSpec[]).map((room, index) => (
-                    <div key={index} className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
-                      <span className="text-sm text-slate-700 dark:text-slate-300">{roomLabels[room.name] || room.name}</span>
-                      <span className="text-sm font-semibold text-slate-900 dark:text-white">{room.area} m²</span>
+                    <div key={index} className="flex items-center justify-between p-2 md:p-2.5 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                      <span className="text-xs md:text-sm text-slate-700 dark:text-slate-300">{roomLabels[room.name] || room.name}</span>
+                      <span className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white">{room.area} m²</span>
                     </div>
                   ))}
                 </div>
@@ -337,15 +337,15 @@ export default async function PropertyDetailPage({ params }: Props) {
 
             {/* Amenities */}
             {hasAmenities && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-                <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 uppercase tracking-wide">{t('amenities')}</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                <h2 className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white mb-2 md:mb-3 uppercase tracking-wide">{t('amenities')}</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2">
                   {(property.amenities as string[]).map((amenity) => {
                     const Icon = amenityIcons[amenity] || Check
                     return (
-                      <div key={amenity} className="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
-                        <Icon size={14} className="shrink-0" />
-                        <span className="text-sm">{tAdmin(`amenities.${amenity}`)}</span>
+                      <div key={amenity} className="flex items-center gap-1.5 md:gap-2 p-1.5 md:p-2 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                        <Icon size={12} className="md:w-3.5 md:h-3.5 shrink-0" />
+                        <span className="text-xs md:text-sm">{tAdmin(`amenities.${amenity}`)}</span>
                       </div>
                     )
                   })}
@@ -355,11 +355,11 @@ export default async function PropertyDetailPage({ params }: Props) {
 
             {/* Floor Plans */}
             {hasFloorPlans && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-                <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 uppercase tracking-wide flex items-center gap-2">
-                  <ImageIcon size={16} /> {t('floorPlans')}
+              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                <h2 className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white mb-2 md:mb-3 uppercase tracking-wide flex items-center gap-1.5 md:gap-2">
+                  <ImageIcon size={14} className="md:w-4 md:h-4" /> {t('floorPlans')}
                 </h2>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-1.5 md:gap-2">
                   {(property.floor_plans as string[]).map((plan, index) => (
                     <div key={plan} className="aspect-[4/3] bg-slate-100 dark:bg-[#1a1735] rounded-lg overflow-hidden">
                       <img
@@ -375,9 +375,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 
             {/* Map */}
             {hasCoordinates && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-                <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 uppercase tracking-wide flex items-center gap-2">
-                  <MapPin size={16} /> {t('location')}
+              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                <h2 className="text-xs md:text-sm font-semibold text-slate-900 dark:text-white mb-2 md:mb-3 uppercase tracking-wide flex items-center gap-1.5 md:gap-2">
+                  <MapPin size={14} className="md:w-4 md:h-4" /> {t('location')}
                 </h2>
                 <div className="aspect-[16/9] rounded-lg overflow-hidden bg-slate-100 dark:bg-[#1a1735]">
                   <iframe
@@ -391,8 +391,8 @@ export default async function PropertyDetailPage({ params }: Props) {
                   />
                 </div>
                 {property.location && (
-                  <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                    <MapPin size={12} /> {property.location}
+                  <p className="mt-1.5 md:mt-2 text-xs md:text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                    <MapPin size={10} className="md:w-3 md:h-3" /> {property.location}
                   </p>
                 )}
               </div>
@@ -449,17 +449,17 @@ export default async function PropertyDetailPage({ params }: Props) {
       </div>
 
       {/* Fixed Bottom Bar for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-[#13102b] border-t border-slate-200 dark:border-[#2d2a4a] p-4 z-40 shadow-lg shadow-black/10 dark:shadow-purple-900/20">
-        <div className="flex gap-3 max-w-lg mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-[#13102b] border-t border-slate-200 dark:border-[#2d2a4a] p-3 z-40 shadow-lg shadow-black/10 dark:shadow-purple-900/20">
+        <div className="flex gap-2 max-w-lg mx-auto">
           <Link
             href={`/${locale}/book`}
-            className="flex-1 flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-3 rounded-lg font-semibold transition text-sm"
+            className="flex-1 flex items-center justify-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-slate-900 px-3 py-2.5 rounded-lg font-semibold transition text-xs"
           >
-            <Calendar size={18} /> {t('bookConsultation')}
+            <Calendar size={16} /> {t('bookConsultation')}
           </Link>
           <Link
             href={`/${locale}/contact`}
-            className="flex items-center justify-center gap-2 border border-slate-300 dark:border-[#2d2a4a] hover:border-amber-500 dark:hover:border-amber-500 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 px-4 py-3 rounded-lg font-medium transition text-sm"
+            className="flex items-center justify-center gap-1.5 border border-slate-300 dark:border-[#2d2a4a] hover:border-amber-500 dark:hover:border-amber-500 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-2.5 rounded-lg font-medium transition text-xs"
           >
             {t('contactUs')}
           </Link>
@@ -467,7 +467,7 @@ export default async function PropertyDetailPage({ params }: Props) {
       </div>
 
       {/* Spacer for fixed bottom bar on mobile */}
-      <div className="h-20 lg:hidden" />
+      <div className="h-16 lg:hidden" />
     </div>
   )
 }

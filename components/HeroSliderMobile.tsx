@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useTranslations } from "next-intl";
 import WorldMap from "./worldmap";
 import { Property } from "@/types/database";
 import {
@@ -36,70 +37,14 @@ type Props = {
 };
 
 const SLIDE_DATA = [
-  {
-    title: "Find Your",
-    subtitle: "dream home",
-    label: "dıscover",
-    color: "#169216",
-  },
-  {
-    title: "Invest in",
-    subtitle: "your future",
-    label: "opportunıty",
-    color: "#C9567D",
-  },
-  {
-    title: "Luxury",
-    subtitle: "living awaits",
-    label: "premıum",
-    color: "#24c7c0",
-  },
-  { title: "Expert", subtitle: "guidance", label: "trusted", color: "#6593d6" },
-  {
-    title: "Your Vision",
-    subtitle: "our mission",
-    label: "partnershıp",
-    color: "#1fbeca",
-  },
+  { key: "slide1", color: "#169216" },
+  { key: "slide2", color: "#C9567D" },
+  { key: "slide3", color: "#24c7c0" },
+  { key: "slide4", color: "#6593d6" },
+  { key: "slide5", color: "#1fbeca" },
 ];
 
-const ARTICLES = [
-  {
-    title: "Find Your Dream Home",
-    content: [
-      "Your perfect home is out there waiting for you. Whether you're looking for a cozy starter home, a spacious family residence, or a luxurious estate, our team is dedicated to helping you find exactly what you're searching for.",
-      "We understand that buying a home is one of the biggest decisions you'll ever make. That's why we take the time to understand your unique needs, preferences, and lifestyle to match you with properties that truly feel like home.",
-    ],
-  },
-  {
-    title: "Invest in Your Future",
-    content: [
-      "Real estate remains one of the most reliable ways to build long-term wealth. Whether you're a first-time investor or expanding your portfolio, we provide the insights and expertise you need to make smart investment decisions.",
-      "Our market analysis tools and local knowledge help you identify properties with strong appreciation potential and excellent rental yields.",
-    ],
-  },
-  {
-    title: "Luxury Living Awaits",
-    content: [
-      "Experience the finest properties our market has to offer. From stunning penthouses with panoramic views to elegant estates with world-class amenities, we specialize in connecting discerning buyers with exceptional homes.",
-      "Our luxury portfolio features properties that represent the pinnacle of design, craftsmanship, and location.",
-    ],
-  },
-  {
-    title: "Expert Guidance You Can Trust",
-    content: [
-      "Navigating the real estate market requires expertise, insight, and dedication. Our team of experienced consultants brings decades of combined experience to every transaction.",
-      "We stay ahead of market trends, understand neighborhood dynamics, and have the negotiation skills to get you the best possible outcome.",
-    ],
-  },
-  {
-    title: "Your Vision, Our Mission",
-    content: [
-      "Every client has a unique vision for their real estate journey. Whether you're selling your family home, searching for the perfect investment property, or relocating to a new city, we make your goals our priority.",
-      "Our personalized approach ensures that you receive tailored advice and dedicated support throughout your entire real estate experience.",
-    ],
-  },
-];
+const ARTICLE_KEYS = ["article1", "article2", "article3", "article4", "article5"];
 
 const THIRD_VIEW_DATA = [
   { title: "Start Your Journey Today", subtitle: "Let us guide you home" },
@@ -161,6 +106,7 @@ export default function HeroSliderMobile({
   slideImages,
   properties = [],
 }: Props) {
+  const t = useTranslations("heroSlider");
   const heroRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
@@ -1874,11 +1820,11 @@ export default function HeroSliderMobile({
                 }`}
               >
                 <div className="mobile-text-slice">
-                  <div className="mobile-text-main-wrapper">{slide.title}</div>
+                  <div className="mobile-text-main-wrapper">{t(`slides.${slide.key}.title`)}</div>
                 </div>
                 <div className="mobile-text-slice">
                   <div className="mobile-text-main-wrapper">
-                    {slide.subtitle}
+                    {t(`slides.${slide.key}.subtitle`)}
                   </div>
                 </div>
                 <div className="mobile-text-label-container">
@@ -1889,7 +1835,7 @@ export default function HeroSliderMobile({
                       borderColor: slide.color,
                     }}
                   >
-                    {slide.label}
+                    {t(`slides.${slide.key}.label`)}
                   </span>
                 </div>
               </div>
@@ -1918,7 +1864,7 @@ export default function HeroSliderMobile({
             ))}
           </div>
 
-          {ARTICLES.map((article, articleIndex) => (
+          {ARTICLE_KEYS.map((articleKey, articleIndex) => (
             <div
               key={articleIndex}
               className={`mobile-article-container ${
@@ -1927,16 +1873,19 @@ export default function HeroSliderMobile({
             >
               <div className="mobile-article-title-wrapper">
                 <div className="mobile-article-text-inner">
-                  <h2 className="mobile-article-title">{article.title}</h2>
+                  <h2 className="mobile-article-title">{t(`articles.${articleKey}.title`)}</h2>
                 </div>
               </div>
-              {article.content.map((para, paraIndex) => (
-                <div key={paraIndex} className="mobile-article-text-wrapper">
-                  <div className="mobile-article-text-inner">
-                    <p className="mobile-article-text">{para}</p>
-                  </div>
+              <div className="mobile-article-text-wrapper">
+                <div className="mobile-article-text-inner">
+                  <p className="mobile-article-text">{t(`articles.${articleKey}.content1`)}</p>
                 </div>
-              ))}
+              </div>
+              <div className="mobile-article-text-wrapper">
+                <div className="mobile-article-text-inner">
+                  <p className="mobile-article-text">{t(`articles.${articleKey}.content2`)}</p>
+                </div>
+              </div>
             </div>
           ))}
         </section>
@@ -1951,10 +1900,9 @@ export default function HeroSliderMobile({
               </div>
             </div>
             <div className="mobile-third-content">
-              <h2 className="mobile-third-title">Your Dream Home, Anywhere</h2>
+              <h2 className="mobile-third-title">{(t.raw("thirdView.titleWords") as string[]).join(" ")}</h2>
               <p className="mobile-third-subtitle">
-                From London to Dubai, Cyprus to Singapore — we connect you with
-                premium properties worldwide
+                {t("thirdView.subtitle")}
               </p>
             </div>
           </div>
@@ -1962,7 +1910,7 @@ export default function HeroSliderMobile({
           {/* Property Cards Section */}
           <div className="mobile-third-properties">
             <div className="mobile-properties-header">
-              <h3 className="mobile-properties-title">Featured Properties</h3>
+              <h3 className="mobile-properties-title">{t("thirdView.featuredProperties")}</h3>
               {displayProperties.length > 0 && (
                 <div className="mobile-properties-nav">
                   <button
@@ -2007,19 +1955,19 @@ export default function HeroSliderMobile({
                               fontSize: "11px",
                             }}
                           >
-                            No image
+                            {t("thirdView.noImage")}
                           </div>
                         )}
                         {property.type && (
                           <div className="mobile-property-card-badge">
-                            {property.type === "sale" ? "For Sale" : "For Rent"}
+                            {property.type === "sale" ? t("thirdView.forSale") : t("thirdView.forRent")}
                           </div>
                         )}
                         {property.price && (
                           <div className="mobile-property-card-price">
                             <p>
                               ${property.price.toLocaleString()}
-                              {property.type === "rent" && <span>/mo</span>}
+                              {property.type === "rent" && <span>{t("thirdView.perMonth")}</span>}
                             </p>
                           </div>
                         )}
@@ -2041,12 +1989,12 @@ export default function HeroSliderMobile({
                         <div className="mobile-property-card-features">
                           {property.bedrooms && (
                             <span className="mobile-property-card-feature">
-                              <BedDouble size={12} /> {property.bedrooms} beds
+                              <BedDouble size={12} /> {property.bedrooms} {t("thirdView.beds")}
                             </span>
                           )}
                           {property.bathrooms && (
                             <span className="mobile-property-card-feature">
-                              <Bath size={12} /> {property.bathrooms} baths
+                              <Bath size={12} /> {property.bathrooms} {t("thirdView.baths")}
                             </span>
                           )}
                           {property.area && (
@@ -2062,7 +2010,7 @@ export default function HeroSliderMobile({
               </div>
             ) : (
               <div className="mobile-no-properties">
-                No properties available at the moment.
+                {t("thirdView.noProperties")}
               </div>
             )}
           </div>
@@ -2084,23 +2032,20 @@ export default function HeroSliderMobile({
 
           <div className="mobile-fourth-content">
             <div className="mobile-fourth-header">
-              <h2 className="mobile-fourth-title">About Us</h2>
+              <h2 className="mobile-fourth-title">{t("fourthView.title")}</h2>
               <p className="mobile-fourth-subtitle">
-                Your trusted partner in global real estate since 2010
+                {t("fourthView.subtitle")}
               </p>
             </div>
 
             <div className="mobile-fourth-body">
               <p className="mobile-fourth-text">
-                We are a premier international real estate consultancy dedicated
-                to helping clients find their perfect property anywhere in the
-                world. With over a decade of experience, we&apos;ve built a
-                reputation for excellence, integrity, and personalized service.
+                {t("fourthView.description")}
               </p>
             </div>
 
             <div className="mobile-fourth-values">
-              <h3 className="mobile-fourth-values-title">Our Core Values</h3>
+              <h3 className="mobile-fourth-values-title">{t("fourthView.coreValues")}</h3>
               <div className="mobile-fourth-values-grid">
                 <div className="mobile-fourth-value-card">
                   <div className="mobile-fourth-value-icon">
@@ -2108,11 +2053,10 @@ export default function HeroSliderMobile({
                   </div>
                   <div className="mobile-fourth-value-content">
                     <h4 className="mobile-fourth-value-title">
-                      Trust & Integrity
+                      {t("fourthView.values.trust.title")}
                     </h4>
                     <p className="mobile-fourth-value-desc">
-                      Building lasting relationships through honesty and
-                      transparency.
+                      {t("fourthView.values.trust.description")}
                     </p>
                   </div>
                 </div>
@@ -2121,9 +2065,9 @@ export default function HeroSliderMobile({
                     <Award size={18} />
                   </div>
                   <div className="mobile-fourth-value-content">
-                    <h4 className="mobile-fourth-value-title">Excellence</h4>
+                    <h4 className="mobile-fourth-value-title">{t("fourthView.values.excellence.title")}</h4>
                     <p className="mobile-fourth-value-desc">
-                      Delivering exceptional results and service quality.
+                      {t("fourthView.values.excellence.description")}
                     </p>
                   </div>
                 </div>
@@ -2132,9 +2076,9 @@ export default function HeroSliderMobile({
                     <Users size={18} />
                   </div>
                   <div className="mobile-fourth-value-content">
-                    <h4 className="mobile-fourth-value-title">Client First</h4>
+                    <h4 className="mobile-fourth-value-title">{t("fourthView.values.clientFirst.title")}</h4>
                     <p className="mobile-fourth-value-desc">
-                      Your goals are our priority, tailored to your needs.
+                      {t("fourthView.values.clientFirst.description")}
                     </p>
                   </div>
                 </div>
@@ -2144,26 +2088,26 @@ export default function HeroSliderMobile({
             <div className="mobile-fourth-stats">
               <div className="mobile-fourth-stat">
                 <div className="mobile-fourth-stat-number">500+</div>
-                <div className="mobile-fourth-stat-label">Properties Sold</div>
+                <div className="mobile-fourth-stat-label">{t("fourthView.stats.propertiesSold")}</div>
               </div>
               <div className="mobile-fourth-stat">
                 <div className="mobile-fourth-stat-number">15+</div>
-                <div className="mobile-fourth-stat-label">Years Experience</div>
+                <div className="mobile-fourth-stat-label">{t("fourthView.stats.yearsExperience")}</div>
               </div>
               <div className="mobile-fourth-stat">
                 <div className="mobile-fourth-stat-number">30+</div>
-                <div className="mobile-fourth-stat-label">Countries</div>
+                <div className="mobile-fourth-stat-label">{t("fourthView.stats.countries")}</div>
               </div>
               <div className="mobile-fourth-stat">
                 <div className="mobile-fourth-stat-number">98%</div>
                 <div className="mobile-fourth-stat-label">
-                  Client Satisfaction
+                  {t("fourthView.stats.clientSatisfaction")}
                 </div>
               </div>
             </div>
 
             <div className="mobile-fourth-gallery">
-              <h3 className="mobile-fourth-gallery-title">Our Journey</h3>
+              <h3 className="mobile-fourth-gallery-title">{t("fourthView.ourJourney")}</h3>
               <div className="mobile-fourth-gallery-scroll">
                 <div className="mobile-fourth-gallery-grid">
                   {GALLERY_IMAGES.map((image, index) => (
@@ -2186,9 +2130,9 @@ export default function HeroSliderMobile({
         {/* Fifth View Section - Our Services */}
         <section className="mobile-fifth-view">
           <div className="mobile-fifth-header">
-            <h1 className="mobile-fifth-title">Our Services</h1>
+            <h1 className="mobile-fifth-title">{t("fifthView.title")}</h1>
             <p className="mobile-fifth-subtitle">
-              Comprehensive real estate solutions tailored to your needs
+              {t("fifthView.subtitle")}
             </p>
           </div>
 
@@ -2198,9 +2142,9 @@ export default function HeroSliderMobile({
                 <Home size={20} />
               </div>
               <div className="mobile-service-content">
-                <h3 className="mobile-service-title">Property Sales</h3>
+                <h3 className="mobile-service-title">{t("fifthView.services.propertySales.title")}</h3>
                 <p className="mobile-service-desc">
-                  Expert guidance through the entire buying and selling process.
+                  {t("fifthView.services.propertySales.description")}
                 </p>
               </div>
             </div>
@@ -2210,9 +2154,9 @@ export default function HeroSliderMobile({
                 <Building size={20} />
               </div>
               <div className="mobile-service-content">
-                <h3 className="mobile-service-title">Property Management</h3>
+                <h3 className="mobile-service-title">{t("fifthView.services.propertyManagement.title")}</h3>
                 <p className="mobile-service-desc">
-                  Comprehensive management services for landlords.
+                  {t("fifthView.services.propertyManagement.description")}
                 </p>
               </div>
             </div>
@@ -2222,9 +2166,9 @@ export default function HeroSliderMobile({
                 <TrendingUp size={20} />
               </div>
               <div className="mobile-service-content">
-                <h3 className="mobile-service-title">Investment Advisory</h3>
+                <h3 className="mobile-service-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
                 <p className="mobile-service-desc">
-                  Strategic guidance to build your portfolio.
+                  {t("fifthView.services.investmentAdvisory.description")}
                 </p>
               </div>
             </div>
@@ -2234,9 +2178,9 @@ export default function HeroSliderMobile({
                 <Globe size={20} />
               </div>
               <div className="mobile-service-content">
-                <h3 className="mobile-service-title">International Properties</h3>
+                <h3 className="mobile-service-title">{t("fifthView.services.internationalProperties.title")}</h3>
                 <p className="mobile-service-desc">
-                  Exclusive properties worldwide.
+                  {t("fifthView.services.internationalProperties.description")}
                 </p>
               </div>
             </div>
@@ -2246,9 +2190,9 @@ export default function HeroSliderMobile({
                 <FileText size={20} />
               </div>
               <div className="mobile-service-content">
-                <h3 className="mobile-service-title">Legal Consultation</h3>
+                <h3 className="mobile-service-title">{t("fifthView.services.legalConsultation.title")}</h3>
                 <p className="mobile-service-desc">
-                  Navigate complex property laws.
+                  {t("fifthView.services.legalConsultation.description")}
                 </p>
               </div>
             </div>
@@ -2258,9 +2202,9 @@ export default function HeroSliderMobile({
                 <Handshake size={20} />
               </div>
               <div className="mobile-service-content">
-                <h3 className="mobile-service-title">Relocation Services</h3>
+                <h3 className="mobile-service-title">{t("fifthView.services.relocationServices.title")}</h3>
                 <p className="mobile-service-desc">
-                  Seamless relocation support for individuals and families.
+                  {t("fifthView.services.relocationServices.description")}
                 </p>
               </div>
             </div>

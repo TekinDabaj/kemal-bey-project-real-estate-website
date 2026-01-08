@@ -670,5 +670,154 @@
     "ctaTitle": "Pronto per iniziare?",
     "ctaDescription": "Prenota una consulenza con i nostri esperti immobiliari.",
     "ctaButton": "Prenota Consulenza"
+  },
+  "heroSlider": {
+    "back": "← Indietro",
+    "slides": {
+      "slide1": {
+        "title": "Trova la tua",
+        "subtitle": "casa dei sogni",
+        "label": "scopri"
+      },
+      "slide2": {
+        "title": "Investi nel",
+        "subtitle": "tuo futuro",
+        "label": "opportunita"
+      },
+      "slide3": {
+        "title": "Il lusso",
+        "subtitle": "ti aspetta",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Consulenza",
+        "subtitle": "esperta",
+        "label": "fiducia"
+      },
+      "slide5": {
+        "title": "La tua visione",
+        "subtitle": "la nostra missione",
+        "label": "partnership"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Trova la tua casa dei sogni",
+        "content1": "La tua casa perfetta ti sta aspettando. Che tu stia cercando un accogliente primo appartamento, una spaziosa residenza familiare o una proprieta di lusso, il nostro team e dedicato ad aiutarti a trovare esattamente cio che cerchi.",
+        "content2": "Capiamo che comprare casa e una delle decisioni piu importanti della tua vita. Ecco perche ci prendiamo il tempo per capire le tue esigenze uniche, preferenze e stile di vita per collegarti con proprieta che sembrano davvero casa.",
+        "content3": "Dalla prima visita alla chiusura finale, siamo con te ad ogni passo, garantendo un'esperienza di acquisto fluida e senza stress."
+      },
+      "article2": {
+        "title": "Investi nel tuo futuro",
+        "content1": "L'immobiliare rimane uno dei modi piu affidabili per costruire ricchezza a lungo termine. Che tu sia un investitore alle prime armi o stia espandendo il tuo portafoglio, forniamo le informazioni e l'esperienza di cui hai bisogno per prendere decisioni di investimento intelligenti.",
+        "content2": "I nostri strumenti di analisi di mercato e la conoscenza locale ti aiutano a identificare proprieta con forte potenziale di apprezzamento e eccellenti rendimenti da affitto.",
+        "content3": "Lascia che ti aiutiamo a trasformare l'immobiliare in un pilastro del tuo futuro finanziario."
+      },
+      "article3": {
+        "title": "Il lusso ti aspetta",
+        "content1": "Scopri le migliori proprieta che il nostro mercato ha da offrire. Dagli attici mozzafiato con viste panoramiche alle eleganti tenute con servizi di classe mondiale, siamo specializzati nel collegare acquirenti esigenti con case eccezionali.",
+        "content2": "Il nostro portafoglio di lusso comprende proprieta che rappresentano l'apice del design, dell'artigianato e della posizione.",
+        "content3": "Scopri uno stile di vita di raffinatezza e comfort con la nostra selezione di proprieta premium."
+      },
+      "article4": {
+        "title": "Consulenza esperta di cui ti puoi fidare",
+        "content1": "Navigare nel mercato immobiliare richiede competenza, intuizione e dedizione. Il nostro team di consulenti esperti porta decenni di esperienza combinata in ogni transazione.",
+        "content2": "Restiamo avanti rispetto alle tendenze di mercato, comprendiamo le dinamiche dei quartieri e abbiamo le capacita negoziali per ottenere il miglior risultato possibile per te.",
+        "content3": "Quando lavori con noi, guadagni un partner di fiducia impegnato nel tuo successo."
+      },
+      "article5": {
+        "title": "La tua visione, la nostra missione",
+        "content1": "Ogni cliente ha una visione unica per il proprio percorso immobiliare. Che tu stia vendendo la tua casa di famiglia, cercando la proprieta di investimento perfetta o trasferendoti in una nuova citta, facciamo dei tuoi obiettivi la nostra priorita.",
+        "content2": "Il nostro approccio personalizzato garantisce che tu riceva consulenza su misura e supporto dedicato durante tutta la tua esperienza immobiliare.",
+        "content3": "Insieme, trasformeremo i tuoi sogni immobiliari in realta."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["La", "Tua Casa", "dei Sogni,", "Ovunque"],
+      "subtitle": "Da Londra a Dubai, da Cipro a Singapore — ti colleghiamo con proprieta premium in tutto il mondo",
+      "featuredProperties": "Proprieta in Evidenza",
+      "noImage": "Nessuna immagine",
+      "forSale": "In vendita",
+      "forRent": "In affitto",
+      "perMonth": "/mese",
+      "beds": "camere",
+      "baths": "bagni",
+      "noProperties": "Nessuna proprieta disponibile al momento."
+    },
+    "fourthView": {
+      "title": "Chi siamo",
+      "subtitle": "Il tuo partner di fiducia nel settore immobiliare globale dal 2010",
+      "description": "Siamo una societa di consulenza immobiliare internazionale di primo livello dedicata ad aiutare i clienti a trovare la loro proprieta perfetta ovunque nel mondo. Con oltre un decennio di esperienza, abbiamo costruito una reputazione di eccellenza, integrita e servizio personalizzato.",
+      "coreValues": "I nostri valori fondamentali",
+      "values": {
+        "trust": {
+          "title": "Fiducia e integrita",
+          "description": "Costruire relazioni durature attraverso onesta e trasparenza."
+        },
+        "excellence": {
+          "title": "Eccellenza",
+          "description": "Fornire risultati eccezionali e qualita del servizio."
+        },
+        "clientFirst": {
+          "title": "Cliente al primo posto",
+          "description": "I tuoi obiettivi sono la nostra priorita, adattati alle tue esigenze."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Proprieta vendute",
+        "yearsExperience": "Anni di esperienza",
+        "countries": "Paesi",
+        "clientSatisfaction": "Soddisfazione del cliente"
+      }
+    },
+    "fifthView": {
+      "title": "I nostri servizi",
+      "subtitle": "Soluzioni immobiliari complete su misura per le tue esigenze",
+      "services": {
+        "propertySales": {
+          "title": "Vendita di proprieta",
+          "description": "Guida esperta attraverso l'intero processo di acquisto e vendita, garantendo il miglior valore per il tuo investimento."
+        },
+        "propertyManagement": {
+          "title": "Gestione immobiliare",
+          "description": "Servizi di gestione completi per i proprietari."
+        },
+        "investmentAdvisory": {
+          "title": "Consulenza sugli investimenti",
+          "description": "Orientamento strategico per costruire il tuo portafoglio."
+        },
+        "internationalProperties": {
+          "title": "Proprieta internazionali",
+          "description": "Proprieta esclusive in tutto il mondo."
+        },
+        "legalConsultation": {
+          "title": "Consulenza legale",
+          "description": "Navigazione attraverso leggi immobiliari complesse."
+        },
+        "relocationServices": {
+          "title": "Servizi di trasferimento",
+          "description": "Supporto al trasferimento senza problemi per individui e famiglie che si trasferiscono in nuove citta o paesi."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Iniziamo una conversazione",
+      "subtitle": "Siamo qui per aiutarti nel tuo percorso immobiliare",
+      "address": "123 Premier Avenue, Istanbul",
+      "successTitle": "Messaggio inviato!",
+      "successMessage": "Grazie per averci contattato. Ti risponderemo entro 24 ore.",
+      "sendAnother": "Invia un altro",
+      "formTitle": "Invia un messaggio",
+      "formSubtitle": "Compila il modulo e ti risponderemo rapidamente",
+      "placeholders": {
+        "name": "Il tuo nome",
+        "email": "Indirizzo email",
+        "phone": "Numero di telefono",
+        "subject": "Oggetto",
+        "message": "Il tuo messaggio..."
+      },
+      "sending": "Invio in corso...",
+      "sendMessage": "Invia messaggio"
+    }
   }
 }

@@ -670,5 +670,154 @@
     "ctaTitle": "Listo para comenzar?",
     "ctaDescription": "Reserve una consulta con nuestros expertos inmobiliarios.",
     "ctaButton": "Reservar Consulta"
+  },
+  "heroSlider": {
+    "back": "← Volver",
+    "slides": {
+      "slide1": {
+        "title": "Encuentre su",
+        "subtitle": "casa sonada",
+        "label": "descubrir"
+      },
+      "slide2": {
+        "title": "Invierta en",
+        "subtitle": "su futuro",
+        "label": "oportunidad"
+      },
+      "slide3": {
+        "title": "El lujo",
+        "subtitle": "le espera",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Asesoria",
+        "subtitle": "experta",
+        "label": "confianza"
+      },
+      "slide5": {
+        "title": "Su vision",
+        "subtitle": "nuestra mision",
+        "label": "asociacion"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Encuentre su casa sonada",
+        "content1": "Su hogar perfecto esta esperandole. Ya sea que busque una acogedora primera vivienda, una espaciosa residencia familiar o una lujosa propiedad, nuestro equipo esta dedicado a ayudarle a encontrar exactamente lo que busca.",
+        "content2": "Entendemos que comprar una casa es una de las decisiones mas importantes de su vida. Por eso nos tomamos el tiempo para comprender sus necesidades unicas, preferencias y estilo de vida para conectarle con propiedades que realmente se sientan como un hogar.",
+        "content3": "Desde la primera visita hasta el cierre final, estamos con usted en cada paso del camino, asegurando una experiencia de compra fluida y sin estres."
+      },
+      "article2": {
+        "title": "Invierta en su futuro",
+        "content1": "Los bienes raices siguen siendo una de las formas mas confiables de construir riqueza a largo plazo. Ya sea que sea un inversor primerizo o este expandiendo su cartera, proporcionamos las perspectivas y la experiencia que necesita para tomar decisiones de inversion inteligentes.",
+        "content2": "Nuestras herramientas de analisis de mercado y conocimiento local le ayudan a identificar propiedades con fuerte potencial de apreciacion y excelentes rendimientos de alquiler.",
+        "content3": "Permitanos ayudarle a convertir los bienes raices en un pilar de su futuro financiero."
+      },
+      "article3": {
+        "title": "El lujo le espera",
+        "content1": "Experimente las mejores propiedades que nuestro mercado tiene para ofrecer. Desde impresionantes aticos con vistas panoramicas hasta elegantes propiedades con comodidades de clase mundial, nos especializamos en conectar compradores exigentes con hogares excepcionales.",
+        "content2": "Nuestra cartera de lujo incluye propiedades que representan la cima del diseno, la artesania y la ubicacion.",
+        "content3": "Descubra un estilo de vida de sofisticacion y comodidad con nuestra seleccion curada de propiedades premium."
+      },
+      "article4": {
+        "title": "Asesoria experta en la que puede confiar",
+        "content1": "Navegar el mercado inmobiliario requiere experiencia, perspicacia y dedicacion. Nuestro equipo de consultores experimentados aporta decadas de experiencia combinada a cada transaccion.",
+        "content2": "Nos mantenemos adelante de las tendencias del mercado, entendemos la dinamica de los vecindarios y tenemos las habilidades de negociacion para obtener el mejor resultado posible para usted.",
+        "content3": "Cuando trabaja con nosotros, gana un socio de confianza comprometido con su exito."
+      },
+      "article5": {
+        "title": "Su vision, nuestra mision",
+        "content1": "Cada cliente tiene una vision unica para su viaje inmobiliario. Ya sea que este vendiendo su casa familiar, buscando la propiedad de inversion perfecta o mudandose a una nueva ciudad, hacemos de sus metas nuestra prioridad.",
+        "content2": "Nuestro enfoque personalizado asegura que reciba asesoramiento a medida y apoyo dedicado durante toda su experiencia inmobiliaria.",
+        "content3": "Juntos, convertiremos sus suenos inmobiliarios en realidad."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Su", "Casa", "Sonada,", "En Cualquier Lugar"],
+      "subtitle": "De Londres a Dubai, de Chipre a Singapur — le conectamos con propiedades premium en todo el mundo",
+      "featuredProperties": "Propiedades destacadas",
+      "noImage": "Sin imagen",
+      "forSale": "En venta",
+      "forRent": "En alquiler",
+      "perMonth": "/mes",
+      "beds": "dormitorios",
+      "baths": "banos",
+      "noProperties": "No hay propiedades disponibles en este momento."
+    },
+    "fourthView": {
+      "title": "Sobre nosotros",
+      "subtitle": "Su socio de confianza en bienes raices globales desde 2010",
+      "description": "Somos una consultoria inmobiliaria internacional de primer nivel dedicada a ayudar a los clientes a encontrar su propiedad perfecta en cualquier parte del mundo. Con mas de una decada de experiencia, hemos construido una reputacion de excelencia, integridad y servicio personalizado.",
+      "coreValues": "Nuestros valores fundamentales",
+      "values": {
+        "trust": {
+          "title": "Confianza e integridad",
+          "description": "Construyendo relaciones duraderas a traves de la honestidad y la transparencia."
+        },
+        "excellence": {
+          "title": "Excelencia",
+          "description": "Entregando resultados excepcionales y calidad de servicio."
+        },
+        "clientFirst": {
+          "title": "Cliente primero",
+          "description": "Sus metas son nuestra prioridad, adaptadas a sus necesidades."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Propiedades vendidas",
+        "yearsExperience": "Anos de experiencia",
+        "countries": "Paises",
+        "clientSatisfaction": "Satisfaccion del cliente"
+      }
+    },
+    "fifthView": {
+      "title": "Nuestros servicios",
+      "subtitle": "Soluciones inmobiliarias integrales adaptadas a sus necesidades",
+      "services": {
+        "propertySales": {
+          "title": "Venta de propiedades",
+          "description": "Orientacion experta a traves de todo el proceso de compra y venta, asegurando el mejor valor para su inversion."
+        },
+        "propertyManagement": {
+          "title": "Gestion de propiedades",
+          "description": "Servicios de gestion integrales para propietarios."
+        },
+        "investmentAdvisory": {
+          "title": "Asesoria de inversiones",
+          "description": "Orientacion estrategica para construir su cartera."
+        },
+        "internationalProperties": {
+          "title": "Propiedades internacionales",
+          "description": "Propiedades exclusivas en todo el mundo."
+        },
+        "legalConsultation": {
+          "title": "Consulta legal",
+          "description": "Navegacion a traves de leyes inmobiliarias complejas."
+        },
+        "relocationServices": {
+          "title": "Servicios de reubicacion",
+          "description": "Apoyo de reubicacion sin problemas para individuos y familias que se mudan a nuevas ciudades o paises."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Iniciemos una conversacion",
+      "subtitle": "Estamos aqui para ayudarle en su viaje inmobiliario",
+      "address": "123 Premier Avenue, Estambul",
+      "successTitle": "Mensaje enviado!",
+      "successMessage": "Gracias por contactarnos. Le responderemos dentro de las 24 horas.",
+      "sendAnother": "Enviar otro",
+      "formTitle": "Enviar un mensaje",
+      "formSubtitle": "Complete el formulario y le responderemos rapidamente",
+      "placeholders": {
+        "name": "Su nombre",
+        "email": "Direccion de correo",
+        "phone": "Numero de telefono",
+        "subject": "Asunto",
+        "message": "Su mensaje..."
+      },
+      "sending": "Enviando...",
+      "sendMessage": "Enviar mensaje"
+    }
   }
 }

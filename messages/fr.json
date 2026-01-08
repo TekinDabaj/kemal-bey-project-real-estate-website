@@ -670,5 +670,154 @@
     "ctaTitle": "Pret a commencer?",
     "ctaDescription": "Reservez une consultation avec nos experts immobiliers.",
     "ctaButton": "Reserver une consultation"
+  },
+  "heroSlider": {
+    "back": "← Retour",
+    "slides": {
+      "slide1": {
+        "title": "Trouvez votre",
+        "subtitle": "maison de reve",
+        "label": "decouvrir"
+      },
+      "slide2": {
+        "title": "Investissez dans",
+        "subtitle": "votre avenir",
+        "label": "opportunite"
+      },
+      "slide3": {
+        "title": "Le luxe",
+        "subtitle": "vous attend",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Conseils",
+        "subtitle": "d'experts",
+        "label": "confiance"
+      },
+      "slide5": {
+        "title": "Votre vision",
+        "subtitle": "notre mission",
+        "label": "partenariat"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Trouvez votre maison de reve",
+        "content1": "Votre maison parfaite vous attend. Que vous recherchiez une premiere maison confortable, une residence familiale spacieuse ou un domaine luxueux, notre equipe est dediee a vous aider a trouver exactement ce que vous cherchez.",
+        "content2": "Nous comprenons que l'achat d'une maison est l'une des plus grandes decisions de votre vie. C'est pourquoi nous prenons le temps de comprendre vos besoins uniques, vos preferences et votre style de vie pour vous mettre en relation avec des proprietes qui ressemblent vraiment a un foyer.",
+        "content3": "De la premiere visite a la signature finale, nous vous accompagnons a chaque etape, garantissant une experience d'achat immobilier fluide et sans stress."
+      },
+      "article2": {
+        "title": "Investissez dans votre avenir",
+        "content1": "L'immobilier reste l'un des moyens les plus fiables de construire une richesse a long terme. Que vous soyez un investisseur debutant ou que vous elargissiez votre portefeuille, nous fournissons les informations et l'expertise dont vous avez besoin pour prendre des decisions d'investissement intelligentes.",
+        "content2": "Nos outils d'analyse de marche et nos connaissances locales vous aident a identifier les proprietes avec un fort potentiel d'appreciation et d'excellents rendements locatifs.",
+        "content3": "Laissez-nous vous aider a faire de l'immobilier un pilier de votre avenir financier."
+      },
+      "article3": {
+        "title": "Le luxe vous attend",
+        "content1": "Decouvrez les plus belles proprietes de notre marche. Des penthouses epoustouflants avec vues panoramiques aux domaines elegants avec des equipements de classe mondiale, nous nous specialisons dans la mise en relation d'acheteurs exigeants avec des maisons exceptionnelles.",
+        "content2": "Notre portefeuille de luxe comprend des proprietes qui representent le summum du design, de l'artisanat et de l'emplacement.",
+        "content3": "Decouvrez un style de vie de sophistication et de confort avec notre selection de proprietes premium."
+      },
+      "article4": {
+        "title": "Des conseils d'experts en qui vous pouvez avoir confiance",
+        "content1": "Naviguer sur le marche immobilier necessite expertise, perspicacite et devouement. Notre equipe de consultants experimentes apporte des decennies d'experience combinee a chaque transaction.",
+        "content2": "Nous restons en avance sur les tendances du marche, comprenons la dynamique des quartiers et avons les competences de negociation pour vous obtenir le meilleur resultat possible.",
+        "content3": "En travaillant avec nous, vous gagnez un partenaire de confiance engage dans votre succes."
+      },
+      "article5": {
+        "title": "Votre vision, notre mission",
+        "content1": "Chaque client a une vision unique pour son parcours immobilier. Que vous vendiez votre maison familiale, recherchiez la propriete d'investissement parfaite ou demenagez dans une nouvelle ville, nous faisons de vos objectifs notre priorite.",
+        "content2": "Notre approche personnalisee garantit que vous recevez des conseils sur mesure et un soutien dedie tout au long de votre experience immobiliere.",
+        "content3": "Ensemble, nous transformerons vos reves immobiliers en realite."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Votre", "Maison", "de Reve,", "Partout"],
+      "subtitle": "De Londres a Dubai, de Chypre a Singapour — nous vous connectons avec des proprietes premium dans le monde entier",
+      "featuredProperties": "Proprietes en vedette",
+      "noImage": "Pas d'image",
+      "forSale": "A vendre",
+      "forRent": "A louer",
+      "perMonth": "/mois",
+      "beds": "chambres",
+      "baths": "salles de bain",
+      "noProperties": "Aucune propriete disponible pour le moment."
+    },
+    "fourthView": {
+      "title": "A propos de nous",
+      "subtitle": "Votre partenaire de confiance dans l'immobilier mondial depuis 2010",
+      "description": "Nous sommes un cabinet de conseil immobilier international de premier plan, dedie a aider les clients a trouver leur propriete parfaite partout dans le monde. Avec plus d'une decennie d'experience, nous avons bati une reputation d'excellence, d'integrite et de service personnalise.",
+      "coreValues": "Nos valeurs fondamentales",
+      "values": {
+        "trust": {
+          "title": "Confiance et integrite",
+          "description": "Construire des relations durables par l'honnetete et la transparence."
+        },
+        "excellence": {
+          "title": "Excellence",
+          "description": "Fournir des resultats exceptionnels et une qualite de service."
+        },
+        "clientFirst": {
+          "title": "Client d'abord",
+          "description": "Vos objectifs sont notre priorite, adaptes a vos besoins."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Proprietes vendues",
+        "yearsExperience": "Annees d'experience",
+        "countries": "Pays",
+        "clientSatisfaction": "Satisfaction client"
+      }
+    },
+    "fifthView": {
+      "title": "Nos services",
+      "subtitle": "Solutions immobilieres completes adaptees a vos besoins",
+      "services": {
+        "propertySales": {
+          "title": "Vente de proprietes",
+          "description": "Accompagnement expert tout au long du processus d'achat et de vente, garantissant la meilleure valeur pour votre investissement."
+        },
+        "propertyManagement": {
+          "title": "Gestion immobiliere",
+          "description": "Services de gestion complets pour les proprietaires."
+        },
+        "investmentAdvisory": {
+          "title": "Conseil en investissement",
+          "description": "Orientation strategique pour construire votre portefeuille."
+        },
+        "internationalProperties": {
+          "title": "Proprietes internationales",
+          "description": "Proprietes exclusives dans le monde entier."
+        },
+        "legalConsultation": {
+          "title": "Consultation juridique",
+          "description": "Navigation dans les lois immobilieres complexes."
+        },
+        "relocationServices": {
+          "title": "Services de relocalisation",
+          "description": "Accompagnement fluide pour les particuliers et les familles qui demenagent vers de nouvelles villes ou pays."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Commencons une conversation",
+      "subtitle": "Nous sommes la pour vous aider dans votre parcours immobilier",
+      "address": "123 Premier Avenue, Istanbul",
+      "successTitle": "Message envoye!",
+      "successMessage": "Merci de nous avoir contactes. Nous vous repondrons dans les 24 heures.",
+      "sendAnother": "Envoyer un autre",
+      "formTitle": "Envoyer un message",
+      "formSubtitle": "Remplissez le formulaire et nous vous repondrons rapidement",
+      "placeholders": {
+        "name": "Votre nom",
+        "email": "Adresse e-mail",
+        "phone": "Numero de telephone",
+        "subject": "Sujet",
+        "message": "Votre message..."
+      },
+      "sending": "Envoi en cours...",
+      "sendMessage": "Envoyer le message"
+    }
   }
 }

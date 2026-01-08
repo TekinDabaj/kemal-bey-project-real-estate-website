@@ -670,5 +670,154 @@
     "ctaTitle": "Siap untuk memulai?",
     "ctaDescription": "Pesan konsultasi dengan ahli properti kami.",
     "ctaButton": "Pesan Konsultasi"
+  },
+  "heroSlider": {
+    "back": "← Kembali",
+    "slides": {
+      "slide1": {
+        "title": "Temukan",
+        "subtitle": "rumah impian Anda",
+        "label": "temukan"
+      },
+      "slide2": {
+        "title": "Investasikan",
+        "subtitle": "masa depan Anda",
+        "label": "peluang"
+      },
+      "slide3": {
+        "title": "Kemewahan",
+        "subtitle": "menunggu Anda",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Panduan",
+        "subtitle": "ahli",
+        "label": "terpercaya"
+      },
+      "slide5": {
+        "title": "Visi Anda",
+        "subtitle": "misi kami",
+        "label": "kemitraan"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Temukan rumah impian Anda",
+        "content1": "Rumah sempurna Anda sedang menunggu. Baik Anda mencari rumah pertama yang nyaman, hunian keluarga yang luas, atau properti mewah, tim kami berdedikasi untuk membantu Anda menemukan apa yang Anda cari.",
+        "content2": "Kami memahami bahwa membeli rumah adalah salah satu keputusan terbesar dalam hidup Anda. Itulah mengapa kami meluangkan waktu untuk memahami kebutuhan, preferensi, dan gaya hidup unik Anda untuk mencocokkan Anda dengan properti yang benar-benar terasa seperti rumah.",
+        "content3": "Dari kunjungan pertama hingga penutupan akhir, kami bersama Anda di setiap langkah, memastikan pengalaman membeli rumah yang lancar dan bebas stres."
+      },
+      "article2": {
+        "title": "Investasikan masa depan Anda",
+        "content1": "Properti tetap menjadi salah satu cara paling dapat diandalkan untuk membangun kekayaan jangka panjang. Baik Anda investor pertama kali atau sedang memperluas portofolio, kami menyediakan wawasan dan keahlian yang Anda butuhkan untuk membuat keputusan investasi yang cerdas.",
+        "content2": "Alat analisis pasar dan pengetahuan lokal kami membantu Anda mengidentifikasi properti dengan potensi apresiasi yang kuat dan hasil sewa yang sangat baik.",
+        "content3": "Biarkan kami membantu Anda menjadikan properti sebagai landasan masa depan keuangan Anda."
+      },
+      "article3": {
+        "title": "Kemewahan menunggu Anda",
+        "content1": "Alami properti terbaik yang ditawarkan pasar kami. Dari penthouse menakjubkan dengan pemandangan panorama hingga properti elegan dengan fasilitas kelas dunia, kami mengkhususkan diri dalam menghubungkan pembeli yang cermat dengan rumah yang luar biasa.",
+        "content2": "Portofolio mewah kami mencakup properti yang mewakili puncak desain, keahlian, dan lokasi.",
+        "content3": "Temukan gaya hidup kecanggihan dan kenyamanan dengan pilihan properti premium kami."
+      },
+      "article4": {
+        "title": "Panduan ahli yang dapat Anda percaya",
+        "content1": "Menavigasi pasar properti membutuhkan keahlian, wawasan, dan dedikasi. Tim konsultan berpengalaman kami membawa puluhan tahun pengalaman gabungan ke setiap transaksi.",
+        "content2": "Kami tetap di depan tren pasar, memahami dinamika lingkungan, dan memiliki keterampilan negosiasi untuk mendapatkan hasil terbaik untuk Anda.",
+        "content3": "Ketika bekerja dengan kami, Anda mendapatkan mitra terpercaya yang berkomitmen pada kesuksesan Anda."
+      },
+      "article5": {
+        "title": "Visi Anda, misi kami",
+        "content1": "Setiap klien memiliki visi unik untuk perjalanan properti mereka. Baik Anda menjual rumah keluarga, mencari properti investasi yang sempurna, atau pindah ke kota baru, kami menjadikan tujuan Anda sebagai prioritas kami.",
+        "content2": "Pendekatan personal kami memastikan Anda menerima saran yang disesuaikan dan dukungan berdedikasi sepanjang pengalaman properti Anda.",
+        "content3": "Bersama-sama, kami akan mengubah impian properti Anda menjadi kenyataan."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Rumah", "Impian", "Anda,", "Di Mana Saja"],
+      "subtitle": "Dari London ke Dubai, Siprus ke Singapura — kami menghubungkan Anda dengan properti premium di seluruh dunia",
+      "featuredProperties": "Properti Unggulan",
+      "noImage": "Tidak ada gambar",
+      "forSale": "Dijual",
+      "forRent": "Disewakan",
+      "perMonth": "/bulan",
+      "beds": "kamar tidur",
+      "baths": "kamar mandi",
+      "noProperties": "Tidak ada properti tersedia saat ini."
+    },
+    "fourthView": {
+      "title": "Tentang Kami",
+      "subtitle": "Mitra terpercaya Anda dalam properti global sejak 2010",
+      "description": "Kami adalah firma konsultan properti internasional terkemuka yang berdedikasi untuk membantu klien menemukan properti sempurna mereka di mana saja di dunia. Dengan lebih dari satu dekade pengalaman, kami telah membangun reputasi untuk keunggulan, integritas, dan layanan personal.",
+      "coreValues": "Nilai inti kami",
+      "values": {
+        "trust": {
+          "title": "Kepercayaan & Integritas",
+          "description": "Membangun hubungan yang langgeng melalui kejujuran dan transparansi."
+        },
+        "excellence": {
+          "title": "Keunggulan",
+          "description": "Memberikan hasil luar biasa dan kualitas layanan."
+        },
+        "clientFirst": {
+          "title": "Klien Pertama",
+          "description": "Tujuan Anda adalah prioritas kami, disesuaikan dengan kebutuhan Anda."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Properti Terjual",
+        "yearsExperience": "Tahun Pengalaman",
+        "countries": "Negara",
+        "clientSatisfaction": "Kepuasan Klien"
+      }
+    },
+    "fifthView": {
+      "title": "Layanan Kami",
+      "subtitle": "Solusi properti komprehensif disesuaikan dengan kebutuhan Anda",
+      "services": {
+        "propertySales": {
+          "title": "Penjualan Properti",
+          "description": "Panduan ahli melalui seluruh proses pembelian dan penjualan, memastikan Anda mendapatkan nilai terbaik untuk investasi Anda."
+        },
+        "propertyManagement": {
+          "title": "Manajemen Properti",
+          "description": "Layanan manajemen komprehensif untuk pemilik properti."
+        },
+        "investmentAdvisory": {
+          "title": "Konsultasi Investasi",
+          "description": "Panduan strategis untuk membangun portofolio Anda."
+        },
+        "internationalProperties": {
+          "title": "Properti Internasional",
+          "description": "Properti eksklusif di seluruh dunia."
+        },
+        "legalConsultation": {
+          "title": "Konsultasi Hukum",
+          "description": "Navigasi hukum properti yang kompleks."
+        },
+        "relocationServices": {
+          "title": "Layanan Relokasi",
+          "description": "Dukungan relokasi yang mulus untuk individu dan keluarga yang pindah ke kota atau negara baru."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Mari mulai percakapan",
+      "subtitle": "Kami di sini untuk membantu perjalanan properti Anda",
+      "address": "123 Premier Avenue, Istanbul",
+      "successTitle": "Pesan terkirim!",
+      "successMessage": "Terima kasih telah menghubungi kami. Kami akan membalas dalam 24 jam.",
+      "sendAnother": "Kirim lagi",
+      "formTitle": "Kirim pesan",
+      "formSubtitle": "Isi formulir dan kami akan membalas dengan cepat",
+      "placeholders": {
+        "name": "Nama Anda",
+        "email": "Alamat email",
+        "phone": "Nomor telepon",
+        "subject": "Subjek",
+        "message": "Pesan Anda..."
+      },
+      "sending": "Mengirim...",
+      "sendMessage": "Kirim pesan"
+    }
   }
 }

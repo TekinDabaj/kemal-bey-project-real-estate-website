@@ -670,5 +670,154 @@
     "ctaTitle": "准备开始了吗？",
     "ctaDescription": "与我们的房地产专家预约咨询。",
     "ctaButton": "预约咨询"
+  },
+  "heroSlider": {
+    "back": "← 返回",
+    "slides": {
+      "slide1": {
+        "title": "找到您的",
+        "subtitle": "梦想家园",
+        "label": "发现"
+      },
+      "slide2": {
+        "title": "投资于",
+        "subtitle": "您的未来",
+        "label": "机遇"
+      },
+      "slide3": {
+        "title": "奢华",
+        "subtitle": "生活等待着您",
+        "label": "高端"
+      },
+      "slide4": {
+        "title": "专业",
+        "subtitle": "指导",
+        "label": "信赖"
+      },
+      "slide5": {
+        "title": "您的愿景",
+        "subtitle": "我们的使命",
+        "label": "合作"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "找到您的梦想家园",
+        "content1": "您完美的家正在等待您。无论您是在寻找温馨的首套住房、宽敞的家庭住宅还是豪华庄园，我们的团队都致力于帮助您找到您正在寻找的一切。",
+        "content2": "我们理解购买房屋是您一生中最重大的决定之一。这就是为什么我们花时间了解您独特的需求、偏好和生活方式，以便为您匹配真正感觉像家的房产。",
+        "content3": "从第一次看房到最终成交，我们在每一步都陪伴着您，确保您拥有顺畅无压力的购房体验。"
+      },
+      "article2": {
+        "title": "投资您的未来",
+        "content1": "房地产仍然是建立长期财富的最可靠方式之一。无论您是首次投资者还是正在扩展您的投资组合，我们都会提供您做出明智投资决策所需的见解和专业知识。",
+        "content2": "我们的市场分析工具和本地知识帮助您识别具有强大升值潜力和优秀租金回报的房产。",
+        "content3": "让我们帮助您将房地产转变为您财务未来的基石。"
+      },
+      "article3": {
+        "title": "奢华生活等待着您",
+        "content1": "体验我们市场上最优质的房产。从拥有全景视野的惊艳顶层公寓到配备世界一流设施的优雅庄园，我们专注于将挑剔的买家与卓越的住宅联系起来。",
+        "content2": "我们的豪华房产组合包括代表设计、工艺和位置巅峰的房产。",
+        "content3": "通过我们精心挑选的高端房产，发现精致舒适的生活方式。"
+      },
+      "article4": {
+        "title": "您可以信赖的专业指导",
+        "content1": "在房地产市场中航行需要专业知识、洞察力和奉献精神。我们经验丰富的顾问团队为每笔交易带来数十年的综合经验。",
+        "content2": "我们紧跟市场趋势，了解社区动态，并拥有为您获得最佳结果的谈判技巧。",
+        "content3": "与我们合作，您将获得一个致力于您成功的值得信赖的合作伙伴。"
+      },
+      "article5": {
+        "title": "您的愿景，我们的使命",
+        "content1": "每位客户对其房地产之旅都有独特的愿景。无论您是在出售家庭住宅、寻找完美的投资房产还是搬迁到新城市，我们都会将您的目标作为我们的优先事项。",
+        "content2": "我们个性化的方法确保您在整个房地产体验中获得量身定制的建议和专注的支持。",
+        "content3": "我们将一起把您的房地产梦想变为现实。"
+      }
+    },
+    "thirdView": {
+      "titleWords": ["您的", "梦想", "家园，", "任何地方"],
+      "subtitle": "从伦敦到迪拜，从塞浦路斯到新加坡——我们为您连接全球优质房产",
+      "featuredProperties": "精选房产",
+      "noImage": "无图片",
+      "forSale": "出售",
+      "forRent": "出租",
+      "perMonth": "/月",
+      "beds": "卧室",
+      "baths": "浴室",
+      "noProperties": "目前没有可用的房产。"
+    },
+    "fourthView": {
+      "title": "关于我们",
+      "subtitle": "自2010年以来，您在全球房地产领域值得信赖的合作伙伴",
+      "description": "我们是一家一流的国际房地产咨询公司，致力于帮助客户在世界任何地方找到他们完美的房产。凭借十多年的经验，我们建立了卓越、诚信和个性化服务的声誉。",
+      "coreValues": "我们的核心价值观",
+      "values": {
+        "trust": {
+          "title": "信任与诚信",
+          "description": "通过诚实和透明建立持久的关系。"
+        },
+        "excellence": {
+          "title": "卓越",
+          "description": "提供卓越的成果和服务质量。"
+        },
+        "clientFirst": {
+          "title": "客户至上",
+          "description": "您的目标是我们的优先事项，量身定制以满足您的需求。"
+        }
+      },
+      "stats": {
+        "propertiesSold": "已售房产",
+        "yearsExperience": "年经验",
+        "countries": "国家",
+        "clientSatisfaction": "客户满意度"
+      }
+    },
+    "fifthView": {
+      "title": "我们的服务",
+      "subtitle": "量身定制的全面房地产解决方案",
+      "services": {
+        "propertySales": {
+          "title": "房产销售",
+          "description": "在整个买卖过程中提供专业指导，确保您的投资获得最佳价值。"
+        },
+        "propertyManagement": {
+          "title": "物业管理",
+          "description": "为业主提供全面的管理服务。"
+        },
+        "investmentAdvisory": {
+          "title": "投资咨询",
+          "description": "为您的投资组合提供战略指导。"
+        },
+        "internationalProperties": {
+          "title": "国际房产",
+          "description": "全球独家房产。"
+        },
+        "legalConsultation": {
+          "title": "法律咨询",
+          "description": "帮助您了解复杂的房产法律。"
+        },
+        "relocationServices": {
+          "title": "搬迁服务",
+          "description": "为搬迁到新城市或国家的个人和家庭提供无缝支持。"
+        }
+      }
+    },
+    "sixthView": {
+      "title": "让我们开始对话",
+      "subtitle": "我们在这里帮助您的房地产之旅",
+      "address": "伊斯坦布尔Premier大道123号",
+      "successTitle": "消息已发送！",
+      "successMessage": "感谢您与我们联系。我们将在24小时内回复您。",
+      "sendAnother": "发送另一条",
+      "formTitle": "发送消息",
+      "formSubtitle": "填写表单，我们会尽快回复",
+      "placeholders": {
+        "name": "您的姓名",
+        "email": "电子邮件地址",
+        "phone": "电话号码",
+        "subject": "主题",
+        "message": "您的留言..."
+      },
+      "sending": "发送中...",
+      "sendMessage": "发送消息"
+    }
   }
 }

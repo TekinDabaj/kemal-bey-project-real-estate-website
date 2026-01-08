@@ -670,5 +670,154 @@
     "ctaTitle": "Bersedia untuk bermula?",
     "ctaDescription": "Tempah perundingan dengan pakar hartanah kami.",
     "ctaButton": "Tempah Perundingan"
+  },
+  "heroSlider": {
+    "back": "← Kembali",
+    "slides": {
+      "slide1": {
+        "title": "Cari",
+        "subtitle": "rumah impian anda",
+        "label": "temui"
+      },
+      "slide2": {
+        "title": "Laburkan",
+        "subtitle": "masa depan anda",
+        "label": "peluang"
+      },
+      "slide3": {
+        "title": "Kemewahan",
+        "subtitle": "menanti anda",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Panduan",
+        "subtitle": "pakar",
+        "label": "dipercayai"
+      },
+      "slide5": {
+        "title": "Visi anda",
+        "subtitle": "misi kami",
+        "label": "perkongsian"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Cari rumah impian anda",
+        "content1": "Rumah sempurna anda sedang menunggu. Sama ada anda mencari rumah permulaan yang selesa, kediaman keluarga yang luas, atau estet mewah, pasukan kami berdedikasi untuk membantu anda mencari apa yang anda cari.",
+        "content2": "Kami memahami bahawa membeli rumah adalah salah satu keputusan terbesar dalam hidup anda. Itulah sebabnya kami mengambil masa untuk memahami keperluan, keutamaan dan gaya hidup unik anda untuk memadankan anda dengan hartanah yang benar-benar terasa seperti rumah.",
+        "content3": "Dari tontonan pertama hingga penutupan akhir, kami bersama anda setiap langkah, memastikan pengalaman membeli rumah yang lancar dan bebas tekanan."
+      },
+      "article2": {
+        "title": "Laburkan masa depan anda",
+        "content1": "Hartanah kekal sebagai salah satu cara paling boleh dipercayai untuk membina kekayaan jangka panjang. Sama ada anda pelabur pertama kali atau mengembangkan portfolio anda, kami menyediakan pandangan dan kepakaran yang anda perlukan untuk membuat keputusan pelaburan yang bijak.",
+        "content2": "Alat analisis pasaran dan pengetahuan tempatan kami membantu anda mengenal pasti hartanah dengan potensi penghargaan yang kuat dan pulangan sewa yang cemerlang.",
+        "content3": "Biarkan kami membantu anda menjadikan hartanah sebagai asas masa depan kewangan anda."
+      },
+      "article3": {
+        "title": "Kemewahan menanti anda",
+        "content1": "Alami hartanah terbaik yang ditawarkan oleh pasaran kami. Dari penthouse menakjubkan dengan pemandangan panorama hingga estet elegan dengan kemudahan bertaraf dunia, kami pakar dalam menghubungkan pembeli yang cermat dengan rumah yang luar biasa.",
+        "content2": "Portfolio mewah kami termasuk hartanah yang mewakili puncak reka bentuk, kemahiran dan lokasi.",
+        "content3": "Temui gaya hidup kecanggihan dan keselesaan dengan pilihan hartanah premium kami."
+      },
+      "article4": {
+        "title": "Panduan pakar yang boleh anda percayai",
+        "content1": "Menavigasi pasaran hartanah memerlukan kepakaran, pandangan dan dedikasi. Pasukan perunding berpengalaman kami membawa puluhan tahun pengalaman gabungan ke setiap transaksi.",
+        "content2": "Kami kekal di hadapan trend pasaran, memahami dinamik kejiranan, dan mempunyai kemahiran rundingan untuk mendapatkan hasil terbaik untuk anda.",
+        "content3": "Apabila bekerja dengan kami, anda mendapat rakan kongsi yang dipercayai yang komited terhadap kejayaan anda."
+      },
+      "article5": {
+        "title": "Visi anda, misi kami",
+        "content1": "Setiap pelanggan mempunyai visi unik untuk perjalanan hartanah mereka. Sama ada anda menjual rumah keluarga, mencari hartanah pelaburan yang sempurna, atau berpindah ke bandar baru, kami menjadikan matlamat anda sebagai keutamaan kami.",
+        "content2": "Pendekatan peribadi kami memastikan anda menerima nasihat yang disesuaikan dan sokongan berdedikasi sepanjang pengalaman hartanah anda.",
+        "content3": "Bersama-sama, kami akan menjadikan impian hartanah anda menjadi kenyataan."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Rumah", "Impian", "Anda,", "Di Mana Sahaja"],
+      "subtitle": "Dari London ke Dubai, Cyprus ke Singapura — kami menghubungkan anda dengan hartanah premium di seluruh dunia",
+      "featuredProperties": "Hartanah Pilihan",
+      "noImage": "Tiada imej",
+      "forSale": "Untuk Dijual",
+      "forRent": "Untuk Disewa",
+      "perMonth": "/bulan",
+      "beds": "bilik tidur",
+      "baths": "bilik mandi",
+      "noProperties": "Tiada hartanah tersedia pada masa ini."
+    },
+    "fourthView": {
+      "title": "Tentang Kami",
+      "subtitle": "Rakan kongsi dipercayai anda dalam hartanah global sejak 2010",
+      "description": "Kami adalah firma perunding hartanah antarabangsa terkemuka yang berdedikasi untuk membantu pelanggan mencari hartanah sempurna mereka di mana-mana di dunia. Dengan lebih satu dekad pengalaman, kami telah membina reputasi untuk kecemerlangan, integriti dan perkhidmatan peribadi.",
+      "coreValues": "Nilai teras kami",
+      "values": {
+        "trust": {
+          "title": "Kepercayaan & Integriti",
+          "description": "Membina hubungan berkekalan melalui kejujuran dan ketelusan."
+        },
+        "excellence": {
+          "title": "Kecemerlangan",
+          "description": "Menyampaikan hasil luar biasa dan kualiti perkhidmatan."
+        },
+        "clientFirst": {
+          "title": "Pelanggan Dahulu",
+          "description": "Matlamat anda adalah keutamaan kami, disesuaikan dengan keperluan anda."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Hartanah Dijual",
+        "yearsExperience": "Tahun Pengalaman",
+        "countries": "Negara",
+        "clientSatisfaction": "Kepuasan Pelanggan"
+      }
+    },
+    "fifthView": {
+      "title": "Perkhidmatan Kami",
+      "subtitle": "Penyelesaian hartanah komprehensif disesuaikan dengan keperluan anda",
+      "services": {
+        "propertySales": {
+          "title": "Jualan Hartanah",
+          "description": "Panduan pakar melalui keseluruhan proses pembelian dan penjualan, memastikan anda mendapat nilai terbaik untuk pelaburan anda."
+        },
+        "propertyManagement": {
+          "title": "Pengurusan Hartanah",
+          "description": "Perkhidmatan pengurusan komprehensif untuk tuan tanah."
+        },
+        "investmentAdvisory": {
+          "title": "Nasihat Pelaburan",
+          "description": "Panduan strategik untuk membina portfolio anda."
+        },
+        "internationalProperties": {
+          "title": "Hartanah Antarabangsa",
+          "description": "Hartanah eksklusif di seluruh dunia."
+        },
+        "legalConsultation": {
+          "title": "Perundingan Undang-undang",
+          "description": "Navigasi undang-undang hartanah yang kompleks."
+        },
+        "relocationServices": {
+          "title": "Perkhidmatan Penempatan Semula",
+          "description": "Sokongan penempatan semula yang lancar untuk individu dan keluarga yang berpindah ke bandar atau negara baru."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Mari mulakan perbualan",
+      "subtitle": "Kami di sini untuk membantu perjalanan hartanah anda",
+      "address": "123 Premier Avenue, Istanbul",
+      "successTitle": "Mesej dihantar!",
+      "successMessage": "Terima kasih kerana menghubungi kami. Kami akan membalas dalam masa 24 jam.",
+      "sendAnother": "Hantar lagi",
+      "formTitle": "Hantar mesej",
+      "formSubtitle": "Isi borang dan kami akan membalas dengan cepat",
+      "placeholders": {
+        "name": "Nama anda",
+        "email": "Alamat e-mel",
+        "phone": "Nombor telefon",
+        "subject": "Subjek",
+        "message": "Mesej anda..."
+      },
+      "sending": "Menghantar...",
+      "sendMessage": "Hantar mesej"
+    }
   }
 }

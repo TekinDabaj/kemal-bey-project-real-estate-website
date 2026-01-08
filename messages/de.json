@@ -670,5 +670,154 @@
     "ctaTitle": "Bereit loszulegen?",
     "ctaDescription": "Buchen Sie eine Beratung mit unseren Immobilienexperten.",
     "ctaButton": "Beratung buchen"
+  },
+  "heroSlider": {
+    "back": "← Zuruck",
+    "slides": {
+      "slide1": {
+        "title": "Finden Sie Ihr",
+        "subtitle": "Traumhaus",
+        "label": "entdecken"
+      },
+      "slide2": {
+        "title": "Investieren Sie in",
+        "subtitle": "Ihre Zukunft",
+        "label": "chance"
+      },
+      "slide3": {
+        "title": "Luxurioses",
+        "subtitle": "Wohnen erwartet Sie",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Experten",
+        "subtitle": "Beratung",
+        "label": "vertrauenswurdig"
+      },
+      "slide5": {
+        "title": "Ihre Vision",
+        "subtitle": "unsere Mission",
+        "label": "partnerschaft"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Finden Sie Ihr Traumhaus",
+        "content1": "Ihr perfektes Zuhause wartet auf Sie. Ob Sie ein gemutliches Starterhaus, eine geraumige Familienresidenz oder ein luxurioses Anwesen suchen, unser Team ist bestrebt, Ihnen zu helfen, genau das zu finden, wonach Sie suchen.",
+        "content2": "Wir verstehen, dass der Kauf eines Hauses eine der grossten Entscheidungen Ihres Lebens ist. Deshalb nehmen wir uns die Zeit, Ihre einzigartigen Bedurfnisse, Praferenzen und Ihren Lebensstil zu verstehen, um Sie mit Immobilien zusammenzubringen, die sich wirklich wie ein Zuhause anfuhlen.",
+        "content3": "Von der ersten Besichtigung bis zum endgultigen Abschluss begleiten wir Sie bei jedem Schritt und sorgen fur ein reibungsloses und stressfreies Immobilienkauferlebnis."
+      },
+      "article2": {
+        "title": "Investieren Sie in Ihre Zukunft",
+        "content1": "Immobilien bleiben eine der zuverlassigsten Moglichkeiten, langfristig Vermogen aufzubauen. Ob Sie zum ersten Mal investieren oder Ihr Portfolio erweitern, wir bieten die Einblicke und das Fachwissen, die Sie benotigen, um kluge Investitionsentscheidungen zu treffen.",
+        "content2": "Unsere Marktanalyse-Tools und lokales Wissen helfen Ihnen, Immobilien mit starkem Wertsteigerungspotenzial und ausgezeichneten Mietrenditen zu identifizieren.",
+        "content3": "Lassen Sie uns Ihnen helfen, Immobilien zu einem Eckpfeiler Ihrer finanziellen Zukunft zu machen."
+      },
+      "article3": {
+        "title": "Luxurioses Wohnen erwartet Sie",
+        "content1": "Erleben Sie die feinsten Immobilien, die unser Markt zu bieten hat. Von atemberaubenden Penthausern mit Panoramablick bis hin zu eleganten Anwesen mit erstklassigen Annehmlichkeiten sind wir darauf spezialisiert, anspruchsvolle Kaufer mit aussergewohnlichen Hausern zu verbinden.",
+        "content2": "Unser Luxusportfolio umfasst Immobilien, die den Hohepunkt von Design, Handwerkskunst und Lage reprasentieren.",
+        "content3": "Entdecken Sie einen Lebensstil von Raffinesse und Komfort mit unserer kuratierten Auswahl an Premium-Immobilien."
+      },
+      "article4": {
+        "title": "Expertenberatung, der Sie vertrauen konnen",
+        "content1": "Die Navigation auf dem Immobilienmarkt erfordert Fachwissen, Einblick und Hingabe. Unser Team erfahrener Berater bringt jahrzehntelange kombinierte Erfahrung in jede Transaktion ein.",
+        "content2": "Wir bleiben den Markttrends voraus, verstehen die Nachbarschaftsdynamik und haben die Verhandlungsfahigkeiten, um Ihnen das bestmogliche Ergebnis zu sichern.",
+        "content3": "Wenn Sie mit uns arbeiten, gewinnen Sie einen vertrauenswurdigen Partner, der sich Ihrem Erfolg verschrieben hat."
+      },
+      "article5": {
+        "title": "Ihre Vision, unsere Mission",
+        "content1": "Jeder Kunde hat eine einzigartige Vision fur seine Immobilienreise. Ob Sie Ihr Familienhaus verkaufen, die perfekte Investitionsimmobilie suchen oder in eine neue Stadt umziehen, wir machen Ihre Ziele zu unserer Prioritat.",
+        "content2": "Unser personalisierter Ansatz stellt sicher, dass Sie wahrend Ihrer gesamten Immobilienerfahrung massgeschneiderte Beratung und engagierte Unterstutzung erhalten.",
+        "content3": "Gemeinsam werden wir Ihre Immobilientraume Wirklichkeit werden lassen."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Ihr", "Traumhaus,", "Uberall"],
+      "subtitle": "Von London bis Dubai, Zypern bis Singapur — wir verbinden Sie mit Premium-Immobilien weltweit",
+      "featuredProperties": "Ausgewahlte Immobilien",
+      "noImage": "Kein Bild",
+      "forSale": "Zu verkaufen",
+      "forRent": "Zu vermieten",
+      "perMonth": "/Monat",
+      "beds": "Schlafzimmer",
+      "baths": "Bader",
+      "noProperties": "Derzeit keine Immobilien verfugbar."
+    },
+    "fourthView": {
+      "title": "Uber uns",
+      "subtitle": "Ihr vertrauenswurdiger Partner fur globale Immobilien seit 2010",
+      "description": "Wir sind eine erstklassige internationale Immobilienberatung, die sich der Unterstutzung von Kunden bei der Suche nach ihrer perfekten Immobilie uberall auf der Welt widmet. Mit uber einem Jahrzehnt Erfahrung haben wir uns einen Ruf fur Exzellenz, Integritat und personalisierten Service aufgebaut.",
+      "coreValues": "Unsere Kernwerte",
+      "values": {
+        "trust": {
+          "title": "Vertrauen & Integritat",
+          "description": "Aufbau dauerhafter Beziehungen durch Ehrlichkeit und Transparenz."
+        },
+        "excellence": {
+          "title": "Exzellenz",
+          "description": "Aussergewohnliche Ergebnisse und Servicequalitat liefern."
+        },
+        "clientFirst": {
+          "title": "Kunde zuerst",
+          "description": "Ihre Ziele sind unsere Prioritat, massgeschneidert auf Ihre Bedurfnisse."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Verkaufte Immobilien",
+        "yearsExperience": "Jahre Erfahrung",
+        "countries": "Lander",
+        "clientSatisfaction": "Kundenzufriedenheit"
+      }
+    },
+    "fifthView": {
+      "title": "Unsere Dienstleistungen",
+      "subtitle": "Umfassende Immobilienlosungen, massgeschneidert auf Ihre Bedurfnisse",
+      "services": {
+        "propertySales": {
+          "title": "Immobilienverkauf",
+          "description": "Expertenberatung durch den gesamten Kauf- und Verkaufsprozess, um sicherzustellen, dass Sie den besten Wert fur Ihre Investition erhalten."
+        },
+        "propertyManagement": {
+          "title": "Immobilienverwaltung",
+          "description": "Umfassende Verwaltungsdienstleistungen fur Vermieter."
+        },
+        "investmentAdvisory": {
+          "title": "Anlageberatung",
+          "description": "Strategische Beratung zum Aufbau Ihres Portfolios."
+        },
+        "internationalProperties": {
+          "title": "Internationale Immobilien",
+          "description": "Exklusive Immobilien weltweit."
+        },
+        "legalConsultation": {
+          "title": "Rechtsberatung",
+          "description": "Navigation durch komplexe Immobiliengesetze."
+        },
+        "relocationServices": {
+          "title": "Umzugsdienstleistungen",
+          "description": "Nahtlose Umzugsunterstutzung fur Einzelpersonen und Familien, die in neue Stadte oder Lander weltweit umziehen."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Lassen Sie uns ein Gesprach beginnen",
+      "subtitle": "Wir sind hier, um Ihnen bei Ihrer Immobilienreise zu helfen",
+      "address": "123 Premier Avenue, Istanbul",
+      "successTitle": "Nachricht gesendet!",
+      "successMessage": "Vielen Dank fur Ihre Kontaktaufnahme. Wir werden uns innerhalb von 24 Stunden bei Ihnen melden.",
+      "sendAnother": "Weitere senden",
+      "formTitle": "Nachricht senden",
+      "formSubtitle": "Fullen Sie das Formular aus und wir antworten umgehend",
+      "placeholders": {
+        "name": "Ihr Name",
+        "email": "E-Mail-Adresse",
+        "phone": "Telefonnummer",
+        "subject": "Betreff",
+        "message": "Ihre Nachricht..."
+      },
+      "sending": "Wird gesendet...",
+      "sendMessage": "Nachricht senden"
+    }
   }
 }

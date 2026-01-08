@@ -81,17 +81,17 @@ export default function ImageGallery({ images, title, bucketUrl }: Props) {
             <>
               <button
                 onClick={goToPrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label="Previous image"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} className="md:w-6 md:h-6" />
               </button>
               <button
                 onClick={goToNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label="Next image"
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} className="md:w-6 md:h-6" />
               </button>
             </>
           )}
@@ -99,29 +99,29 @@ export default function ImageGallery({ images, title, bucketUrl }: Props) {
           {/* Fullscreen Button */}
           <button
             onClick={() => openFullscreen()}
-            className="absolute top-3 right-3 w-10 h-10 rounded-lg bg-black/50 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute top-2 right-2 md:top-3 md:right-3 w-8 h-8 md:w-10 md:h-10 rounded-lg bg-black/50 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
             aria-label="View fullscreen"
           >
-            <Expand size={20} />
+            <Expand size={16} className="md:w-5 md:h-5" />
           </button>
 
           {/* Image Counter */}
-          <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-black/50 text-white text-sm font-medium">
+          <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 px-2 md:px-3 py-1 md:py-1.5 rounded-lg bg-black/50 text-white text-xs md:text-sm font-medium">
             {activeIndex + 1} / {images.length}
           </div>
         </div>
 
         {/* Thumbnails */}
         {images.length > 1 && (
-          <div className="p-3 bg-slate-50 dark:bg-[#1a1735] border-t border-slate-100 dark:border-[#2d2a4a]">
-            <div className="flex gap-2 overflow-x-auto py-1 px-1 scrollbar-thin">
+          <div className="p-2 md:p-3 bg-slate-50 dark:bg-[#1a1735] border-t border-slate-100 dark:border-[#2d2a4a]">
+            <div className="flex gap-1.5 md:gap-2 overflow-x-auto py-0.5 md:py-1 px-0.5 md:px-1 scrollbar-thin">
               {images.map((img, index) => (
                 <button
                   key={img}
                   onClick={() => setActiveIndex(index)}
-                  className={`relative shrink-0 w-20 h-14 rounded-lg overflow-hidden transition-all ${
+                  className={`relative shrink-0 w-16 h-11 md:w-20 md:h-14 rounded-md md:rounded-lg overflow-hidden transition-all ${
                     index === activeIndex
-                      ? 'ring-2 ring-amber-500 ring-offset-2 dark:ring-offset-[#1a1735]'
+                      ? 'ring-2 ring-amber-500 ring-offset-1 md:ring-offset-2 dark:ring-offset-[#1a1735]'
                       : 'opacity-70 hover:opacity-100'
                   }`}
                 >
@@ -140,10 +140,10 @@ export default function ImageGallery({ images, title, bucketUrl }: Props) {
                     setIsFullscreen(true)
                     setIsGridView(true)
                   }}
-                  className="shrink-0 w-20 h-14 rounded-lg bg-slate-200 dark:bg-[#2d2a4a] hover:bg-slate-300 dark:hover:bg-[#3d3a5c] flex items-center justify-center gap-1 text-slate-600 dark:text-slate-300 transition-colors"
+                  className="shrink-0 w-16 h-11 md:w-20 md:h-14 rounded-md md:rounded-lg bg-slate-200 dark:bg-[#2d2a4a] hover:bg-slate-300 dark:hover:bg-[#3d3a5c] flex items-center justify-center gap-1 text-slate-600 dark:text-slate-300 transition-colors"
                 >
-                  <Grid3X3 size={16} />
-                  <span className="text-xs font-medium">All</span>
+                  <Grid3X3 size={14} className="md:w-4 md:h-4" />
+                  <span className="text-[10px] md:text-xs font-medium">All</span>
                 </button>
               )}
             </div>
@@ -237,13 +237,13 @@ export default function ImageGallery({ images, title, bucketUrl }: Props) {
 
           {/* Bottom Thumbnails (Single Image View) */}
           {!isGridView && images.length > 1 && (
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-              <div className="flex justify-center gap-2 overflow-x-auto pb-1">
+            <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="flex justify-center gap-1.5 md:gap-2 overflow-x-auto pb-1">
                 {images.map((img, index) => (
                   <button
                     key={img}
                     onClick={() => setActiveIndex(index)}
-                    className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all ${
+                    className={`shrink-0 w-12 h-9 md:w-16 md:h-12 rounded-md md:rounded-lg overflow-hidden transition-all ${
                       index === activeIndex
                         ? 'ring-2 ring-amber-500'
                         : 'opacity-50 hover:opacity-100'

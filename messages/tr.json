@@ -730,5 +730,154 @@
     "ctaTitle": "Baslamaya Hazir misiniz?",
     "ctaDescription": "Gayrimenkul uzmanlarimizla bir gorusme planlayin.",
     "ctaButton": "Randevu Al"
+  },
+  "heroSlider": {
+    "back": "← Geri",
+    "slides": {
+      "slide1": {
+        "title": "Hayalinizdeki",
+        "subtitle": "evi bulun",
+        "label": "kesfet"
+      },
+      "slide2": {
+        "title": "Geleceginize",
+        "subtitle": "yatirim yapin",
+        "label": "firsat"
+      },
+      "slide3": {
+        "title": "Luks",
+        "subtitle": "yasam sizi bekliyor",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Uzman",
+        "subtitle": "rehberlik",
+        "label": "guvenilir"
+      },
+      "slide5": {
+        "title": "Sizin Vizyonunuz",
+        "subtitle": "bizim misyonumuz",
+        "label": "ortaklik"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Hayalinizdeki Evi Bulun",
+        "content1": "Mukemmel eviniz sizi bekliyor. Ister sicak bir baslangic evi, ister genis bir aile konutu veya luks bir malikane ariyor olun, ekibimiz tam olarak aradiginizi bulmaniza yardimci olmaya kararlidir.",
+        "content2": "Ev almanin hayatinizda vereceginiz en buyuk kararlardan biri oldugunu biliyoruz. Bu nedenle, sizi gercekten eviniz gibi hissettirecek mulklerle eslestirmek icin benzersiz ihtiyaclarinizi, tercihlerinizi ve yasam tarzinizi anlamak icin zaman ayiriyoruz.",
+        "content3": "Ilk gosteriden son kapanisa kadar, sorunsuz ve stressiz bir ev alma deneyimi saglamak icin her adimda yaninizdayiz."
+      },
+      "article2": {
+        "title": "Geleceginize Yatirim Yapin",
+        "content1": "Gayrimenkul, uzun vadeli servet olusturmanin en guvenilir yollarindan biri olmaya devam ediyor. Ister ilk kez yatirim yapan biri olun ister portfoyunuzu genisletiyor olun, akilli yatirim kararlari vermeniz icin gereken icgoruleri ve uzmanligi sagliyoruz.",
+        "content2": "Piyasa analiz araclarimiz ve yerel bilgimiz, guclu deger artis potansiyeli ve mukemmel kira getirisi olan mulkleri belirlemenize yardimci olur.",
+        "content3": "Gayrimenkulu finansal geleceginizin temeli haline getirmenize yardimci olalim."
+      },
+      "article3": {
+        "title": "Luks Yasam Sizi Bekliyor",
+        "content1": "Piyasamizin sundugu en iyi mulkleri deneyimleyin. Panoramik manzarali sasirtici cati katlarindan dunya standartlarinda olanaklara sahip zarif malikânelere kadar, secici alicilari olaganustu evlerle bulusturma konusunda uzmaniz.",
+        "content2": "Luks portfoyumuz, tasarim, iscilik ve konumun zirvesini temsil eden mulkler icerir.",
+        "content3": "Premium mulk secmelerimizle sofistike ve konforlu bir yasam tarzi kesfedin."
+      },
+      "article4": {
+        "title": "Guvenebileceginiz Uzman Rehberlik",
+        "content1": "Gayrimenkul piyasasinda gezinmek uzmanlik, icgoru ve ozveri gerektirir. Deneyimli danismanlarimizdan olusan ekibimiz, her isleme onlarca yillik birlesik deneyim getirir.",
+        "content2": "Piyasa trendlerinin onunde kaliyoruz, mahalle dinamiklerini anliyoruz ve size mumkun olan en iyi sonucu almak icin muzakere becerilerine sahibiz.",
+        "content3": "Bizimle calistiginizda, basariniza adanmis guvenilir bir ortak kazanirsiniz."
+      },
+      "article5": {
+        "title": "Sizin Vizyonunuz, Bizim Misyonumuz",
+        "content1": "Her musterinin gayrimenkul yolculugu icin benzersiz bir vizyonu vardir. Aile evinizi satiyor, mukemmel yatirim mulkunu ariyor veya yeni bir sehre tasiniyor olsaniz da, hedeflerinizi onceliklimiz yapiyoruz.",
+        "content2": "Kisisellestirilmis yaklasimimiz, tum gayrimenkul deneyiminiz boyunca ozellestirilmis tavsiye ve ozverili destek almanizi saglar.",
+        "content3": "Birlikte, gayrimenkul hayallerinizi gercege donusturecegiz."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Hayalinizdeki", "Eviniz,", "Her", "Yerde"],
+      "subtitle": "Londra'dan Dubai'ye, Kibris'tan Singapur'a — sizi dunya genelinde premium mulklerle bulusturuyoruz",
+      "featuredProperties": "One Cikan Mulkler",
+      "noImage": "Gorsel yok",
+      "forSale": "Satilik",
+      "forRent": "Kiralik",
+      "perMonth": "/ay",
+      "beds": "yatak",
+      "baths": "banyo",
+      "noProperties": "Su anda mevcut mulk bulunmamaktadir."
+    },
+    "fourthView": {
+      "title": "Hakkimizda",
+      "subtitle": "2010'dan beri kuresel gayrimenkulde guvenilir ortaginiz",
+      "description": "Dunyanin her yerinde musterilerin mukemmel mulklerini bulmalarına yardimci olmaya adanmis birinci sinif uluslararasi bir gayrimenkul danismanligiyiz. On yili askin deneyimimizle, mukemmellik, durustluk ve kisisellestirilmis hizmet konusunda bir itibar olusturduk.",
+      "coreValues": "Temel Degerlerimiz",
+      "values": {
+        "trust": {
+          "title": "Guven ve Durustluk",
+          "description": "Durustluk ve seffaflik yoluyla kalici iliskiler kurmak."
+        },
+        "excellence": {
+          "title": "Mukemmellik",
+          "description": "Olaganustu sonuclar ve hizmet kalitesi sunmak."
+        },
+        "clientFirst": {
+          "title": "Once Musteri",
+          "description": "Hedefleriniz bizim onceligigimiz, ihtiyaclariniza gore uyarlanmis."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Satilan Mulk",
+        "yearsExperience": "Yillik Deneyim",
+        "countries": "Ulke",
+        "clientSatisfaction": "Musteri Memnuniyeti"
+      }
+    },
+    "fifthView": {
+      "title": "Hizmetlerimiz",
+      "subtitle": "Ihtiyaclariniza gore uyarlanmis kapsamli gayrimenkul cozumleri",
+      "services": {
+        "propertySales": {
+          "title": "Mulk Satisi",
+          "description": "Yatiriminizdan en iyi degeri almanizi saglayan, tum alis ve satis surecinde uzman rehberlik."
+        },
+        "propertyManagement": {
+          "title": "Mulk Yonetimi",
+          "description": "Ev sahipleri icin kapsamli yonetim hizmetleri."
+        },
+        "investmentAdvisory": {
+          "title": "Yatirim Danismanligi",
+          "description": "Portfoyunuzu olusturmak icin stratejik rehberlik."
+        },
+        "internationalProperties": {
+          "title": "Uluslararasi Mulkler",
+          "description": "Dunya genelinde ozel mulkler."
+        },
+        "legalConsultation": {
+          "title": "Hukuki Danismanlik",
+          "description": "Karmasik mulk yasalarinda gezinme."
+        },
+        "relocationServices": {
+          "title": "Yer Degistirme Hizmetleri",
+          "description": "Dunya genelinde yeni sehirlere veya ulkelere tasinan bireyler ve aileler icin sorunsuz tasinma destegi."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Bir Sohbet Baslatalim",
+      "subtitle": "Gayrimenkul yolculugunuzda size yardimci olmak icin buradayiz",
+      "address": "123 Premier Caddesi, Istanbul",
+      "successTitle": "Mesaj Gonderildi!",
+      "successMessage": "Bize ulastiginiz icin tesekkurler. 24 saat icinde size donecegiz.",
+      "sendAnother": "Baska Gonder",
+      "formTitle": "Mesaj Gonder",
+      "formSubtitle": "Formu doldurun, hizlica yanit verecegiz",
+      "placeholders": {
+        "name": "Adiniz",
+        "email": "E-posta Adresi",
+        "phone": "Telefon Numarasi",
+        "subject": "Konu",
+        "message": "Mesajiniz..."
+      },
+      "sending": "Gonderiliyor...",
+      "sendMessage": "Mesaj Gonder"
+    }
   }
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";
+import { useTranslations } from "next-intl";
 import { HeroSlide, Property } from "@/types/database";
 import WorldMap from "./worldmap";
 import AboutUsImageGallery from "./AboutUsImageGallery";
@@ -37,75 +38,14 @@ type Props = {
 };
 
 const SLIDE_DATA = [
-  {
-    title: "Find Your",
-    subtitle: "dream home",
-    label: "dıscover",
-    color: "#169216",
-  },
-  {
-    title: "Invest in",
-    subtitle: "your future",
-    label: "opportunıty",
-    color: "#C9567D",
-  },
-  {
-    title: "Luxury",
-    subtitle: "living awaits",
-    label: "premıum",
-    color: "#24c7c0",
-  },
-  { title: "Expert", subtitle: "guidance", label: "trusted", color: "#6593d6" },
-  {
-    title: "Your Vision",
-    subtitle: "our mission",
-    label: "partnershıp",
-    color: "#1fbeca",
-  },
+  { key: "slide1", color: "#169216" },
+  { key: "slide2", color: "#C9567D" },
+  { key: "slide3", color: "#24c7c0" },
+  { key: "slide4", color: "#6593d6" },
+  { key: "slide5", color: "#1fbeca" },
 ];
 
-const ARTICLES = [
-  {
-    title: "Find Your Dream Home",
-    content: [
-      "Your perfect home is out there waiting for you. Whether you're looking for a cozy starter home, a spacious family residence, or a luxurious estate, our team is dedicated to helping you find exactly what you're searching for.",
-      "We understand that buying a home is one of the biggest decisions you'll ever make. That's why we take the time to understand your unique needs, preferences, and lifestyle to match you with properties that truly feel like home.",
-      "From the first viewing to the final closing, we're with you every step of the way, ensuring a smooth and stress-free home buying experience.",
-    ],
-  },
-  {
-    title: "Invest in Your Future",
-    content: [
-      "Real estate remains one of the most reliable ways to build long-term wealth. Whether you're a first-time investor or expanding your portfolio, we provide the insights and expertise you need to make smart investment decisions.",
-      "Our market analysis tools and local knowledge help you identify properties with strong appreciation potential and excellent rental yields.",
-      "Let us help you turn real estate into a cornerstone of your financial future.",
-    ],
-  },
-  {
-    title: "Luxury Living Awaits",
-    content: [
-      "Experience the finest properties our market has to offer. From stunning penthouses with panoramic views to elegant estates with world-class amenities, we specialize in connecting discerning buyers with exceptional homes.",
-      "Our luxury portfolio features properties that represent the pinnacle of design, craftsmanship, and location.",
-      "Discover a lifestyle of sophistication and comfort with our curated selection of premium properties.",
-    ],
-  },
-  {
-    title: "Expert Guidance You Can Trust",
-    content: [
-      "Navigating the real estate market requires expertise, insight, and dedication. Our team of experienced consultants brings decades of combined experience to every transaction.",
-      "We stay ahead of market trends, understand neighborhood dynamics, and have the negotiation skills to get you the best possible outcome.",
-      "When you work with us, you gain a trusted partner committed to your success.",
-    ],
-  },
-  {
-    title: "Your Vision, Our Mission",
-    content: [
-      "Every client has a unique vision for their real estate journey. Whether you're selling your family home, searching for the perfect investment property, or relocating to a new city, we make your goals our priority.",
-      "Our personalized approach ensures that you receive tailored advice and dedicated support throughout your entire real estate experience.",
-      "Together, we'll turn your real estate dreams into reality.",
-    ],
-  },
-];
+const ARTICLE_KEYS = ["article1", "article2", "article3", "article4", "article5"];
 
 // Map slice indices (0-indexed) to property image indices
 const PROPERTY_SLICE_MAP: Record<number, number> = {
@@ -120,6 +60,7 @@ export default function HeroSlider({
   propertyImages = [],
   properties = [],
 }: Props) {
+  const t = useTranslations("heroSlider");
   const propertyScrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -4534,7 +4475,7 @@ export default function HeroSlider({
                   <div key={sliceIndex} className="text-slice">
                     <div className="text-main-wrapper">
                       <div className="text-main-inner">
-                        {slide.title} <br /> {slide.subtitle}
+                        {t(`slides.${slide.key}.title`)} <br /> {t(`slides.${slide.key}.subtitle`)}
                       </div>
                     </div>
                   </div>
@@ -4552,7 +4493,7 @@ export default function HeroSlider({
                         border-left: 13px solid color-mix(in srgb, ${slide.color} 60%, black);
                       }
                     `}</style>
-                    {slide.label}
+                    {t(`slides.${slide.key}.label`)}
                   </div>
                 </div>
               </div>
@@ -4635,14 +4576,14 @@ export default function HeroSlider({
             })}
           </div>
           <button className="back-button" onClick={handleBackToSlider}>
-            ← Back
+            {t("back")}
           </button>
           <section className="page-container">
             <article>
-              <h1>{ARTICLES[currentSlide].title}</h1>
-              {ARTICLES[currentSlide].content.map((para, index) => (
-                <p key={index}>{para}</p>
-              ))}
+              <h1>{t(`articles.${ARTICLE_KEYS[currentSlide]}.title`)}</h1>
+              <p>{t(`articles.${ARTICLE_KEYS[currentSlide]}.content1`)}</p>
+              <p>{t(`articles.${ARTICLE_KEYS[currentSlide]}.content2`)}</p>
+              <p>{t(`articles.${ARTICLE_KEYS[currentSlide]}.content3`)}</p>
             </article>
           </section>
           {/* Down arrow to third view */}
@@ -4667,7 +4608,7 @@ export default function HeroSlider({
             className="third-view-back-button"
             onClick={handleBackToArticle}
           >
-            ← Back
+            {t("back")}
           </button>
 
           {/* Top area: Globe left, Content right */}
@@ -4680,7 +4621,7 @@ export default function HeroSlider({
             <div className="third-view-content-area">
               <div className="third-view-content">
                 <h1 className="third-view-title">
-                  {["Your", "Dream", "Home,", "Anywhere"].map((word, index) => (
+                  {(t.raw("thirdView.titleWords") as string[]).map((word, index) => (
                     <div key={index} className="third-view-title-slice">
                       <span>{word}</span>
                     </div>
@@ -4688,8 +4629,7 @@ export default function HeroSlider({
                 </h1>
                 <div className="third-view-subtitle-wrapper">
                   <p className="third-view-subtitle">
-                    From London to Dubai, Cyprus to Singapore — we connect you
-                    with premium properties worldwide
+                    {t("thirdView.subtitle")}
                   </p>
                 </div>
               </div>
@@ -4699,7 +4639,7 @@ export default function HeroSlider({
           {/* Property Cards Section */}
           <div className="third-view-properties">
             <div className="properties-header">
-              <h3 className="properties-title">Featured Properties</h3>
+              <h3 className="properties-title">{t("thirdView.featuredProperties")}</h3>
               {displayProperties.length > 0 && (
                 <div className="properties-nav">
                   <button
@@ -4750,19 +4690,19 @@ export default function HeroSlider({
                               fontSize: "12px",
                             }}
                           >
-                            No image
+                            {t("thirdView.noImage")}
                           </div>
                         )}
                         {property.type && (
                           <div className="property-card-badge">
-                            {property.type === "sale" ? "For Sale" : "For Rent"}
+                            {property.type === "sale" ? t("thirdView.forSale") : t("thirdView.forRent")}
                           </div>
                         )}
                         {property.price && (
                           <div className="property-card-price">
                             <p>
                               ${property.price.toLocaleString()}
-                              {property.type === "rent" && <span>/mo</span>}
+                              {property.type === "rent" && <span>{t("thirdView.perMonth")}</span>}
                             </p>
                           </div>
                         )}
@@ -4784,12 +4724,12 @@ export default function HeroSlider({
                         <div className="property-card-features">
                           {property.bedrooms && (
                             <span className="property-card-feature">
-                              <BedDouble size={14} /> {property.bedrooms} beds
+                              <BedDouble size={14} /> {property.bedrooms} {t("thirdView.beds")}
                             </span>
                           )}
                           {property.bathrooms && (
                             <span className="property-card-feature">
-                              <Bath size={14} /> {property.bathrooms} baths
+                              <Bath size={14} /> {property.bathrooms} {t("thirdView.baths")}
                             </span>
                           )}
                           {property.area && (
@@ -4805,7 +4745,7 @@ export default function HeroSlider({
               </div>
             ) : (
               <div className="no-properties-message">
-                No properties available at the moment.
+                {t("thirdView.noProperties")}
               </div>
             )}
           </div>
@@ -4837,31 +4777,27 @@ export default function HeroSlider({
             className="fourth-view-back-button"
             onClick={handleBackToThird}
           >
-            ← Back
+            {t("back")}
           </button>
 
           <div className="fourth-view-content">
             {/* Left Side: Title, Text, Values, Stats */}
             <div className="fourth-view-left">
               <div className="fourth-view-header">
-                <h1 className="fourth-view-title">About Us</h1>
+                <h1 className="fourth-view-title">{t("fourthView.title")}</h1>
                 <p className="fourth-view-subtitle">
-                  Your trusted partner in global real estate since 2010
+                  {t("fourthView.subtitle")}
                 </p>
               </div>
 
               <div className="fourth-view-body">
                 <p className="fourth-view-text">
-                  We are a premier international real estate consultancy
-                  dedicated to helping clients find their perfect property
-                  anywhere in the world. With over a decade of experience,
-                  we&apos;ve built a reputation for excellence, integrity, and
-                  personalized service.
+                  {t("fourthView.description")}
                 </p>
               </div>
 
               <div className="fourth-view-values">
-                <h2 className="fourth-view-values-title">Our Core Values</h2>
+                <h2 className="fourth-view-values-title">{t("fourthView.coreValues")}</h2>
                 <div className="fourth-view-values-grid">
                   <div className="fourth-view-value-card value-trust">
                     <div className="fourth-view-value-icon">
@@ -4869,11 +4805,10 @@ export default function HeroSlider({
                     </div>
                     <div className="fourth-view-value-content">
                       <h3 className="fourth-view-value-title">
-                        Trust & Integrity
+                        {t("fourthView.values.trust.title")}
                       </h3>
                       <p className="fourth-view-value-desc">
-                        Building lasting relationships through honesty and
-                        transparency.
+                        {t("fourthView.values.trust.description")}
                       </p>
                     </div>
                   </div>
@@ -4882,9 +4817,9 @@ export default function HeroSlider({
                       <Award size={20} />
                     </div>
                     <div className="fourth-view-value-content">
-                      <h3 className="fourth-view-value-title">Excellence</h3>
+                      <h3 className="fourth-view-value-title">{t("fourthView.values.excellence.title")}</h3>
                       <p className="fourth-view-value-desc">
-                        Delivering exceptional results and service quality.
+                        {t("fourthView.values.excellence.description")}
                       </p>
                     </div>
                   </div>
@@ -4893,9 +4828,9 @@ export default function HeroSlider({
                       <Users size={20} />
                     </div>
                     <div className="fourth-view-value-content">
-                      <h3 className="fourth-view-value-title">Client First</h3>
+                      <h3 className="fourth-view-value-title">{t("fourthView.values.clientFirst.title")}</h3>
                       <p className="fourth-view-value-desc">
-                        Your goals are our priority, tailored to your needs.
+                        {t("fourthView.values.clientFirst.description")}
                       </p>
                     </div>
                   </div>
@@ -4906,20 +4841,20 @@ export default function HeroSlider({
               <div className="fourth-view-stats">
                 <div className="fourth-view-stat">
                   <div className="fourth-view-stat-number">500+</div>
-                  <div className="fourth-view-stat-label">Properties Sold</div>
+                  <div className="fourth-view-stat-label">{t("fourthView.stats.propertiesSold")}</div>
                 </div>
                 <div className="fourth-view-stat">
                   <div className="fourth-view-stat-number">15+</div>
-                  <div className="fourth-view-stat-label">Years Experience</div>
+                  <div className="fourth-view-stat-label">{t("fourthView.stats.yearsExperience")}</div>
                 </div>
                 <div className="fourth-view-stat">
                   <div className="fourth-view-stat-number">30+</div>
-                  <div className="fourth-view-stat-label">Countries</div>
+                  <div className="fourth-view-stat-label">{t("fourthView.stats.countries")}</div>
                 </div>
                 <div className="fourth-view-stat">
                   <div className="fourth-view-stat-number">98%</div>
                   <div className="fourth-view-stat-label">
-                    Client Satisfaction
+                    {t("fourthView.stats.clientSatisfaction")}
                   </div>
                 </div>
               </div>
@@ -4958,14 +4893,14 @@ export default function HeroSlider({
             className="fifth-view-back-button"
             onClick={handleBackToFourth}
           >
-            ← Back
+            {t("back")}
           </button>
 
           <div className="fifth-view-content">
             <div className="fifth-view-header">
-              <h1 className="fifth-view-title">Our Services</h1>
+              <h1 className="fifth-view-title">{t("fifthView.title")}</h1>
               <p className="fifth-view-subtitle">
-                Comprehensive real estate solutions tailored to your needs
+                {t("fifthView.subtitle")}
               </p>
             </div>
 
@@ -4975,11 +4910,9 @@ export default function HeroSlider({
                   <Home size={28} />
                 </div>
                 <div className="bento-card-content">
-                  <h3 className="bento-card-title">Property Sales</h3>
+                  <h3 className="bento-card-title">{t("fifthView.services.propertySales.title")}</h3>
                   <p className="bento-card-desc">
-                    Expert guidance through the entire buying and selling
-                    process, ensuring you get the best value for your
-                    investment.
+                    {t("fifthView.services.propertySales.description")}
                   </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
@@ -4990,9 +4923,9 @@ export default function HeroSlider({
                   <Building size={24} />
                 </div>
                 <div className="bento-card-content">
-                  <h3 className="bento-card-title">Property Management</h3>
+                  <h3 className="bento-card-title">{t("fifthView.services.propertyManagement.title")}</h3>
                   <p className="bento-card-desc">
-                    Comprehensive management services for landlords.
+                    {t("fifthView.services.propertyManagement.description")}
                   </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
@@ -5003,9 +4936,9 @@ export default function HeroSlider({
                   <TrendingUp size={24} />
                 </div>
                 <div className="bento-card-content">
-                  <h3 className="bento-card-title">Investment Advisory</h3>
+                  <h3 className="bento-card-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
                   <p className="bento-card-desc">
-                    Strategic guidance to build your portfolio.
+                    {t("fifthView.services.investmentAdvisory.description")}
                   </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
@@ -5016,9 +4949,9 @@ export default function HeroSlider({
                   <Globe size={24} />
                 </div>
                 <div className="bento-card-content">
-                  <h3 className="bento-card-title">International Properties</h3>
+                  <h3 className="bento-card-title">{t("fifthView.services.internationalProperties.title")}</h3>
                   <p className="bento-card-desc">
-                    Exclusive properties worldwide.
+                    {t("fifthView.services.internationalProperties.description")}
                   </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
@@ -5029,9 +4962,9 @@ export default function HeroSlider({
                   <FileText size={24} />
                 </div>
                 <div className="bento-card-content">
-                  <h3 className="bento-card-title">Legal Consultation</h3>
+                  <h3 className="bento-card-title">{t("fifthView.services.legalConsultation.title")}</h3>
                   <p className="bento-card-desc">
-                    Navigate complex property laws.
+                    {t("fifthView.services.legalConsultation.description")}
                   </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
@@ -5042,10 +4975,9 @@ export default function HeroSlider({
                   <Handshake size={28} />
                 </div>
                 <div className="bento-card-content">
-                  <h3 className="bento-card-title">Relocation Services</h3>
+                  <h3 className="bento-card-title">{t("fifthView.services.relocationServices.title")}</h3>
                   <p className="bento-card-desc">
-                    Seamless relocation support for individuals and families
-                    moving to new cities or countries worldwide.
+                    {t("fifthView.services.relocationServices.description")}
                   </p>
                 </div>
                 <div className="bento-card-arrow">→</div>
@@ -5070,7 +5002,7 @@ export default function HeroSlider({
             className="sixth-view-back-button"
             onClick={handleBackToFifth}
           >
-            ← Back
+            {t("back")}
           </button>
 
           <div className="sixth-view-content">
@@ -5078,10 +5010,10 @@ export default function HeroSlider({
               {/* Left Side - Contact Info */}
               <div className="contact-left">
                 <h2 className="contact-left-title">
-                  Let&apos;s Start a Conversation
+                  {t("sixthView.title")}
                 </h2>
                 <p className="contact-left-subtitle">
-                  We&apos;re here to help with your real estate journey
+                  {t("sixthView.subtitle")}
                 </p>
 
                 <div className="contact-info-list">
@@ -5089,7 +5021,7 @@ export default function HeroSlider({
                     <div className="contact-info-icon">
                       <MapPin size={20} />
                     </div>
-                    <span>123 Premier Avenue, Istanbul</span>
+                    <span>{t("sixthView.address")}</span>
                   </div>
                   <div className="contact-info-row">
                     <div className="contact-info-icon">
@@ -5115,24 +5047,23 @@ export default function HeroSlider({
                     <div className="success-icon">
                       <CheckCircle size={36} />
                     </div>
-                    <h3 className="success-title">Message Sent!</h3>
+                    <h3 className="success-title">{t("sixthView.successTitle")}</h3>
                     <p className="success-message">
-                      Thank you for reaching out. We&apos;ll get back to you
-                      within 24 hours.
+                      {t("sixthView.successMessage")}
                     </p>
                     <button
                       className="success-btn"
                       onClick={() => setContactSuccess(false)}
                     >
-                      Send Another
+                      {t("sixthView.sendAnother")}
                     </button>
                   </div>
                 ) : (
                   <>
                     <div className="contact-form-header">
-                      <h3 className="contact-form-title">Send a Message</h3>
+                      <h3 className="contact-form-title">{t("sixthView.formTitle")}</h3>
                       <p className="contact-form-subtitle">
-                        Fill out the form and we&apos;ll respond promptly
+                        {t("sixthView.formSubtitle")}
                       </p>
                     </div>
 
@@ -5144,7 +5075,7 @@ export default function HeroSlider({
                         <input
                           type="text"
                           className="form-input"
-                          placeholder="Your Name"
+                          placeholder={t("sixthView.placeholders.name")}
                           required
                           value={contactForm.name}
                           onChange={(e) =>
@@ -5157,7 +5088,7 @@ export default function HeroSlider({
                         <input
                           type="email"
                           className="form-input"
-                          placeholder="Email Address"
+                          placeholder={t("sixthView.placeholders.email")}
                           required
                           value={contactForm.email}
                           onChange={(e) =>
@@ -5173,7 +5104,7 @@ export default function HeroSlider({
                         <input
                           type="tel"
                           className="form-input"
-                          placeholder="Phone Number"
+                          placeholder={t("sixthView.placeholders.phone")}
                           required
                           value={contactForm.phone}
                           onChange={(e) =>
@@ -5186,7 +5117,7 @@ export default function HeroSlider({
                         <input
                           type="text"
                           className="form-input"
-                          placeholder="Subject"
+                          placeholder={t("sixthView.placeholders.subject")}
                           required
                           value={contactForm.subject}
                           onChange={(e) =>
@@ -5200,7 +5131,7 @@ export default function HeroSlider({
 
                       <textarea
                         className="form-textarea"
-                        placeholder="Your message..."
+                        placeholder={t("sixthView.placeholders.message")}
                         required
                         value={contactForm.message}
                         onChange={(e) =>
@@ -5223,12 +5154,12 @@ export default function HeroSlider({
                         {contactLoading ? (
                           <>
                             <Loader2 size={18} className="animate-spin" />
-                            Sending...
+                            {t("sixthView.sending")}
                           </>
                         ) : (
                           <>
                             <Send size={18} />
-                            Send Message
+                            {t("sixthView.sendMessage")}
                           </>
                         )}
                       </button>

@@ -730,5 +730,154 @@
     "ctaTitle": "Ready to Get Started?",
     "ctaDescription": "Book a consultation with our real estate experts.",
     "ctaButton": "Book Consultation"
+  },
+  "heroSlider": {
+    "back": "← Back",
+    "slides": {
+      "slide1": {
+        "title": "Find Your",
+        "subtitle": "dream home",
+        "label": "discover"
+      },
+      "slide2": {
+        "title": "Invest in",
+        "subtitle": "your future",
+        "label": "opportunity"
+      },
+      "slide3": {
+        "title": "Luxury",
+        "subtitle": "living awaits",
+        "label": "premium"
+      },
+      "slide4": {
+        "title": "Expert",
+        "subtitle": "guidance",
+        "label": "trusted"
+      },
+      "slide5": {
+        "title": "Your Vision",
+        "subtitle": "our mission",
+        "label": "partnership"
+      }
+    },
+    "articles": {
+      "article1": {
+        "title": "Find Your Dream Home",
+        "content1": "Your perfect home is out there waiting for you. Whether you're looking for a cozy starter home, a spacious family residence, or a luxurious estate, our team is dedicated to helping you find exactly what you're searching for.",
+        "content2": "We understand that buying a home is one of the biggest decisions you'll ever make. That's why we take the time to understand your unique needs, preferences, and lifestyle to match you with properties that truly feel like home.",
+        "content3": "From the first viewing to the final closing, we're with you every step of the way, ensuring a smooth and stress-free home buying experience."
+      },
+      "article2": {
+        "title": "Invest in Your Future",
+        "content1": "Real estate remains one of the most reliable ways to build long-term wealth. Whether you're a first-time investor or expanding your portfolio, we provide the insights and expertise you need to make smart investment decisions.",
+        "content2": "Our market analysis tools and local knowledge help you identify properties with strong appreciation potential and excellent rental yields.",
+        "content3": "Let us help you turn real estate into a cornerstone of your financial future."
+      },
+      "article3": {
+        "title": "Luxury Living Awaits",
+        "content1": "Experience the finest properties our market has to offer. From stunning penthouses with panoramic views to elegant estates with world-class amenities, we specialize in connecting discerning buyers with exceptional homes.",
+        "content2": "Our luxury portfolio features properties that represent the pinnacle of design, craftsmanship, and location.",
+        "content3": "Discover a lifestyle of sophistication and comfort with our curated selection of premium properties."
+      },
+      "article4": {
+        "title": "Expert Guidance You Can Trust",
+        "content1": "Navigating the real estate market requires expertise, insight, and dedication. Our team of experienced consultants brings decades of combined experience to every transaction.",
+        "content2": "We stay ahead of market trends, understand neighborhood dynamics, and have the negotiation skills to get you the best possible outcome.",
+        "content3": "When you work with us, you gain a trusted partner committed to your success."
+      },
+      "article5": {
+        "title": "Your Vision, Our Mission",
+        "content1": "Every client has a unique vision for their real estate journey. Whether you're selling your family home, searching for the perfect investment property, or relocating to a new city, we make your goals our priority.",
+        "content2": "Our personalized approach ensures that you receive tailored advice and dedicated support throughout your entire real estate experience.",
+        "content3": "Together, we'll turn your real estate dreams into reality."
+      }
+    },
+    "thirdView": {
+      "titleWords": ["Your", "Dream", "Home,", "Anywhere"],
+      "subtitle": "From London to Dubai, Cyprus to Singapore — we connect you with premium properties worldwide",
+      "featuredProperties": "Featured Properties",
+      "noImage": "No image",
+      "forSale": "For Sale",
+      "forRent": "For Rent",
+      "perMonth": "/mo",
+      "beds": "beds",
+      "baths": "baths",
+      "noProperties": "No properties available at the moment."
+    },
+    "fourthView": {
+      "title": "About Us",
+      "subtitle": "Your trusted partner in global real estate since 2010",
+      "description": "We are a premier international real estate consultancy dedicated to helping clients find their perfect property anywhere in the world. With over a decade of experience, we've built a reputation for excellence, integrity, and personalized service.",
+      "coreValues": "Our Core Values",
+      "values": {
+        "trust": {
+          "title": "Trust & Integrity",
+          "description": "Building lasting relationships through honesty and transparency."
+        },
+        "excellence": {
+          "title": "Excellence",
+          "description": "Delivering exceptional results and service quality."
+        },
+        "clientFirst": {
+          "title": "Client First",
+          "description": "Your goals are our priority, tailored to your needs."
+        }
+      },
+      "stats": {
+        "propertiesSold": "Properties Sold",
+        "yearsExperience": "Years Experience",
+        "countries": "Countries",
+        "clientSatisfaction": "Client Satisfaction"
+      }
+    },
+    "fifthView": {
+      "title": "Our Services",
+      "subtitle": "Comprehensive real estate solutions tailored to your needs",
+      "services": {
+        "propertySales": {
+          "title": "Property Sales",
+          "description": "Expert guidance through the entire buying and selling process, ensuring you get the best value for your investment."
+        },
+        "propertyManagement": {
+          "title": "Property Management",
+          "description": "Comprehensive management services for landlords."
+        },
+        "investmentAdvisory": {
+          "title": "Investment Advisory",
+          "description": "Strategic guidance to build your portfolio."
+        },
+        "internationalProperties": {
+          "title": "International Properties",
+          "description": "Exclusive properties worldwide."
+        },
+        "legalConsultation": {
+          "title": "Legal Consultation",
+          "description": "Navigate complex property laws."
+        },
+        "relocationServices": {
+          "title": "Relocation Services",
+          "description": "Seamless relocation support for individuals and families moving to new cities or countries worldwide."
+        }
+      }
+    },
+    "sixthView": {
+      "title": "Let's Start a Conversation",
+      "subtitle": "We're here to help with your real estate journey",
+      "address": "123 Premier Avenue, Istanbul",
+      "successTitle": "Message Sent!",
+      "successMessage": "Thank you for reaching out. We'll get back to you within 24 hours.",
+      "sendAnother": "Send Another",
+      "formTitle": "Send a Message",
+      "formSubtitle": "Fill out the form and we'll respond promptly",
+      "placeholders": {
+        "name": "Your Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "subject": "Subject",
+        "message": "Your message..."
+      },
+      "sending": "Sending...",
+      "sendMessage": "Send Message"
+    }
   }
 }
