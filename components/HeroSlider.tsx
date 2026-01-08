@@ -3073,7 +3073,7 @@ export default function HeroSlider({
         }
 
         /* Third View - Laptop/Tablet Responsive */
-        @media screen and (min-width: 1001px) and (max-width: 1440px) {
+        @media screen and (min-width: 1001px) and (max-width: 1680px) {
           .third-view-content-area {
             padding: 50px 30px 30px 15px;
           }
@@ -3592,7 +3592,7 @@ export default function HeroSlider({
         }
 
         /* Fourth View - Laptop/Tablet Responsive */
-        @media screen and (min-width: 1001px) and (max-width: 1440px) {
+        @media screen and (min-width: 1001px) and (max-width: 1680px) {
           .fourth-view-content {
             padding: 70px 40px 35px;
             gap: 40px;
