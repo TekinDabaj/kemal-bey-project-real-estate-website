@@ -180,7 +180,7 @@ export default function BookPage() {
 
   if (success) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center px-4 py-16 bg-gradient-to-b from-slate-50 to-white dark:from-[#0c0a1d] dark:to-[#0c0a1d]">
+      <div className="min-h-[80vh] flex items-center justify-center px-4 py-16 pt-24 md:pt-28 bg-gradient-to-b from-slate-50 to-white dark:from-[#0c0a1d] dark:to-[#0c0a1d]">
         <div className="max-w-lg w-full">
           <div className="bg-white dark:bg-[#13102b] rounded-2xl shadow-xl dark:shadow-purple-900/10 p-8 md:p-12 text-center border border-slate-100 dark:border-[#2d2a4a]">
             <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -258,7 +258,7 @@ export default function BookPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0c0a1d] dark:to-[#0c0a1d]">
       {/* Hero Section */}
-      <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-16 px-4">
+      <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-16 pt-24 md:pt-28 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">{t("title")}</h1>
           <p className="text-slate-300 dark:text-slate-400 text-lg max-w-2xl mx-auto mb-8">
