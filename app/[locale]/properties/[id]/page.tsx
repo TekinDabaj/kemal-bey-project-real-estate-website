@@ -137,7 +137,7 @@ export default async function PropertyDetailPage({ params }: Props) {
   return (
     <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-screen pt-16 md:pt-24">
       {/* Header */}
-      <div className="max-w-6xl mx-auto px-3 md:px-4 py-2 md:py-3 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-3 md:px-4 lg:px-6 py-2 md:py-3 flex items-center justify-between">
           <Link
             href={`/${locale}/properties`}
             className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition text-sm font-medium"
@@ -158,19 +158,22 @@ export default async function PropertyDetailPage({ params }: Props) {
           </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-3 md:px-4 py-4 md:py-6">
-        {/* Image Gallery */}
-        <div className="mb-3 md:mb-4">
-          <ImageGallery
-            images={property.images || []}
-            title={property.title}
-            bucketUrl={bucketUrl}
-          />
-        </div>
+      <div className="max-w-[1400px] mx-auto px-3 md:px-4 lg:px-6 py-4 md:py-6">
+        <div className="flex gap-6">
+          {/* Left Side - Main Property Content */}
+          <div className="flex-1 min-w-0">
+            {/* Image Gallery */}
+            <div className="mb-3 md:mb-4">
+              <ImageGallery
+                images={property.images || []}
+                title={property.title}
+                bucketUrl={bucketUrl}
+              />
+            </div>
 
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 gap-3 md:gap-4">
-          {/* Main Content */}
-          <div className="xl:col-span-3 lg:col-span-2 space-y-3 md:space-y-4">
+            <div className="grid lg:grid-cols-3 gap-3 md:gap-4">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-3 md:space-y-4">
             {/* Title & Price Card */}
             <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 md:p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
               <div className="flex flex-wrap items-start justify-between gap-2 md:gap-3 mb-2 md:mb-3">
@@ -413,38 +416,122 @@ export default async function PropertyDetailPage({ params }: Props) {
           </div>
 
           {/* Sidebar - Hidden on mobile, shown on desktop */}
-          <div className="hidden lg:block space-y-4">
-            {/* Contact Card */}
-            <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
-              <h2 className="font-semibold text-slate-900 dark:text-white mb-2 text-sm">{t('interested')}</h2>
-              <p className="text-xs text-slate-600 dark:text-slate-400 mb-3">{t('interestedDescription')}</p>
-              <Link
-                href={`/${locale}/book`}
-                className="flex items-center justify-center gap-2 w-full bg-amber-500 hover:bg-amber-600 text-slate-900 px-3 py-2 rounded-lg font-semibold transition text-xs"
-              >
-                <Calendar size={14} /> {t('bookConsultation')}
-              </Link>
-              <Link
-                href={`/${locale}/contact`}
-                className="flex items-center justify-center gap-2 w-full border border-slate-300 dark:border-[#2d2a4a] hover:border-amber-500 dark:hover:border-amber-500 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-2 rounded-lg font-medium transition mt-2 text-xs"
-              >
-                {t('contactUs')}
-              </Link>
+              <div className="hidden lg:block space-y-4">
+                {/* Contact Card */}
+                <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+                  <h2 className="font-semibold text-slate-900 dark:text-white mb-2 text-sm">{t('interested')}</h2>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mb-3">{t('interestedDescription')}</p>
+                  <Link
+                    href={`/${locale}/book`}
+                    className="flex items-center justify-center gap-2 w-full bg-amber-500 hover:bg-amber-600 text-slate-900 px-3 py-2 rounded-lg font-semibold transition text-xs"
+                  >
+                    <Calendar size={14} /> {t('bookConsultation')}
+                  </Link>
+                  <Link
+                    href={`/${locale}/contact`}
+                    className="flex items-center justify-center gap-2 w-full border border-slate-300 dark:border-[#2d2a4a] hover:border-amber-500 dark:hover:border-amber-500 text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 px-3 py-2 rounded-lg font-medium transition mt-2 text-xs"
+                  >
+                    {t('contactUs')}
+                  </Link>
+                </div>
+
+                {/* Property ID */}
+                <div className="bg-slate-100 dark:bg-[#1a1735] rounded-xl p-3 text-center dark:border dark:border-[#2d2a4a]">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-500">{t('propertyId')}</p>
+                  <p className="font-mono text-xs text-slate-700 dark:text-slate-300">{property.id.slice(0, 8).toUpperCase()}</p>
+                </div>
+              </div>
             </div>
 
-            {/* Related Properties - Desktop vertical column */}
+            {/* Related Properties - Mobile horizontal scroll */}
             {shuffledProperties.length > 0 && (
-              <div className="bg-white dark:bg-[#13102b] rounded-xl p-4 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a]">
+              <div className="xl:hidden mt-6">
+                <h2 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm px-1">{t('relatedProperties')}</h2>
+                <div className="overflow-x-auto pb-2 -mx-3 px-3 scrollbar-hide">
+                  <div className="flex gap-3" style={{ width: 'max-content' }}>
+                    {shuffledProperties.map((relatedProperty) => (
+                      <Link
+                        key={relatedProperty.id}
+                        href={`/${locale}/properties/${relatedProperty.id}`}
+                        className="w-[200px] flex-shrink-0 bg-white dark:bg-[#13102b] rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-[#2d2a4a] hover:shadow-md transition group"
+                      >
+                        {/* Image */}
+                        <div className="relative aspect-[16/10] bg-slate-200 dark:bg-[#1a1735]">
+                          {relatedProperty.images && relatedProperty.images.length > 0 ? (
+                            <img
+                              src={`${bucketUrl}${relatedProperty.images[0]}`}
+                              alt={relatedProperty.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-600 text-xs">
+                              {t('noImage')}
+                            </div>
+                          )}
+                          {/* Type Badge */}
+                          {relatedProperty.type && (
+                            <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500 text-slate-900">
+                              {relatedProperty.type === 'sale' ? t('forSale') : t('forRent')}
+                            </div>
+                          )}
+                          {/* Price Overlay */}
+                          {relatedProperty.price && (
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1.5">
+                              <p className="text-sm font-bold text-white">
+                                ${relatedProperty.price.toLocaleString()}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        {/* Content */}
+                        <div className="p-2.5">
+                          <h3 className="font-medium text-slate-900 dark:text-white text-xs group-hover:text-amber-600 dark:group-hover:text-amber-400 transition line-clamp-1">{relatedProperty.title}</h3>
+                          {relatedProperty.location && (
+                            <p className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">
+                              <MapPin size={10} /> <span className="line-clamp-1">{relatedProperty.location}</span>
+                            </p>
+                          )}
+                          {/* Features */}
+                          <div className="flex gap-2 text-slate-500 dark:text-slate-400 text-[10px] mt-1.5 pt-1.5 border-t border-slate-100 dark:border-[#2d2a4a]">
+                            {relatedProperty.bedrooms && (
+                              <span className="flex items-center gap-0.5">
+                                <BedDouble size={10} /> {relatedProperty.bedrooms}
+                              </span>
+                            )}
+                            {relatedProperty.bathrooms && (
+                              <span className="flex items-center gap-0.5">
+                                <Bath size={10} /> {relatedProperty.bathrooms}
+                              </span>
+                            )}
+                            {relatedProperty.area && (
+                              <span className="flex items-center gap-0.5">
+                                <Expand size={10} /> {relatedProperty.area}m²
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right Side - Related Properties Column (Desktop only) */}
+          {shuffledProperties.length > 0 && (
+            <div className="hidden xl:block w-[280px] flex-shrink-0">
+              <div className="sticky top-28">
                 <h2 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm">{t('relatedProperties')}</h2>
-                <div className="space-y-3">
+                <div className="space-y-3 max-h-[calc(100vh-140px)] overflow-y-auto pr-1 scrollbar-thin">
                   {shuffledProperties.map((relatedProperty) => (
                     <Link
                       key={relatedProperty.id}
                       href={`/${locale}/properties/${relatedProperty.id}`}
-                      className="block bg-slate-50 dark:bg-[#1a1735] rounded-lg overflow-hidden hover:bg-slate-100 dark:hover:bg-[#1f1b40] transition group"
+                      className="block bg-white dark:bg-[#13102b] rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-[#2d2a4a] hover:shadow-md dark:hover:shadow-purple-900/20 transition group"
                     >
                       {/* Image */}
-                      <div className="relative aspect-[16/10] bg-slate-200 dark:bg-[#13102b]">
+                      <div className="relative aspect-[16/10] bg-slate-200 dark:bg-[#1a1735]">
                         {relatedProperty.images && relatedProperty.images.length > 0 ? (
                           <img
                             src={`${bucketUrl}${relatedProperty.images[0]}`}
@@ -480,7 +567,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                           </p>
                         )}
                         {/* Features */}
-                        <div className="flex gap-2 text-slate-500 dark:text-slate-400 text-[10px] mt-1.5 pt-1.5 border-t border-slate-200 dark:border-[#2d2a4a]">
+                        <div className="flex gap-2 text-slate-500 dark:text-slate-400 text-[10px] mt-1.5 pt-1.5 border-t border-slate-100 dark:border-[#2d2a4a]">
                           {relatedProperty.bedrooms && (
                             <span className="flex items-center gap-0.5">
                               <BedDouble size={10} /> {relatedProperty.bedrooms}
@@ -502,89 +589,9 @@ export default async function PropertyDetailPage({ params }: Props) {
                   ))}
                 </div>
               </div>
-            )}
-
-            {/* Property ID */}
-            <div className="bg-slate-100 dark:bg-[#1a1735] rounded-xl p-3 text-center dark:border dark:border-[#2d2a4a]">
-              <p className="text-[10px] text-slate-500 dark:text-slate-500">{t('propertyId')}</p>
-              <p className="font-mono text-xs text-slate-700 dark:text-slate-300">{property.id.slice(0, 8).toUpperCase()}</p>
             </div>
-          </div>
+          )}
         </div>
-
-        {/* Related Properties - Mobile horizontal scroll */}
-        {shuffledProperties.length > 0 && (
-          <div className="lg:hidden mt-6">
-            <h2 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm px-1">{t('relatedProperties')}</h2>
-            <div className="overflow-x-auto pb-2 -mx-3 px-3 scrollbar-hide">
-              <div className="flex gap-3" style={{ width: 'max-content' }}>
-                {shuffledProperties.map((relatedProperty) => (
-                  <Link
-                    key={relatedProperty.id}
-                    href={`/${locale}/properties/${relatedProperty.id}`}
-                    className="w-[200px] flex-shrink-0 bg-white dark:bg-[#13102b] rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-[#2d2a4a] hover:shadow-md transition group"
-                  >
-                    {/* Image */}
-                    <div className="relative aspect-[16/10] bg-slate-200 dark:bg-[#1a1735]">
-                      {relatedProperty.images && relatedProperty.images.length > 0 ? (
-                        <img
-                          src={`${bucketUrl}${relatedProperty.images[0]}`}
-                          alt={relatedProperty.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-600 text-xs">
-                          {t('noImage')}
-                        </div>
-                      )}
-                      {/* Type Badge */}
-                      {relatedProperty.type && (
-                        <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500 text-slate-900">
-                          {relatedProperty.type === 'sale' ? t('forSale') : t('forRent')}
-                        </div>
-                      )}
-                      {/* Price Overlay */}
-                      {relatedProperty.price && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1.5">
-                          <p className="text-sm font-bold text-white">
-                            ${relatedProperty.price.toLocaleString()}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                    {/* Content */}
-                    <div className="p-2.5">
-                      <h3 className="font-medium text-slate-900 dark:text-white text-xs group-hover:text-amber-600 dark:group-hover:text-amber-400 transition line-clamp-1">{relatedProperty.title}</h3>
-                      {relatedProperty.location && (
-                        <p className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">
-                          <MapPin size={10} /> <span className="line-clamp-1">{relatedProperty.location}</span>
-                        </p>
-                      )}
-                      {/* Features */}
-                      <div className="flex gap-2 text-slate-500 dark:text-slate-400 text-[10px] mt-1.5 pt-1.5 border-t border-slate-100 dark:border-[#2d2a4a]">
-                        {relatedProperty.bedrooms && (
-                          <span className="flex items-center gap-0.5">
-                            <BedDouble size={10} /> {relatedProperty.bedrooms}
-                          </span>
-                        )}
-                        {relatedProperty.bathrooms && (
-                          <span className="flex items-center gap-0.5">
-                            <Bath size={10} /> {relatedProperty.bathrooms}
-                          </span>
-                        )}
-                        {relatedProperty.area && (
-                          <span className="flex items-center gap-0.5">
-                            <Expand size={10} /> {relatedProperty.area}m²
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Fixed Bottom Bar for Mobile */}
