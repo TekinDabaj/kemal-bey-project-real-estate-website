@@ -122,10 +122,9 @@ export default async function PropertyDetailPage({ params }: Props) {
   const hasCoordinates = property.latitude && property.longitude
 
   return (
-    <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-screen">
+    <div className="bg-slate-50 dark:bg-[#0c0a1d] min-h-screen pt-20 md:pt-24">
       {/* Header */}
-      <div className="bg-white dark:bg-[#13102b] border-b border-slate-200 dark:border-[#2d2a4a] sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
             href={`/${locale}/properties`}
             className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition text-sm font-medium"
@@ -144,7 +143,6 @@ export default async function PropertyDetailPage({ params }: Props) {
               </span>
             )}
           </div>
-        </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6">
@@ -404,7 +402,7 @@ export default async function PropertyDetailPage({ params }: Props) {
           {/* Sidebar - Hidden on mobile, shown on desktop */}
           <div className="hidden lg:block space-y-4">
             {/* Contact Card */}
-            <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a] sticky top-20">
+            <div className="bg-white dark:bg-[#13102b] rounded-xl p-5 shadow-sm dark:shadow-purple-900/10 dark:border dark:border-[#2d2a4a] sticky top-24 md:top-28">
               <h2 className="font-semibold text-slate-900 dark:text-white mb-2">{t('interested')}</h2>
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{t('interestedDescription')}</p>
               <Link

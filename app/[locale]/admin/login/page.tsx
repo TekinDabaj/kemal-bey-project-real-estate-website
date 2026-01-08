@@ -48,7 +48,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-4 py-8 pt-24 md:pt-28 bg-slate-900 dark:bg-[#0c0a1d]">
+    <div className="min-h-[60vh] flex items-center justify-center px-4 py-8 pt-24 md:pt-28 bg-white dark:bg-[#0c0a1d]">
       <div className="w-full max-w-sm">
         <div className="bg-white dark:bg-[#13102b] p-6 rounded-lg border border-slate-200 dark:border-[#2d2a4a]">
           {/* Header */}
