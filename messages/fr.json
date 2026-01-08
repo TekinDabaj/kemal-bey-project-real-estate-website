@@ -768,7 +768,8 @@
         "yearsExperience": "Annees d'experience",
         "countries": "Pays",
         "clientSatisfaction": "Satisfaction client"
-      }
+      },
+      "ourJourney": "Notre parcours"
     },
     "fifthView": {
       "title": "Nos services",

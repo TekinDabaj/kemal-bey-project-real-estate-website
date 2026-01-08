@@ -3074,6 +3074,10 @@ export default function HeroSlider({
 
         /* Third View - Laptop/Tablet Responsive */
         @media screen and (min-width: 1001px) and (max-width: 1680px) {
+          .third-view-top {
+            flex: 1.2;
+          }
+
           .third-view-content-area {
             padding: 50px 30px 30px 15px;
           }
@@ -3094,64 +3098,81 @@ export default function HeroSlider({
           }
 
           .third-view-properties {
-            padding: 15px 0 25px;
+            padding: 10px 0 18px;
+            flex-shrink: 0;
           }
 
           .properties-header {
-            padding: 0 30px;
-            margin-bottom: 12px;
+            padding: 0 25px;
+            margin-bottom: 8px;
           }
 
           .properties-title {
-            font-size: 16px;
-          }
-
-          .properties-nav-btn {
-            width: 32px;
-            height: 32px;
-          }
-
-          .properties-scroll-container {
-            padding: 0 30px;
-          }
-
-          .properties-grid {
-            gap: 14px;
-          }
-
-          .property-card {
-            width: 300px;
-          }
-
-          .property-card-image {
-            aspect-ratio: 16/9;
-          }
-
-          .property-card-price p {
-            font-size: 16px;
-          }
-
-          .property-card-content {
-            padding: 12px;
-          }
-
-          .property-card-title {
             font-size: 14px;
           }
 
+          .properties-nav-btn {
+            width: 28px;
+            height: 28px;
+          }
+
+          .properties-scroll-container {
+            padding: 0 25px;
+          }
+
+          .properties-grid {
+            gap: 12px;
+            padding-bottom: 4px;
+          }
+
+          .property-card {
+            width: 240px;
+          }
+
+          .property-card-image {
+            aspect-ratio: 16/10;
+          }
+
+          .property-card-badge {
+            padding: 2px 6px;
+            font-size: 10px;
+          }
+
+          .property-card-price p {
+            font-size: 14px;
+          }
+
+          .property-card-price {
+            padding: 16px 10px 6px;
+          }
+
+          .property-card-content {
+            padding: 10px;
+          }
+
+          .property-card-title {
+            font-size: 13px;
+            margin-bottom: 2px;
+          }
+
           .property-card-location {
-            font-size: 11px;
+            font-size: 10px;
+            margin-bottom: 6px;
           }
 
           .property-card-description {
-            font-size: 11px;
-            margin-bottom: 10px;
+            display: none;
           }
 
           .property-card-features {
-            gap: 10px;
-            font-size: 11px;
-            padding-top: 10px;
+            gap: 8px;
+            font-size: 10px;
+            padding-top: 8px;
+          }
+
+          .property-card-feature svg {
+            width: 12px;
+            height: 12px;
           }
 
           .third-view-back-button {
@@ -3164,7 +3185,7 @@ export default function HeroSlider({
           .third-view-down-button {
             width: 44px;
             height: 44px;
-            bottom: 25px;
+            bottom: 20px;
           }
         }
 

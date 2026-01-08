@@ -2217,10 +2217,10 @@ export default function HeroSliderMobile({
             {/* Top - Contact Info */}
             <div className="mobile-contact-top">
               <h2 className="mobile-contact-title">
-                Let&apos;s Start a Conversation
+                {t("sixthView.title")}
               </h2>
               <p className="mobile-contact-subtitle">
-                We&apos;re here to help with your real estate journey
+                {t("sixthView.subtitle")}
               </p>
 
               <div className="mobile-contact-info-list">
@@ -2228,7 +2228,7 @@ export default function HeroSliderMobile({
                   <div className="mobile-contact-info-icon">
                     <MapPin size={16} />
                   </div>
-                  <span>123 Premier Avenue, Istanbul</span>
+                  <span>{t("sixthView.address")}</span>
                 </div>
                 <div className="mobile-contact-info-row">
                   <div className="mobile-contact-info-icon">
@@ -2254,24 +2254,23 @@ export default function HeroSliderMobile({
                   <div className="mobile-success-icon">
                     <CheckCircle size={28} />
                   </div>
-                  <h3 className="mobile-success-title">Message Sent!</h3>
+                  <h3 className="mobile-success-title">{t("sixthView.successTitle")}</h3>
                   <p className="mobile-success-message">
-                    Thank you for reaching out. We&apos;ll get back to you
-                    within 24 hours.
+                    {t("sixthView.successMessage")}
                   </p>
                   <button
                     className="mobile-success-btn"
                     onClick={() => setContactSuccess(false)}
                   >
-                    Send Another
+                    {t("sixthView.sendAnother")}
                   </button>
                 </div>
               ) : (
                 <>
                   <div className="mobile-form-header">
-                    <h3 className="mobile-form-title">Send a Message</h3>
+                    <h3 className="mobile-form-title">{t("sixthView.formTitle")}</h3>
                     <p className="mobile-form-subtitle">
-                      Fill out the form and we&apos;ll respond promptly
+                      {t("sixthView.formSubtitle")}
                     </p>
                   </div>
 
@@ -2283,7 +2282,7 @@ export default function HeroSliderMobile({
                       <input
                         type="text"
                         className="mobile-form-input"
-                        placeholder="Your Name"
+                        placeholder={t("sixthView.placeholders.name")}
                         required
                         value={contactForm.name}
                         onChange={(e) =>
@@ -2296,7 +2295,7 @@ export default function HeroSliderMobile({
                       <input
                         type="email"
                         className="mobile-form-input"
-                        placeholder="Email"
+                        placeholder={t("sixthView.placeholders.email")}
                         required
                         value={contactForm.email}
                         onChange={(e) =>
@@ -2312,7 +2311,7 @@ export default function HeroSliderMobile({
                       <input
                         type="tel"
                         className="mobile-form-input"
-                        placeholder="Phone"
+                        placeholder={t("sixthView.placeholders.phone")}
                         required
                         value={contactForm.phone}
                         onChange={(e) =>
@@ -2325,7 +2324,7 @@ export default function HeroSliderMobile({
                       <input
                         type="text"
                         className="mobile-form-input"
-                        placeholder="Subject"
+                        placeholder={t("sixthView.placeholders.subject")}
                         required
                         value={contactForm.subject}
                         onChange={(e) =>
@@ -2339,7 +2338,7 @@ export default function HeroSliderMobile({
 
                     <textarea
                       className="mobile-form-textarea"
-                      placeholder="Your message..."
+                      placeholder={t("sixthView.placeholders.message")}
                       required
                       value={contactForm.message}
                       onChange={(e) =>
@@ -2362,12 +2361,12 @@ export default function HeroSliderMobile({
                       {contactLoading ? (
                         <>
                           <Loader2 size={16} className="animate-spin" />
-                          Sending...
+                          {t("sixthView.sending")}
                         </>
                       ) : (
                         <>
                           <Send size={16} />
-                          Send Message
+                          {t("sixthView.sendMessage")}
                         </>
                       )}
                     </button>
