@@ -280,7 +280,9 @@
     "livingSpace": "ruang kediaman",
     "builtIn": "Dibina pada",
     "parkingSpaces": "tempat letak kereta",
-    "propertyId": "ID Hartanah"
+    "propertyId": "ID Hartanah",
+    "relatedProperties": "Hartanah Berkaitan",
+    "noImage": "Tiada gambar"
   },
   "admin": {
     "title": "Panel Admin",

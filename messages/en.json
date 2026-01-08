@@ -280,7 +280,9 @@
     "livingSpace": "living space",
     "builtIn": "Built in",
     "parkingSpaces": "parking spaces",
-    "propertyId": "Property ID"
+    "propertyId": "Property ID",
+    "relatedProperties": "Related Properties",
+    "noImage": "No image"
   },
   "admin": {
     "title": "Admin Panel",

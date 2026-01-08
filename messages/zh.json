@@ -280,7 +280,9 @@
     "livingSpace": "居住面积",
     "builtIn": "建于",
     "parkingSpaces": "车位",
-    "propertyId": "房产编号"
+    "propertyId": "房产编号",
+    "relatedProperties": "相关房产",
+    "noImage": "无图片"
   },
   "admin": {
     "title": "管理面板",

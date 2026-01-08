@@ -280,7 +280,9 @@
     "livingSpace": "居住スペース",
     "builtIn": "築",
     "parkingSpaces": "駐車場",
-    "propertyId": "物件ID"
+    "propertyId": "物件ID",
+    "relatedProperties": "関連物件",
+    "noImage": "画像なし"
   },
   "admin": {
     "title": "管理パネル",

@@ -280,7 +280,9 @@
     "livingSpace": "Wohnflache",
     "builtIn": "Baujahr",
     "parkingSpaces": "Parkplatze",
-    "propertyId": "Immobilien-ID"
+    "propertyId": "Immobilien-ID",
+    "relatedProperties": "Ahnliche Immobilien",
+    "noImage": "Kein Bild"
   },
   "admin": {
     "title": "Admin-Bereich",

@@ -280,7 +280,9 @@
     "livingSpace": "yasam alani",
     "builtIn": "Yapi yili",
     "parkingSpaces": "otopark",
-    "propertyId": "Emlak ID"
+    "propertyId": "Emlak ID",
+    "relatedProperties": "Benzer Emlaklar",
+    "noImage": "Gorsel yok"
   },
   "admin": {
     "title": "Yonetim Paneli",

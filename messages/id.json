@@ -280,7 +280,9 @@
     "livingSpace": "ruang tinggal",
     "builtIn": "Dibangun tahun",
     "parkingSpaces": "tempat parkir",
-    "propertyId": "ID Properti"
+    "propertyId": "ID Properti",
+    "relatedProperties": "Properti Terkait",
+    "noImage": "Tidak ada gambar"
   },
   "admin": {
     "title": "Panel Admin",

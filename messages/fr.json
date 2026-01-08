@@ -280,7 +280,9 @@
     "livingSpace": "espace de vie",
     "builtIn": "Construit en",
     "parkingSpaces": "places de parking",
-    "propertyId": "ID de propriete"
+    "propertyId": "ID de propriete",
+    "relatedProperties": "Proprietes similaires",
+    "noImage": "Pas d'image"
   },
   "admin": {
     "title": "Panneau Admin",

@@ -280,7 +280,9 @@
     "livingSpace": "रहने का स्थान",
     "builtIn": "निर्मित",
     "parkingSpaces": "पार्किंग स्थान",
-    "propertyId": "संपत्ति आईडी"
+    "propertyId": "संपत्ति आईडी",
+    "relatedProperties": "संबंधित संपत्तियां",
+    "noImage": "कोई छवि नहीं"
   },
   "admin": {
     "title": "एडमिन पैनल",

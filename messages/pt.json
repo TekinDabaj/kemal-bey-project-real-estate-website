@@ -280,7 +280,9 @@
     "livingSpace": "area util",
     "builtIn": "Construido em",
     "parkingSpaces": "vagas",
-    "propertyId": "ID do imovel"
+    "propertyId": "ID do imovel",
+    "relatedProperties": "Imoveis relacionados",
+    "noImage": "Sem imagem"
   },
   "admin": {
     "title": "Painel Admin",
