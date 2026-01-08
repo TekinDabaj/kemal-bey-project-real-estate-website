@@ -3285,65 +3285,66 @@ export default function HeroSlider({
         }
 
         .fourth-view-value-card {
-          border-radius: 16px;
-          padding: 18px;
+          border-radius: 12px;
+          padding: 20px;
           display: flex;
           flex-direction: column;
           gap: 12px;
-          border: none;
+          border: 1px solid #e2e8f0;
+          background: white;
           position: relative;
           overflow: hidden;
-          transition: transform 0.3s ease;
+          transition: all 0.3s ease;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
-        .fourth-view-value-card::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.15) 0%,
-            transparent 50%
-          );
-          pointer-events: none;
+        :global(.dark) .fourth-view-value-card {
+          background: #13102b;
+          border-color: #2d2a4a;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .fourth-view-value-card:hover {
-          transform: scale(1.02);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          border-color: #f59e0b;
+        }
+
+        :global(.dark) .fourth-view-value-card:hover {
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+          border-color: #f59e0b;
         }
 
         /* Trust - Large card spanning 2 columns */
         .fourth-view-value-card.value-trust {
           grid-column: span 2;
-          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
           flex-direction: row;
           align-items: center;
         }
 
-        /* Excellence - Amber */
+        /* Excellence */
         .fourth-view-value-card.value-excellence {
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         }
 
-        /* Client First - Emerald */
+        /* Client First */
         .fourth-view-value-card.value-client {
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         }
 
         .fourth-view-value-icon {
-          width: 40px;
-          height: 40px;
+          width: 44px;
+          height: 44px;
           flex-shrink: 0;
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 12px;
+          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          backdrop-filter: blur(10px);
+          color: #d97706;
+        }
+
+        :global(.dark) .fourth-view-value-icon {
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.2) 100%);
+          color: #f59e0b;
         }
 
         .fourth-view-value-card.value-trust .fourth-view-value-icon {
@@ -3359,8 +3360,12 @@ export default function HeroSlider({
           font-family: "Biryani", sans-serif;
           font-size: 15px;
           font-weight: 700;
-          color: white;
+          color: #1a1a2e;
           margin: 0 0 4px;
+        }
+
+        :global(.dark) .fourth-view-value-title {
+          color: white;
         }
 
         .fourth-view-value-card.value-trust .fourth-view-value-title {
@@ -3370,9 +3375,13 @@ export default function HeroSlider({
         .fourth-view-value-desc {
           font-family: "Montserrat", sans-serif;
           font-size: 12px;
-          color: rgba(255, 255, 255, 0.85);
+          color: #64748b;
           margin: 0;
-          line-height: 1.4;
+          line-height: 1.5;
+        }
+
+        :global(.dark) .fourth-view-value-desc {
+          color: #94a3b8;
         }
 
         .fourth-view-gallery {
@@ -3395,9 +3404,9 @@ export default function HeroSlider({
         }
 
         .fourth-view-stat-number {
-          font-family: "Biryani", sans-serif;
+          font-family: "Montserrat", sans-serif;
           font-size: 24px;
-          font-weight: 900;
+          font-weight: 800;
           color: #f59e0b;
           line-height: 1;
           margin-bottom: 2px;
