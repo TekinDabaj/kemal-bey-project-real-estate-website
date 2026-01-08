@@ -3072,6 +3072,102 @@ export default function HeroSlider({
           }
         }
 
+        /* Third View - Laptop/Tablet Responsive */
+        @media screen and (min-width: 1001px) and (max-width: 1440px) {
+          .third-view-content-area {
+            padding: 50px 30px 30px 15px;
+          }
+
+          .third-view-title {
+            font-size: 42px;
+            gap: 0 10px;
+            margin-bottom: 12px;
+          }
+
+          .third-view-subtitle {
+            font-size: 16px;
+            letter-spacing: 1.5px;
+          }
+
+          .third-view-worldmap-wrapper {
+            transform: scale(1.2);
+          }
+
+          .third-view-properties {
+            padding: 15px 0 25px;
+          }
+
+          .properties-header {
+            padding: 0 30px;
+            margin-bottom: 12px;
+          }
+
+          .properties-title {
+            font-size: 16px;
+          }
+
+          .properties-nav-btn {
+            width: 32px;
+            height: 32px;
+          }
+
+          .properties-scroll-container {
+            padding: 0 30px;
+          }
+
+          .properties-grid {
+            gap: 14px;
+          }
+
+          .property-card {
+            width: 300px;
+          }
+
+          .property-card-image {
+            aspect-ratio: 16/9;
+          }
+
+          .property-card-price p {
+            font-size: 16px;
+          }
+
+          .property-card-content {
+            padding: 12px;
+          }
+
+          .property-card-title {
+            font-size: 14px;
+          }
+
+          .property-card-location {
+            font-size: 11px;
+          }
+
+          .property-card-description {
+            font-size: 11px;
+            margin-bottom: 10px;
+          }
+
+          .property-card-features {
+            gap: 10px;
+            font-size: 11px;
+            padding-top: 10px;
+          }
+
+          .third-view-back-button {
+            top: 90px;
+            right: 30px;
+            padding: 10px 20px;
+            font-size: 11px;
+          }
+
+          .third-view-down-button {
+            width: 44px;
+            height: 44px;
+            bottom: 25px;
+          }
+        }
+
         /* Fourth View Section - About Us */
         .fourth-view-section {
           position: absolute;
@@ -3492,6 +3588,105 @@ export default function HeroSlider({
 
           .fourth-view-value-desc {
             font-size: 11px;
+          }
+        }
+
+        /* Fourth View - Laptop/Tablet Responsive */
+        @media screen and (min-width: 1001px) and (max-width: 1440px) {
+          .fourth-view-content {
+            padding: 70px 40px 35px;
+            gap: 40px;
+          }
+
+          .fourth-view-header {
+            margin-bottom: 16px;
+          }
+
+          .fourth-view-title {
+            font-size: 38px;
+            margin-bottom: 8px;
+          }
+
+          .fourth-view-subtitle {
+            font-size: 14px;
+          }
+
+          .fourth-view-body {
+            margin-bottom: 18px;
+          }
+
+          .fourth-view-text {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+          }
+
+          .fourth-view-values {
+            margin-top: 16px;
+          }
+
+          .fourth-view-values-title {
+            font-size: 17px;
+            margin-bottom: 12px;
+          }
+
+          .fourth-view-values-grid {
+            gap: 10px;
+          }
+
+          .fourth-view-value-card {
+            padding: 16px;
+            gap: 10px;
+          }
+
+          .fourth-view-value-icon {
+            width: 38px;
+            height: 38px;
+          }
+
+          .fourth-view-value-card.value-trust .fourth-view-value-icon {
+            width: 42px;
+            height: 42px;
+          }
+
+          .fourth-view-value-title {
+            font-size: 13px;
+            margin-bottom: 3px;
+          }
+
+          .fourth-view-value-card.value-trust .fourth-view-value-title {
+            font-size: 15px;
+          }
+
+          .fourth-view-value-desc {
+            font-size: 11px;
+            line-height: 1.4;
+          }
+
+          .fourth-view-stats {
+            gap: 20px;
+            margin-top: 16px;
+          }
+
+          .fourth-view-stat-number {
+            font-size: 20px;
+          }
+
+          .fourth-view-stat-label {
+            font-size: 9px;
+          }
+
+          .fourth-view-back-button {
+            top: 90px;
+            right: 30px;
+            padding: 10px 20px;
+            font-size: 11px;
+          }
+
+          .fourth-view-down-button {
+            width: 44px;
+            height: 44px;
+            bottom: 25px;
           }
         }
 
