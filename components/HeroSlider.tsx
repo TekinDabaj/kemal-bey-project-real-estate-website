@@ -3190,6 +3190,76 @@ export default function HeroSlider({
           }
         }
 
+        /* Third View - Landscape Tablet Specific (limited height) */
+        @media screen and (min-width: 1024px) and (max-width: 1400px) and (orientation: landscape) and (max-height: 1050px) {
+          .third-view-top {
+            flex: 0.9;
+          }
+
+          .third-view-worldmap-wrapper {
+            transform: scale(1.0);
+          }
+
+          .third-view-content-area {
+            padding: 30px 25px 20px 15px;
+          }
+
+          .third-view-title {
+            font-size: 38px;
+            gap: 0 8px;
+            margin-bottom: 10px;
+          }
+
+          .third-view-subtitle {
+            font-size: 15px;
+          }
+
+          .third-view-properties {
+            padding: 8px 0 12px;
+            flex-shrink: 0;
+          }
+
+          .properties-header {
+            margin-bottom: 6px;
+          }
+
+          .properties-title {
+            font-size: 13px;
+          }
+
+          .property-card {
+            width: 210px;
+          }
+
+          .property-card-image {
+            aspect-ratio: 16/9;
+          }
+
+          .property-card-content {
+            padding: 8px;
+          }
+
+          .property-card-title {
+            font-size: 12px;
+          }
+
+          .property-card-location {
+            font-size: 9px;
+            margin-bottom: 4px;
+          }
+
+          .property-card-features {
+            gap: 6px;
+            font-size: 9px;
+            padding-top: 5px;
+          }
+
+          .property-card-feature svg {
+            width: 11px;
+            height: 11px;
+          }
+        }
+
         /* Third View - Portrait Tablet Specific (iPad Air 13", etc.) */
         @media screen and (min-width: 768px) and (max-width: 1200px) and (orientation: portrait) {
           .third-view-top {
