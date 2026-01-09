@@ -3190,6 +3190,75 @@ export default function HeroSlider({
           }
         }
 
+        /* Third View - Portrait Tablet Specific (iPad Air 13", etc.) */
+        @media screen and (min-width: 768px) and (max-width: 1200px) and (orientation: portrait) {
+          .third-view-top {
+            flex: 0.8;
+          }
+
+          .third-view-globe-area {
+            height: auto;
+          }
+
+          .third-view-worldmap-wrapper {
+            transform: scale(0.95);
+          }
+
+          .third-view-content-area {
+            padding: 15px 25px 10px 15px;
+          }
+
+          .third-view-title {
+            font-size: 36px;
+            gap: 0 8px;
+            margin-bottom: 8px;
+          }
+
+          .third-view-subtitle {
+            font-size: 14px;
+          }
+
+          .third-view-properties {
+            padding: 8px 0 15px;
+            flex-shrink: 0;
+          }
+
+          .properties-header {
+            padding: 0 20px;
+            margin-bottom: 6px;
+          }
+
+          .properties-title {
+            font-size: 13px;
+          }
+
+          .property-card {
+            width: 220px;
+          }
+
+          .property-card-image {
+            aspect-ratio: 16/9;
+          }
+
+          .property-card-content {
+            padding: 8px;
+          }
+
+          .property-card-title {
+            font-size: 12px;
+          }
+
+          .property-card-location {
+            font-size: 9px;
+          }
+
+          .property-card-features {
+            gap: 6px;
+            font-size: 9px;
+            padding-top: 6px;
+          }
+        }
+
         /* Fourth View Section - About Us */
         .fourth-view-section {
           position: absolute;
