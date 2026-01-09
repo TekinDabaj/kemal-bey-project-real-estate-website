@@ -2690,13 +2690,13 @@ export default function HeroSlider({
 
         .third-view-title {
           font-family: "Biryani", sans-serif;
-          font-size: 56px;
-          line-height: 1.1;
+          font-size: 46px;
+          line-height: 1.05;
           font-weight: 900;
-          margin-bottom: 16px;
+          margin-bottom: 12px;
           display: flex;
           flex-wrap: wrap;
-          gap: 0 14px;
+          gap: 0 10px;
         }
 
         .third-view-title-slice {
@@ -3052,12 +3052,14 @@ export default function HeroSlider({
           }
 
           .third-view-title {
-            font-size: 36px;
+            font-size: 30px;
             justify-content: center;
+            line-height: 1.05;
+            gap: 0 6px;
           }
 
           .third-view-subtitle {
-            font-size: 16px;
+            font-size: 14px;
           }
 
           .property-card {
@@ -3084,9 +3086,10 @@ export default function HeroSlider({
           }
 
           .third-view-title {
-            font-size: 42px;
-            gap: 0 10px;
-            margin-bottom: 12px;
+            font-size: 36px;
+            gap: 0 8px;
+            margin-bottom: 10px;
+            line-height: 1.05;
           }
 
           .third-view-subtitle {
@@ -3205,13 +3208,14 @@ export default function HeroSlider({
           }
 
           .third-view-title {
-            font-size: 38px;
-            gap: 0 8px;
-            margin-bottom: 10px;
+            font-size: 32px;
+            gap: 0 6px;
+            margin-bottom: 8px;
+            line-height: 1.05;
           }
 
           .third-view-subtitle {
-            font-size: 15px;
+            font-size: 14px;
           }
 
           .third-view-properties {
@@ -3279,13 +3283,14 @@ export default function HeroSlider({
           }
 
           .third-view-title {
-            font-size: 36px;
-            gap: 0 8px;
-            margin-bottom: 8px;
+            font-size: 30px;
+            gap: 0 6px;
+            margin-bottom: 6px;
+            line-height: 1.05;
           }
 
           .third-view-subtitle {
-            font-size: 14px;
+            font-size: 13px;
           }
 
           .third-view-properties {
@@ -3326,6 +3331,23 @@ export default function HeroSlider({
             gap: 6px;
             font-size: 9px;
             padding-top: 6px;
+          }
+        }
+
+        /* Third View - Large Desktop Screens (21 inch+) */
+        @media screen and (min-width: 1920px) {
+          .third-view-worldmap-wrapper {
+            transform: scale(1.8);
+          }
+
+          .third-view-title {
+            font-size: 52px;
+            line-height: 1.05;
+            gap: 0 12px;
+          }
+
+          .third-view-subtitle {
+            font-size: 20px;
           }
         }
 
@@ -4251,7 +4273,7 @@ export default function HeroSlider({
           width: 100%;
           height: 100%;
           background: white;
-          z-index: 95;
+          z-index: 350;
           visibility: hidden;
           opacity: 0;
           overflow: hidden;
@@ -4259,6 +4281,56 @@ export default function HeroSlider({
 
         :global(.dark) .sixth-view-section {
           background: #0c0a1d;
+        }
+
+        /* Grid lines behind contact form */
+        .sixth-view-section::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 25%;
+          width: 2px;
+          height: 100%;
+          background: rgba(130, 130, 130, 0.2);
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .sixth-view-section::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          background: rgba(130, 130, 130, 0.2);
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .sixth-view-content::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 75%;
+          width: 2px;
+          height: 100%;
+          background: rgba(130, 130, 130, 0.2);
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .sixth-view-content::after {
+          content: "";
+          position: absolute;
+          top: var(--row-height);
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: rgba(130, 130, 130, 0.2);
+          z-index: 1;
+          pointer-events: none;
+          box-shadow: 0 calc(var(--row-height)) 0 rgba(130, 130, 130, 0.2);
         }
 
         .sixth-view-section.active {
@@ -4299,6 +4371,7 @@ export default function HeroSlider({
         }
 
         .sixth-view-content {
+          position: relative;
           width: 100%;
           height: 100%;
           display: flex;
