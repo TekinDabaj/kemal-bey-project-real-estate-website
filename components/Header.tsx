@@ -83,7 +83,7 @@ export default function Header() {
             </div>
 
             {/* Mobile menu button */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-4 md:hidden ml-auto">
               <ThemeToggle />
               <LanguageSwitcher />
               <button onClick={() => setIsOpen(!isOpen)} className="text-white p-1">
@@ -104,25 +104,6 @@ export default function Header() {
               </Link>
               <button
                 className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
-                onClick={(e) => handleViewNavigation(e, 6)}
-              >
-                {t('contact')}
-              </button>
-              <Link
-                href="/blog"
-                className="block py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
-                onClick={() => setIsOpen(false)}
-              >
-                {t('blog')}
-              </Link>
-              <button
-                className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
-                onClick={(e) => handleViewNavigation(e, 4)}
-              >
-                {t('about')}
-              </button>
-              <button
-                className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
                 onClick={(e) => handleViewNavigation(e, 5)}
               >
                 {t('services')}
@@ -134,13 +115,12 @@ export default function Header() {
               >
                 {t('properties')}
               </Link>
-              <Link
-                href="/"
-                className="block py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
-                onClick={handleHomeClick}
+              <button
+                className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
+                onClick={(e) => handleViewNavigation(e, 4)}
               >
-                {t('home')}
-              </Link>
+                {'KA GLOBAL'}
+              </button>
             </div>
           )}
         </div>
