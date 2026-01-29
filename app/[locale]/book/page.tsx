@@ -229,9 +229,9 @@ function PropertySelectionModal({
                       {property.location || t("propertyModal.noAddress")}
                     </p>
                     <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-400">
-                      {property.bedrooms > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" /> {property.bedrooms}</span>}
-                      {property.bathrooms > 0 && <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" /> {property.bathrooms}</span>}
-                      {property.area > 0 && <span className="flex items-center gap-0.5"><Square className="w-3 h-3" /> {property.area}m²</span>}
+                      {property.bedrooms && property.bedrooms > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" /> {property.bedrooms}</span>}
+                      {property.bathrooms && property.bathrooms > 0 && <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" /> {property.bathrooms}</span>}
+                      {property.area && property.area > 0 && <span className="flex items-center gap-0.5"><Square className="w-3 h-3" /> {property.area}m²</span>}
                       <span className="text-amber-600 dark:text-amber-400 font-medium ml-auto">${property.price?.toLocaleString()}</span>
                     </div>
                   </div>
