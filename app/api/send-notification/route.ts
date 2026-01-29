@@ -269,199 +269,6 @@ function getAdminEmailTemplate({
   `;
 }
 
-function getCustomerEmailTemplate({
-  name,
-  date,
-  time,
-}: {
-  name: string;
-  date: string;
-  time: string;
-}) {
-  return `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; background-color: #faf9f7; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #faf9f7;">
-    <tr>
-      <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px;">
-          
-          <!-- Black Header -->
-          <tr>
-            <td style="background-color: #0f0f0f; padding: 40px 40px; text-align: center;">
-              <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
-                <tr>
-                  <td style="vertical-align: middle;">
-                    <span style="color: #ffffff; font-size: 26px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;">KA</span>
-                    <span style="color: #d4af37; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;">Global</span>
-                  </td>
-                </tr>
-              </table>
-              <p style="margin: 16px 0 0 0; color: #666666; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">Exceptional Properties. Exceptional Service.</p>
-            </td>
-          </tr>
-          
-          <!-- Main Content Area -->
-          <tr>
-            <td style="background-color: #faf9f7; padding: 40px 24px;">
-              
-              <!-- Success Icon & Title -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 32px;">
-                <tr>
-                  <td style="text-align: center;">
-                    <div style="width: 72px; height: 72px; margin: 0 auto 20px auto; border: 2px solid #d4af37; border-radius: 50%; line-height: 68px; background-color: #ffffff;">
-                      <span style="color: #d4af37; font-size: 32px;">✓</span>
-                    </div>
-                    <p style="margin: 0 0 8px 0; color: #d4af37; font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;">Consultation Confirmed</p>
-                    <h1 style="margin: 0; color: #1a1a1a; font-size: 28px; font-weight: 300; letter-spacing: 1px;">Thank You, ${name}</h1>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- Welcome Message -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 32px;">
-                <tr>
-                  <td style="text-align: center;">
-                    <p style="margin: 0; color: #666666; font-size: 15px; line-height: 1.8;">
-                      Your exclusive consultation with KA Global has been scheduled.<br>We look forward to helping you discover your perfect property.
-                    </p>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- Appointment Card (White) -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 1px solid #e8e6e3; border-radius: 4px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                <tr>
-                  <td style="padding: 32px;">
-                    <p style="margin: 0 0 24px 0; color: #d4af37; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; text-align: center;">Your Appointment</p>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td width="50%" style="text-align: center; padding: 16px; border-right: 1px solid #f0eeeb;">
-                          <p style="margin: 0 0 8px 0; color: #999999; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Date</p>
-                          <p style="margin: 0; color: #1a1a1a; font-size: 18px; font-weight: 500;">${date}</p>
-                        </td>
-                        <td width="50%" style="text-align: center; padding: 16px;">
-                          <p style="margin: 0 0 8px 0; color: #999999; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Time</p>
-                          <p style="margin: 0; color: #1a1a1a; font-size: 18px; font-weight: 500;">${time}</p>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- What to Expect Card (White) -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 1px solid #e8e6e3; border-radius: 4px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                <tr>
-                  <td style="padding: 32px;">
-                    <p style="margin: 0 0 24px 0; color: #d4af37; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; text-align: center;">What to Expect</p>
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding: 14px 0; border-bottom: 1px solid #f0eeeb;">
-                          <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                              <td style="width: 48px; vertical-align: top;">
-                                <div style="width: 32px; height: 32px; background-color: #faf9f7; border: 1px solid #d4af37; border-radius: 50%; text-align: center; line-height: 30px;">
-                                  <span style="color: #d4af37; font-size: 12px; font-weight: 600;">01</span>
-                                </div>
-                              </td>
-                              <td style="vertical-align: middle;">
-                                <p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Confirmation Call</p>
-                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">Our team will contact you within 24 hours</p>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 14px 0; border-bottom: 1px solid #f0eeeb;">
-                          <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                              <td style="width: 48px; vertical-align: top;">
-                                <div style="width: 32px; height: 32px; background-color: #faf9f7; border: 1px solid #d4af37; border-radius: 50%; text-align: center; line-height: 30px;">
-                                  <span style="color: #d4af37; font-size: 12px; font-weight: 600;">02</span>
-                                </div>
-                              </td>
-                              <td style="vertical-align: middle;">
-                                <p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Personalized Consultation</p>
-                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">Discuss your requirements with our experts</p>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 14px 0;">
-                          <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                              <td style="width: 48px; vertical-align: top;">
-                                <div style="width: 32px; height: 32px; background-color: #faf9f7; border: 1px solid #d4af37; border-radius: 50%; text-align: center; line-height: 30px;">
-                                  <span style="color: #d4af37; font-size: 12px; font-weight: 600;">03</span>
-                                </div>
-                              </td>
-                              <td style="vertical-align: middle;">
-                                <p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Curated Property Selection</p>
-                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">Receive handpicked recommendations</p>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- Questions Section -->
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="text-align: center; padding: 8px 0;">
-                    <p style="margin: 0 0 4px 0; color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Questions before your consultation?</p>
-                    <p style="margin: 0; color: #666666; font-size: 14px;">Simply reply to this email and we'll assist you.</p>
-                  </td>
-                </tr>
-              </table>
-              
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #f5f4f2; padding: 32px 24px; text-align: center; border-top: 1px solid #e8e6e3;">
-              <table cellpadding="0" cellspacing="0" style="margin: 0 auto 20px auto;">
-                <tr>
-                  <td style="padding: 0 12px;">
-                    <a href="#" style="color: #888888; font-size: 11px; text-decoration: none; letter-spacing: 1px;">PROPERTIES</a>
-                  </td>
-                  <td style="color: #cccccc;">|</td>
-                  <td style="padding: 0 12px;">
-                    <a href="#" style="color: #888888; font-size: 11px; text-decoration: none; letter-spacing: 1px;">ABOUT US</a>
-                  </td>
-                  <td style="color: #cccccc;">|</td>
-                  <td style="padding: 0 12px;">
-                    <a href="#" style="color: #888888; font-size: 11px; text-decoration: none; letter-spacing: 1px;">CONTACT</a>
-                  </td>
-                </tr>
-              </table>
-              <p style="margin: 0 0 4px 0; color: #999999; font-size: 11px; letter-spacing: 1px;">© ${new Date().getFullYear()} KA Global</p>
-              <p style="margin: 0; color: #bbbbbb; font-size: 10px;">Exceptional Properties. Exceptional Service.</p>
-            </td>
-          </tr>
-          
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-  `;
-}
-
 export async function POST(request: Request) {
   try {
     const {
@@ -479,7 +286,8 @@ export async function POST(request: Request) {
       desiredProperties,
     } = await request.json();
 
-    // Send notification to admin
+    // Send notification to admin only
+    // Customer will receive email when admin confirms or rejects the reservation
     await resend.emails.send({
       from: FROM_EMAIL,
       to: process.env.ADMIN_EMAIL!,
@@ -498,14 +306,6 @@ export async function POST(request: Request) {
         referralSource,
         desiredProperties,
       }),
-    });
-
-    // Send confirmation to customer
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: email,
-      subject: "Your Consultation is Confirmed — KA Global",
-      html: getCustomerEmailTemplate({ name, date, time }),
     });
 
     return NextResponse.json({ success: true });
