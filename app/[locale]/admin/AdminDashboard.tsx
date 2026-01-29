@@ -53,6 +53,10 @@ import {
   Target,
   Globe,
   FileText,
+  Bed,
+  Bath,
+  Expand,
+  MapPin,
 } from "lucide-react";
 import { Reservation, Property, HeroSlide, BlogPost } from "@/types/database";
 import ContentEditor from "./ContentEditor";
@@ -110,6 +114,9 @@ export default function AdminDashboard({
   const [rejectionReason, setRejectionReason] = useState("");
   const [rejectingReservation, setRejectingReservation] = useState<Reservation | null>(null);
   const [rejectionLoading, setRejectionLoading] = useState(false);
+
+  // Property preview modal state
+  const [previewProperty, setPreviewProperty] = useState<Property | null>(null);
 
   // Hydration fix: update notification state only after mount
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -565,6 +572,106 @@ export default function AdminDashboard({
         </div>
       )}
 
+      {/* Property Preview Modal */}
+      {previewProperty && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setPreviewProperty(null)}
+          />
+          <div className="relative bg-white dark:bg-[#13102b] rounded-xl shadow-2xl w-full max-w-lg border border-slate-200 dark:border-[#2d2a4a] overflow-hidden">
+            {/* Property Image */}
+            <div className="relative aspect-[16/10] bg-slate-100 dark:bg-[#1a1735]">
+              {previewProperty.images?.[0] ? (
+                <img
+                  src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${previewProperty.images[0]}`}
+                  alt={previewProperty.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <Building2 size={48} className="text-slate-300 dark:text-slate-600" />
+                </div>
+              )}
+              <button
+                onClick={() => setPreviewProperty(null)}
+                className="absolute top-3 right-3 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition"
+              >
+                <X size={18} />
+              </button>
+              {/* Price Badge */}
+              {previewProperty.price && (
+                <div className="absolute bottom-3 left-3 px-3 py-1.5 bg-amber-500 text-slate-900 rounded-lg font-bold text-lg">
+                  ${previewProperty.price.toLocaleString()}
+                  {previewProperty.type === "rent" && <span className="text-sm font-normal">/mo</span>}
+                </div>
+              )}
+              {/* Type Badge */}
+              {previewProperty.type && (
+                <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/90 dark:bg-[#13102b]/90 text-slate-900 dark:text-white rounded-md text-xs font-medium capitalize">
+                  For {previewProperty.type}
+                </div>
+              )}
+            </div>
+
+            {/* Property Info */}
+            <div className="p-5">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                {previewProperty.title}
+              </h3>
+
+              {previewProperty.location && (
+                <p className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 mb-4">
+                  <MapPin size={14} />
+                  {previewProperty.location}
+                </p>
+              )}
+
+              {/* Features */}
+              <div className="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400 pb-4 border-b border-slate-100 dark:border-[#2d2a4a]">
+                {previewProperty.bedrooms && (
+                  <span className="flex items-center gap-1.5">
+                    <Bed size={16} className="text-slate-400" />
+                    {previewProperty.bedrooms} {previewProperty.bedrooms === 1 ? "Bed" : "Beds"}
+                  </span>
+                )}
+                {previewProperty.bathrooms && (
+                  <span className="flex items-center gap-1.5">
+                    <Bath size={16} className="text-slate-400" />
+                    {previewProperty.bathrooms} {previewProperty.bathrooms === 1 ? "Bath" : "Baths"}
+                  </span>
+                )}
+                {previewProperty.area && (
+                  <span className="flex items-center gap-1.5">
+                    <Expand size={16} className="text-slate-400" />
+                    {previewProperty.area} m²
+                  </span>
+                )}
+              </div>
+
+              {/* Additional Info */}
+              <div className="flex flex-wrap gap-2 mt-4">
+                {previewProperty.property_type && (
+                  <span className="px-2.5 py-1 bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-md text-xs capitalize">
+                    {previewProperty.property_type}
+                  </span>
+                )}
+                {previewProperty.furnished && (
+                  <span className="px-2.5 py-1 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-md text-xs">
+                    Furnished
+                  </span>
+                )}
+                {previewProperty.year_built && (
+                  <span className="px-2.5 py-1 bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-md text-xs">
+                    Built {previewProperty.year_built}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8">
@@ -948,12 +1055,42 @@ export default function AdminDashboard({
                         {/* Desired Properties */}
                         {reservation.desired_properties && reservation.desired_properties.length > 0 && (
                           <div className="mt-3 pt-3 border-t border-slate-100 dark:border-[#2d2a4a]">
-                            <div className="flex items-start gap-1.5 text-sm text-slate-600 dark:text-slate-400">
+                            <div className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
                               <Building2 size={14} className="mt-0.5 shrink-0 text-amber-500" />
-                              <div>
-                                <span className="font-medium text-slate-700 dark:text-slate-300">Interested in {reservation.desired_properties.length} {reservation.desired_properties.length === 1 ? 'property' : 'properties'}</span>
-                                <div className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">
-                                  IDs: {reservation.desired_properties.join(', ')}
+                              <div className="flex-1">
+                                <span className="font-medium text-slate-700 dark:text-slate-300 block mb-2">
+                                  Interested in {reservation.desired_properties.length} {reservation.desired_properties.length === 1 ? 'property' : 'properties'}
+                                </span>
+                                <div className="flex flex-wrap gap-2">
+                                  {reservation.desired_properties.map((propertyId) => {
+                                    const property = properties.find(p => p.id === propertyId);
+                                    if (!property) return null;
+                                    const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
+                                    return (
+                                      <button
+                                        key={propertyId}
+                                        onClick={() => setPreviewProperty(property)}
+                                        className="flex items-center gap-2 px-2 py-1.5 bg-slate-50 dark:bg-[#1a1735] rounded-md border border-slate-200 dark:border-[#2d2a4a] hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/10 transition cursor-pointer"
+                                      >
+                                        <div className="w-8 h-8 rounded overflow-hidden bg-slate-200 dark:bg-[#2d2a4a] flex-shrink-0">
+                                          {property.images?.[0] ? (
+                                            <img
+                                              src={`${bucketUrl}${property.images[0]}`}
+                                              alt={property.title}
+                                              className="w-full h-full object-cover"
+                                            />
+                                          ) : (
+                                            <div className="w-full h-full flex items-center justify-center">
+                                              <Building2 size={12} className="text-slate-400" />
+                                            </div>
+                                          )}
+                                        </div>
+                                        <span className="text-xs font-medium text-slate-700 dark:text-slate-300 max-w-[150px] truncate">
+                                          {property.title}
+                                        </span>
+                                      </button>
+                                    );
+                                  })}
                                 </div>
                               </div>
                             </div>

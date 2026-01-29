@@ -49,21 +49,13 @@ import {
   Clock,
   CheckCircle,
   User,
-  Mail,
-  Phone,
   MessageSquare,
   ArrowRight,
   ArrowLeft,
-  Shield,
-  Sparkles,
   CalendarCheck,
   Home,
-  DollarSign,
   Building2,
   Search,
-  Key,
-  Target,
-  Globe,
   X,
   Check,
   MapPin,
@@ -76,16 +68,17 @@ import {
 type Property = {
   id: string;
   title: string;
-  price: number;
-  currency: string;
-  type: string;
-  property_type: string;
-  bedrooms: number;
-  bathrooms: number;
-  total_area: number;
-  address: string;
+  price: number | null;
+  type: "sale" | "rent" | null;
+  property_type: string | null;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  area: number | null;
+  location: string | null;
   images: string[];
 };
+
+const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
 
 const timeSlots = [
   "08:00",
@@ -155,7 +148,7 @@ function PropertySelectionModal({
   const filteredProperties = properties.filter(
     (p) =>
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.address?.toLowerCase().includes(searchQuery.toLowerCase())
+      p.location?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const toggleProperty = (property: Property) => {
@@ -172,51 +165,32 @@ function PropertySelectionModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* Modal */}
-      <div className="relative bg-white dark:bg-[#13102b] rounded-2xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col border border-slate-200 dark:border-[#2d2a4a]">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-[#2d2a4a]">
-          <div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-              {t("propertyModal.title")}
-            </h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              {t("propertyModal.subtitle")}
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded-lg transition"
-          >
-            <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3">
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+      <div className="relative bg-white dark:bg-[#13102b] rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] flex flex-col border border-slate-200 dark:border-[#2d2a4a]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-[#2d2a4a]">
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+            {t("propertyModal.title")}
+          </h3>
+          <button onClick={onClose} className="p-1 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded transition">
+            <X className="w-4 h-4 text-slate-500" />
           </button>
         </div>
-
-        {/* Search */}
-        <div className="p-4 border-b border-slate-200 dark:border-[#2d2a4a]">
+        <div className="px-4 py-2 border-b border-slate-100 dark:border-[#2d2a4a]">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
               placeholder={t("propertyModal.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+              className="w-full pl-8 pr-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
             />
           </div>
         </div>
-
-        {/* Property List */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        <div className="flex-1 overflow-y-auto p-2 space-y-1">
           {filteredProperties.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 dark:text-slate-400">
+            <div className="text-center py-8 text-sm text-slate-500 dark:text-slate-400">
               {t("propertyModal.noProperties")}
             </div>
           ) : (
@@ -226,86 +200,53 @@ function PropertySelectionModal({
                 <div
                   key={property.id}
                   onClick={() => toggleProperty(property)}
-                  className={`flex gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                  className={`flex gap-3 p-2 rounded-md border cursor-pointer transition ${
                     isSelected
-                      ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20"
-                      : "border-slate-200 dark:border-[#2d2a4a] hover:border-slate-300 dark:hover:border-[#3d3a5a]"
+                      ? "border-amber-500 bg-amber-50/50 dark:bg-amber-900/10"
+                      : "border-transparent hover:bg-slate-50 dark:hover:bg-[#1a1735]"
                   }`}
                 >
-                  {/* Property Image */}
-                  <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-[#1a1735]">
+                  <div className="w-16 h-16 flex-shrink-0 rounded overflow-hidden bg-slate-100 dark:bg-[#1a1735]">
                     {property.images?.[0] ? (
-                      <img
-                        src={property.images[0]}
-                        alt={property.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={`${bucketUrl}${property.images[0]}`} alt={property.title} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <Building2 className="w-8 h-8 text-slate-300 dark:text-slate-600" />
+                        <Building2 className="w-5 h-5 text-slate-300 dark:text-slate-600" />
                       </div>
                     )}
                   </div>
-
-                  {/* Property Info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-semibold text-slate-900 dark:text-white truncate">
-                        {property.title}
-                      </h4>
+                  <div className="flex-1 min-w-0 py-0.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <h4 className="text-sm font-medium text-slate-900 dark:text-white truncate">{property.title}</h4>
                       {isSelected && (
-                        <div className="flex-shrink-0 w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
-                          <Check className="w-4 h-4 text-white" />
+                        <div className="w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3 h-3 text-white" />
                         </div>
                       )}
                     </div>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
                       <MapPin className="w-3 h-3" />
-                      {property.address || t("propertyModal.noAddress")}
+                      {property.location || t("propertyModal.noAddress")}
                     </p>
-                    <div className="flex items-center gap-4 mt-2 text-sm text-slate-600 dark:text-slate-400">
-                      {property.bedrooms > 0 && (
-                        <span className="flex items-center gap-1">
-                          <Bed className="w-4 h-4" /> {property.bedrooms}
-                        </span>
-                      )}
-                      {property.bathrooms > 0 && (
-                        <span className="flex items-center gap-1">
-                          <Bath className="w-4 h-4" /> {property.bathrooms}
-                        </span>
-                      )}
-                      {property.total_area > 0 && (
-                        <span className="flex items-center gap-1">
-                          <Square className="w-4 h-4" /> {property.total_area}m²
-                        </span>
-                      )}
+                    <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-400">
+                      {property.bedrooms > 0 && <span className="flex items-center gap-0.5"><Bed className="w-3 h-3" /> {property.bedrooms}</span>}
+                      {property.bathrooms > 0 && <span className="flex items-center gap-0.5"><Bath className="w-3 h-3" /> {property.bathrooms}</span>}
+                      {property.area > 0 && <span className="flex items-center gap-0.5"><Square className="w-3 h-3" /> {property.area}m²</span>}
+                      <span className="text-amber-600 dark:text-amber-400 font-medium ml-auto">${property.price?.toLocaleString()}</span>
                     </div>
-                    <p className="text-amber-600 dark:text-amber-400 font-semibold mt-2">
-                      {property.currency} {property.price?.toLocaleString()}
-                    </p>
                   </div>
                 </div>
               );
             })
           )}
         </div>
-
-        {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-slate-200 dark:border-[#2d2a4a]">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            {tempSelected.length} {t("propertyModal.selected")}
-          </p>
-          <div className="flex gap-3">
-            <button
-              onClick={onClose}
-              className="px-5 py-2.5 border-2 border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition"
-            >
+        <div className="flex items-center justify-between px-4 py-3 border-t border-slate-200 dark:border-[#2d2a4a]">
+          <span className="text-xs text-slate-500 dark:text-slate-400">{tempSelected.length} {t("propertyModal.selected")}</span>
+          <div className="flex gap-2">
+            <button onClick={onClose} className="px-3 py-1.5 text-sm border border-slate-200 dark:border-[#2d2a4a] text-slate-600 dark:text-slate-300 rounded-md hover:bg-slate-50 dark:hover:bg-[#1a1735] transition">
               {t("propertyModal.cancel")}
             </button>
-            <button
-              onClick={handleConfirm}
-              className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition"
-            >
+            <button onClick={handleConfirm} className="px-3 py-1.5 text-sm bg-amber-500 hover:bg-amber-600 text-white rounded-md font-medium transition">
               {t("propertyModal.confirm")}
             </button>
           </div>
@@ -350,18 +291,23 @@ export default function BookPage() {
   // Fetch properties on mount
   useEffect(() => {
     async function fetchProperties() {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("properties")
-        .select("id, title, price, currency, type, property_type, bedrooms, bathrooms, total_area, address, images")
+        .select("id, title, price, type, property_type, bedrooms, bathrooms, area, location, images")
         .eq("status", "active")
         .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Error fetching properties:", error);
+        return;
+      }
 
       if (data) {
         setProperties(data);
       }
     }
     fetchProperties();
-  }, [supabase]);
+  }, []);
 
   async function handleDateSelect(date: Date) {
     setSelectedDate(date);
@@ -437,73 +383,33 @@ export default function BookPage() {
 
   if (success) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center px-3 sm:px-4 py-8 sm:py-16 pt-20 sm:pt-24 md:pt-28 bg-gradient-to-b from-slate-50 to-white dark:from-[#0c0a1d] dark:to-[#0c0a1d]">
-        <div className="max-w-lg w-full">
-          <div className="bg-white dark:bg-[#13102b] rounded-xl sm:rounded-2xl shadow-xl dark:shadow-purple-900/10 p-5 sm:p-8 md:p-12 text-center border border-slate-100 dark:border-[#2d2a4a]">
-            <div className="w-14 h-14 sm:w-20 sm:h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-              <CheckCircle className="w-7 h-7 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" />
+      <div className="flex items-center justify-center px-3 py-8 pt-20 bg-slate-50 dark:bg-[#0c0a1d] flex-1">
+        <div className="max-w-md w-full">
+          <div className="bg-white dark:bg-[#13102b] rounded-lg shadow-sm p-5 text-center border border-slate-200 dark:border-[#2d2a4a]">
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+              <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2">
-              {t("success.title")}
-            </h1>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-4 sm:mb-6">
-              {t("success.subtitle")}
-            </p>
-
-            <div className="bg-slate-50 dark:bg-[#1a1735] rounded-lg sm:rounded-xl p-4 sm:p-6 mb-5 sm:mb-8">
-              <div className="flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-lg font-semibold text-slate-900 dark:text-white mb-1.5 sm:mb-2">
-                <CalendarCheck className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-                <span>
-                  {format(selectedDate!, "EEEE, MMMM d, yyyy", {
-                    locale: dateLocale,
-                  })}
-                </span>
-              </div>
-              <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span>
-                  {t("success.at")} {selectedTime}
-                </span>
+            <h1 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">{t("success.title")}</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">{t("success.subtitle")}</p>
+            <div className="bg-slate-50 dark:bg-[#1a1735] rounded-md p-3 mb-4">
+              <div className="flex items-center justify-center gap-2 text-sm font-medium text-slate-900 dark:text-white">
+                <CalendarCheck className="w-4 h-4 text-amber-500" />
+                {format(selectedDate!, "EEE, MMM d, yyyy", { locale: dateLocale })} • {selectedTime}
               </div>
             </div>
-
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-5 sm:mb-8">
-              {t("success.confirmationSent")}{" "}
-              <strong className="dark:text-white">{formData.email}</strong>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+              {t("success.confirmationSent")} <strong className="text-slate-700 dark:text-slate-200">{formData.email}</strong>
             </p>
-
-            <div className="bg-amber-50 dark:bg-amber-900/20 rounded-lg sm:rounded-xl p-4 sm:p-6 mb-5 sm:mb-8 text-left border dark:border-amber-800/30">
-              <h3 className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-                {t("success.whatNext")}
-              </h3>
-              <ul className="space-y-2.5 sm:space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                <li className="flex items-start gap-2.5 sm:gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-100 dark:bg-amber-800/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-[10px] sm:text-xs font-bold">
-                    1
-                  </span>
-                  {t("success.step1")}
-                </li>
-                <li className="flex items-start gap-2.5 sm:gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-100 dark:bg-amber-800/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-[10px] sm:text-xs font-bold">
-                    2
-                  </span>
-                  {t("success.step2")}
-                </li>
-                <li className="flex items-start gap-2.5 sm:gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-100 dark:bg-amber-800/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-[10px] sm:text-xs font-bold">
-                    3
-                  </span>
-                  {t("success.step3")}
-                </li>
-              </ul>
+            <div className="bg-amber-50 dark:bg-amber-900/10 rounded-md p-3 mb-4 text-left border border-amber-100 dark:border-amber-900/20">
+              <h3 className="text-xs font-semibold text-slate-700 dark:text-slate-200 mb-2">{t("success.whatNext")}</h3>
+              <ol className="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 list-decimal list-inside">
+                <li>{t("success.step1")}</li>
+                <li>{t("success.step2")}</li>
+                <li>{t("success.step3")}</li>
+              </ol>
             </div>
-
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 bg-slate-900 dark:bg-[#2d2a4a] hover:bg-slate-800 dark:hover:bg-[#3d3a5c] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition"
-            >
-              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Link href="/" className="inline-flex items-center gap-1.5 bg-slate-900 dark:bg-[#2d2a4a] hover:bg-slate-800 dark:hover:bg-[#3d3a5c] text-white px-4 py-2 rounded-md text-sm font-medium transition">
+              <Home className="w-3.5 h-3.5" />
               {t("success.backToHome")}
             </Link>
           </div>
@@ -513,8 +419,7 @@ export default function BookPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0c0a1d] dark:to-[#0c0a1d]">
-      {/* Property Selection Modal */}
+    <div className="bg-slate-50 dark:bg-[#0c0a1d] flex-1">
       <PropertySelectionModal
         isOpen={isPropertyModalOpen}
         onClose={() => setIsPropertyModalOpen(false)}
@@ -524,118 +429,67 @@ export default function BookPage() {
         t={t}
       />
 
-      {/* Hero Section */}
-      <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-8 sm:py-16 pt-20 sm:pt-24 md:pt-28 px-3 sm:px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">{t("title")}</h1>
-          <p className="text-slate-300 dark:text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto mb-4 sm:mb-8">
-            {t("subtitle")}
-          </p>
-
-          {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm">
-            <div className="flex items-center gap-1.5 sm:gap-2 text-slate-300 dark:text-slate-400">
-              <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
-              {t("freeConsultation")}
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 text-slate-300 dark:text-slate-400">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
-              {t("workingHours")}
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 text-slate-300 dark:text-slate-400">
-              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
-              {t("noObligation")}
-            </div>
-          </div>
+      {/* Compact Header */}
+      <div className="bg-white dark:bg-[#13102b] border-b border-slate-200 dark:border-[#2d2a4a] pt-16 sm:pt-20">
+        <div className="max-w-4xl mx-auto px-4 py-4 sm:py-6">
+          <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white text-center">{t("title")}</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 text-center mt-1 max-w-lg mx-auto">{t("subtitle")}</p>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 sm:py-12">
-        {/* Progress Steps */}
-        <div className="flex items-center justify-center mb-6 sm:mb-10">
-          <div className="flex items-center">
-            {[1, 2, 3].map((s, i) => (
-              <div key={s} className="flex items-center">
-                <div
-                  className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full font-semibold text-sm sm:text-base transition-all ${
-                    step >= s
-                      ? "bg-amber-500 text-white"
-                      : "bg-slate-200 dark:bg-[#2d2a4a] text-slate-500 dark:text-slate-400"
-                  }`}
-                >
-                  {step > s ? <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" /> : s}
-                </div>
-                {i < 2 && (
-                  <div
-                    className={`w-10 sm:w-16 md:w-24 h-0.5 sm:h-1 mx-1.5 sm:mx-2 rounded transition-all ${
-                      step > s
-                        ? "bg-amber-500"
-                        : "bg-slate-200 dark:bg-[#2d2a4a]"
-                    }`}
-                  />
-                )}
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+        {/* Compact Progress Steps */}
+        <div className="flex items-center justify-center gap-1 mb-4 sm:mb-6">
+          {[
+            { num: 1, label: t("selectDate") },
+            { num: 2, label: t("selectTime") },
+            { num: 3, label: t("yourDetails") },
+          ].map((s, i) => (
+            <div key={s.num} className="flex items-center">
+              <div className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-xs sm:text-sm font-medium transition ${
+                step >= s.num
+                  ? "text-amber-600 dark:text-amber-400"
+                  : "text-slate-400 dark:text-slate-500"
+              }`}>
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
+                  step > s.num ? "bg-amber-500 text-white" : step === s.num ? "bg-amber-500 text-white" : "bg-slate-200 dark:bg-[#2d2a4a] text-slate-500"
+                }`}>
+                  {step > s.num ? <Check className="w-3 h-3" /> : s.num}
+                </span>
+                <span className="hidden sm:inline">{s.label}</span>
               </div>
-            ))}
-          </div>
+              {i < 2 && <div className={`w-6 sm:w-10 h-px mx-1 ${step > s.num ? "bg-amber-400" : "bg-slate-200 dark:bg-[#2d2a4a]"}`} />}
+            </div>
+          ))}
         </div>
 
         {/* Main Content */}
-        <div className="bg-white dark:bg-[#13102b] rounded-2xl shadow-lg dark:shadow-purple-900/10 border border-slate-100 dark:border-[#2d2a4a] overflow-hidden">
+        <div className="bg-white dark:bg-[#13102b] rounded-lg shadow-sm border border-slate-200 dark:border-[#2d2a4a]">
           {/* Step 1: Select Date */}
-          <div
-            className={`transition-all duration-300 ${
-              step === 1 ? "block" : "hidden"
-            }`}
-          >
-            <div className="p-4 sm:p-6 border-b border-slate-100 dark:border-[#2d2a4a]">
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
-                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400" />
-                </div>
-                <div>
-                  <h2 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white">
-                    {t("selectDate")}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                    {t("step")} 1 {t("of")} 3
-                  </p>
-                </div>
-              </div>
+          <div className={step === 1 ? "block" : "hidden"}>
+            <div className="px-4 py-3 border-b border-slate-100 dark:border-[#2d2a4a] flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-amber-500" />
+              <h2 className="text-sm font-medium text-slate-900 dark:text-white">{t("selectDate")}</h2>
             </div>
-            <div className="p-4 sm:p-6">
-              <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-1.5 sm:gap-2">
+            <div className="p-3 sm:p-4">
+              <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-10 gap-1.5">
                 {availableDays.map((date) => {
-                  const isSelected =
-                    selectedDate?.toDateString() === date.toDateString();
+                  const isSelected = selectedDate?.toDateString() === date.toDateString();
                   return (
                     <button
                       key={date.toISOString()}
                       onClick={() => handleDateSelect(date)}
-                      className={`group relative p-2 sm:p-3 rounded-lg sm:rounded-xl text-center border transition-all hover:scale-105 ${
+                      className={`p-1.5 sm:p-2 rounded-md text-center transition ${
                         isSelected
-                          ? "bg-amber-500 text-white border-amber-500 shadow-md shadow-amber-500/25"
-                          : "border-slate-200 dark:border-[#2d2a4a] hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 dark:text-white"
+                          ? "bg-amber-500 text-white"
+                          : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
                       }`}
                     >
-                      <div
-                        className={`text-[10px] sm:text-xs font-medium mb-0.5 sm:mb-1 ${
-                          isSelected
-                            ? "text-amber-100"
-                            : "text-slate-400 dark:text-slate-500"
-                        }`}
-                      >
+                      <div className={`text-[10px] font-medium ${isSelected ? "text-amber-100" : "text-slate-400 dark:text-slate-500"}`}>
                         {format(date, "EEE", { locale: dateLocale })}
                       </div>
-                      <div className="text-sm sm:text-lg font-bold">
-                        {format(date, "d", { locale: dateLocale })}
-                      </div>
-                      <div
-                        className={`text-[10px] sm:text-xs ${
-                          isSelected
-                            ? "text-amber-100"
-                            : "text-slate-500 dark:text-slate-400"
-                        }`}
-                      >
+                      <div className="text-sm font-semibold">{format(date, "d", { locale: dateLocale })}</div>
+                      <div className={`text-[10px] ${isSelected ? "text-amber-100" : "text-slate-400 dark:text-slate-500"}`}>
                         {format(date, "MMM", { locale: dateLocale })}
                       </div>
                     </button>
@@ -646,41 +500,21 @@ export default function BookPage() {
           </div>
 
           {/* Step 2: Select Time */}
-          <div
-            className={`transition-all duration-300 ${
-              step === 2 ? "block" : "hidden"
-            }`}
-          >
-            <div className="p-4 sm:p-6 border-b border-slate-100 dark:border-[#2d2a4a]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
-                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div>
-                    <h2 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white">
-                      {t("selectTime")}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                      {t("step")} 2 {t("of")} 3 &bull;{" "}
-                      {selectedDate &&
-                        format(selectedDate, "EEEE, MMM d", {
-                          locale: dateLocale,
-                        })}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setStep(1)}
-                  className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">{t("back")}</span>
-                </button>
+          <div className={step === 2 ? "block" : "hidden"}>
+            <div className="px-4 py-3 border-b border-slate-100 dark:border-[#2d2a4a] flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-amber-500" />
+                <h2 className="text-sm font-medium text-slate-900 dark:text-white">{t("selectTime")}</h2>
+                <span className="text-xs text-slate-400 dark:text-slate-500">
+                  • {selectedDate && format(selectedDate, "EEE, MMM d", { locale: dateLocale })}
+                </span>
               </div>
+              <button onClick={() => setStep(1)} className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-1">
+                <ArrowLeft className="w-3 h-3" /> {t("back")}
+              </button>
             </div>
-            <div className="p-4 sm:p-6">
-              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-3">
+            <div className="p-3 sm:p-4">
+              <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-13 gap-1.5">
                 {timeSlots.map((time) => {
                   const isBooked = bookedSlots.includes(time);
                   const isSelected = selectedTime === time;
@@ -689,20 +523,16 @@ export default function BookPage() {
                       key={time}
                       onClick={() => !isBooked && handleTimeSelect(time)}
                       disabled={isBooked}
-                      className={`relative py-2.5 sm:py-3 px-2 sm:px-4 rounded-lg sm:rounded-xl text-center text-sm sm:text-base font-semibold border transition-all ${
+                      className={`relative py-2 px-1 rounded-md text-center text-sm font-medium transition ${
                         isBooked
-                          ? "bg-slate-50 dark:bg-[#1a1735] text-slate-300 dark:text-slate-600 border-slate-100 dark:border-[#2d2a4a] cursor-not-allowed"
+                          ? "bg-slate-100 dark:bg-[#1a1735] text-slate-300 dark:text-slate-600 cursor-not-allowed"
                           : isSelected
-                          ? "bg-amber-500 text-white border-amber-500 shadow-md shadow-amber-500/25"
-                          : "border-slate-200 dark:border-[#2d2a4a] hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 dark:text-white"
+                          ? "bg-amber-500 text-white"
+                          : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
                       }`}
                     >
                       {time}
-                      {isBooked && (
-                        <span className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 bg-slate-400 dark:bg-slate-600 text-white text-[8px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full">
-                          {t("booked")}
-                        </span>
-                      )}
+                      {isBooked && <span className="absolute -top-1 -right-1 w-2 h-2 bg-slate-400 dark:bg-slate-600 rounded-full" />}
                     </button>
                   );
                 })}
@@ -711,149 +541,106 @@ export default function BookPage() {
           </div>
 
           {/* Step 3: Contact Details + Additional Info */}
-          <div
-            className={`transition-all duration-300 ${
-              step === 3 ? "block" : "hidden"
-            }`}
-          >
-            <div className="p-4 sm:p-6 border-b border-slate-100 dark:border-[#2d2a4a]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
-                    <User className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400" />
-                  </div>
-                  <div>
-                    <h2 className="text-base sm:text-xl font-bold text-slate-900 dark:text-white">
-                      {t("yourDetails")}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                      {t("step")} 3 {t("of")} 3
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setStep(2)}
-                  className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">{t("back")}</span>
-                </button>
+          <div className={step === 3 ? "block" : "hidden"}>
+            <div className="px-5 py-3 border-b border-slate-100 dark:border-[#2d2a4a] flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-amber-500" />
+                <h2 className="text-sm font-medium text-slate-900 dark:text-white">{t("yourDetails")}</h2>
               </div>
+              <button onClick={() => setStep(2)} className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-1">
+                <ArrowLeft className="w-3 h-3" /> {t("back")}
+              </button>
             </div>
 
             {/* Selected Date/Time Summary */}
-            <div className="mx-4 sm:mx-6 mt-4 sm:mt-5 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg sm:rounded-xl border border-amber-200/60 dark:border-amber-800/30">
-              <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-4">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400" />
-                  <span className="text-xs sm:text-sm font-medium text-slate-900 dark:text-white">
-                    {selectedDate &&
-                      format(selectedDate, "EEEE, MMMM d, yyyy", {
-                        locale: dateLocale,
-                      })}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400" />
-                  <span className="text-xs sm:text-sm font-medium text-slate-900 dark:text-white">
-                    {selectedTime}
-                  </span>
-                </div>
-              </div>
+            <div className="mx-5 mt-4 px-4 py-2.5 bg-amber-50/80 dark:bg-amber-900/10 rounded-md border border-amber-200/50 dark:border-amber-800/20 flex items-center justify-center gap-6 text-xs">
+              <span className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                <Calendar className="w-4 h-4 text-amber-500" />
+                {selectedDate && format(selectedDate, "EEE, MMM d, yyyy", { locale: dateLocale })}
+              </span>
+              <span className="w-px h-4 bg-amber-200 dark:bg-amber-800/40" />
+              <span className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                <Clock className="w-4 h-4 text-amber-500" />
+                {selectedTime}
+              </span>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-5">
-              {/* Contact Information Section */}
-              <div className="bg-slate-50/50 dark:bg-[#1a1735]/50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-slate-100 dark:border-[#2d2a4a]/50">
-                <h3 className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white flex items-center gap-2 mb-3 sm:mb-4">
-                  <User className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-                  {t("contactInfo")}
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <form onSubmit={handleSubmit} className="p-5">
+              {/* Section 1: Contact Information */}
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1 h-4 bg-amber-500 rounded-full" />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">{t("contactInfo")}</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+                    <label className="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5 block">
                       {t("name")} <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       required
                       value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+                    <label className="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5 block">
                       {t("email")} <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                       placeholder="john@example.com"
                     />
                   </div>
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+                    <label className="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5 block">
                       {t("phone")} <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="tel"
                       required
                       value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                       placeholder="+1 (555) 123-4567"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Property Preferences Section */}
-              <div className="bg-slate-50/50 dark:bg-[#1a1735]/50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-slate-100 dark:border-[#2d2a4a]/50">
-                <h3 className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white flex items-center gap-2 mb-3 sm:mb-4">
-                  <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-                  {t("propertyPreferences")}
-                </h3>
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-[#2d2a4a] to-transparent mb-5" />
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                  {/* Budget */}
+              {/* Section 2: Property Preferences */}
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1 h-4 bg-amber-500 rounded-full" />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">{t("propertyPreferences")}</span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                      {t("budget")}
-                    </label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("budget")}</label>
                     <input
                       type="text"
                       value={formData.budget}
-                      onChange={(e) =>
-                        setFormData({ ...formData, budget: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                       placeholder={t("budgetPlaceholder")}
                     />
                   </div>
-
-                  {/* Property Type */}
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                      {t("propertyType")}
-                    </label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("propertyType")}</label>
                     <select
                       value={formData.propertyType}
-                      onChange={(e) =>
-                        setFormData({ ...formData, propertyType: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition"
+                      onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                     >
                       <option value="">{t("selectPropertyType")}</option>
                       <option value="house">{t("propertyTypes.house")}</option>
@@ -862,36 +649,24 @@ export default function BookPage() {
                       <option value="land">{t("propertyTypes.land")}</option>
                     </select>
                   </div>
-
-                  {/* Investment Type */}
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                      {t("investmentType")}
-                    </label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("investmentType")}</label>
                     <select
                       value={formData.investmentType}
-                      onChange={(e) =>
-                        setFormData({ ...formData, investmentType: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition"
+                      onChange={(e) => setFormData({ ...formData, investmentType: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                     >
                       <option value="">{t("selectInvestmentType")}</option>
                       <option value="buying">{t("investmentTypes.buying")}</option>
                       <option value="renting">{t("investmentTypes.renting")}</option>
                     </select>
                   </div>
-
-                  {/* Reason */}
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                      {t("reason")}
-                    </label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("reason")}</label>
                     <select
                       value={formData.reason}
-                      onChange={(e) =>
-                        setFormData({ ...formData, reason: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition"
+                      onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                     >
                       <option value="">{t("selectReason")}</option>
                       <option value="investment">{t("reasons.investment")}</option>
@@ -899,18 +674,13 @@ export default function BookPage() {
                     </select>
                   </div>
                 </div>
-
-                {/* Desired Properties & Referral in same row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
-                  {/* Desired Properties */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                      {t("desiredProperties")}
-                    </label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("desiredProperties")}</label>
                     <button
                       type="button"
                       onClick={() => setIsPropertyModalOpen(true)}
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-dashed border-slate-300 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-600 dark:text-slate-400 rounded-lg hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition flex items-center justify-center gap-2"
+                      className="w-full px-3 py-2 text-sm border border-dashed border-slate-300 dark:border-[#3d3a5a] bg-slate-50/50 dark:bg-[#1a1735] text-slate-500 dark:text-slate-400 rounded-md hover:border-amber-400 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition flex items-center justify-center gap-2"
                     >
                       <Search className="w-3.5 h-3.5" />
                       {selectedProperties.length > 0
@@ -918,18 +688,12 @@ export default function BookPage() {
                         : t("browseProperties")}
                     </button>
                   </div>
-
-                  {/* Referral Source */}
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                      {t("referralSource")}
-                    </label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("referralSource")}</label>
                     <select
                       value={formData.referralSource}
-                      onChange={(e) =>
-                        setFormData({ ...formData, referralSource: e.target.value })
-                      }
-                      className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition"
+                      onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
+                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
                     >
                       <option value="">{t("selectReferralSource")}</option>
                       <option value="google">{t("referralSources.google")}</option>
@@ -940,41 +704,20 @@ export default function BookPage() {
                     </select>
                   </div>
                 </div>
-
-                {/* Selected Properties Display */}
                 {selectedProperties.length > 0 && (
                   <div className="mt-3 flex flex-wrap gap-2">
                     {selectedProperties.map((property) => (
-                      <div
-                        key={property.id}
-                        className="flex items-center gap-2 py-1.5 pl-2 pr-1 bg-amber-100/80 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800/40"
-                      >
+                      <div key={property.id} className="flex items-center gap-2 py-1 pl-1.5 pr-1 bg-amber-50 dark:bg-amber-900/20 rounded-md border border-amber-200/60 dark:border-amber-800/30">
                         <div className="w-6 h-6 rounded overflow-hidden bg-slate-100 dark:bg-[#1a1735] flex-shrink-0">
                           {property.images?.[0] ? (
-                            <img
-                              src={property.images[0]}
-                              alt={property.title}
-                              className="w-full h-full object-cover"
-                            />
+                            <img src={`${bucketUrl}${property.images[0]}`} alt={property.title} className="w-full h-full object-cover" />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <Building2 className="w-3 h-3 text-slate-400" />
-                            </div>
+                            <div className="w-full h-full flex items-center justify-center"><Building2 className="w-3 h-3 text-slate-400" /></div>
                           )}
                         </div>
-                        <span className="text-xs font-medium text-slate-700 dark:text-slate-200 max-w-[120px] truncate">
-                          {property.title}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setSelectedProperties((prev) =>
-                              prev.filter((p) => p.id !== property.id)
-                            )
-                          }
-                          className="p-1 hover:bg-amber-200 dark:hover:bg-amber-800/40 rounded transition"
-                        >
-                          <X className="w-3 h-3 text-slate-500 dark:text-slate-400" />
+                        <span className="text-xs text-slate-600 dark:text-slate-300 max-w-[120px] truncate">{property.title}</span>
+                        <button type="button" onClick={() => setSelectedProperties((prev) => prev.filter((p) => p.id !== property.id))} className="p-0.5 hover:bg-amber-100 dark:hover:bg-amber-800/30 rounded transition">
+                          <X className="w-3 h-3 text-slate-400" />
                         </button>
                       </div>
                     ))}
@@ -982,22 +725,21 @@ export default function BookPage() {
                 )}
               </div>
 
-              {/* Additional Message */}
-              <div>
-                <label className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mb-1.5">
-                  <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  {t("message")}{" "}
-                  <span className="text-slate-400 dark:text-slate-500 font-normal">
-                    ({t("optional")})
-                  </span>
-                </label>
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-[#2d2a4a] to-transparent mb-5" />
+
+              {/* Section 3: Additional Notes */}
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1 h-4 bg-amber-500 rounded-full" />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">{t("message")}</span>
+                  <span className="text-xs text-slate-400 dark:text-slate-500 font-normal normal-case">({t("optional")})</span>
+                </div>
                 <textarea
-                  rows={2}
+                  rows={3}
                   value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  className="w-full px-3 py-2 sm:py-2.5 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#13102b] text-slate-900 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition resize-none placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition resize-none"
                   placeholder={t("messagePlaceholder")}
                 />
               </div>
@@ -1005,17 +747,17 @@ export default function BookPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white py-3 sm:py-3.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
+                className="w-full flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white py-2.5 rounded-md font-medium text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     {t("booking")}
                   </>
                 ) : (
                   <>
                     {t("confirmBooking")}
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>

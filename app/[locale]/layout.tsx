@@ -40,7 +40,7 @@ export default async function LocaleLayout({
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             <Header />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow flex flex-col">{children}</main>
             <ConditionalFooter />
           </NextIntlClientProvider>
         </ThemeProvider>
