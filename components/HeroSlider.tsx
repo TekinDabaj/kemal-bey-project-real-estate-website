@@ -3929,6 +3929,8 @@ export default function HeroSlider({
         }
 
         .fifth-view-content {
+          position: relative;
+          z-index: 100;
           width: 100%;
           height: 100%;
           display: flex;
@@ -3938,11 +3940,20 @@ export default function HeroSlider({
           padding: 100px 60px 60px;
           box-sizing: border-box;
           overflow: hidden;
+          background: #f5f5f7;
+          isolation: isolate;
+        }
+
+        :global(.dark) .fifth-view-content {
+          background: #0c0a1d;
         }
 
         .fifth-view-header {
           text-align: center;
           margin-bottom: 50px;
+          max-width: 800px;
+          position: relative;
+          z-index: 350;
         }
 
         .fifth-view-title {
@@ -3950,13 +3961,21 @@ export default function HeroSlider({
           font-size: 52px;
           font-weight: 900;
           color: #1a1a2e;
-          margin: 0 0 8px 0;
+          margin: 0 0 16px 0;
           line-height: 1;
           letter-spacing: -1px;
         }
 
+        .fifth-view-title .title-highlight {
+          color: #f59e0b;
+        }
+
         :global(.dark) .fifth-view-title {
           color: white;
+        }
+
+        :global(.dark) .fifth-view-title .title-highlight {
+          color: #f59e0b;
         }
 
         .fifth-view-subtitle {
@@ -3965,169 +3984,126 @@ export default function HeroSlider({
           color: #64748b;
           margin: 0;
           font-weight: 400;
+          line-height: 1.6;
         }
 
         :global(.dark) .fifth-view-subtitle {
           color: rgba(255, 255, 255, 0.6);
         }
 
-        .bento-grid {
+        .services-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          grid-template-rows: repeat(2, 200px);
-          gap: 16px;
+          gap: 24px;
           max-width: 1200px;
           width: 100%;
+          position: relative;
+          z-index: 350;
         }
 
-        .bento-card {
-          border-radius: 24px;
-          padding: 28px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .service-card {
+          background: #f8fafc;
+          border-radius: 8px;
+          transition: all 0.3s ease;
           cursor: pointer;
           position: relative;
-          overflow: hidden;
+          z-index: 350;
         }
 
-        .bento-card::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            transparent 50%
-          );
-          pointer-events: none;
+        :global(.dark) .service-card {
+          background: #1a1735;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .bento-card:hover {
-          transform: scale(1.02);
+        .service-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* Card 1 - Property Sales (Large, spans 2 cols) */
-        .bento-card-1 {
-          grid-column: span 2;
-          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        :global(.dark) .service-card:hover {
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Card 2 - Property Management */
-        .bento-card-2 {
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        .service-card-highlight {
+          background: #f59e0b;
         }
 
-        /* Card 3 - Investment Advisory */
-        .bento-card-3 {
-          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        :global(.dark) .service-card-highlight {
+          background: #f59e0b;
+          border: none;
         }
 
-        /* Card 4 - International Properties */
-        .bento-card-4 {
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .service-card-highlight .service-icon-wrapper {
+          color: white;
         }
 
-        /* Card 5 - Legal Consultation */
-        .bento-card-5 {
-          background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        .service-card-highlight .service-card-title,
+        .service-card-highlight .service-card-desc {
+          color: white;
         }
 
-        /* Card 6 - Relocation Services (Large, spans 2 cols) */
-        .bento-card-6 {
-          grid-column: span 2;
-          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        .service-card-highlight .service-card-desc {
+          color: rgba(255, 255, 255, 0.9);
         }
 
-        .bento-card-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 14px;
-          background: rgba(255, 255, 255, 0.2);
+        .service-card-inner {
+          padding: 32px 24px;
+          text-align: center;
+        }
+
+        .service-icon-wrapper {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          backdrop-filter: blur(10px);
+          margin: 0 auto 20px;
+          color: #1a1a2e;
         }
 
-        .bento-card-1 .bento-card-icon,
-        .bento-card-6 .bento-card-icon {
-          width: 56px;
-          height: 56px;
+        :global(.dark) .service-card:not(.service-card-highlight) .service-icon-wrapper {
+          color: #f59e0b;
         }
 
-        .bento-card-content {
+        .service-card-content {
           display: flex;
           flex-direction: column;
-          gap: 6px;
+          gap: 12px;
         }
 
-        .bento-card-title {
+        .service-card-title {
           font-family: "Biryani", sans-serif;
-          font-size: 20px;
+          font-size: 16px;
           font-weight: 700;
-          color: white;
+          color: #1a1a2e;
           margin: 0;
-          line-height: 1.2;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
-        .bento-card-1 .bento-card-title,
-        .bento-card-6 .bento-card-title {
-          font-size: 26px;
+        :global(.dark) .service-card:not(.service-card-highlight) .service-card-title {
+          color: white;
         }
 
-        .bento-card-desc {
+        .service-card-desc {
           font-family: "Montserrat", sans-serif;
-          font-size: 13px;
-          line-height: 1.5;
-          color: rgba(255, 255, 255, 0.8);
-          margin: 0;
-          max-width: 280px;
-        }
-
-        .bento-card-1 .bento-card-desc,
-        .bento-card-6 .bento-card-desc {
           font-size: 14px;
-          max-width: 400px;
+          line-height: 1.6;
+          color: #64748b;
+          margin: 0;
+          font-weight: 300;
         }
 
-        .bento-card-arrow {
-          position: absolute;
-          bottom: 24px;
-          right: 24px;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.2);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          opacity: 0;
-          transform: translateX(-10px);
-          transition: all 0.3s;
-        }
-
-        .bento-card:hover .bento-card-arrow {
-          opacity: 1;
-          transform: translateX(0);
+        :global(.dark) .service-card:not(.service-card-highlight) .service-card-desc {
+          color: rgba(255, 255, 255, 0.6);
         }
 
         /* Responsive - Tablet */
         @media (max-width: 1024px) {
-          .bento-grid {
+          .services-grid {
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(4, 160px);
-          }
-
-          .bento-card-1,
-          .bento-card-6 {
-            grid-column: span 2;
+            gap: 20px;
           }
 
           .fifth-view-title {
@@ -4141,28 +4117,29 @@ export default function HeroSlider({
 
         /* Responsive - Mobile */
         @media (max-width: 640px) {
-          .bento-grid {
+          .services-grid {
             grid-template-columns: 1fr;
-            grid-template-rows: repeat(6, 150px);
-            gap: 12px;
+            gap: 16px;
           }
 
-          .bento-card-1,
-          .bento-card-6 {
-            grid-column: span 1;
+          .service-card-inner {
+            padding: 24px 20px;
           }
 
-          .bento-card-1 .bento-card-title,
-          .bento-card-6 .bento-card-title {
-            font-size: 22px;
+          .service-card-title {
+            font-size: 14px;
           }
 
-          .bento-card-title {
-            font-size: 18px;
+          .service-card-desc {
+            font-size: 13px;
           }
 
           .fifth-view-title {
             font-size: 32px;
+          }
+
+          .fifth-view-subtitle {
+            font-size: 14px;
           }
 
           .fifth-view-header {
@@ -4171,6 +4148,7 @@ export default function HeroSlider({
 
           .fifth-view-content {
             padding: 90px 20px 20px;
+            overflow-y: auto;
           }
         }
 
@@ -5327,89 +5305,69 @@ export default function HeroSlider({
 
           <div className="fifth-view-content">
             <div className="fifth-view-header">
-              <h1 className="fifth-view-title">{t("fifthView.title")}</h1>
+              <h1 className="fifth-view-title">
+                {t("fifthView.title").split(" ")[0]} <span className="title-highlight">{t("fifthView.title").split(" ").slice(1).join(" ") || "Services"}</span>
+              </h1>
               <p className="fifth-view-subtitle">
                 {t("fifthView.subtitle")}
               </p>
             </div>
 
-            <div className="bento-grid">
-              <div className="bento-card bento-card-1">
-                <div className="bento-card-icon">
-                  <Home size={28} />
+            <div className="services-grid">
+              <div className="service-card">
+                <div className="service-card-inner">
+                  <div className="service-icon-wrapper">
+                    <Home size={32} />
+                  </div>
+                  <div className="service-card-content">
+                    <h3 className="service-card-title">{t("fifthView.services.propertySales.title")}</h3>
+                    <p className="service-card-desc">
+                      {t("fifthView.services.propertySales.description")}
+                    </p>
+                  </div>
                 </div>
-                <div className="bento-card-content">
-                  <h3 className="bento-card-title">{t("fifthView.services.propertySales.title")}</h3>
-                  <p className="bento-card-desc">
-                    {t("fifthView.services.propertySales.description")}
-                  </p>
-                </div>
-                <div className="bento-card-arrow">→</div>
               </div>
 
-              <div className="bento-card bento-card-2">
-                <div className="bento-card-icon">
-                  <Building size={24} />
+              <div className="service-card service-card-highlight">
+                <div className="service-card-inner">
+                  <div className="service-icon-wrapper">
+                    <Building size={32} />
+                  </div>
+                  <div className="service-card-content">
+                    <h3 className="service-card-title">{t("fifthView.services.propertyManagement.title")}</h3>
+                    <p className="service-card-desc">
+                      {t("fifthView.services.propertyManagement.description")}
+                    </p>
+                  </div>
                 </div>
-                <div className="bento-card-content">
-                  <h3 className="bento-card-title">{t("fifthView.services.propertyManagement.title")}</h3>
-                  <p className="bento-card-desc">
-                    {t("fifthView.services.propertyManagement.description")}
-                  </p>
-                </div>
-                <div className="bento-card-arrow">→</div>
               </div>
 
-              <div className="bento-card bento-card-3">
-                <div className="bento-card-icon">
-                  <TrendingUp size={24} />
+              <div className="service-card">
+                <div className="service-card-inner">
+                  <div className="service-icon-wrapper">
+                    <TrendingUp size={32} />
+                  </div>
+                  <div className="service-card-content">
+                    <h3 className="service-card-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
+                    <p className="service-card-desc">
+                      {t("fifthView.services.investmentAdvisory.description")}
+                    </p>
+                  </div>
                 </div>
-                <div className="bento-card-content">
-                  <h3 className="bento-card-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
-                  <p className="bento-card-desc">
-                    {t("fifthView.services.investmentAdvisory.description")}
-                  </p>
-                </div>
-                <div className="bento-card-arrow">→</div>
               </div>
 
-              <div className="bento-card bento-card-4">
-                <div className="bento-card-icon">
-                  <Globe size={24} />
+              <div className="service-card service-card-highlight">
+                <div className="service-card-inner">
+                  <div className="service-icon-wrapper">
+                    <Globe size={32} />
+                  </div>
+                  <div className="service-card-content">
+                    <h3 className="service-card-title">{t("fifthView.services.internationalProperties.title")}</h3>
+                    <p className="service-card-desc">
+                      {t("fifthView.services.internationalProperties.description")}
+                    </p>
+                  </div>
                 </div>
-                <div className="bento-card-content">
-                  <h3 className="bento-card-title">{t("fifthView.services.internationalProperties.title")}</h3>
-                  <p className="bento-card-desc">
-                    {t("fifthView.services.internationalProperties.description")}
-                  </p>
-                </div>
-                <div className="bento-card-arrow">→</div>
-              </div>
-
-              <div className="bento-card bento-card-5">
-                <div className="bento-card-icon">
-                  <FileText size={24} />
-                </div>
-                <div className="bento-card-content">
-                  <h3 className="bento-card-title">{t("fifthView.services.legalConsultation.title")}</h3>
-                  <p className="bento-card-desc">
-                    {t("fifthView.services.legalConsultation.description")}
-                  </p>
-                </div>
-                <div className="bento-card-arrow">→</div>
-              </div>
-
-              <div className="bento-card bento-card-6">
-                <div className="bento-card-icon">
-                  <Handshake size={28} />
-                </div>
-                <div className="bento-card-content">
-                  <h3 className="bento-card-title">{t("fifthView.services.relocationServices.title")}</h3>
-                  <p className="bento-card-desc">
-                    {t("fifthView.services.relocationServices.description")}
-                  </p>
-                </div>
-                <div className="bento-card-arrow">→</div>
               </div>
             </div>
           </div>

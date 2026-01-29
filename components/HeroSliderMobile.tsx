@@ -1345,6 +1345,7 @@ export default function HeroSliderMobile({
           background: #f5f5f7;
           padding: 24px 16px;
           overflow: hidden;
+          isolation: isolate;
         }
 
         :global(.dark) .mobile-fifth-view {
@@ -1354,6 +1355,8 @@ export default function HeroSliderMobile({
         .mobile-fifth-header {
           text-align: center;
           margin-bottom: 20px;
+          position: relative;
+          z-index: 350;
         }
 
         .mobile-fifth-title {
@@ -1361,8 +1364,12 @@ export default function HeroSliderMobile({
           font-size: 24px;
           font-weight: 900;
           color: #1a1a2e;
-          margin: 0 0 4px 0;
+          margin: 0 0 12px 0;
           line-height: 1.1;
+        }
+
+        .mobile-title-highlight {
+          color: #f59e0b;
         }
 
         :global(.dark) .mobile-fifth-title {
@@ -1374,6 +1381,7 @@ export default function HeroSliderMobile({
           font-size: 12px;
           color: #64748b;
           margin: 0;
+          line-height: 1.5;
         }
 
         :global(.dark) .mobile-fifth-subtitle {
@@ -1381,80 +1389,97 @@ export default function HeroSliderMobile({
         }
 
         .mobile-services-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+          position: relative;
+          z-index: 350;
         }
 
         .mobile-service-card {
-          border-radius: 16px;
-          padding: 16px;
-          display: flex;
-          align-items: center;
-          gap: 14px;
+          background: #fff;
+          border-radius: 8px;
           transition: transform 0.3s;
+          position: relative;
+          z-index: 350;
+        }
+
+        :global(.dark) .mobile-service-card {
+          background: #1a1735;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .mobile-service-card:active {
           transform: scale(0.98);
         }
 
-        .mobile-service-card-1 {
-          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        .mobile-service-card-highlight {
+          background: #f59e0b;
         }
 
-        .mobile-service-card-2 {
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        :global(.dark) .mobile-service-card-highlight {
+          background: #f59e0b;
+          border: none;
         }
 
-        .mobile-service-card-3 {
-          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        .mobile-service-card-highlight .mobile-service-icon-wrapper {
+          color: white;
         }
 
-        .mobile-service-card-4 {
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .mobile-service-card-highlight .mobile-service-title,
+        .mobile-service-card-highlight .mobile-service-desc {
+          color: white;
         }
 
-        .mobile-service-card-5 {
-          background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        .mobile-service-card-highlight .mobile-service-desc {
+          color: rgba(255, 255, 255, 0.9);
         }
 
-        .mobile-service-card-6 {
-          background: linear-gradient(135deg, #1a1a2e 0%, #2d2a5a 100%);
+        .mobile-service-card-inner {
+          padding: 20px 16px;
+          text-align: center;
         }
 
-        .mobile-service-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.2);
+        .mobile-service-icon-wrapper {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          flex-shrink: 0;
+          margin: 0 auto 12px;
+          color: #1a1a2e;
         }
 
-        .mobile-service-content {
-          flex: 1;
-          min-width: 0;
+        :global(.dark) .mobile-service-card:not(.mobile-service-card-highlight) .mobile-service-icon-wrapper {
+          color: #f59e0b;
         }
 
         .mobile-service-title {
           font-family: "Biryani", sans-serif;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 700;
+          color: #1a1a2e;
+          margin: 0 0 8px 0;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+
+        :global(.dark) .mobile-service-card:not(.mobile-service-card-highlight) .mobile-service-title {
           color: white;
-          margin: 0 0 2px 0;
-          line-height: 1.2;
         }
 
         .mobile-service-desc {
           font-family: "Montserrat", sans-serif;
           font-size: 11px;
-          line-height: 1.4;
-          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.5;
+          color: #64748b;
           margin: 0;
+          font-weight: 300;
+        }
+
+        :global(.dark) .mobile-service-card:not(.mobile-service-card-highlight) .mobile-service-desc {
+          color: rgba(255, 255, 255, 0.6);
         }
 
         /* Sixth View Section - Contact */
@@ -2130,18 +2155,20 @@ export default function HeroSliderMobile({
         {/* Fifth View Section - Our Services */}
         <section className="mobile-fifth-view">
           <div className="mobile-fifth-header">
-            <h1 className="mobile-fifth-title">{t("fifthView.title")}</h1>
+            <h1 className="mobile-fifth-title">
+              {t("fifthView.title").split(" ")[0]} <span className="mobile-title-highlight">{t("fifthView.title").split(" ").slice(1).join(" ") || "Services"}</span>
+            </h1>
             <p className="mobile-fifth-subtitle">
               {t("fifthView.subtitle")}
             </p>
           </div>
 
           <div className="mobile-services-grid">
-            <div className="mobile-service-card mobile-service-card-1">
-              <div className="mobile-service-icon">
-                <Home size={20} />
-              </div>
-              <div className="mobile-service-content">
+            <div className="mobile-service-card">
+              <div className="mobile-service-card-inner">
+                <div className="mobile-service-icon-wrapper">
+                  <Home size={28} />
+                </div>
                 <h3 className="mobile-service-title">{t("fifthView.services.propertySales.title")}</h3>
                 <p className="mobile-service-desc">
                   {t("fifthView.services.propertySales.description")}
@@ -2149,11 +2176,11 @@ export default function HeroSliderMobile({
               </div>
             </div>
 
-            <div className="mobile-service-card mobile-service-card-2">
-              <div className="mobile-service-icon">
-                <Building size={20} />
-              </div>
-              <div className="mobile-service-content">
+            <div className="mobile-service-card mobile-service-card-highlight">
+              <div className="mobile-service-card-inner">
+                <div className="mobile-service-icon-wrapper">
+                  <Building size={28} />
+                </div>
                 <h3 className="mobile-service-title">{t("fifthView.services.propertyManagement.title")}</h3>
                 <p className="mobile-service-desc">
                   {t("fifthView.services.propertyManagement.description")}
@@ -2161,11 +2188,11 @@ export default function HeroSliderMobile({
               </div>
             </div>
 
-            <div className="mobile-service-card mobile-service-card-3">
-              <div className="mobile-service-icon">
-                <TrendingUp size={20} />
-              </div>
-              <div className="mobile-service-content">
+            <div className="mobile-service-card">
+              <div className="mobile-service-card-inner">
+                <div className="mobile-service-icon-wrapper">
+                  <TrendingUp size={28} />
+                </div>
                 <h3 className="mobile-service-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
                 <p className="mobile-service-desc">
                   {t("fifthView.services.investmentAdvisory.description")}
@@ -2173,38 +2200,14 @@ export default function HeroSliderMobile({
               </div>
             </div>
 
-            <div className="mobile-service-card mobile-service-card-4">
-              <div className="mobile-service-icon">
-                <Globe size={20} />
-              </div>
-              <div className="mobile-service-content">
+            <div className="mobile-service-card mobile-service-card-highlight">
+              <div className="mobile-service-card-inner">
+                <div className="mobile-service-icon-wrapper">
+                  <Globe size={28} />
+                </div>
                 <h3 className="mobile-service-title">{t("fifthView.services.internationalProperties.title")}</h3>
                 <p className="mobile-service-desc">
                   {t("fifthView.services.internationalProperties.description")}
-                </p>
-              </div>
-            </div>
-
-            <div className="mobile-service-card mobile-service-card-5">
-              <div className="mobile-service-icon">
-                <FileText size={20} />
-              </div>
-              <div className="mobile-service-content">
-                <h3 className="mobile-service-title">{t("fifthView.services.legalConsultation.title")}</h3>
-                <p className="mobile-service-desc">
-                  {t("fifthView.services.legalConsultation.description")}
-                </p>
-              </div>
-            </div>
-
-            <div className="mobile-service-card mobile-service-card-6">
-              <div className="mobile-service-icon">
-                <Handshake size={20} />
-              </div>
-              <div className="mobile-service-content">
-                <h3 className="mobile-service-title">{t("fifthView.services.relocationServices.title")}</h3>
-                <p className="mobile-service-desc">
-                  {t("fifthView.services.relocationServices.description")}
                 </p>
               </div>
             </div>
