@@ -5,13 +5,13 @@
   },
   "navigation": {
     "home": "Home",
-    "properties": "Properties",
-    "services": "Services",
+    "properties": "Featured Properties",
+    "services": "Our Services",
     "about": "About",
     "blog": "Blog",
     "contact": "Contact",
     "bookConsultation": "Book Consultation",
-    "brandName": "Premier Realty"
+    "brandName": "KA GLOBAL"
   },
   "home": {
     "stats": {
@@ -733,6 +733,20 @@
     "ctaDescription": "Book a consultation with our real estate experts.",
     "ctaButton": "Book Consultation"
   },
+  "footer": {
+    "companyName": "KA Global",
+    "address": {
+      "line1": "Yaprak Sokak No:11,",
+      "line2": "Lavin Apartment 1, Daire:3",
+      "line3": "Nicosia - North Cyprus"
+    },
+    "phone": "+90 533 860 6456",
+    "email": "Team@kaglobal.com.cy",
+    "registrationNo": "Company Registration No: xxxxxxx",
+    "copyright": "2026 KA Global. All rights reserved.",
+    "quickLinks": "Quick Links",
+    "contactInfo": "Contact Info"
+  },
   "heroSlider": {
     "back": "← Back",
     "slides": {
@@ -808,8 +822,8 @@
     },
     "fourthView": {
       "title": "About Us",
-      "subtitle": "Your trusted partner in global real estate since 2010",
-      "description": "We are a premier international real estate consultancy dedicated to helping clients find their perfect property anywhere in the world. With over a decade of experience, we've built a reputation for excellence, integrity, and personalized service.",
+      "subtitle": "",
+      "description": "KA Global was founded by Kemal Aşık, who brings over twenty years of leadership experience across the UK, Hong Kong, Thailand, and Singapore. The firm was established to assist international clients in securing residential and investment properties across the globe.\n\nSpecializing in both ready-to-move and off-plan properties, KA Global exclusively represents projects from reputable developers. Under Kemal's leadership, the company provides comprehensive support throughout the acquisition process and offers ongoing real estate management services post-purchase.\n\nKemal personally oversees all client meetings, utilizing his extensive expertise to ensure that every requirement is met efficiently and without stress. While KA Global is headquartered in Cyprus, Kemal remains actively engaged with investors across the UK and Asia to identify promising investment opportunities and affordable housing solutions.",
       "coreValues": "Our Core Values",
       "values": {
         "trust": {
@@ -835,23 +849,23 @@
     },
     "fifthView": {
       "title": "Our Services",
-      "subtitle": "Comprehensive real estate solutions tailored to your needs",
+      "subtitle": "We know that it all starts with a sincere conversation. As the KA Global team, we work with an independent and professional perspective when purchasing your new property.",
       "services": {
         "propertySales": {
-          "title": "Property Sales",
-          "description": "Expert guidance through the entire buying and selling process, ensuring you get the best value for your investment."
+          "title": "Property Appraisal",
+          "description": "Recognizing the importance of investing in a new property, as a team, we conduct due diligence on properties to ensure a stress-free and enjoyable experience, providing you with the most suitable properties for you."
         },
         "propertyManagement": {
-          "title": "Property Management",
-          "description": "Comprehensive management services for landlords."
+          "title": "Managing the Process",
+          "description": "Whether it's a residence for personal use or an investment property for your portfolio, we help you find the right property and provide solutions at every point during the purchase process."
         },
         "investmentAdvisory": {
-          "title": "Investment Advisory",
-          "description": "Strategic guidance to build your portfolio."
+          "title": "Negotiation",
+          "description": "With our market knowledge and data, we offer negotiation services to ensure the best negotiation is done during the purchase of your desired property, keeping your privacy in mind."
         },
         "internationalProperties": {
-          "title": "International Properties",
-          "description": "Exclusive properties worldwide."
+          "title": "Real Estate Management",
+          "description": "The dedicated KA Global LM team ensures you get the best return on your investment while matching the perfect tenant with your property."
         },
         "legalConsultation": {
           "title": "Legal Consultation",

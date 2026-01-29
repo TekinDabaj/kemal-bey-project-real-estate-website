@@ -43,16 +43,14 @@ export default function Header() {
     <header className="fixed bottom-4 md:bottom-auto md:top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl font-[family-name:var(--font-montserrat)]">
       <nav className="bg-slate-900/80 dark:bg-[#0c0a1d]/80 backdrop-blur-xl border border-white/10 dark:border-white dark:md:border-white/10 rounded-2xl shadow-lg shadow-black/10">
         <div className="px-6 py-3 flex flex-col">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            {/* Left: Brand */}
             <Link href="/" className="text-xl font-semibold text-amber-400" onClick={handleHomeClick}>
               {t('brandName')}
             </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-white/80 hover:text-amber-400 transition text-sm" onClick={handleHomeClick}>
-                {t('home')}
-              </Link>
+            {/* Center: Desktop nav - flex-1 to take remaining space, centered */}
+            <div className="hidden md:flex flex-1 items-center justify-center space-x-6">
               <Link href="/properties" className="text-white/80 hover:text-amber-400 transition text-sm">
                 {t('properties')}
               </Link>
@@ -66,17 +64,12 @@ export default function Header() {
                 className="text-white/80 hover:text-amber-400 transition text-sm"
                 onClick={(e) => handleViewNavigation(e, 4)}
               >
-                {t('about')}
+                {'KA GLOBAL'}
               </button>
-              <Link href="/blog" className="text-white/80 hover:text-amber-400 transition text-sm">
-                {t('blog')}
-              </Link>
-              <button
-                className="text-white/80 hover:text-amber-400 transition text-sm"
-                onClick={(e) => handleViewNavigation(e, 6)}
-              >
-                {t('contact')}
-              </button>
+            </div>
+
+            {/* Right: Desktop controls */}
+            <div className="hidden md:flex items-center space-x-4">
               <div className="flex items-center gap-2 pl-2 border-l border-white/10">
                 <ThemeToggle />
                 <LanguageSwitcher />

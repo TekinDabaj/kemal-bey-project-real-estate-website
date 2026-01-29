@@ -5,13 +5,13 @@
   },
   "navigation": {
     "home": "Ana Sayfa",
-    "properties": "Emlaklar",
-    "services": "Hizmetler",
+    "properties": "Öne Çıkan Emlaklar",
+    "services": "Hizmetlerimiz",
     "about": "Hakkımızda",
     "blog": "Blog",
     "contact": "İletişim",
     "bookConsultation": "Randevu Al",
-    "brandName": "Premier Realty"
+    "brandName": "KA GLOBAL"
   },
   "home": {
     "stats": {
@@ -733,6 +733,20 @@
     "ctaDescription": "Gayrimenkul uzmanlarımızla bir görüşme planlayın.",
     "ctaButton": "Randevu Al"
   },
+  "footer": {
+    "companyName": "KA Global",
+    "address": {
+      "line1": "Yaprak Sokak No:11,",
+      "line2": "Lavin Apartmanı 1, Daire:3",
+      "line3": "Lefkoşa - Kuzey Kıbrıs"
+    },
+    "phone": "+90 533 860 6456",
+    "email": "Team@kaglobal.com.cy",
+    "registrationNo": "Şirket Kayıt No: xxxxxxx",
+    "copyright": "2026 KA Global. Tüm hakları saklıdır.",
+    "quickLinks": "Hızlı Bağlantılar",
+    "contactInfo": "İletişim Bilgileri"
+  },
   "heroSlider": {
     "back": "← Geri",
     "slides": {
@@ -808,8 +822,8 @@
     },
     "fourthView": {
       "title": "Hakkımızda",
-      "subtitle": "2010'dan beri küresel gayrimenkulde güvenilir ortağınız",
-      "description": "Dünyanın her yerinde müşterilerin mükemmel mülklerini bulmalarına yardımcı olmaya adanmış birinci sınıf uluslararası bir gayrimenkul danışmanlığıyız. On yılı aşkın deneyimimizle, mükemmellik, dürüstlük ve kişiselleştirilmiş hizmet konusunda bir itibar oluşturduk.",
+      "subtitle": "",
+      "description": "KA Global, İngiltere, Hong Kong, Tayland ve Singapur'da yirmi yılı aşkın deneyime sahip olan Kemal Aşık tarafından, uluslararası müşterilerinin, Kuzey Kıbrıs ve İngiltere'de konut veya yatırım amaçlı mülk bulmalarına yardımcı olma arzusuyla kurulmuştur.\n\nTaşınmaya hazır ve inşaat halindeki mülkler konusunda uzmanlaşan KA Global, sadece güvenilir şirketlerin projeleri üzerinden yatırımcılara yol gösterir. Kemal'in liderliğindeki şirket, uluslararası yatırımcılara konut/yatırım amaçlı mülk bulma ve satın alma sürecinin yanı sıra, mülk alımı sonrası gayrimenkul yönetimi yapmaktadır.\n\nEnerjik ve sabırlı kişiliğiyle Kemal, müşterilerinin ihtiyaçlarının stressiz ve zamanında karşılanmasını sağlamak için tüm görüşmelere öncülük etmektedir.\n\nKA Global'in ilk ofisi Kıbrıs'ta olmakla birlikte, Kemal geleceğe yönelik yatırım ve uygun fiyatlı konuta ilişkin tutkusunu Kıbrıs'ın yanı sıra, yıl boyunca İngiltere ve Asya'da da yaymaktadır.",
       "coreValues": "Temel Değerlerimiz",
       "values": {
         "trust": {
@@ -835,23 +849,23 @@
     },
     "fifthView": {
       "title": "Hizmetlerimiz",
-      "subtitle": "İhtiyaçlarınıza göre uyarlanmış kapsamlı gayrimenkul çözümleri",
+      "subtitle": "Her şeyin samimi bir sohbetle başladığını biliyoruz. KA Global ekibi olarak, yeni mülkünüzü satın alırken, bağımsız ve profesyonel bir bakış açısıyla çalışıyoruz.",
       "services": {
         "propertySales": {
-          "title": "Mülk Satışı",
-          "description": "Yatırımınızdan en iyi değeri almanızı sağlayan, tüm alış ve satış sürecinde uzman rehberlik."
+          "title": "Mülk Değerlendirme",
+          "description": "Yeni bir mülke yatırım yapmanın öneminin bilinciyle, ekip olarak, size stressiz ve keyifli bir deneyimi sağlamak amacıyla mülklerle ilgili durum tespiti yapıp, sizin için en uygun mülkleri size sunuyoruz."
         },
         "propertyManagement": {
-          "title": "Mülk Yönetimi",
-          "description": "Ev sahipleri için kapsamlı yönetim hizmetleri."
+          "title": "Satın Alma",
+          "description": "İster kişisel kullanım için bir konut, ister portföyünüz için yatırım amaçlı bir gayrimenkul olsun, doğru mülkü bulmanıza yardımcı olup, satın alma süresince her noktada çözümler üretiyoruz."
         },
         "investmentAdvisory": {
-          "title": "Yatırım Danışmanlığı",
-          "description": "Portföyünüzü oluşturmak için stratejik rehberlik."
+          "title": "Pazarlık",
+          "description": "Piyasa bilgimiz ve verilerimizle, gizliliğinizi göz önünde bulundurarak, istediğiniz mülkün satın alınması sırasında pazarlığın en iyi şekilde yapılmasını sağlamak için müzakere hizmetleri sunuyoruz."
         },
         "internationalProperties": {
-          "title": "Uluslararası Mülkler",
-          "description": "Dünya genelinde özel mülkler."
+          "title": "Gayrimenkul Yönetimi",
+          "description": "Özel olarak kurulan KA Global LM ekibi, mülkünüzle mükemmel kiracıyı eşleştirirken, yatırımınızdan en iyi getiriyi almanızı sağlar."
         },
         "legalConsultation": {
           "title": "Hukuki Danışmanlık",

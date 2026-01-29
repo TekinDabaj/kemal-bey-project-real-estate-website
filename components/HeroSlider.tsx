@@ -5414,7 +5414,7 @@ export default function HeroSlider({
             </div>
           </div>
 
-          {/* Down arrow to View 6 */}
+          {/* Down arrow to View 6 (Hidden since contact section is hidden)
           <button className="fifth-view-down-button" onClick={handleGoToSixth}>
             <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -5423,9 +5423,10 @@ export default function HeroSlider({
               />
             </svg>
           </button>
+          */}
         </div>
 
-        {/* Sixth View Section - Contact */}
+{/* Sixth View Section - Contact (Hidden for now)
         <div className={`sixth-view-section ${showSixthView ? "active" : ""}`}>
           <button
             className="sixth-view-back-button"
@@ -5436,7 +5437,6 @@ export default function HeroSlider({
 
           <div className="sixth-view-content">
             <div className="contact-main-card">
-              {/* Left Side - Contact Info */}
               <div className="contact-left">
                 <h2 className="contact-left-title">
                   {t("sixthView.title")}
@@ -5469,7 +5469,6 @@ export default function HeroSlider({
                 </div>
               </div>
 
-              {/* Right Side - Form */}
               <div className="contact-right">
                 {contactSuccess ? (
                   <div className="contact-success">
@@ -5599,6 +5598,7 @@ export default function HeroSlider({
             </div>
           </div>
         </div>
+        */}
       </div>
     </>
   );

@@ -2211,10 +2211,9 @@ export default function HeroSliderMobile({
           </div>
         </section>
 
-        {/* Sixth View Section - Contact */}
+{/* Sixth View Section - Contact (Hidden for now)
         <section className="mobile-sixth-view">
           <div className="mobile-contact-card">
-            {/* Top - Contact Info */}
             <div className="mobile-contact-top">
               <h2 className="mobile-contact-title">
                 {t("sixthView.title")}
@@ -2247,7 +2246,6 @@ export default function HeroSliderMobile({
               </div>
             </div>
 
-            {/* Bottom - Form */}
             <div className="mobile-contact-bottom">
               {contactSuccess ? (
                 <div className="mobile-contact-success">
@@ -2376,6 +2374,7 @@ export default function HeroSliderMobile({
             </div>
           </div>
         </section>
+        */}
       </div>
     </>
   );
