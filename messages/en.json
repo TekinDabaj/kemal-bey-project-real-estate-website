@@ -130,6 +130,53 @@
     "booked": "Booked",
     "available": "Available",
     "unavailable": "Unavailable",
+    "back": "Back",
+    "contactInfo": "Contact Information",
+    "propertyPreferences": "Property Preferences",
+    "budget": "Budget",
+    "budgetPlaceholder": "e.g., $100,000 - $1,000,000",
+    "propertyType": "Property Type",
+    "selectPropertyType": "Select property type",
+    "propertyTypes": {
+      "house": "House",
+      "apartment": "Apartment",
+      "office": "Office",
+      "land": "Land"
+    },
+    "investmentType": "Investment Type",
+    "selectInvestmentType": "Select investment type",
+    "investmentTypes": {
+      "buying": "Buying",
+      "renting": "Renting"
+    },
+    "reason": "Purpose",
+    "selectReason": "Select purpose",
+    "reasons": {
+      "investment": "Investment",
+      "personal": "Personal Use"
+    },
+    "desiredProperties": "Interested Properties",
+    "browseProperties": "Browse Our Properties",
+    "referralSource": "How did you find us?",
+    "selectReferralSource": "Select an option",
+    "referralSources": {
+      "google": "Google Search",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "reference": "Friend / Reference",
+      "other": "Other"
+    },
+    "propertyModal": {
+      "title": "Select Properties",
+      "subtitle": "Choose properties you're interested in",
+      "searchPlaceholder": "Search properties...",
+      "noProperties": "No properties found",
+      "noAddress": "Address not specified",
+      "selected": "property(ies) selected",
+      "cancel": "Cancel",
+      "confirm": "Confirm Selection",
+      "changeSelection": "Change Selection ({count} selected)"
+    },
     "success": {
       "title": "Booking Confirmed!",
       "subtitle": "Your consultation has been successfully scheduled",

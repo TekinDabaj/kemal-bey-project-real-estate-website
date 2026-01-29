@@ -127,9 +127,56 @@
     "required": "zorunlu",
     "confirmBooking": "Randevuyu Onayla",
     "booking": "Randevu alınıyor...",
+    "back": "Geri",
+    "contactInfo": "İletişim Bilgileri",
+    "propertyPreferences": "Mülk Tercihleri",
+    "budget": "Bütçe",
+    "budgetPlaceholder": "örn. 1.000.000₺ - 10.000.000₺",
+    "propertyType": "Mülk Tipi",
+    "selectPropertyType": "Mülk tipi seçin",
     "booked": "Dolu",
     "available": "Müsait",
     "unavailable": "Müsait Değil",
+    "propertyTypes": {
+      "house": "Müstakil Ev",
+      "apartment": "Daire",
+      "office": "Ofis",
+      "land": "Arsa"
+    },
+    "investmentType": "Yatırım Türü",
+    "selectInvestmentType": "Yatırım türü seçin",
+    "investmentTypes": {
+      "buying": "Satın Alma",
+      "renting": "Kiralama"
+    },
+    "reason": "Amaç",
+    "selectReason": "Amaç seçin",
+    "reasons": {
+      "investment": "Yatırım",
+      "personal": "Kişisel Kullanım"
+    },
+    "desiredProperties": "İlgilenilen Mülkler",
+    "browseProperties": "Mülklerimize Göz Atın",
+    "referralSource": "Bizi nereden buldunuz?",
+    "selectReferralSource": "Bir seçenek seçin",
+    "referralSources": {
+      "google": "Google Arama",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "reference": "Arkadaş / Referans",
+      "other": "Diğer"
+    },
+    "propertyModal": {
+      "title": "Mülk Seçin",
+      "subtitle": "İlgilendiğiniz mülkleri seçin",
+      "searchPlaceholder": "Mülk ara...",
+      "noProperties": "Mülk bulunamadı",
+      "noAddress": "Adres belirtilmemiş",
+      "selected": "mülk seçildi",
+      "cancel": "İptal",
+      "confirm": "Seçimi Onayla",
+      "changeSelection": "Seçimi Değiştir ({count} seçili)"
+    },
     "success": {
       "title": "Randevu Onaylandı!",
       "subtitle": "Görüşmeniz başarıyla planlandı",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/client";
@@ -58,7 +58,34 @@ import {
   Sparkles,
   CalendarCheck,
   Home,
+  DollarSign,
+  Building2,
+  Search,
+  Key,
+  Target,
+  Globe,
+  X,
+  Check,
+  MapPin,
+  Bed,
+  Bath,
+  Square,
 } from "lucide-react";
+
+// Property type from database
+type Property = {
+  id: string;
+  title: string;
+  price: number;
+  currency: string;
+  type: string;
+  property_type: string;
+  bedrooms: number;
+  bathrooms: number;
+  total_area: number;
+  address: string;
+  images: string[];
+};
 
 const timeSlots = [
   "08:00",
@@ -100,6 +127,194 @@ function getNext30Days() {
   return days;
 }
 
+// Property Selection Modal Component
+function PropertySelectionModal({
+  isOpen,
+  onClose,
+  properties,
+  selectedProperties,
+  onConfirm,
+  t,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  properties: Property[];
+  selectedProperties: Property[];
+  onConfirm: (properties: Property[]) => void;
+  t: ReturnType<typeof useTranslations<"booking">>;
+}) {
+  const [tempSelected, setTempSelected] = useState<Property[]>(selectedProperties);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    setTempSelected(selectedProperties);
+  }, [selectedProperties, isOpen]);
+
+  if (!isOpen) return null;
+
+  const filteredProperties = properties.filter(
+    (p) =>
+      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.address?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const toggleProperty = (property: Property) => {
+    setTempSelected((prev) =>
+      prev.some((p) => p.id === property.id)
+        ? prev.filter((p) => p.id !== property.id)
+        : [...prev, property]
+    );
+  };
+
+  const handleConfirm = () => {
+    onConfirm(tempSelected);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
+      <div className="relative bg-white dark:bg-[#13102b] rounded-2xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col border border-slate-200 dark:border-[#2d2a4a]">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-[#2d2a4a]">
+          <div>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+              {t("propertyModal.title")}
+            </h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+              {t("propertyModal.subtitle")}
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded-lg transition"
+          >
+            <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+          </button>
+        </div>
+
+        {/* Search */}
+        <div className="p-4 border-b border-slate-200 dark:border-[#2d2a4a]">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input
+              type="text"
+              placeholder={t("propertyModal.searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+            />
+          </div>
+        </div>
+
+        {/* Property List */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          {filteredProperties.length === 0 ? (
+            <div className="text-center py-12 text-slate-500 dark:text-slate-400">
+              {t("propertyModal.noProperties")}
+            </div>
+          ) : (
+            filteredProperties.map((property) => {
+              const isSelected = tempSelected.some((p) => p.id === property.id);
+              return (
+                <div
+                  key={property.id}
+                  onClick={() => toggleProperty(property)}
+                  className={`flex gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                    isSelected
+                      ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20"
+                      : "border-slate-200 dark:border-[#2d2a4a] hover:border-slate-300 dark:hover:border-[#3d3a5a]"
+                  }`}
+                >
+                  {/* Property Image */}
+                  <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-[#1a1735]">
+                    {property.images?.[0] ? (
+                      <img
+                        src={property.images[0]}
+                        alt={property.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Building2 className="w-8 h-8 text-slate-300 dark:text-slate-600" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Property Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <h4 className="font-semibold text-slate-900 dark:text-white truncate">
+                        {property.title}
+                      </h4>
+                      {isSelected && (
+                        <div className="flex-shrink-0 w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-1">
+                      <MapPin className="w-3 h-3" />
+                      {property.address || t("propertyModal.noAddress")}
+                    </p>
+                    <div className="flex items-center gap-4 mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      {property.bedrooms > 0 && (
+                        <span className="flex items-center gap-1">
+                          <Bed className="w-4 h-4" /> {property.bedrooms}
+                        </span>
+                      )}
+                      {property.bathrooms > 0 && (
+                        <span className="flex items-center gap-1">
+                          <Bath className="w-4 h-4" /> {property.bathrooms}
+                        </span>
+                      )}
+                      {property.total_area > 0 && (
+                        <span className="flex items-center gap-1">
+                          <Square className="w-4 h-4" /> {property.total_area}m²
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-amber-600 dark:text-amber-400 font-semibold mt-2">
+                      {property.currency} {property.price?.toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between p-6 border-t border-slate-200 dark:border-[#2d2a4a]">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            {tempSelected.length} {t("propertyModal.selected")}
+          </p>
+          <div className="flex gap-3">
+            <button
+              onClick={onClose}
+              className="px-5 py-2.5 border-2 border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition"
+            >
+              {t("propertyModal.cancel")}
+            </button>
+            <button
+              onClick={handleConfirm}
+              className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition"
+            >
+              {t("propertyModal.confirm")}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function BookPage() {
   const t = useTranslations("booking");
   const locale = useLocale();
@@ -110,15 +325,43 @@ export default function BookPage() {
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  // Properties state
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [selectedProperties, setSelectedProperties] = useState<Property[]>([]);
+  const [isPropertyModalOpen, setIsPropertyModalOpen] = useState(false);
+
+  // Form data with new fields
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
+    budget: "",
+    propertyType: "",
+    investmentType: "",
+    reason: "",
+    referralSource: "",
   });
 
   const supabase = createClient();
   const availableDays = getNext30Days();
+
+  // Fetch properties on mount
+  useEffect(() => {
+    async function fetchProperties() {
+      const { data } = await supabase
+        .from("properties")
+        .select("id, title, price, currency, type, property_type, bedrooms, bathrooms, total_area, address, images")
+        .eq("status", "active")
+        .order("created_at", { ascending: false });
+
+      if (data) {
+        setProperties(data);
+      }
+    }
+    fetchProperties();
+  }, [supabase]);
 
   async function handleDateSelect(date: Date) {
     setSelectedDate(date);
@@ -152,6 +395,14 @@ export default function BookPage() {
       message: formData.message || null,
       date: format(selectedDate, "yyyy-MM-dd"),
       time: selectedTime,
+      budget: formData.budget || null,
+      property_type: formData.propertyType || null,
+      investment_type: formData.investmentType || null,
+      reason: formData.reason || null,
+      referral_source: formData.referralSource || null,
+      desired_properties: selectedProperties.length > 0 
+        ? selectedProperties.map(p => p.id) 
+        : null,
     });
 
     if (error) {
@@ -171,6 +422,12 @@ export default function BookPage() {
         message: formData.message,
         date: format(selectedDate, "EEEE, MMMM d, yyyy"),
         time: selectedTime,
+        budget: formData.budget,
+        propertyType: formData.propertyType,
+        investmentType: formData.investmentType,
+        reason: formData.reason,
+        referralSource: formData.referralSource,
+        desiredProperties: selectedProperties.map(p => p.title).join(", "),
       }),
     });
 
@@ -257,6 +514,16 @@ export default function BookPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#0c0a1d] dark:to-[#0c0a1d]">
+      {/* Property Selection Modal */}
+      <PropertySelectionModal
+        isOpen={isPropertyModalOpen}
+        onClose={() => setIsPropertyModalOpen(false)}
+        properties={properties}
+        selectedProperties={selectedProperties}
+        onConfirm={setSelectedProperties}
+        t={t}
+      />
+
       {/* Hero Section */}
       <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white py-16 pt-24 md:pt-28 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -408,7 +675,7 @@ export default function BookPage() {
                   className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span className="hidden sm:inline">Back</span>
+                  <span className="hidden sm:inline">{t("back")}</span>
                 </button>
               </div>
             </div>
@@ -443,7 +710,7 @@ export default function BookPage() {
             </div>
           </div>
 
-          {/* Step 3: Contact Details */}
+          {/* Step 3: Contact Details + Additional Info */}
           <div
             className={`transition-all duration-300 ${
               step === 3 ? "block" : "hidden"
@@ -469,7 +736,7 @@ export default function BookPage() {
                   className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span className="hidden sm:inline">Back</span>
+                  <span className="hidden sm:inline">{t("back")}</span>
                 </button>
               </div>
             </div>
@@ -495,60 +762,242 @@ export default function BookPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-5">
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  <User className="w-4 h-4" />
-                  {t("name")} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                  placeholder="John Doe"
-                />
-              </div>
+            <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-6">
+              {/* Contact Information Section */}
+              <div className="space-y-5">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <User className="w-5 h-5 text-amber-500" />
+                  {t("contactInfo")}
+                </h3>
 
-              <div className="grid md:grid-cols-2 gap-5">
                 <div>
                   <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    <Mail className="w-4 h-4" />
-                    {t("email")} <span className="text-red-500">*</span>
+                    <User className="w-4 h-4" />
+                    {t("name")} <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     required
-                    value={formData.email}
+                    value={formData.name}
                     onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
+                      setFormData({ ...formData, name: e.target.value })
                     }
                     className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                    placeholder="john@example.com"
+                    placeholder="John Doe"
                   />
                 </div>
-                <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    <Phone className="w-4 h-4" />
-                    {t("phone")} <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                    placeholder="+1 (555) 123-4567"
-                  />
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div>
+                    <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <Mail className="w-4 h-4" />
+                      {t("email")} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <Phone className="w-4 h-4" />
+                      {t("phone")} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div>
+              {/* Property Preferences Section */}
+              <div className="space-y-5 pt-4 border-t border-slate-200 dark:border-[#2d2a4a]">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Building2 className="w-5 h-5 text-amber-500" />
+                  {t("propertyPreferences")}
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  {/* Budget */}
+                  <div>
+                    <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <DollarSign className="w-4 h-4" />
+                      {t("budget")}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.budget}
+                      onChange={(e) =>
+                        setFormData({ ...formData, budget: e.target.value })
+                      }
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      placeholder={t("budgetPlaceholder")}
+                    />
+                  </div>
+
+                  {/* Property Type */}
+                  <div>
+                    <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <Building2 className="w-4 h-4" />
+                      {t("propertyType")}
+                    </label>
+                    <select
+                      value={formData.propertyType}
+                      onChange={(e) =>
+                        setFormData({ ...formData, propertyType: e.target.value })
+                      }
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                    >
+                      <option value="">{t("selectPropertyType")}</option>
+                      <option value="house">{t("propertyTypes.house")}</option>
+                      <option value="apartment">{t("propertyTypes.apartment")}</option>
+                      <option value="office">{t("propertyTypes.office")}</option>
+                      <option value="land">{t("propertyTypes.land")}</option>
+                    </select>
+                  </div>
+
+                  {/* Investment Type */}
+                  <div>
+                    <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <Key className="w-4 h-4" />
+                      {t("investmentType")}
+                    </label>
+                    <select
+                      value={formData.investmentType}
+                      onChange={(e) =>
+                        setFormData({ ...formData, investmentType: e.target.value })
+                      }
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                    >
+                      <option value="">{t("selectInvestmentType")}</option>
+                      <option value="buying">{t("investmentTypes.buying")}</option>
+                      <option value="renting">{t("investmentTypes.renting")}</option>
+                    </select>
+                  </div>
+
+                  {/* Reason */}
+                  <div>
+                    <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <Target className="w-4 h-4" />
+                      {t("reason")}
+                    </label>
+                    <select
+                      value={formData.reason}
+                      onChange={(e) =>
+                        setFormData({ ...formData, reason: e.target.value })
+                      }
+                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                    >
+                      <option value="">{t("selectReason")}</option>
+                      <option value="investment">{t("reasons.investment")}</option>
+                      <option value="personal">{t("reasons.personal")}</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Desired Properties */}
+                <div>
+                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <Home className="w-4 h-4" />
+                    {t("desiredProperties")}
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setIsPropertyModalOpen(true)}
+                    className="w-full px-4 py-3 border-2 border-dashed border-slate-300 dark:border-[#2d2a4a] bg-slate-50 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-xl hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition flex items-center justify-center gap-2"
+                  >
+                    <Search className="w-4 h-4" />
+                    {selectedProperties.length > 0
+                      ? t("propertyModal.changeSelection", { count: selectedProperties.length })
+                      : t("browseProperties")}
+                  </button>
+
+                  {/* Selected Properties Display */}
+                  {selectedProperties.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      {selectedProperties.map((property) => (
+                        <div
+                          key={property.id}
+                          className="flex items-center justify-between p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-100 dark:border-amber-800/30"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-100 dark:bg-[#1a1735]">
+                              {property.images?.[0] ? (
+                                <img
+                                  src={property.images[0]}
+                                  alt={property.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <Building2 className="w-4 h-4 text-slate-300 dark:text-slate-600" />
+                                </div>
+                              )}
+                            </div>
+                            <div>
+                              <p className="font-medium text-slate-900 dark:text-white text-sm">
+                                {property.title}
+                              </p>
+                              <p className="text-xs text-amber-600 dark:text-amber-400">
+                                {property.currency} {property.price?.toLocaleString()}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setSelectedProperties((prev) =>
+                                prev.filter((p) => p.id !== property.id)
+                              )
+                            }
+                            className="p-1.5 hover:bg-amber-100 dark:hover:bg-amber-800/30 rounded-lg transition"
+                          >
+                            <X className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Referral Source */}
+                <div>
+                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <Globe className="w-4 h-4" />
+                    {t("referralSource")}
+                  </label>
+                  <select
+                    value={formData.referralSource}
+                    onChange={(e) =>
+                      setFormData({ ...formData, referralSource: e.target.value })
+                    }
+                    className="w-full px-4 py-3 border-2 border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                  >
+                    <option value="">{t("selectReferralSource")}</option>
+                    <option value="google">{t("referralSources.google")}</option>
+                    <option value="facebook">{t("referralSources.facebook")}</option>
+                    <option value="instagram">{t("referralSources.instagram")}</option>
+                    <option value="reference">{t("referralSources.reference")}</option>
+                    <option value="other">{t("referralSources.other")}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Additional Message */}
+              <div className="pt-4 border-t border-slate-200 dark:border-[#2d2a4a]">
                 <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   <MessageSquare className="w-4 h-4" />
                   {t("message")}{" "}

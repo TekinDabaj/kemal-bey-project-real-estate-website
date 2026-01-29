@@ -1802,114 +1802,6 @@ export default function HeroSliderMobile({
               </p>
             </div>
           </div>
-
-          {/* Property Cards Section */}
-          <div className="mobile-third-properties">
-            <div className="mobile-properties-header">
-              <h3 className="mobile-properties-title">{t("thirdView.featuredProperties")}</h3>
-              {displayProperties.length > 0 && (
-                <div className="mobile-properties-nav">
-                  <button
-                    className="mobile-properties-nav-btn"
-                    onClick={() => scrollProperties("left")}
-                  >
-                    <ChevronLeft size={16} />
-                  </button>
-                  <button
-                    className="mobile-properties-nav-btn"
-                    onClick={() => scrollProperties("right")}
-                  >
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
-              )}
-            </div>
-            {displayProperties.length > 0 ? (
-              <div className="mobile-properties-scroll" ref={propertyScrollRef}>
-                <div className="mobile-properties-grid">
-                  {displayProperties.map((property) => (
-                    <a
-                      key={property.id}
-                      href={`/properties/${property.id}`}
-                      className="mobile-property-card"
-                    >
-                      <div className="mobile-property-card-image">
-                        {property.images && property.images.length > 0 ? (
-                          <img
-                            src={`${bucketUrl}${property.images[0]}`}
-                            alt={property.title}
-                          />
-                        ) : (
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#94a3b8",
-                              fontSize: "11px",
-                            }}
-                          >
-                            {t("thirdView.noImage")}
-                          </div>
-                        )}
-                        {property.type && (
-                          <div className="mobile-property-card-badge">
-                            {property.type === "sale" ? t("thirdView.forSale") : t("thirdView.forRent")}
-                          </div>
-                        )}
-                        {property.price && (
-                          <div className="mobile-property-card-price">
-                            <p>
-                              ${property.price.toLocaleString()}
-                              {property.type === "rent" && <span>{t("thirdView.perMonth")}</span>}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                      <div className="mobile-property-card-content">
-                        <h4 className="mobile-property-card-title">
-                          {property.title}
-                        </h4>
-                        {property.location && (
-                          <div className="mobile-property-card-location">
-                            <MapPin size={10} /> {property.location}
-                          </div>
-                        )}
-                        {property.description && (
-                          <p className="mobile-property-card-description">
-                            {property.description}
-                          </p>
-                        )}
-                        <div className="mobile-property-card-features">
-                          {property.bedrooms && (
-                            <span className="mobile-property-card-feature">
-                              <BedDouble size={12} /> {property.bedrooms} {t("thirdView.beds")}
-                            </span>
-                          )}
-                          {property.bathrooms && (
-                            <span className="mobile-property-card-feature">
-                              <Bath size={12} /> {property.bathrooms} {t("thirdView.baths")}
-                            </span>
-                          )}
-                          {property.area && (
-                            <span className="mobile-property-card-feature">
-                              <Expand size={12} /> {property.area} m²
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className="mobile-no-properties">
-                {t("thirdView.noProperties")}
-              </div>
-            )}
-          </div>
         </section>
 
         {/* Hero Section with Slices */}
@@ -2040,6 +1932,114 @@ export default function HeroSliderMobile({
             </div>
           ))}
         </section>
+
+        {/* Property Cards Section */}
+        <div className="mobile-third-properties">
+          <div className="mobile-properties-header">
+            <h3 className="mobile-properties-title">{t("thirdView.featuredProperties")}</h3>
+            {displayProperties.length > 0 && (
+              <div className="mobile-properties-nav">
+                <button
+                  className="mobile-properties-nav-btn"
+                  onClick={() => scrollProperties("left")}
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <button
+                  className="mobile-properties-nav-btn"
+                  onClick={() => scrollProperties("right")}
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            )}
+          </div>
+          {displayProperties.length > 0 ? (
+            <div className="mobile-properties-scroll" ref={propertyScrollRef}>
+              <div className="mobile-properties-grid">
+                {displayProperties.map((property) => (
+                  <a
+                    key={property.id}
+                    href={`/properties/${property.id}`}
+                    className="mobile-property-card"
+                  >
+                    <div className="mobile-property-card-image">
+                      {property.images && property.images.length > 0 ? (
+                        <img
+                          src={`${bucketUrl}${property.images[0]}`}
+                          alt={property.title}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "#94a3b8",
+                            fontSize: "11px",
+                          }}
+                        >
+                          {t("thirdView.noImage")}
+                        </div>
+                      )}
+                      {property.type && (
+                        <div className="mobile-property-card-badge">
+                          {property.type === "sale" ? t("thirdView.forSale") : t("thirdView.forRent")}
+                        </div>
+                      )}
+                      {property.price && (
+                        <div className="mobile-property-card-price">
+                          <p>
+                            ${property.price.toLocaleString()}
+                            {property.type === "rent" && <span>{t("thirdView.perMonth")}</span>}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <div className="mobile-property-card-content">
+                      <h4 className="mobile-property-card-title">
+                        {property.title}
+                      </h4>
+                      {property.location && (
+                        <div className="mobile-property-card-location">
+                          <MapPin size={10} /> {property.location}
+                        </div>
+                      )}
+                      {property.description && (
+                        <p className="mobile-property-card-description">
+                          {property.description}
+                        </p>
+                      )}
+                      <div className="mobile-property-card-features">
+                        {property.bedrooms && (
+                          <span className="mobile-property-card-feature">
+                            <BedDouble size={12} /> {property.bedrooms} {t("thirdView.beds")}
+                          </span>
+                        )}
+                        {property.bathrooms && (
+                          <span className="mobile-property-card-feature">
+                            <Bath size={12} /> {property.bathrooms} {t("thirdView.baths")}
+                          </span>
+                        )}
+                        {property.area && (
+                          <span className="mobile-property-card-feature">
+                            <Expand size={12} /> {property.area} m²
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="mobile-no-properties">
+              {t("thirdView.noProperties")}
+            </div>
+          )}
+        </div>
 
         {/* Fourth View Section - About Us */}
         <section className="mobile-fourth-view">
