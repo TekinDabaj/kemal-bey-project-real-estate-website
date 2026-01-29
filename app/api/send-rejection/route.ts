@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM_EMAIL = process.env.FROM_EMAIL || "KA Global <onboarding@resend.dev>";
 
 function getRejectionEmailTemplate({
   name,
@@ -163,7 +164,10 @@ export async function POST(request: Request) {
   try {
     const { name, email, date, time, reason } = await request.json();
 
+    console.log("Rejection email request:", { name, email, date, time, reason });
+
     if (!name || !email || !date || !time || !reason) {
+      console.error("Missing required fields:", { name, email, date, time, reason });
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -171,18 +175,20 @@ export async function POST(request: Request) {
     }
 
     // Send rejection email to customer
-    await resend.emails.send({
-      from: "KA Global <onboarding@resend.dev>",
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
       to: email,
       subject: "Regarding Your Appointment Request - KA Global",
       html: getRejectionEmailTemplate({ name, date, time, reason }),
     });
 
-    return NextResponse.json({ success: true });
+    console.log("Rejection email sent:", result);
+
+    return NextResponse.json({ success: true, result });
   } catch (error) {
     console.error("Rejection email error:", error);
     return NextResponse.json(
-      { error: "Failed to send rejection email" },
+      { error: "Failed to send rejection email", details: String(error) },
       { status: 500 }
     );
   }

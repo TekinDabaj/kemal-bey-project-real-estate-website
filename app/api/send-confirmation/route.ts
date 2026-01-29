@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM_EMAIL = process.env.FROM_EMAIL || "KA Global <onboarding@resend.dev>";
 
 function getConfirmationEmailTemplate({
   name,
@@ -200,7 +201,10 @@ export async function POST(request: Request) {
   try {
     const { name, email, date, time } = await request.json();
 
+    console.log("Confirmation email request:", { name, email, date, time });
+
     if (!name || !email || !date || !time) {
+      console.error("Missing required fields:", { name, email, date, time });
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -208,18 +212,20 @@ export async function POST(request: Request) {
     }
 
     // Send confirmation email to customer
-    await resend.emails.send({
-      from: "KA Global <onboarding@resend.dev>",
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
       to: email,
       subject: "Your Appointment is Confirmed - KA Global",
       html: getConfirmationEmailTemplate({ name, date, time }),
     });
 
-    return NextResponse.json({ success: true });
+    console.log("Confirmation email sent:", result);
+
+    return NextResponse.json({ success: true, result });
   } catch (error) {
     console.error("Confirmation email error:", error);
     return NextResponse.json(
-      { error: "Failed to send confirmation email" },
+      { error: "Failed to send confirmation email", details: String(error) },
       { status: 500 }
     );
   }

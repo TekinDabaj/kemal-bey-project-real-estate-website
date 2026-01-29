@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM_EMAIL = process.env.FROM_EMAIL || "KA Global <onboarding@resend.dev>";
 
 function getAdminEmailTemplate({
   name,
@@ -480,7 +481,7 @@ export async function POST(request: Request) {
 
     // Send notification to admin
     await resend.emails.send({
-      from: "KA Global <onboarding@resend.dev>",
+      from: FROM_EMAIL,
       to: process.env.ADMIN_EMAIL!,
       subject: `New Consultation Request — ${name}`,
       html: getAdminEmailTemplate({
@@ -501,7 +502,7 @@ export async function POST(request: Request) {
 
     // Send confirmation to customer
     await resend.emails.send({
-      from: "KA Global <onboarding@resend.dev>",
+      from: FROM_EMAIL,
       to: email,
       subject: "Your Consultation is Confirmed — KA Global",
       html: getCustomerEmailTemplate({ name, date, time }),

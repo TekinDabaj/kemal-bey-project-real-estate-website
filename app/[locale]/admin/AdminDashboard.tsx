@@ -331,7 +331,7 @@ export default function AdminDashboard({
 
       // Send confirmation email when status is confirmed
       try {
-        await fetch("/api/send-confirmation", {
+        const emailRes = await fetch("/api/send-confirmation", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -343,8 +343,14 @@ export default function AdminDashboard({
             time: reservation.time.slice(0, 5),
           }),
         });
+        const emailData = await emailRes.json();
+        if (!emailRes.ok) {
+          console.error("Confirmation email failed:", emailData);
+          alert(`Reservation confirmed but email failed to send: ${emailData.details || emailData.error}`);
+        }
       } catch (emailError) {
         console.error("Failed to send confirmation email:", emailError);
+        alert("Reservation confirmed but failed to send confirmation email.");
       }
     }
   }
@@ -376,7 +382,7 @@ export default function AdminDashboard({
 
       // Send rejection email
       try {
-        await fetch("/api/send-rejection", {
+        const emailRes = await fetch("/api/send-rejection", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -389,8 +395,14 @@ export default function AdminDashboard({
             reason: rejectionReason.trim(),
           }),
         });
+        const emailData = await emailRes.json();
+        if (!emailRes.ok) {
+          console.error("Rejection email failed:", emailData);
+          alert(`Reservation cancelled but email failed to send: ${emailData.details || emailData.error}`);
+        }
       } catch (emailError) {
         console.error("Failed to send rejection email:", emailError);
+        alert("Reservation cancelled but failed to send rejection email.");
       }
 
       // Close modal and reset state
