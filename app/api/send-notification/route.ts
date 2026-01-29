@@ -10,6 +10,12 @@ function getAdminEmailTemplate({
   message,
   date,
   time,
+  budget,
+  propertyType,
+  investmentType,
+  reason,
+  referralSource,
+  desiredProperties,
 }: {
   name: string;
   email: string;
@@ -17,6 +23,12 @@ function getAdminEmailTemplate({
   message?: string;
   date: string;
   time: string;
+  budget?: string;
+  propertyType?: string;
+  investmentType?: string;
+  reason?: string;
+  referralSource?: string;
+  desiredProperties?: string;
 }) {
   return `
 <!DOCTYPE html>
@@ -37,8 +49,8 @@ function getAdminEmailTemplate({
               <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                 <tr>
                   <td style="vertical-align: middle;">
-                    <span style="color: #ffffff; font-size: 26px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;">Premier</span>
-                    <span style="color: #d4af37; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;">Realty</span>
+                    <span style="color: #ffffff; font-size: 26px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;">KA</span>
+                    <span style="color: #d4af37; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;">Global</span>
                   </td>
                 </tr>
               </table>
@@ -121,6 +133,93 @@ function getAdminEmailTemplate({
                   </td>
                 </tr>
               </table>
+
+              ${(budget || propertyType || investmentType || reason || referralSource) ? `
+              <!-- Property Preferences Card (White) -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 1px solid #e8e6e3; border-radius: 4px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                <tr>
+                  <td style="padding: 28px;">
+                    <p style="margin: 0 0 20px 0; color: #d4af37; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;">Property Preferences</p>
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      ${budget ? `
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #f0eeeb;">
+                          <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 140px;">Budget</td>
+                              <td style="color: #1a1a1a; font-size: 15px; font-weight: 500;">${budget}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      ` : ''}
+                      ${propertyType ? `
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #f0eeeb;">
+                          <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 140px;">Property Type</td>
+                              <td style="color: #1a1a1a; font-size: 15px; font-weight: 500; text-transform: capitalize;">${propertyType}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      ` : ''}
+                      ${investmentType ? `
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #f0eeeb;">
+                          <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 140px;">Interest</td>
+                              <td style="color: #1a1a1a; font-size: 15px; font-weight: 500; text-transform: capitalize;">${investmentType}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      ` : ''}
+                      ${reason ? `
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #f0eeeb;">
+                          <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 140px;">Purpose</td>
+                              <td style="color: #1a1a1a; font-size: 15px; font-weight: 500; text-transform: capitalize;">${reason}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      ` : ''}
+                      ${referralSource ? `
+                      <tr>
+                        <td style="padding: 12px 0;">
+                          <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td style="color: #999999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 140px;">Found Us Via</td>
+                              <td style="color: #1a1a1a; font-size: 15px; font-weight: 500; text-transform: capitalize;">${referralSource}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      ` : ''}
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              ` : ''}
+
+              ${desiredProperties ? `
+              <!-- Interested Properties Card (White) -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 1px solid #e8e6e3; border-radius: 4px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                <tr>
+                  <td style="padding: 28px;">
+                    <p style="margin: 0 0 16px 0; color: #d4af37; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;">Interested Properties</p>
+                    <div style="background-color: #faf9f7; border-left: 3px solid #d4af37; padding: 16px 20px;">
+                      <p style="margin: 0; color: #1a1a1a; font-size: 14px; line-height: 1.7;">${desiredProperties}</p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              ` : ''}
               
               ${
                 message
@@ -144,7 +243,7 @@ function getAdminEmailTemplate({
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="text-align: center; padding: 8px 0;">
-                    <a href="mailto:${email}" style="display: inline-block; background-color: #0f0f0f; color: #ffffff; padding: 16px 48px; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 2px;">Contact Client</a>
+                    <a href="https://kemal-bey-project-real-estate-websi.vercel.app/admin" style="display: inline-block; background-color: #0f0f0f; color: #ffffff; padding: 16px 48px; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 2px;">View in Admin Panel</a>
                   </td>
                 </tr>
               </table>
@@ -155,8 +254,8 @@ function getAdminEmailTemplate({
           <!-- Footer -->
           <tr>
             <td style="background-color: #f5f4f2; padding: 24px; text-align: center; border-top: 1px solid #e8e6e3;">
-              <p style="margin: 0 0 4px 0; color: #999999; font-size: 11px; letter-spacing: 1px;">Automated notification from Premier Realty</p>
-              <p style="margin: 0; color: #bbbbbb; font-size: 10px;">© ${new Date().getFullYear()} Premier Realty. All rights reserved.</p>
+              <p style="margin: 0 0 4px 0; color: #999999; font-size: 11px; letter-spacing: 1px;">Automated notification from KA Global</p>
+              <p style="margin: 0; color: #bbbbbb; font-size: 10px;">© ${new Date().getFullYear()} KA Global. All rights reserved.</p>
             </td>
           </tr>
           
@@ -197,8 +296,8 @@ function getCustomerEmailTemplate({
               <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                 <tr>
                   <td style="vertical-align: middle;">
-                    <span style="color: #ffffff; font-size: 26px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;">Premier</span>
-                    <span style="color: #d4af37; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;">Realty</span>
+                    <span style="color: #ffffff; font-size: 26px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;">KA</span>
+                    <span style="color: #d4af37; font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;">Global</span>
                   </td>
                 </tr>
               </table>
@@ -228,7 +327,7 @@ function getCustomerEmailTemplate({
                 <tr>
                   <td style="text-align: center;">
                     <p style="margin: 0; color: #666666; font-size: 15px; line-height: 1.8;">
-                      Your exclusive consultation with Premier Realty has been scheduled.<br>We look forward to helping you discover your perfect property.
+                      Your exclusive consultation with KA Global has been scheduled.<br>We look forward to helping you discover your perfect property.
                     </p>
                   </td>
                 </tr>
@@ -348,7 +447,7 @@ function getCustomerEmailTemplate({
                   </td>
                 </tr>
               </table>
-              <p style="margin: 0 0 4px 0; color: #999999; font-size: 11px; letter-spacing: 1px;">© ${new Date().getFullYear()} Premier Realty</p>
+              <p style="margin: 0 0 4px 0; color: #999999; font-size: 11px; letter-spacing: 1px;">© ${new Date().getFullYear()} KA Global</p>
               <p style="margin: 0; color: #bbbbbb; font-size: 10px;">Exceptional Properties. Exceptional Service.</p>
             </td>
           </tr>
@@ -364,21 +463,47 @@ function getCustomerEmailTemplate({
 
 export async function POST(request: Request) {
   try {
-    const { name, email, phone, message, date, time } = await request.json();
+    const {
+      name,
+      email,
+      phone,
+      message,
+      date,
+      time,
+      budget,
+      propertyType,
+      investmentType,
+      reason,
+      referralSource,
+      desiredProperties,
+    } = await request.json();
 
     // Send notification to admin
     await resend.emails.send({
-      from: "Premier Realty <onboarding@resend.dev>",
+      from: "KA Global <onboarding@resend.dev>",
       to: process.env.ADMIN_EMAIL!,
       subject: `New Consultation Request — ${name}`,
-      html: getAdminEmailTemplate({ name, email, phone, message, date, time }),
+      html: getAdminEmailTemplate({
+        name,
+        email,
+        phone,
+        message,
+        date,
+        time,
+        budget,
+        propertyType,
+        investmentType,
+        reason,
+        referralSource,
+        desiredProperties,
+      }),
     });
 
     // Send confirmation to customer
     await resend.emails.send({
-      from: "Premier Realty <onboarding@resend.dev>",
+      from: "KA Global <onboarding@resend.dev>",
       to: email,
-      subject: "Your Consultation is Confirmed — Premier Realty",
+      subject: "Your Consultation is Confirmed — KA Global",
       html: getCustomerEmailTemplate({ name, date, time }),
     });
 

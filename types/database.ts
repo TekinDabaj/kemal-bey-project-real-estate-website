@@ -8,6 +8,12 @@ export type Reservation = {
   time: string;
   status: "pending" | "confirmed" | "cancelled";
   created_at: string;
+  budget: string | null;
+  property_type: string | null;
+  investment_type: string | null;
+  reason: string | null;
+  referral_source: string | null;
+  desired_properties: string[] | null;
 };
 
 export type SiteContent = {
