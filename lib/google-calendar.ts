@@ -85,9 +85,11 @@ export async function createCalendarEventWithMeet(
     console.log("Google Calendar client initialized");
 
     // Create the event with conference data (Google Meet)
+    // Note: Service accounts cannot invite external attendees without Domain-Wide Delegation
+    // The Meet link will be shared via email instead
     const event: calendar_v3.Schema$Event = {
       summary: input.summary,
-      description: input.description,
+      description: `${input.description}\n\nClient: ${input.attendeeName} (${input.attendeeEmail})`,
       start: {
         dateTime: input.startDateTime,
         timeZone: "Europe/Istanbul", // Turkey timezone
@@ -96,14 +98,6 @@ export async function createCalendarEventWithMeet(
         dateTime: input.endDateTime,
         timeZone: "Europe/Istanbul",
       },
-      // Add attendee for the client
-      attendees: [
-        {
-          email: input.attendeeEmail,
-          displayName: input.attendeeName,
-          responseStatus: "needsAction",
-        },
-      ],
       // Request Google Meet conference creation
       conferenceData: {
         createRequest: {
@@ -113,12 +107,11 @@ export async function createCalendarEventWithMeet(
           },
         },
       },
-      // Send email notifications to attendees
       reminders: {
         useDefault: false,
         overrides: [
-          { method: "email", minutes: 60 }, // 1 hour before
-          { method: "popup", minutes: 30 }, // 30 minutes before
+          { method: "popup", minutes: 60 }, // 1 hour before
+          { method: "popup", minutes: 15 }, // 15 minutes before
         ],
       },
     };
@@ -131,7 +124,7 @@ export async function createCalendarEventWithMeet(
         calendarId: "primary", // Service account's primary calendar
         requestBody: event,
         conferenceDataVersion: 1, // Required for conference data
-        sendUpdates: "all", // Send email invites to attendees
+        sendUpdates: "none", // No attendees to notify - client gets Meet link via email
       });
     } catch (insertError: unknown) {
       console.error("Calendar insert error details:", JSON.stringify(insertError, null, 2));
