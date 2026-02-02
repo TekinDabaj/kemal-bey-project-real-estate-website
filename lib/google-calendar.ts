@@ -25,28 +25,36 @@ function getGoogleAuth() {
   // Try environment variable first (for production/Vercel)
   const credentialsJson = process.env.GOOGLE_CREDENTIALS_JSON;
 
+  console.log("Google Auth: Checking credentials...");
+  console.log("GOOGLE_CREDENTIALS_JSON env var exists:", !!credentialsJson);
+
   if (credentialsJson) {
     try {
       const credentials = JSON.parse(credentialsJson);
+      console.log("Google Auth: Parsed credentials for project:", credentials.project_id);
+      console.log("Google Auth: Service account email:", credentials.client_email);
       return new google.auth.GoogleAuth({
         credentials,
         scopes: ["https://www.googleapis.com/auth/calendar"],
       });
     } catch (error) {
       console.error("Failed to parse GOOGLE_CREDENTIALS_JSON:", error);
-      throw new Error("Invalid GOOGLE_CREDENTIALS_JSON environment variable");
+      throw new Error("Invalid GOOGLE_CREDENTIALS_JSON environment variable - JSON parse failed");
     }
   }
 
   // Fall back to file (for local development)
+  console.log("Google Auth: Falling back to file-based credentials");
   const credentialsPath = path.join(process.cwd(), "google-credentials.json");
 
   if (!fs.existsSync(credentialsPath)) {
+    console.error("Google Auth: No credentials file found at:", credentialsPath);
     throw new Error(
       "Google credentials not found. Set GOOGLE_CREDENTIALS_JSON env var or place google-credentials.json in project root."
     );
   }
 
+  console.log("Google Auth: Using credentials file:", credentialsPath);
   return new google.auth.GoogleAuth({
     keyFile: credentialsPath,
     scopes: ["https://www.googleapis.com/auth/calendar"],
@@ -68,8 +76,13 @@ export async function createCalendarEventWithMeet(
   input: CalendarEventInput
 ): Promise<CalendarEventResult> {
   try {
+    console.log("Creating calendar event with Meet for:", input.attendeeEmail);
+    console.log("Event time:", input.startDateTime, "to", input.endDateTime);
+
     const auth = getGoogleAuth();
     const calendar = google.calendar({ version: "v3", auth });
+
+    console.log("Google Calendar client initialized");
 
     // Create the event with conference data (Google Meet)
     const event: calendar_v3.Schema$Event = {
@@ -111,13 +124,25 @@ export async function createCalendarEventWithMeet(
     };
 
     // Insert the event with conference data version 1 to enable Meet
-    const response = await calendar.events.insert({
-      calendarId: "primary", // Service account's primary calendar
-      requestBody: event,
-      conferenceDataVersion: 1, // Required for conference data
-      sendUpdates: "all", // Send email invites to attendees
-    });
+    console.log("Inserting calendar event...");
+    let response;
+    try {
+      response = await calendar.events.insert({
+        calendarId: "primary", // Service account's primary calendar
+        requestBody: event,
+        conferenceDataVersion: 1, // Required for conference data
+        sendUpdates: "all", // Send email invites to attendees
+      });
+    } catch (insertError: unknown) {
+      console.error("Calendar insert error details:", JSON.stringify(insertError, null, 2));
+      const err = insertError as { response?: { data?: unknown }; message?: string };
+      if (err.response?.data) {
+        console.error("Google API error response:", JSON.stringify(err.response.data, null, 2));
+      }
+      throw insertError;
+    }
 
+    console.log("Calendar event inserted successfully");
     const createdEvent = response.data;
 
     // Extract Meet link from conference data
