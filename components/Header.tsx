@@ -51,9 +51,6 @@ export default function Header() {
 
             {/* Center: Desktop nav - flex-1 to take remaining space, centered */}
             <div className="hidden md:flex flex-1 items-center justify-center space-x-6">
-              <Link href="/properties" className="text-white/80 hover:text-amber-400 transition text-sm">
-                {t('properties')}
-              </Link>
               <button
                 className="text-white/80 hover:text-amber-400 transition text-sm"
                 onClick={(e) => handleViewNavigation(e, 5)}
@@ -108,13 +105,6 @@ export default function Header() {
               >
                 {t('services')}
               </button>
-              <Link
-                href="/properties"
-                className="block py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
-                onClick={() => setIsOpen(false)}
-              >
-                {t('properties')}
-              </Link>
               <button
                 className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
                 onClick={(e) => handleViewNavigation(e, 4)}

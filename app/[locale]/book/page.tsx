@@ -674,20 +674,7 @@ export default function BookPage() {
                     </select>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("desiredProperties")}</label>
-                    <button
-                      type="button"
-                      onClick={() => setIsPropertyModalOpen(true)}
-                      className="w-full px-3 py-2 text-sm border border-dashed border-slate-300 dark:border-[#3d3a5a] bg-slate-50/50 dark:bg-[#1a1735] text-slate-500 dark:text-slate-400 rounded-md hover:border-amber-400 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition flex items-center justify-center gap-2"
-                    >
-                      <Search className="w-3.5 h-3.5" />
-                      {selectedProperties.length > 0
-                        ? t("propertyModal.changeSelection", { count: selectedProperties.length })
-                        : t("browseProperties")}
-                    </button>
-                  </div>
+                <div className="mt-4">
                   <div>
                     <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("referralSource")}</label>
                     <select
@@ -704,25 +691,6 @@ export default function BookPage() {
                     </select>
                   </div>
                 </div>
-                {selectedProperties.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {selectedProperties.map((property) => (
-                      <div key={property.id} className="flex items-center gap-2 py-1 pl-1.5 pr-1 bg-amber-50 dark:bg-amber-900/20 rounded-md border border-amber-200/60 dark:border-amber-800/30">
-                        <div className="w-6 h-6 rounded overflow-hidden bg-slate-100 dark:bg-[#1a1735] flex-shrink-0">
-                          {property.images?.[0] ? (
-                            <img src={`${bucketUrl}${property.images[0]}`} alt={property.title} className="w-full h-full object-cover" />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center"><Building2 className="w-3 h-3 text-slate-400" /></div>
-                          )}
-                        </div>
-                        <span className="text-xs text-slate-600 dark:text-slate-300 max-w-[120px] truncate">{property.title}</span>
-                        <button type="button" onClick={() => setSelectedProperties((prev) => prev.filter((p) => p.id !== property.id))} className="p-0.5 hover:bg-amber-100 dark:hover:bg-amber-800/30 rounded transition">
-                          <X className="w-3 h-3 text-slate-400" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
 
               {/* Divider */}
