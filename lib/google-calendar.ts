@@ -84,10 +84,9 @@ export async function createCalendarEventWithMeet(
 
     console.log("Google Calendar client initialized");
 
-    // Create the event with conference data (Google Meet)
-    // Note: Service accounts cannot invite external attendees without Domain-Wide Delegation
-    // The Meet link will be shared via email instead
-    const event: calendar_v3.Schema$Event = {
+    // Create the event - try with Google Meet first, fall back to regular event
+    // Note: Service accounts without Google Workspace cannot create Meet conferences
+    const baseEvent: calendar_v3.Schema$Event = {
       summary: input.summary,
       description: `${input.description}\n\nClient: ${input.attendeeName} (${input.attendeeEmail})`,
       start: {
@@ -98,15 +97,6 @@ export async function createCalendarEventWithMeet(
         dateTime: input.endDateTime,
         timeZone: "Europe/Istanbul",
       },
-      // Request Google Meet conference creation
-      conferenceData: {
-        createRequest: {
-          requestId: generateRequestId(),
-          conferenceSolutionKey: {
-            type: "hangoutsMeet",
-          },
-        },
-      },
       reminders: {
         useDefault: false,
         overrides: [
@@ -116,40 +106,62 @@ export async function createCalendarEventWithMeet(
       },
     };
 
-    // Insert the event with conference data version 1 to enable Meet
-    console.log("Inserting calendar event...");
     let response;
+    let meetLink: string | undefined;
+
+    // First, try to create event WITH Google Meet
+    console.log("Attempting to create calendar event with Google Meet...");
     try {
+      const eventWithMeet: calendar_v3.Schema$Event = {
+        ...baseEvent,
+        conferenceData: {
+          createRequest: {
+            requestId: generateRequestId(),
+            conferenceSolutionKey: {
+              type: "hangoutsMeet",
+            },
+          },
+        },
+      };
+
       response = await calendar.events.insert({
-        calendarId: "primary", // Service account's primary calendar
-        requestBody: event,
-        conferenceDataVersion: 1, // Required for conference data
-        sendUpdates: "none", // No attendees to notify - client gets Meet link via email
+        calendarId: "primary",
+        requestBody: eventWithMeet,
+        conferenceDataVersion: 1,
+        sendUpdates: "none",
       });
-    } catch (insertError: unknown) {
-      console.error("Calendar insert error details:", JSON.stringify(insertError, null, 2));
-      const err = insertError as { response?: { data?: unknown }; message?: string };
-      if (err.response?.data) {
-        console.error("Google API error response:", JSON.stringify(err.response.data, null, 2));
+
+      const createdEvent = response.data;
+      meetLink =
+        createdEvent.conferenceData?.entryPoints?.find(
+          (ep) => ep.entryPointType === "video"
+        )?.uri || createdEvent.hangoutLink || undefined;
+
+      console.log("Event created with Meet link:", meetLink);
+    } catch (meetError: unknown) {
+      // Meet creation failed - try without Meet
+      console.warn("Could not create Meet conference, creating event without Meet:",
+        meetError instanceof Error ? meetError.message : "Unknown error");
+
+      try {
+        response = await calendar.events.insert({
+          calendarId: "primary",
+          requestBody: baseEvent,
+          sendUpdates: "none",
+        });
+        console.log("Event created without Meet link");
+      } catch (insertError: unknown) {
+        console.error("Calendar insert error details:", JSON.stringify(insertError, null, 2));
+        const err = insertError as { response?: { data?: unknown }; message?: string };
+        if (err.response?.data) {
+          console.error("Google API error response:", JSON.stringify(err.response.data, null, 2));
+        }
+        throw insertError;
       }
-      throw insertError;
     }
 
-    console.log("Calendar event inserted successfully");
+    console.log("Calendar event created successfully");
     const createdEvent = response.data;
-
-    // Extract Meet link from conference data
-    const meetLink =
-      createdEvent.conferenceData?.entryPoints?.find(
-        (ep) => ep.entryPointType === "video"
-      )?.uri || createdEvent.hangoutLink;
-
-    if (!meetLink) {
-      console.warn(
-        "Event created but no Meet link generated:",
-        createdEvent.id
-      );
-    }
 
     return {
       success: true,
