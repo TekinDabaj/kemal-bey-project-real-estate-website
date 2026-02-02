@@ -1,0 +1,33 @@
+import { NextResponse } from "next/server";
+import { google } from "googleapis";
+
+export async function GET() {
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const redirectUri = process.env.GOOGLE_REDIRECT_URI;
+
+  if (!clientId || !clientSecret || !redirectUri) {
+    return NextResponse.json(
+      {
+        error: "Missing OAuth configuration",
+        details: "Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REDIRECT_URI environment variables",
+      },
+      { status: 500 }
+    );
+  }
+
+  const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUri);
+
+  // Generate the authorization URL
+  const authUrl = oauth2Client.generateAuthUrl({
+    access_type: "offline", // Request refresh token
+    prompt: "consent", // Force consent screen to get refresh token
+    scope: [
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/calendar.events",
+    ],
+  });
+
+  // Redirect to Google's OAuth consent screen
+  return NextResponse.redirect(authUrl);
+}
