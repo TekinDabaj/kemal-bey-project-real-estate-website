@@ -14,6 +14,9 @@ export type Reservation = {
   reason: string | null;
   referral_source: string | null;
   desired_properties: string[] | null;
+  // Google Calendar integration fields
+  calendar_event_id: string | null;
+  meet_link: string | null;
 };
 
 export type SiteContent = {

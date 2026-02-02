@@ -57,6 +57,8 @@ import {
   Bath,
   Expand,
   MapPin,
+  Video,
+  ExternalLink,
 } from "lucide-react";
 import { Reservation, Property, HeroSlide, BlogPost } from "@/types/database";
 import ContentEditor from "./ContentEditor";
@@ -326,17 +328,55 @@ export default function AdminDashboard({
     const reservation = reservations.find((r) => r.id === id);
     if (!reservation) return;
 
+    // Step 1: Create Google Calendar event with Meet link
+    let meetLink: string | undefined;
+    let calendarEventId: string | undefined;
+    try {
+      const calendarRes = await fetch("/api/create-calendar-event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: reservation.name,
+          email: reservation.email,
+          phone: reservation.phone,
+          date: reservation.date, // YYYY-MM-DD format
+          time: reservation.time.slice(0, 5), // HH:MM format
+          message: reservation.message,
+        }),
+      });
+      const calendarData = await calendarRes.json();
+      if (calendarRes.ok) {
+        meetLink = calendarData.meetLink;
+        calendarEventId = calendarData.eventId;
+        console.log("Google Meet created:", meetLink);
+      } else {
+        console.warn("Calendar event creation failed:", calendarData);
+      }
+    } catch (calendarError) {
+      console.error("Failed to create calendar event:", calendarError);
+      // Continue with confirmation - Meet creation failure shouldn't block
+    }
+
+    // Step 2: Update database with status and calendar info
+    const updateData: Record<string, unknown> = { status };
+    if (calendarEventId) updateData.calendar_event_id = calendarEventId;
+    if (meetLink) updateData.meet_link = meetLink;
+
     const { error } = await supabase
       .from("reservations")
-      .update({ status })
+      .update(updateData)
       .eq("id", id);
 
     if (!error) {
       setReservations(
-        reservations.map((r) => (r.id === id ? { ...r, status } : r))
+        reservations.map((r) =>
+          r.id === id
+            ? { ...r, status, calendar_event_id: calendarEventId || null, meet_link: meetLink || null }
+            : r
+        )
       );
 
-      // Send confirmation email when status is confirmed
+      // Step 3: Send confirmation email (with Meet link if available)
       try {
         const emailRes = await fetch("/api/send-confirmation", {
           method: "POST",
@@ -348,6 +388,7 @@ export default function AdminDashboard({
               locale: dateLocale,
             }),
             time: reservation.time.slice(0, 5),
+            meetLink, // Include Meet link if available
           }),
         });
         const emailData = await emailRes.json();
@@ -375,19 +416,43 @@ export default function AdminDashboard({
 
     setRejectionLoading(true);
 
+    // Step 1: Delete Google Calendar event if it exists
+    if (rejectingReservation.calendar_event_id) {
+      try {
+        const deleteRes = await fetch("/api/delete-calendar-event", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            eventId: rejectingReservation.calendar_event_id,
+          }),
+        });
+        if (!deleteRes.ok) {
+          console.warn("Failed to delete calendar event, continuing with cancellation");
+        } else {
+          console.log("Calendar event deleted successfully");
+        }
+      } catch (deleteError) {
+        console.error("Failed to delete calendar event:", deleteError);
+        // Continue with cancellation even if calendar deletion fails
+      }
+    }
+
+    // Step 2: Update database status and clear calendar info
     const { error } = await supabase
       .from("reservations")
-      .update({ status: "cancelled" })
+      .update({ status: "cancelled", calendar_event_id: null, meet_link: null })
       .eq("id", rejectingReservation.id);
 
     if (!error) {
       setReservations(
         reservations.map((r) =>
-          r.id === rejectingReservation.id ? { ...r, status: "cancelled" } : r
+          r.id === rejectingReservation.id
+            ? { ...r, status: "cancelled", calendar_event_id: null, meet_link: null }
+            : r
         )
       );
 
-      // Send rejection email
+      // Step 3: Send rejection email
       try {
         const emailRes = await fetch("/api/send-rejection", {
           method: "POST",
@@ -1011,6 +1076,22 @@ export default function AdminDashboard({
                             <Phone size={14} /> {reservation.phone}
                           </span>
                         </div>
+
+                        {/* Google Meet Link */}
+                        {reservation.meet_link && reservation.status === "confirmed" && (
+                          <div className="mt-2">
+                            <a
+                              href={reservation.meet_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition text-sm font-medium"
+                            >
+                              <Video size={14} />
+                              Join Google Meet
+                              <ExternalLink size={12} />
+                            </a>
+                          </div>
+                        )}
 
                         {/* Property Preferences */}
                         {(reservation.budget || reservation.property_type || reservation.investment_type || reservation.reason) && (

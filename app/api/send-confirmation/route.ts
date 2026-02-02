@@ -8,11 +8,65 @@ function getConfirmationEmailTemplate({
   name,
   date,
   time,
+  meetLink,
 }: {
   name: string;
   date: string;
   time: string;
+  meetLink?: string;
 }) {
+  // Google Meet section - only shown if meetLink is provided
+  const meetSection = meetLink
+    ? `
+              <!-- Google Meet Card -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 2px solid #1a73e8; border-radius: 4px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(26,115,232,0.12);">
+                <tr>
+                  <td style="padding: 28px;">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="text-align: center;">
+                          <!-- Google Meet Icon -->
+                          <div style="margin-bottom: 16px;">
+                            <div style="display: inline-block; width: 56px; height: 56px; background: linear-gradient(135deg, #00897B 0%, #1a73e8 100%); border-radius: 12px; line-height: 56px; text-align: center;">
+                              <span style="color: #ffffff; font-size: 24px;">&#128249;</span>
+                            </div>
+                          </div>
+                          <p style="margin: 0 0 8px 0; color: #1a73e8; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;">Video Conference</p>
+                          <h2 style="margin: 0 0 16px 0; color: #1a1a1a; font-size: 20px; font-weight: 500;">Join via Google Meet</h2>
+                          <p style="margin: 0 0 20px 0; color: #666666; font-size: 14px; line-height: 1.6;">
+                            Click the button below to join the video call at your scheduled time.<br>
+                            You can also add this to your calendar automatically.
+                          </p>
+                          <!-- Join Meeting Button -->
+                          <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
+                            <tr>
+                              <td style="background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%); border-radius: 8px;">
+                                <a href="${meetLink}" target="_blank" style="display: inline-block; padding: 14px 32px; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">
+                                  Join Meeting
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                          <!-- Meeting Link Text -->
+                          <p style="margin: 16px 0 0 0; color: #999999; font-size: 12px;">
+                            Or copy this link: <a href="${meetLink}" style="color: #1a73e8; text-decoration: none; word-break: break-all;">${meetLink}</a>
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+`
+    : "";
+
+  // Update "What's Next" step 1 based on whether we have Meet link
+  const step1Content = meetLink
+    ? `<p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Check Your Email</p>
+                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">You'll receive a calendar invite with the Meet link</p>`
+    : `<p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Save the Date</p>
+                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">Add this appointment to your calendar</p>`;
+
   return `
 <!DOCTYPE html>
 <html>
@@ -90,6 +144,8 @@ function getConfirmationEmailTemplate({
                 </tr>
               </table>
 
+              ${meetSection}
+
               <!-- What's Next Card (White) -->
               <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 1px solid #e8e6e3; border-radius: 4px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
                 <tr>
@@ -106,8 +162,7 @@ function getConfirmationEmailTemplate({
                                 </div>
                               </td>
                               <td style="vertical-align: middle;">
-                                <p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Save the Date</p>
-                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">Add this appointment to your calendar</p>
+                                ${step1Content}
                               </td>
                             </tr>
                           </table>
@@ -140,8 +195,8 @@ function getConfirmationEmailTemplate({
                                 </div>
                               </td>
                               <td style="vertical-align: middle;">
-                                <p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">Meet Our Team</p>
-                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">We'll guide you through every step</p>
+                                <p style="margin: 0; color: #1a1a1a; font-size: 14px; font-weight: 500;">${meetLink ? "Join the Video Call" : "Meet Our Team"}</p>
+                                <p style="margin: 4px 0 0 0; color: #888888; font-size: 13px;">${meetLink ? "Click the Meet link at your scheduled time" : "We'll guide you through every step"}</p>
                               </td>
                             </tr>
                           </table>
@@ -199,9 +254,9 @@ function getConfirmationEmailTemplate({
 
 export async function POST(request: Request) {
   try {
-    const { name, email, date, time } = await request.json();
+    const { name, email, date, time, meetLink } = await request.json();
 
-    console.log("Confirmation email request:", { name, email, date, time });
+    console.log("Confirmation email request:", { name, email, date, time, meetLink: meetLink ? "provided" : "not provided" });
 
     if (!name || !email || !date || !time) {
       console.error("Missing required fields:", { name, email, date, time });
@@ -215,8 +270,10 @@ export async function POST(request: Request) {
     const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: "Your Appointment is Confirmed - KA Global",
-      html: getConfirmationEmailTemplate({ name, date, time }),
+      subject: meetLink
+        ? "Your Appointment is Confirmed - Join via Google Meet"
+        : "Your Appointment is Confirmed - KA Global",
+      html: getConfirmationEmailTemplate({ name, date, time, meetLink }),
     });
 
     console.log("Confirmation email sent:", result);

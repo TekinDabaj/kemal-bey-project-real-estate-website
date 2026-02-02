@@ -29,6 +29,8 @@ import {
   Clock,
   CheckCircle,
   Loader2,
+  Quote,
+  Star,
 } from "lucide-react";
 
 type Props = {
@@ -118,8 +120,8 @@ export default function HeroSlider({
     const articleDownBtn = containerRef.current.querySelector(
       ".article-down-button"
     );
-    const articleBackBtn = containerRef.current.querySelector(
-      ".article-section .back-button"
+    const articleUpBtn = containerRef.current.querySelector(
+      ".article-section .article-up-button"
     );
 
     // Third view elements
@@ -136,14 +138,14 @@ export default function HeroSlider({
       ".third-view-worldmap-wrapper"
     );
     const thirdTop = containerRef.current.querySelector(".third-view-top");
-    const thirdProperties = containerRef.current.querySelector(
-      ".third-view-properties"
+    const thirdTestimonials = containerRef.current.querySelector(
+      ".third-view-testimonials"
     );
     const thirdDownBtn = containerRef.current.querySelector(
       ".third-view-down-button"
     );
-    const thirdBackBtn = containerRef.current.querySelector(
-      ".third-view-back-button"
+    const thirdUpBtn = containerRef.current.querySelector(
+      ".third-view-up-button"
     );
 
     // Fourth view elements
@@ -171,8 +173,8 @@ export default function HeroSlider({
     const fourthDownBtn = containerRef.current.querySelector(
       ".fourth-view-down-button"
     );
-    const fourthBackBtn = containerRef.current.querySelector(
-      ".fourth-view-back-button"
+    const fourthUpBtn = containerRef.current.querySelector(
+      ".fourth-view-up-button"
     );
 
     // Fifth view elements
@@ -187,8 +189,8 @@ export default function HeroSlider({
     const fifthDownBtn = containerRef.current.querySelector(
       ".fifth-view-down-button"
     );
-    const fifthBackBtn = containerRef.current.querySelector(
-      ".fifth-view-back-button"
+    const fifthUpBtn = containerRef.current.querySelector(
+      ".fifth-view-up-button"
     );
 
     // Sixth view
@@ -250,7 +252,7 @@ export default function HeroSlider({
     tl.set(articleTitle, { yPercent: 0, autoAlpha: 1 }, 0.4);
     tl.set(articleParagraphs, { yPercent: 0, autoAlpha: 1 }, 0.4);
     tl.set(articleDownBtn, { autoAlpha: 1 }, 0.4);
-    tl.set(articleBackBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(articleUpBtn, { autoAlpha: 1 }, 0.4);
 
     // Third view elements - reset to initial positions
     tl.set(thirdTitleSlices, { yPercent: 101 }, 0.4);
@@ -258,9 +260,9 @@ export default function HeroSlider({
     tl.set(thirdWorldmap, { autoAlpha: 0, scale: 0.8 }, 0.4);
     // These get hidden by handleDownToFourth - must reset them!
     tl.set(thirdTop, { yPercent: 0, autoAlpha: 1 }, 0.4);
-    tl.set(thirdProperties, { yPercent: 0, autoAlpha: 1 }, 0.4);
+    tl.set(thirdTestimonials, { yPercent: 0, autoAlpha: 1 }, 0.4);
     tl.set(thirdDownBtn, { autoAlpha: 1 }, 0.4);
-    tl.set(thirdBackBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(thirdUpBtn, { autoAlpha: 1 }, 0.4);
 
     // Fourth view elements - reset content that gets animated in
     tl.set(fourthTitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
@@ -273,14 +275,14 @@ export default function HeroSlider({
     tl.set(fourthLeft, { yPercent: 0, autoAlpha: 1 }, 0.4);
     tl.set(fourthRight, { yPercent: 0, autoAlpha: 1 }, 0.4);
     tl.set(fourthDownBtn, { autoAlpha: 1 }, 0.4);
-    tl.set(fourthBackBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(fourthUpBtn, { autoAlpha: 1 }, 0.4);
 
     // Fifth view elements - reset content
     tl.set(fifthTitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
     tl.set(fifthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0.4);
     tl.set(bentoCards, { y: 40, autoAlpha: 0 }, 0.4);
     tl.set(fifthDownBtn, { autoAlpha: 1 }, 0.4);
-    tl.set(fifthBackBtn, { autoAlpha: 1 }, 0.4);
+    tl.set(fifthUpBtn, { autoAlpha: 1 }, 0.4);
 
     // Show hero container immediately (like handleBackToSlider)
     tl.set(heroContainer, { autoAlpha: 1 }, 0);
@@ -371,8 +373,8 @@ export default function HeroSlider({
     const articleDownBtn = containerRef.current.querySelector(
       ".article-down-button"
     );
-    const articleBackBtn = containerRef.current.querySelector(
-      ".article-section .back-button"
+    const articleUpBtn = containerRef.current.querySelector(
+      ".article-section .article-up-button"
     );
 
     // Third view elements
@@ -389,14 +391,14 @@ export default function HeroSlider({
       ".third-view-worldmap-wrapper"
     );
     const thirdTop = containerRef.current.querySelector(".third-view-top");
-    const thirdProperties = containerRef.current.querySelector(
-      ".third-view-properties"
+    const thirdTestimonials = containerRef.current.querySelector(
+      ".third-view-testimonials"
     );
     const thirdDownBtn = containerRef.current.querySelector(
       ".third-view-down-button"
     );
-    const thirdBackBtn = containerRef.current.querySelector(
-      ".third-view-back-button"
+    const thirdUpBtn = containerRef.current.querySelector(
+      ".third-view-up-button"
     );
 
     // Fourth view elements
@@ -424,8 +426,8 @@ export default function HeroSlider({
     const fourthDownBtn = containerRef.current.querySelector(
       ".fourth-view-down-button"
     );
-    const fourthBackBtn = containerRef.current.querySelector(
-      ".fourth-view-back-button"
+    const fourthUpBtn = containerRef.current.querySelector(
+      ".fourth-view-up-button"
     );
 
     // Fifth view elements
@@ -440,8 +442,8 @@ export default function HeroSlider({
     const fifthDownBtn = containerRef.current.querySelector(
       ".fifth-view-down-button"
     );
-    const fifthBackBtn = containerRef.current.querySelector(
-      ".fifth-view-back-button"
+    const fifthUpBtn = containerRef.current.querySelector(
+      ".fifth-view-up-button"
     );
 
     // Sixth view elements
@@ -503,7 +505,7 @@ export default function HeroSlider({
       tl.set(articleTitle, { yPercent: -110, autoAlpha: 0 }, 0);
       tl.set(articleParagraphs, { yPercent: -110, autoAlpha: 0 }, 0);
       tl.set(articleDownBtn, { autoAlpha: 0 }, 0);
-      tl.set(articleBackBtn, { autoAlpha: 0 }, 0);
+      tl.set(articleUpBtn, { autoAlpha: 0 }, 0);
     } else if (targetView === 2) {
       // View 2 is target - animate article in
       tl.set(articleSection, { autoAlpha: 1 }, 0);
@@ -511,7 +513,7 @@ export default function HeroSlider({
       tl.set(articleTitle, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(articleParagraphs, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(articleDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(articleBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(articleUpBtn, { autoAlpha: 1 }, 0);
       articleSliceInners.forEach((el, i) => {
         tl.to(
           el,
@@ -524,24 +526,24 @@ export default function HeroSlider({
     // Third view - set passed state matching handleDownToFourth end state
     if (targetView >= 4) {
       // Third was scrolled past - section hidden, but title/subtitle/worldmap stay visible!
-      // handleDownToFourth only hides thirdTop and thirdProperties
+      // handleDownToFourth only hides thirdTop and thirdTestimonials
       tl.set(thirdViewSection, { autoAlpha: 0 }, 0);
       // Content stays visible (handleBackToThird expects this)
       tl.set(thirdTitleSlices, { yPercent: 0 }, 0);
       tl.set(thirdSubtitle, { yPercent: 0 }, 0);
       tl.set(thirdWorldmap, { autoAlpha: 1, scale: 1 }, 0);
-      // Only thirdTop and thirdProperties are hidden
+      // Only thirdTop and thirdTestimonials are hidden
       tl.set(thirdTop, { yPercent: -100, autoAlpha: 0 }, 0);
-      tl.set(thirdProperties, { yPercent: -100, autoAlpha: 0 }, 0);
+      tl.set(thirdTestimonials, { yPercent: -100, autoAlpha: 0 }, 0);
       tl.set(thirdDownBtn, { autoAlpha: 0 }, 0);
-      tl.set(thirdBackBtn, { autoAlpha: 0 }, 0);
+      tl.set(thirdUpBtn, { autoAlpha: 0 }, 0);
     } else if (targetView === 3) {
       // View 3 is target - show and animate content in
       tl.set(thirdViewSection, { autoAlpha: 1 }, 0);
       tl.set(thirdTop, { yPercent: 0, autoAlpha: 1 }, 0);
-      tl.set(thirdProperties, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(thirdTestimonials, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(thirdDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(thirdBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(thirdUpBtn, { autoAlpha: 1 }, 0);
       thirdTitleSlices.forEach((el, i) => {
         tl.fromTo(
           el,
@@ -580,14 +582,14 @@ export default function HeroSlider({
       tl.set(fourthLeft, { yPercent: -100, autoAlpha: 0 }, 0);
       tl.set(fourthRight, { yPercent: -100, autoAlpha: 0 }, 0);
       tl.set(fourthDownBtn, { autoAlpha: 0 }, 0);
-      tl.set(fourthBackBtn, { autoAlpha: 0 }, 0);
+      tl.set(fourthUpBtn, { autoAlpha: 0 }, 0);
     } else if (targetView === 4) {
       // View 4 is target - show and animate content in
       tl.set(fourthViewSection, { autoAlpha: 1 }, 0);
       tl.set(fourthLeft, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(fourthRight, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(fourthDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(fourthBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(fourthUpBtn, { autoAlpha: 1 }, 0);
       tl.fromTo(
         fourthTitle,
         { yPercent: 50, autoAlpha: 0 },
@@ -643,12 +645,12 @@ export default function HeroSlider({
       // Only bentoCards are hidden
       tl.set(bentoCards, { yPercent: -30, autoAlpha: 0 }, 0);
       tl.set(fifthDownBtn, { autoAlpha: 0 }, 0);
-      tl.set(fifthBackBtn, { autoAlpha: 0 }, 0);
+      tl.set(fifthUpBtn, { autoAlpha: 0 }, 0);
     } else if (targetView === 5) {
       // View 5 is target - show and animate content in
       tl.set(fifthViewSection, { autoAlpha: 1 }, 0);
       tl.set(fifthDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(fifthBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(fifthUpBtn, { autoAlpha: 1 }, 0);
       tl.fromTo(
         fifthTitle,
         { yPercent: 50, autoAlpha: 0 },
@@ -727,7 +729,7 @@ export default function HeroSlider({
       tl.set(fifthSubtitle, { yPercent: 50, autoAlpha: 0 }, 0);
       tl.set(bentoCards, { y: 40, autoAlpha: 0 }, 0);
       tl.set(fifthDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(fifthBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(fifthUpBtn, { autoAlpha: 1 }, 0);
     }
 
     // If target is less than 6, set up view 6 (Contact) initial state
@@ -752,7 +754,7 @@ export default function HeroSlider({
       tl.set(fourthLeft, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(fourthRight, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(fourthDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(fourthBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(fourthUpBtn, { autoAlpha: 1 }, 0);
     }
 
     // If target is less than 3, set up view 3 initial state
@@ -762,9 +764,9 @@ export default function HeroSlider({
       tl.set(thirdSubtitle, { yPercent: 101 }, 0);
       tl.set(thirdWorldmap, { autoAlpha: 0, scale: 0.8 }, 0);
       tl.set(thirdTop, { yPercent: 0, autoAlpha: 1 }, 0);
-      tl.set(thirdProperties, { yPercent: 0, autoAlpha: 1 }, 0);
+      tl.set(thirdTestimonials, { yPercent: 0, autoAlpha: 1 }, 0);
       tl.set(thirdDownBtn, { autoAlpha: 1 }, 0);
-      tl.set(thirdBackBtn, { autoAlpha: 1 }, 0);
+      tl.set(thirdUpBtn, { autoAlpha: 1 }, 0);
     }
   }, []);
 
@@ -1146,8 +1148,8 @@ export default function HeroSlider({
     const thirdViewSection = containerRef.current.querySelector(
       ".third-view-section"
     );
-    const articleBackBtn = containerRef.current.querySelector(
-      ".article-section .back-button"
+    const articleUpBtn = containerRef.current.querySelector(
+      ".article-section .article-up-button"
     );
     const articleDownBtn = containerRef.current.querySelector(
       ".article-down-button"
@@ -1184,7 +1186,7 @@ export default function HeroSlider({
 
     // Fade out buttons first (like CTAs in handleDown)
     tl.to(articleDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
-    tl.to(articleBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(articleUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in third view section (like article section fades in)
     tl.fromTo(
@@ -1253,8 +1255,8 @@ export default function HeroSlider({
 
     const articleSection =
       containerRef.current.querySelector(".article-section");
-    const articleBackBtn = containerRef.current.querySelector(
-      ".article-section .back-button"
+    const articleUpBtn = containerRef.current.querySelector(
+      ".article-section .article-up-button"
     );
     const articleDownBtn = containerRef.current.querySelector(
       ".article-down-button"
@@ -1349,7 +1351,7 @@ export default function HeroSlider({
     );
 
     // Show buttons at the end
-    tl.to(articleBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+    tl.to(articleUpBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
     tl.to(articleDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
@@ -1363,15 +1365,15 @@ export default function HeroSlider({
     const fourthViewSection = containerRef.current.querySelector(
       ".fourth-view-section"
     );
-    const thirdBackBtn = containerRef.current.querySelector(
-      ".third-view-back-button"
+    const thirdUpBtn = containerRef.current.querySelector(
+      ".third-view-up-button"
     );
     const thirdDownBtn = containerRef.current.querySelector(
       ".third-view-down-button"
     );
     const thirdTop = containerRef.current.querySelector(".third-view-top");
-    const thirdProperties = containerRef.current.querySelector(
-      ".third-view-properties"
+    const thirdTestimonials = containerRef.current.querySelector(
+      ".third-view-testimonials"
     );
     const fourthTitle =
       containerRef.current.querySelector(".fourth-view-title");
@@ -1405,7 +1407,7 @@ export default function HeroSlider({
 
     // Fade out buttons first
     tl.to(thirdDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
-    tl.to(thirdBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(thirdUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in fourth view section
     tl.fromTo(
@@ -1422,7 +1424,7 @@ export default function HeroSlider({
       0.1
     );
     tl.to(
-      thirdProperties,
+      thirdTestimonials,
       { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
       0.15
     );
@@ -1509,15 +1511,15 @@ export default function HeroSlider({
     const fourthViewSection = containerRef.current.querySelector(
       ".fourth-view-section"
     );
-    const thirdBackBtn = containerRef.current.querySelector(
-      ".third-view-back-button"
+    const thirdUpBtn = containerRef.current.querySelector(
+      ".third-view-up-button"
     );
     const thirdDownBtn = containerRef.current.querySelector(
       ".third-view-down-button"
     );
     const thirdTop = containerRef.current.querySelector(".third-view-top");
-    const thirdProperties = containerRef.current.querySelector(
-      ".third-view-properties"
+    const thirdTestimonials = containerRef.current.querySelector(
+      ".third-view-testimonials"
     );
     const fourthTitle =
       containerRef.current.querySelector(".fourth-view-title");
@@ -1620,14 +1622,14 @@ export default function HeroSlider({
       0.3
     );
     tl.fromTo(
-      thirdProperties,
+      thirdTestimonials,
       { yPercent: -100, autoAlpha: 0 },
       { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
       0.35
     );
 
     // Show buttons at the end
-    tl.to(thirdBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+    tl.to(thirdUpBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
     tl.to(thirdDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
@@ -1641,8 +1643,8 @@ export default function HeroSlider({
     const fifthViewSection = containerRef.current.querySelector(
       ".fifth-view-section"
     );
-    const fourthBackBtn = containerRef.current.querySelector(
-      ".fourth-view-back-button"
+    const fourthUpBtn = containerRef.current.querySelector(
+      ".fourth-view-up-button"
     );
     const fourthDownBtn = containerRef.current.querySelector(
       ".fourth-view-down-button"
@@ -1666,7 +1668,7 @@ export default function HeroSlider({
 
     // Fade out buttons first
     tl.to(fourthDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
-    tl.to(fourthBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(fourthUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in fifth view section
     tl.fromTo(
@@ -1727,8 +1729,8 @@ export default function HeroSlider({
     const fifthViewSection = containerRef.current.querySelector(
       ".fifth-view-section"
     );
-    const fourthBackBtn = containerRef.current.querySelector(
-      ".fourth-view-back-button"
+    const fourthUpBtn = containerRef.current.querySelector(
+      ".fourth-view-up-button"
     );
     const fourthDownBtn = containerRef.current.querySelector(
       ".fourth-view-down-button"
@@ -1793,7 +1795,7 @@ export default function HeroSlider({
     );
 
     // Show buttons at the end
-    tl.to(fourthBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+    tl.to(fourthUpBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
     tl.to(fourthDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
@@ -1808,8 +1810,8 @@ export default function HeroSlider({
     const sixthViewSection = containerRef.current.querySelector(
       ".sixth-view-section"
     );
-    const fifthBackBtn = containerRef.current.querySelector(
-      ".fifth-view-back-button"
+    const fifthUpBtn = containerRef.current.querySelector(
+      ".fifth-view-up-button"
     );
     const fifthDownBtn = containerRef.current.querySelector(
       ".fifth-view-down-button"
@@ -1828,7 +1830,7 @@ export default function HeroSlider({
 
     // Fade out buttons first
     tl.to(fifthDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
-    tl.to(fifthBackBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(fifthUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in sixth view section
     tl.fromTo(
@@ -1870,8 +1872,8 @@ export default function HeroSlider({
     const sixthViewSection = containerRef.current.querySelector(
       ".sixth-view-section"
     );
-    const fifthBackBtn = containerRef.current.querySelector(
-      ".fifth-view-back-button"
+    const fifthUpBtn = containerRef.current.querySelector(
+      ".fifth-view-up-button"
     );
     const fifthDownBtn = containerRef.current.querySelector(
       ".fifth-view-down-button"
@@ -1915,7 +1917,7 @@ export default function HeroSlider({
     });
 
     // Show buttons at the end
-    tl.to(fifthBackBtn, { autoAlpha: 1, duration: 0.4 }, 0.5);
+    tl.to(fifthUpBtn, { autoAlpha: 1, duration: 0.4 }, 0.5);
     tl.to(fifthDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
   };
 
@@ -2548,36 +2550,51 @@ export default function HeroSlider({
           overflow: hidden;
         }
 
-        .back-button {
+        .article-up-button {
           position: fixed;
-          top: 100px;
-          right: 40px;
+          top: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
           z-index: 200;
-          background: #1a1a2e;
-          border: none;
-          color: white;
-          padding: 12px 24px;
-          border-radius: 30px;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
           cursor: pointer;
-          font-family: "Biryani", sans-serif;
-          font-size: 12px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          transition: background 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           pointer-events: auto;
         }
 
-        :global(.dark) .back-button {
+        :global(.dark) .article-up-button {
+          border-color: rgba(255, 255, 255, 0.3);
           background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .back-button:hover {
-          background: #2a2a4e;
+        .article-up-button svg {
+          transition: all 0.2s ease-in-out;
         }
 
-        :global(.dark) .back-button:hover {
+        .article-up-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .article-up-button:hover {
           background: rgba(255, 255, 255, 0.2);
+        }
+
+        .article-up-button:hover svg {
+          transform: translateY(-4px);
+        }
+
+        :global(.dark) .article-up-button svg path {
+          fill: white;
         }
 
         .article-down-button {
@@ -2725,108 +2742,87 @@ export default function HeroSlider({
           color: rgba(255, 255, 255, 0.7);
         }
 
-        .third-view-back-button {
+        .third-view-up-button {
           position: fixed;
-          top: 100px;
-          right: 40px;
-          z-index: 1000;
-          background: #1a1a2e;
-          border: none;
-          color: white;
-          padding: 12px 24px;
-          border-radius: 30px;
-          cursor: pointer;
-          font-family: "Biryani", sans-serif;
-          font-size: 12px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          transition: background 0.3s;
-          pointer-events: auto;
-        }
-
-        :global(.dark) .third-view-back-button {
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .third-view-back-button:hover {
-          background: #2a2a4e;
-        }
-
-        :global(.dark) .third-view-back-button:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Property Cards Section */
-        .third-view-properties {
-          padding: 20px 0 30px;
-          border-top: 1px solid rgba(0, 0, 0, 0.1);
-          background: #f8fafc;
-        }
-
-        :global(.dark) .third-view-properties {
-          border-top-color: #2d2a4a;
-          background: #13102b;
-        }
-
-        .properties-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 40px;
-          margin-bottom: 16px;
-        }
-
-        .properties-title {
-          font-family: "Biryani", sans-serif;
-          font-size: 18px;
-          font-weight: 700;
-          color: #1a1a2e;
-          margin: 0;
-        }
-
-        :global(.dark) .properties-title {
-          color: white;
-        }
-
-        .properties-nav {
-          display: flex;
-          gap: 8px;
-        }
-
-        .properties-nav-btn {
-          width: 36px;
-          height: 36px;
+          top: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
           border-radius: 50%;
-          border: 1px solid #e2e8f0;
-          background: white;
+          z-index: 1000;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s;
-          color: #64748b;
+          pointer-events: auto;
         }
 
-        :global(.dark) .properties-nav-btn {
-          border-color: #2d2a4a;
-          background: #1a1735;
-          color: #94a3b8;
+        :global(.dark) .third-view-up-button {
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
         }
 
-        .properties-nav-btn:hover {
-          background: #f1f5f9;
-          border-color: #cbd5e1;
+        .third-view-up-button svg {
+          transition: all 0.2s ease-in-out;
+        }
+
+        .third-view-up-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .third-view-up-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .third-view-up-button:hover svg {
+          transform: translateY(-4px);
+        }
+
+        :global(.dark) .third-view-up-button svg path {
+          fill: white;
+        }
+
+        /* Testimonials Section */
+        .third-view-testimonials {
+          padding: 20px 0 30px;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        :global(.dark) .third-view-testimonials {
+          border-top-color: #2d2a4a;
+          background: linear-gradient(135deg, #13102b 0%, #1a1735 100%);
+        }
+
+        .testimonials-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 40px;
+          margin-bottom: 20px;
+        }
+
+        .testimonials-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 20px;
+          font-weight: 700;
           color: #1a1a2e;
+          margin: 0;
+          text-align: center;
         }
 
-        :global(.dark) .properties-nav-btn:hover {
-          background: #2d2a4a;
-          border-color: #3d3a5a;
+        :global(.dark) .testimonials-title {
           color: white;
         }
 
-        .properties-scroll-container {
+        .testimonials-scroll-container {
           overflow-x: auto;
           overflow-y: hidden;
           scrollbar-width: none;
@@ -2834,196 +2830,133 @@ export default function HeroSlider({
           padding: 0 40px;
         }
 
-        .properties-scroll-container::-webkit-scrollbar {
+        .testimonials-scroll-container::-webkit-scrollbar {
           display: none;
         }
 
-        .properties-grid {
+        .testimonials-grid {
           display: flex;
-          gap: 16px;
+          gap: 20px;
           padding-bottom: 8px;
         }
 
-        .property-card {
+        .testimonial-card {
           flex-shrink: 0;
-          width: 340px;
+          width: 320px;
           background: white;
-          border-radius: 8px;
-          overflow: hidden;
+          border-radius: 16px;
+          padding: 24px;
           border: 1px solid #f1f5f9;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-          transition: all 0.2s;
-          text-decoration: none;
-          color: inherit;
-          display: block;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          transition: all 0.3s ease;
           font-family: "Montserrat", sans-serif;
+          position: relative;
+          overflow: hidden;
         }
 
-        :global(.dark) .property-card {
-          background: #13102b;
+        .testimonial-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+
+        :global(.dark) .testimonial-card {
+          background: #1a1735;
           border-color: #2d2a4a;
         }
 
-        .property-card:hover {
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .testimonial-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.15), 0 4px 8px -2px rgba(0, 0, 0, 0.1);
         }
 
-        :global(.dark) .property-card:hover {
-          box-shadow: 0 4px 6px -1px rgba(128, 90, 213, 0.2);
+        :global(.dark) .testimonial-card:hover {
+          box-shadow: 0 12px 24px -4px rgba(128, 90, 213, 0.25);
         }
 
-        .property-card-image {
-          position: relative;
-          aspect-ratio: 16/10;
-          background: #e2e8f0;
-          overflow: hidden;
-        }
-
-        :global(.dark) .property-card-image {
-          background: #1a1735;
-        }
-
-        .property-card-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.3s;
-        }
-
-        .property-card:hover .property-card-image img {
-          transform: scale(1.05);
-        }
-
-        .property-card-badge {
-          position: absolute;
-          top: 8px;
-          right: 8px;
-          padding: 2px 8px;
-          border-radius: 4px;
-          font-size: 12px;
-          font-weight: 500;
-          background: #f59e0b;
-          color: #0f172a;
-        }
-
-        .property-card-price {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-          padding: 20px 12px 8px;
-        }
-
-        .property-card-price p {
-          font-size: 18px;
-          font-weight: 700;
-          color: white;
-          margin: 0;
-        }
-
-        .property-card-price span {
-          font-size: 14px;
-          font-weight: 400;
-          opacity: 0.8;
-        }
-
-        .property-card-content {
-          padding: 16px;
-        }
-
-        .property-card-title {
-          font-family: inherit;
-          font-size: 16px;
-          font-weight: 600;
-          color: #0f172a;
-          margin: 0 0 4px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-          transition: color 0.2s;
-        }
-
-        :global(.dark) .property-card-title {
-          color: white;
-        }
-
-        .property-card:hover .property-card-title {
-          color: #d97706;
-        }
-
-        :global(.dark) .property-card:hover .property-card-title {
-          color: #fbbf24;
-        }
-
-        .property-card-location {
+        .testimonial-quote-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
           display: flex;
           align-items: center;
-          gap: 4px;
-          font-size: 12px;
-          color: #64748b;
-          margin-bottom: 8px;
+          justify-content: center;
+          margin-bottom: 16px;
+          color: white;
         }
 
-        :global(.dark) .property-card-location {
-          color: #94a3b8;
-        }
-
-        .property-card-description {
-          font-size: 12px;
-          color: #475569;
-          margin-bottom: 12px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          line-height: 1.5;
-        }
-
-        :global(.dark) .property-card-description {
-          color: #94a3b8;
-        }
-
-        .property-card-features {
+        .testimonial-stars {
           display: flex;
-          gap: 12px;
-          font-size: 12px;
-          color: #64748b;
-          border-top: 1px solid #f1f5f9;
-          padding-top: 12px;
+          gap: 2px;
+          margin-bottom: 12px;
         }
 
-        :global(.dark) .property-card-features {
+        .testimonial-text {
+          font-size: 14px;
+          line-height: 1.7;
+          color: #475569;
+          margin: 0 0 20px;
+          font-style: italic;
+        }
+
+        :global(.dark) .testimonial-text {
           color: #94a3b8;
+        }
+
+        .testimonial-author {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding-top: 16px;
+          border-top: 1px solid #f1f5f9;
+        }
+
+        :global(.dark) .testimonial-author {
           border-top-color: #2d2a4a;
         }
 
-        .property-card-feature {
+        .testimonial-author-avatar {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #24c7c0 0%, #169216 100%);
           display: flex;
           align-items: center;
-          gap: 4px;
+          justify-content: center;
+          font-family: "Biryani", sans-serif;
+          font-weight: 700;
+          font-size: 18px;
+          color: white;
+          text-transform: uppercase;
         }
 
-        .property-card-feature svg {
-          color: #94a3b8;
+        .testimonial-author-info {
+          flex: 1;
         }
 
-        :global(.dark) .property-card-feature svg {
+        .testimonial-author-name {
+          font-size: 14px;
+          font-weight: 600;
+          color: #0f172a;
+          margin: 0 0 2px;
+        }
+
+        :global(.dark) .testimonial-author-name {
+          color: white;
+        }
+
+        .testimonial-author-location {
+          font-size: 12px;
           color: #64748b;
+          margin: 0;
         }
 
-        .no-properties-message {
-          padding: 40px;
-          text-align: center;
-          color: #64748b;
-          font-family: "Montserrat", sans-serif;
-        }
-
-        :global(.dark) .no-properties-message {
+        :global(.dark) .testimonial-author-location {
           color: #94a3b8;
         }
 
@@ -3062,15 +2995,16 @@ export default function HeroSlider({
             font-size: 14px;
           }
 
-          .property-card {
-            width: 300px;
+          .testimonial-card {
+            width: 280px;
+            padding: 20px;
           }
 
-          .properties-header {
+          .testimonials-header {
             padding: 0 20px;
           }
 
-          .properties-scroll-container {
+          .testimonials-scroll-container {
             padding: 0 20px;
           }
         }
@@ -3101,89 +3035,68 @@ export default function HeroSlider({
             transform: scale(1.2);
           }
 
-          .third-view-properties {
+          .third-view-testimonials {
             padding: 10px 0 18px;
             flex-shrink: 0;
           }
 
-          .properties-header {
+          .testimonials-header {
             padding: 0 25px;
             margin-bottom: 8px;
           }
 
-          .properties-title {
+          .testimonials-title {
             font-size: 14px;
           }
 
-          .properties-nav-btn {
-            width: 28px;
-            height: 28px;
-          }
-
-          .properties-scroll-container {
+          .testimonials-scroll-container {
             padding: 0 25px;
           }
 
-          .properties-grid {
+          .testimonials-grid {
             gap: 12px;
             padding-bottom: 4px;
           }
 
-          .property-card {
-            width: 240px;
+          .testimonial-card {
+            width: 260px;
+            padding: 18px;
           }
 
-          .property-card-image {
-            aspect-ratio: 16/10;
+          .testimonial-quote-icon {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 12px;
           }
 
-          .property-card-badge {
-            padding: 2px 6px;
-            font-size: 10px;
+          .testimonial-quote-icon svg {
+            width: 18px;
+            height: 18px;
           }
 
-          .property-card-price p {
-            font-size: 14px;
-          }
-
-          .property-card-price {
-            padding: 16px 10px 6px;
-          }
-
-          .property-card-content {
-            padding: 10px;
-          }
-
-          .property-card-title {
+          .testimonial-text {
             font-size: 13px;
-            margin-bottom: 2px;
+            margin-bottom: 16px;
           }
 
-          .property-card-location {
-            font-size: 10px;
-            margin-bottom: 6px;
+          .testimonial-author-avatar {
+            width: 38px;
+            height: 38px;
+            font-size: 16px;
           }
 
-          .property-card-description {
-            display: none;
+          .testimonial-author-name {
+            font-size: 13px;
           }
 
-          .property-card-features {
-            gap: 8px;
-            font-size: 10px;
-            padding-top: 8px;
-          }
-
-          .property-card-feature svg {
-            width: 12px;
-            height: 12px;
-          }
-
-          .third-view-back-button {
-            top: 90px;
-            right: 30px;
-            padding: 10px 20px;
+          .testimonial-author-location {
             font-size: 11px;
+          }
+
+          .third-view-up-button {
+            width: 44px;
+            height: 44px;
+            top: 20px;
           }
 
           .third-view-down-button {
@@ -3218,49 +3131,62 @@ export default function HeroSlider({
             font-size: 14px;
           }
 
-          .third-view-properties {
+          .third-view-testimonials {
             padding: 8px 0 12px;
             flex-shrink: 0;
           }
 
-          .properties-header {
+          .testimonials-header {
             margin-bottom: 6px;
           }
 
-          .properties-title {
+          .testimonials-title {
             font-size: 13px;
           }
 
-          .property-card {
-            width: 210px;
+          .testimonial-card {
+            width: 220px;
+            padding: 14px;
           }
 
-          .property-card-image {
-            aspect-ratio: 16/9;
+          .testimonial-quote-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 10px;
           }
 
-          .property-card-content {
-            padding: 8px;
+          .testimonial-quote-icon svg {
+            width: 16px;
+            height: 16px;
           }
 
-          .property-card-title {
-            font-size: 12px;
+          .testimonial-text {
+            font-size: 11px;
+            line-height: 1.5;
+            margin-bottom: 12px;
           }
 
-          .property-card-location {
+          .testimonial-author {
+            padding-top: 10px;
+          }
+
+          .testimonial-author-avatar {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+          }
+
+          .testimonial-author-name {
+            font-size: 11px;
+          }
+
+          .testimonial-author-location {
             font-size: 9px;
-            margin-bottom: 4px;
           }
 
-          .property-card-features {
-            gap: 6px;
-            font-size: 9px;
-            padding-top: 5px;
-          }
-
-          .property-card-feature svg {
-            width: 11px;
-            height: 11px;
+          .testimonial-stars svg {
+            width: 10px;
+            height: 10px;
           }
         }
 
@@ -3293,44 +3219,48 @@ export default function HeroSlider({
             font-size: 13px;
           }
 
-          .third-view-properties {
+          .third-view-testimonials {
             padding: 8px 0 15px;
             flex-shrink: 0;
           }
 
-          .properties-header {
+          .testimonials-header {
             padding: 0 20px;
             margin-bottom: 6px;
           }
 
-          .properties-title {
+          .testimonials-title {
             font-size: 13px;
           }
 
-          .property-card {
-            width: 220px;
+          .testimonial-card {
+            width: 240px;
+            padding: 16px;
           }
 
-          .property-card-image {
-            aspect-ratio: 16/9;
+          .testimonial-quote-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 10px;
           }
 
-          .property-card-content {
-            padding: 8px;
+          .testimonial-text {
+            font-size: 12px;
+            margin-bottom: 14px;
           }
 
-          .property-card-title {
+          .testimonial-author-avatar {
+            width: 36px;
+            height: 36px;
+            font-size: 15px;
+          }
+
+          .testimonial-author-name {
             font-size: 12px;
           }
 
-          .property-card-location {
-            font-size: 9px;
-          }
-
-          .property-card-features {
-            gap: 6px;
-            font-size: 9px;
-            padding-top: 6px;
+          .testimonial-author-location {
+            font-size: 10px;
           }
         }
 
@@ -3377,36 +3307,51 @@ export default function HeroSlider({
           background: #0c0a1d;
         }
 
-        .fourth-view-back-button {
+        .fourth-view-up-button {
           position: fixed;
-          top: 100px;
-          right: 40px;
+          top: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
           z-index: 1000;
-          background: #1a1a2e;
-          border: none;
-          color: white;
-          padding: 12px 24px;
-          border-radius: 30px;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
           cursor: pointer;
-          font-family: "Biryani", sans-serif;
-          font-size: 12px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          transition: background 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           pointer-events: auto;
         }
 
-        :global(.dark) .fourth-view-back-button {
+        :global(.dark) .fourth-view-up-button {
+          border-color: rgba(255, 255, 255, 0.3);
           background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .fourth-view-back-button:hover {
-          background: #2a2a4e;
+        .fourth-view-up-button svg {
+          transition: all 0.2s ease-in-out;
         }
 
-        :global(.dark) .fourth-view-back-button:hover {
+        .fourth-view-up-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .fourth-view-up-button:hover {
           background: rgba(255, 255, 255, 0.2);
+        }
+
+        .fourth-view-up-button:hover svg {
+          transform: translateY(-4px);
+        }
+
+        :global(.dark) .fourth-view-up-button svg path {
+          fill: white;
         }
 
         .fourth-view-content {
@@ -3859,11 +3804,10 @@ export default function HeroSlider({
             font-size: 9px;
           }
 
-          .fourth-view-back-button {
-            top: 90px;
-            right: 30px;
-            padding: 10px 20px;
-            font-size: 11px;
+          .fourth-view-up-button {
+            width: 44px;
+            height: 44px;
+            top: 20px;
           }
 
           .fourth-view-down-button {
@@ -3896,36 +3840,51 @@ export default function HeroSlider({
           opacity: 1;
         }
 
-        .fifth-view-back-button {
+        .fifth-view-up-button {
           position: fixed;
-          top: 100px;
-          right: 40px;
+          top: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
           z-index: 1000;
-          background: #1a1a2e;
-          border: none;
-          color: white;
-          padding: 12px 24px;
-          border-radius: 30px;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
           cursor: pointer;
-          font-family: "Biryani", sans-serif;
-          font-size: 12px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          transition: background 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           pointer-events: auto;
         }
 
-        :global(.dark) .fifth-view-back-button {
+        :global(.dark) .fifth-view-up-button {
+          border-color: rgba(255, 255, 255, 0.3);
           background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .fifth-view-back-button:hover {
-          background: #2a2a4e;
+        .fifth-view-up-button svg {
+          transition: all 0.2s ease-in-out;
         }
 
-        :global(.dark) .fifth-view-back-button:hover {
+        .fifth-view-up-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .fifth-view-up-button:hover {
           background: rgba(255, 255, 255, 0.2);
+        }
+
+        .fifth-view-up-button:hover svg {
+          transform: translateY(-4px);
+        }
+
+        :global(.dark) .fifth-view-up-button svg path {
+          fill: white;
         }
 
         .fifth-view-content {
@@ -4982,8 +4941,18 @@ export default function HeroSlider({
               );
             })}
           </div>
-          <button className="back-button" onClick={handleBackToSlider}>
-            {t("back")}
+          <button className="article-up-button" onClick={handleBackToSlider}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 30.13c-.475.568-1.313.645-1.88.172L26 19.626 13.19 30.303c-.565.472-1.408.395-1.88-.17-.474-.567-.397-1.41.17-1.882l13.665-11.386c.248-.207.552-.312.854-.312.303 0 .607.104.854.312L40.52 28.25c.567.474.644 1.315.17 1.88z"
+              />
+            </svg>
           </button>
           <section className="page-container">
             <article>
@@ -5012,10 +4981,20 @@ export default function HeroSlider({
         {/* Third View Section */}
         <div className={`third-view-section ${showThirdView ? "active" : ""}`}>
           <button
-            className="third-view-back-button"
+            className="third-view-up-button"
             onClick={handleBackToArticle}
           >
-            {t("back")}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 30.13c-.475.568-1.313.645-1.88.172L26 19.626 13.19 30.303c-.565.472-1.408.395-1.88-.17-.474-.567-.397-1.41.17-1.882l13.665-11.386c.248-.207.552-.312.854-.312.303 0 .607.104.854.312L40.52 28.25c.567.474.644 1.315.17 1.88z"
+              />
+            </svg>
           </button>
 
           {/* Top area: Globe left, Content right */}
@@ -5043,118 +5022,43 @@ export default function HeroSlider({
             </div>
           </div>
 
-          {/* Property Cards Section */}
-          <div className="third-view-properties">
-            <div className="properties-header">
-              <h3 className="properties-title">{t("thirdView.featuredProperties")}</h3>
-              {displayProperties.length > 0 && (
-                <div className="properties-nav">
-                  <button
-                    className="properties-nav-btn"
-                    onClick={() => scrollProperties("left")}
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-                  <button
-                    className="properties-nav-btn"
-                    onClick={() => scrollProperties("right")}
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
-              )}
+          {/* Testimonials Section */}
+          <div className="third-view-testimonials">
+            <div className="testimonials-header">
+              <h3 className="testimonials-title">{t("thirdView.testimonials.title")}</h3>
             </div>
-            {displayProperties.length > 0 ? (
-              <div
-                className="properties-scroll-container"
-                ref={propertyScrollRef}
-              >
-                <div className="properties-grid">
-                  {displayProperties.map((property) => (
-                    <a
-                      key={property.id}
-                      href={`/properties/${property.id}`}
-                      className="property-card"
-                    >
-                      <div className="property-card-image">
-                        {property.images && property.images.length > 0 ? (
-                          <Image
-                            src={`${bucketUrl}${property.images[0]}`}
-                            alt={property.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 300px"
-                            style={{ objectFit: "cover" }}
-                          />
-                        ) : (
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#94a3b8",
-                              fontSize: "12px",
-                            }}
-                          >
-                            {t("thirdView.noImage")}
-                          </div>
-                        )}
-                        {property.type && (
-                          <div className="property-card-badge">
-                            {property.type === "sale" ? t("thirdView.forSale") : t("thirdView.forRent")}
-                          </div>
-                        )}
-                        {property.price && (
-                          <div className="property-card-price">
-                            <p>
-                              ${property.price.toLocaleString()}
-                              {property.type === "rent" && <span>{t("thirdView.perMonth")}</span>}
-                            </p>
-                          </div>
-                        )}
+            <div className="testimonials-scroll-container">
+              <div className="testimonials-grid">
+                {[0, 1, 2, 3].map((index) => (
+                  <div key={index} className="testimonial-card">
+                    <div className="testimonial-quote-icon">
+                      <Quote size={24} />
+                    </div>
+                    <div className="testimonial-stars">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={14} fill="#f59e0b" color="#f59e0b" />
+                      ))}
+                    </div>
+                    <p className="testimonial-text">
+                      {t(`thirdView.testimonials.items.${index}.text`)}
+                    </p>
+                    <div className="testimonial-author">
+                      <div className="testimonial-author-avatar">
+                        {t(`thirdView.testimonials.items.${index}.name`).charAt(0)}
                       </div>
-                      <div className="property-card-content">
-                        <h4 className="property-card-title">
-                          {property.title}
+                      <div className="testimonial-author-info">
+                        <h4 className="testimonial-author-name">
+                          {t(`thirdView.testimonials.items.${index}.name`)}
                         </h4>
-                        {property.location && (
-                          <div className="property-card-location">
-                            <MapPin size={12} /> {property.location}
-                          </div>
-                        )}
-                        {property.description && (
-                          <p className="property-card-description">
-                            {property.description}
-                          </p>
-                        )}
-                        <div className="property-card-features">
-                          {property.bedrooms && (
-                            <span className="property-card-feature">
-                              <BedDouble size={14} /> {property.bedrooms} {t("thirdView.beds")}
-                            </span>
-                          )}
-                          {property.bathrooms && (
-                            <span className="property-card-feature">
-                              <Bath size={14} /> {property.bathrooms} {t("thirdView.baths")}
-                            </span>
-                          )}
-                          {property.area && (
-                            <span className="property-card-feature">
-                              <Expand size={14} /> {property.area} m²
-                            </span>
-                          )}
-                        </div>
+                        <p className="testimonial-author-location">
+                          {t(`thirdView.testimonials.items.${index}.location`)}
+                        </p>
                       </div>
-                    </a>
-                  ))}
-                </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <div className="no-properties-message">
-                {t("thirdView.noProperties")}
-              </div>
-            )}
+            </div>
           </div>
 
           {/* Down arrow to fourth view */}
@@ -5181,10 +5085,20 @@ export default function HeroSlider({
           className={`fourth-view-section ${showFourthView ? "active" : ""}`}
         >
           <button
-            className="fourth-view-back-button"
+            className="fourth-view-up-button"
             onClick={handleBackToThird}
           >
-            {t("back")}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 30.13c-.475.568-1.313.645-1.88.172L26 19.626 13.19 30.303c-.565.472-1.408.395-1.88-.17-.474-.567-.397-1.41.17-1.882l13.665-11.386c.248-.207.552-.312.854-.312.303 0 .607.104.854.312L40.52 28.25c.567.474.644 1.315.17 1.88z"
+              />
+            </svg>
           </button>
 
           <div className="fourth-view-content">
@@ -5297,10 +5211,20 @@ export default function HeroSlider({
         {/* Fifth View Section - Our Services */}
         <div className={`fifth-view-section ${showFifthView ? "active" : ""}`}>
           <button
-            className="fifth-view-back-button"
+            className="fifth-view-up-button"
             onClick={handleBackToFourth}
           >
-            {t("back")}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 30.13c-.475.568-1.313.645-1.88.172L26 19.626 13.19 30.303c-.565.472-1.408.395-1.88-.17-.474-.567-.397-1.41.17-1.882l13.665-11.386c.248-.207.552-.312.854-.312.303 0 .607.104.854.312L40.52 28.25c.567.474.644 1.315.17 1.88z"
+              />
+            </svg>
           </button>
 
           <div className="fifth-view-content">

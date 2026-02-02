@@ -865,7 +865,32 @@
       "perMonth": "/mo",
       "beds": "beds",
       "baths": "baths",
-      "noProperties": "No properties available at the moment."
+      "noProperties": "No properties available at the moment.",
+      "testimonials": {
+        "title": "What Our Clients Say",
+        "items": [
+          {
+            "text": "Working with KA Global was an exceptional experience. Kemal's expertise and personal attention made finding our dream villa in Cyprus effortless. His 20+ years of experience truly shows in every interaction.",
+            "name": "James Mitchell",
+            "location": "London, UK"
+          },
+          {
+            "text": "As an overseas investor, I was concerned about the complexity of buying property abroad. KA Global handled everything seamlessly, from property selection to post-purchase management. Highly recommended!",
+            "name": "Sarah Chen",
+            "location": "Singapore"
+          },
+          {
+            "text": "The level of professionalism and market knowledge at KA Global is outstanding. They helped us find the perfect investment property with excellent rental yields. A truly world-class service.",
+            "name": "Michael Thompson",
+            "location": "Dubai, UAE"
+          },
+          {
+            "text": "Kemal personally guided us through the entire process of purchasing our holiday home. His attention to detail and commitment to client satisfaction is remarkable. We couldn't be happier with our investment.",
+            "name": "Emma Williams",
+            "location": "Hong Kong"
+          }
+        ]
+      }
     },
     "fourthView": {
       "title": "About Us",

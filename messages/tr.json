@@ -865,7 +865,32 @@
       "perMonth": "/ay",
       "beds": "yatak",
       "baths": "banyo",
-      "noProperties": "Şu anda mevcut mülk bulunmamaktadır."
+      "noProperties": "Şu anda mevcut mülk bulunmamaktadır.",
+      "testimonials": {
+        "title": "Müşterilerimiz Ne Diyor",
+        "items": [
+          {
+            "text": "KA Global ile çalışmak olağanüstü bir deneyimdi. Kemal'in uzmanlığı ve kişisel ilgisi, Kıbrıs'taki hayalimizdeki villayı bulmamızı zahmetsiz hale getirdi. 20 yılı aşkın deneyimi her etkileşimde kendini gösteriyor.",
+            "name": "James Mitchell",
+            "location": "Londra, İngiltere"
+          },
+          {
+            "text": "Yurt dışından bir yatırımcı olarak, yurt dışında mülk satın almanın karmaşıklığından endişe duyuyordum. KA Global, mülk seçiminden satın alma sonrası yönetime kadar her şeyi sorunsuz bir şekilde halletti. Kesinlikle tavsiye ederim!",
+            "name": "Sarah Chen",
+            "location": "Singapur"
+          },
+          {
+            "text": "KA Global'deki profesyonellik ve piyasa bilgisi seviyesi olağanüstü. Mükemmel kira getirisi olan ideal yatırım mülkünü bulmamıza yardımcı oldular. Gerçekten dünya standartlarında bir hizmet.",
+            "name": "Michael Thompson",
+            "location": "Dubai, BAE"
+          },
+          {
+            "text": "Kemal, tatil evimizi satın alma sürecinin tamamında bize kişisel olarak rehberlik etti. Detaylara gösterdiği özen ve müşteri memnuniyetine olan bağlılığı dikkat çekici. Yatırımımızdan çok memnunuz.",
+            "name": "Emma Williams",
+            "location": "Hong Kong"
+          }
+        ]
+      }
     },
     "fourthView": {
       "title": "Hakkımızda",

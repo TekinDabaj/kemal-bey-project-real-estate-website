@@ -26,6 +26,8 @@ import {
   Send,
   CheckCircle,
   Loader2,
+  Quote,
+  Star,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -840,72 +842,40 @@ export default function HeroSliderMobile({
           color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Mobile Property Cards Section */
-        .mobile-third-properties {
+        /* Mobile Testimonials Section */
+        .mobile-third-testimonials {
           padding: 16px 0 24px;
           border-top: 1px solid rgba(0, 0, 0, 0.1);
-          background: #f8fafc;
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
 
-        :global(.dark) .mobile-third-properties {
+        :global(.dark) .mobile-third-testimonials {
           border-top-color: #2d2a4a;
-          background: #13102b;
+          background: linear-gradient(135deg, #13102b 0%, #1a1735 100%);
         }
 
-        .mobile-properties-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 16px;
-          margin-bottom: 12px;
-        }
-
-        .mobile-properties-title {
-          font-family: "Biryani", sans-serif;
-          font-size: 14px;
-          font-weight: 700;
-          color: #1a1a2e;
-          margin: 0;
-        }
-
-        :global(.dark) .mobile-properties-title {
-          color: white;
-        }
-
-        .mobile-properties-nav {
-          display: flex;
-          gap: 6px;
-        }
-
-        .mobile-properties-nav-btn {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          border: 1px solid #e2e8f0;
-          background: white;
-          cursor: pointer;
+        .mobile-testimonials-header {
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s;
-          color: #64748b;
+          padding: 0 16px;
+          margin-bottom: 14px;
         }
 
-        :global(.dark) .mobile-properties-nav-btn {
-          border-color: #2d2a4a;
-          background: #1a1735;
-          color: #94a3b8;
+        .mobile-testimonials-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 15px;
+          font-weight: 700;
+          color: #1a1a2e;
+          margin: 0;
+          text-align: center;
         }
 
-        .mobile-properties-nav-btn:active {
-          background: #f1f5f9;
+        :global(.dark) .mobile-testimonials-title {
+          color: white;
         }
 
-        :global(.dark) .mobile-properties-nav-btn:active {
-          background: #2d2a4a;
-        }
-
-        .mobile-properties-scroll {
+        .mobile-testimonials-scroll {
           overflow-x: auto;
           overflow-y: hidden;
           scrollbar-width: none;
@@ -913,170 +883,128 @@ export default function HeroSliderMobile({
           padding: 0 16px;
         }
 
-        .mobile-properties-scroll::-webkit-scrollbar {
+        .mobile-testimonials-scroll::-webkit-scrollbar {
           display: none;
         }
 
-        .mobile-properties-grid {
+        .mobile-testimonials-grid {
           display: flex;
           gap: 12px;
           padding-bottom: 4px;
         }
 
-        .mobile-property-card {
+        .mobile-testimonial-card {
           flex-shrink: 0;
-          width: 260px;
+          width: 280px;
           background: white;
-          border-radius: 8px;
-          overflow: hidden;
+          border-radius: 14px;
+          padding: 18px;
           border: 1px solid #f1f5f9;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-          text-decoration: none;
-          color: inherit;
-          display: block;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
           font-family: "Montserrat", sans-serif;
+          position: relative;
+          overflow: hidden;
         }
 
-        :global(.dark) .mobile-property-card {
-          background: #13102b;
+        .mobile-testimonial-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+
+        :global(.dark) .mobile-testimonial-card {
+          background: #1a1735;
           border-color: #2d2a4a;
         }
 
-        .mobile-property-card-image {
-          position: relative;
-          aspect-ratio: 16/10;
-          background: #e2e8f0;
-          overflow: hidden;
-        }
-
-        :global(.dark) .mobile-property-card-image {
-          background: #1a1735;
-        }
-
-        .mobile-property-card-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .mobile-property-card-badge {
-          position: absolute;
-          top: 6px;
-          right: 6px;
-          padding: 2px 6px;
-          border-radius: 4px;
-          font-size: 10px;
-          font-weight: 500;
-          background: #f59e0b;
-          color: #0f172a;
-        }
-
-        .mobile-property-card-price {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-          padding: 16px 10px 6px;
-        }
-
-        .mobile-property-card-price p {
-          font-size: 15px;
-          font-weight: 700;
-          color: white;
-          margin: 0;
-        }
-
-        .mobile-property-card-price span {
-          font-size: 12px;
-          font-weight: 400;
-          opacity: 0.8;
-        }
-
-        .mobile-property-card-content {
-          padding: 12px;
-        }
-
-        .mobile-property-card-title {
-          font-size: 13px;
-          font-weight: 600;
-          color: #0f172a;
-          margin: 0 0 4px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        :global(.dark) .mobile-property-card-title {
-          color: white;
-        }
-
-        .mobile-property-card-location {
+        .mobile-testimonial-quote-icon {
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
           display: flex;
           align-items: center;
-          gap: 3px;
-          font-size: 11px;
-          color: #64748b;
-          margin-bottom: 8px;
+          justify-content: center;
+          margin-bottom: 12px;
+          color: white;
         }
 
-        :global(.dark) .mobile-property-card-location {
-          color: #94a3b8;
-        }
-
-        .mobile-property-card-description {
-          font-size: 11px;
-          color: #475569;
+        .mobile-testimonial-stars {
+          display: flex;
+          gap: 2px;
           margin-bottom: 10px;
+        }
+
+        .mobile-testimonial-text {
+          font-size: 12px;
+          line-height: 1.6;
+          color: #475569;
+          margin: 0 0 14px;
+          font-style: italic;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
-          line-height: 1.4;
         }
 
-        :global(.dark) .mobile-property-card-description {
+        :global(.dark) .mobile-testimonial-text {
           color: #94a3b8;
         }
 
-        .mobile-property-card-features {
+        .mobile-testimonial-author {
           display: flex;
+          align-items: center;
           gap: 10px;
-          font-size: 10px;
-          color: #64748b;
+          padding-top: 12px;
           border-top: 1px solid #f1f5f9;
-          padding-top: 10px;
         }
 
-        :global(.dark) .mobile-property-card-features {
-          color: #94a3b8;
+        :global(.dark) .mobile-testimonial-author {
           border-top-color: #2d2a4a;
         }
 
-        .mobile-property-card-feature {
+        .mobile-testimonial-author-avatar {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #24c7c0 0%, #169216 100%);
           display: flex;
           align-items: center;
-          gap: 3px;
+          justify-content: center;
+          font-family: "Biryani", sans-serif;
+          font-weight: 700;
+          font-size: 16px;
+          color: white;
+          text-transform: uppercase;
         }
 
-        .mobile-property-card-feature svg {
-          color: #94a3b8;
+        .mobile-testimonial-author-info {
+          flex: 1;
         }
 
-        :global(.dark) .mobile-property-card-feature svg {
+        .mobile-testimonial-author-name {
+          font-size: 12px;
+          font-weight: 600;
+          color: #0f172a;
+          margin: 0 0 2px;
+        }
+
+        :global(.dark) .mobile-testimonial-author-name {
+          color: white;
+        }
+
+        .mobile-testimonial-author-location {
+          font-size: 10px;
           color: #64748b;
+          margin: 0;
         }
 
-        .mobile-no-properties {
-          padding: 32px 16px;
-          text-align: center;
-          color: #64748b;
-          font-family: "Montserrat", sans-serif;
-          font-size: 13px;
-        }
-
-        :global(.dark) .mobile-no-properties {
+        :global(.dark) .mobile-testimonial-author-location {
           color: #94a3b8;
         }
 
@@ -1933,112 +1861,43 @@ export default function HeroSliderMobile({
           ))}
         </section>
 
-        {/* Property Cards Section */}
-        <div className="mobile-third-properties">
-          <div className="mobile-properties-header">
-            <h3 className="mobile-properties-title">{t("thirdView.featuredProperties")}</h3>
-            {displayProperties.length > 0 && (
-              <div className="mobile-properties-nav">
-                <button
-                  className="mobile-properties-nav-btn"
-                  onClick={() => scrollProperties("left")}
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <button
-                  className="mobile-properties-nav-btn"
-                  onClick={() => scrollProperties("right")}
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            )}
+        {/* Testimonials Section */}
+        <div className="mobile-third-testimonials">
+          <div className="mobile-testimonials-header">
+            <h3 className="mobile-testimonials-title">{t("thirdView.testimonials.title")}</h3>
           </div>
-          {displayProperties.length > 0 ? (
-            <div className="mobile-properties-scroll" ref={propertyScrollRef}>
-              <div className="mobile-properties-grid">
-                {displayProperties.map((property) => (
-                  <a
-                    key={property.id}
-                    href={`/properties/${property.id}`}
-                    className="mobile-property-card"
-                  >
-                    <div className="mobile-property-card-image">
-                      {property.images && property.images.length > 0 ? (
-                        <img
-                          src={`${bucketUrl}${property.images[0]}`}
-                          alt={property.title}
-                        />
-                      ) : (
-                        <div
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            color: "#94a3b8",
-                            fontSize: "11px",
-                          }}
-                        >
-                          {t("thirdView.noImage")}
-                        </div>
-                      )}
-                      {property.type && (
-                        <div className="mobile-property-card-badge">
-                          {property.type === "sale" ? t("thirdView.forSale") : t("thirdView.forRent")}
-                        </div>
-                      )}
-                      {property.price && (
-                        <div className="mobile-property-card-price">
-                          <p>
-                            ${property.price.toLocaleString()}
-                            {property.type === "rent" && <span>{t("thirdView.perMonth")}</span>}
-                          </p>
-                        </div>
-                      )}
+          <div className="mobile-testimonials-scroll">
+            <div className="mobile-testimonials-grid">
+              {[0, 1, 2, 3].map((index) => (
+                <div key={index} className="mobile-testimonial-card">
+                  <div className="mobile-testimonial-quote-icon">
+                    <Quote size={18} />
+                  </div>
+                  <div className="mobile-testimonial-stars">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={12} fill="#f59e0b" color="#f59e0b" />
+                    ))}
+                  </div>
+                  <p className="mobile-testimonial-text">
+                    {t(`thirdView.testimonials.items.${index}.text`)}
+                  </p>
+                  <div className="mobile-testimonial-author">
+                    <div className="mobile-testimonial-author-avatar">
+                      {t(`thirdView.testimonials.items.${index}.name`).charAt(0)}
                     </div>
-                    <div className="mobile-property-card-content">
-                      <h4 className="mobile-property-card-title">
-                        {property.title}
+                    <div className="mobile-testimonial-author-info">
+                      <h4 className="mobile-testimonial-author-name">
+                        {t(`thirdView.testimonials.items.${index}.name`)}
                       </h4>
-                      {property.location && (
-                        <div className="mobile-property-card-location">
-                          <MapPin size={10} /> {property.location}
-                        </div>
-                      )}
-                      {property.description && (
-                        <p className="mobile-property-card-description">
-                          {property.description}
-                        </p>
-                      )}
-                      <div className="mobile-property-card-features">
-                        {property.bedrooms && (
-                          <span className="mobile-property-card-feature">
-                            <BedDouble size={12} /> {property.bedrooms} {t("thirdView.beds")}
-                          </span>
-                        )}
-                        {property.bathrooms && (
-                          <span className="mobile-property-card-feature">
-                            <Bath size={12} /> {property.bathrooms} {t("thirdView.baths")}
-                          </span>
-                        )}
-                        {property.area && (
-                          <span className="mobile-property-card-feature">
-                            <Expand size={12} /> {property.area} m²
-                          </span>
-                        )}
-                      </div>
+                      <p className="mobile-testimonial-author-location">
+                        {t(`thirdView.testimonials.items.${index}.location`)}
+                      </p>
                     </div>
-                  </a>
-                ))}
-              </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ) : (
-            <div className="mobile-no-properties">
-              {t("thirdView.noProperties")}
-            </div>
-          )}
+          </div>
         </div>
 
         {/* Fourth View Section - About Us */}
