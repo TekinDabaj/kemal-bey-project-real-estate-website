@@ -2552,7 +2552,7 @@ export default function HeroSlider({
 
         .article-up-button {
           position: fixed;
-          top: 30px;
+          top: 100px;
           left: 50%;
           transform: translateX(-50%);
           width: 50px;
@@ -2744,7 +2744,7 @@ export default function HeroSlider({
 
         .third-view-up-button {
           position: fixed;
-          top: 30px;
+          top: 100px;
           left: 50%;
           transform: translateX(-50%);
           width: 50px;
@@ -3096,7 +3096,7 @@ export default function HeroSlider({
           .third-view-up-button {
             width: 44px;
             height: 44px;
-            top: 20px;
+            top: 90px;
           }
 
           .third-view-down-button {
@@ -3309,7 +3309,7 @@ export default function HeroSlider({
 
         .fourth-view-up-button {
           position: fixed;
-          top: 30px;
+          top: 100px;
           left: 50%;
           transform: translateX(-50%);
           width: 50px;
@@ -3807,7 +3807,7 @@ export default function HeroSlider({
           .fourth-view-up-button {
             width: 44px;
             height: 44px;
-            top: 20px;
+            top: 90px;
           }
 
           .fourth-view-down-button {
@@ -3842,7 +3842,7 @@ export default function HeroSlider({
 
         .fifth-view-up-button {
           position: fixed;
-          top: 30px;
+          top: 100px;
           left: 50%;
           transform: translateX(-50%);
           width: 50px;
