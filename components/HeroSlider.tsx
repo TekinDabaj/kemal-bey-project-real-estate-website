@@ -2084,15 +2084,15 @@ export default function HeroSlider({
           -webkit-mask-image: linear-gradient(
             to right,
             transparent 0%,
-            transparent 20%,
-            black 50%,
+            transparent 45%,
+            black 70%,
             black 100%
           );
           mask-image: linear-gradient(
             to right,
             transparent 0%,
-            transparent 20%,
-            black 50%,
+            transparent 45%,
+            black 70%,
             black 100%
           );
           opacity: 1;
@@ -2102,15 +2102,15 @@ export default function HeroSlider({
           -webkit-mask-image: linear-gradient(
             to right,
             transparent 0%,
-            transparent 20%,
-            black 50%,
+            transparent 45%,
+            black 70%,
             black 100%
           );
           mask-image: linear-gradient(
             to right,
             transparent 0%,
-            transparent 20%,
-            black 50%,
+            transparent 45%,
+            black 70%,
             black 100%
           );
           opacity: 1;
@@ -3438,6 +3438,15 @@ export default function HeroSlider({
 
         .fourth-view-values {
           margin-top: 20px;
+          padding: 20px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        :global(.dark) .fourth-view-values {
+          background: linear-gradient(135deg, #13102b 0%, #1a1735 100%);
+          border-color: #2d2a4a;
         }
 
         .fourth-view-values-title {

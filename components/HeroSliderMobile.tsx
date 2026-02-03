@@ -1077,6 +1077,15 @@ export default function HeroSliderMobile({
 
         .mobile-fourth-values {
           margin-bottom: 20px;
+          padding: 16px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        :global(.dark) .mobile-fourth-values {
+          background: linear-gradient(135deg, #13102b 0%, #1a1735 100%);
+          border-color: #2d2a4a;
         }
 
         .mobile-fourth-values-title {
