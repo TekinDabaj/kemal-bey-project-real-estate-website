@@ -41,7 +41,7 @@ export default function Header() {
 
   return (
     <header className="fixed bottom-4 md:bottom-auto md:top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl font-[family-name:var(--font-montserrat)]">
-      <nav className="bg-[#00008B]/80 dark:bg-[#0c0a1d]/80 backdrop-blur-xl border border-white/10 dark:border-white dark:md:border-white/10 rounded-2xl shadow-lg shadow-black/10">
+      <nav className="bg-[#00008B] dark:bg-[#0c0a1d]/80 backdrop-blur-xl border border-white/10 dark:border-white dark:md:border-white/10 rounded-2xl shadow-lg shadow-black/10">
         <div className="px-6 py-3 flex flex-col">
           <div className="flex items-center">
             {/* Left: Brand */}
@@ -73,7 +73,7 @@ export default function Header() {
               </div>
               <Link
                 href="/book"
-                className="bg-[#0F52BA] hover:bg-[#0D47A1] text-white dark:bg-amber-500 dark:hover:bg-amber-600 dark:text-slate-900 px-4 py-2 rounded-xl font-medium transition text-sm"
+                className="bg-[#FF8C00] hover:bg-[#E67E00] text-black dark:bg-amber-500 dark:hover:bg-amber-600 dark:text-slate-900 px-4 py-2 rounded-xl font-medium transition text-sm"
               >
                 {t('bookConsultation')}
               </Link>
@@ -94,7 +94,7 @@ export default function Header() {
             <div className="md:hidden pb-4 pt-2 space-y-1 border-b border-white/10 mb-3 order-first">
               <Link
                 href="/book"
-                className="block bg-[#0F52BA] hover:bg-[#0D47A1] text-white dark:bg-amber-500 dark:hover:bg-amber-600 dark:text-slate-900 px-4 py-2 rounded-xl font-medium text-center mb-2"
+                className="block bg-[#FF8C00] hover:bg-[#E67E00] text-black dark:bg-amber-500 dark:hover:bg-amber-600 dark:text-slate-900 px-4 py-2 rounded-xl font-medium text-center mb-2"
                 onClick={() => setIsOpen(false)}
               >
                 {t('bookConsultation')}

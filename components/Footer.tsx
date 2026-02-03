@@ -9,7 +9,7 @@ export default function Footer() {
   const nav = useTranslations('navigation');
 
   return (
-    <footer className="bg-slate-900 dark:bg-[#080716] dark:border-t dark:border-[#2d2a4a] text-slate-300">
+    <footer className="bg-[#00008B] dark:bg-[#080716] dark:border-t dark:border-[#2d2a4a] text-slate-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Company Info */}
