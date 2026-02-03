@@ -23,7 +23,7 @@ export interface ValueData {
   description: string;
 }
 
-interface AboutUsCardsProps {
+export interface AboutUsCardsProps {
   values: ValueData[];
 }
 
@@ -301,5 +301,3 @@ export default function AboutUsCards({ values }: AboutUsCardsProps) {
     </>
   );
 }
-
-export type { ValueData, AboutUsCardsProps };
