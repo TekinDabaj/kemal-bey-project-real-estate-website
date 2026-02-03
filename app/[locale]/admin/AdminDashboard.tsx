@@ -60,7 +60,7 @@ import {
   Video,
   ExternalLink,
 } from "lucide-react";
-import { Reservation, Property, HeroSlide, BlogPost } from "@/types/database";
+import { Reservation, Property, HeroSlide, BlogPost, Availability } from "@/types/database";
 import ContentEditor from "./ContentEditor";
 import PropertiesManager from "./PropertiesManager";
 import BlogManager from "./BlogManager";
@@ -120,6 +120,13 @@ export default function AdminDashboard({
   // Property preview modal state
   const [previewProperty, setPreviewProperty] = useState<Property | null>(null);
 
+  // Availability modal state
+  const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
+  const [selectedAvailabilityDate, setSelectedAvailabilityDate] = useState<Date | null>(null);
+  const [selectedTimes, setSelectedTimes] = useState<string[]>([]);
+  const [availabilities, setAvailabilities] = useState<Availability[]>([]);
+  const [availabilitySaving, setAvailabilitySaving] = useState(false);
+
   // Hydration fix: update notification state only after mount
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
@@ -150,6 +157,107 @@ export default function AdminDashboard({
   // Get reservations for a specific day
   const getReservationsForDay = (day: Date) => {
     return reservations.filter((r) => isSameDay(new Date(r.date), day));
+  };
+
+  // Time slots for availability
+  const timeSlots = [
+    "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00",
+    "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
+  ];
+
+  // Load availabilities on mount
+  useEffect(() => {
+    async function loadAvailabilities() {
+      const { data, error } = await supabase
+        .from("availabilities")
+        .select("*")
+        .order("date", { ascending: true });
+
+      if (!error && data) {
+        setAvailabilities(data);
+      }
+    }
+    loadAvailabilities();
+  }, [supabase]);
+
+  // Get availability for a specific date
+  const getAvailabilityForDate = (date: Date) => {
+    const dateStr = format(date, "yyyy-MM-dd");
+    return availabilities.find((a) => a.date === dateStr);
+  };
+
+  // Get booked times for a specific date
+  const getBookedTimesForDate = (date: Date) => {
+    const dayReservations = getReservationsForDay(date);
+    return dayReservations
+      .filter((r) => r.status !== "cancelled")
+      .map((r) => r.time.slice(0, 5));
+  };
+
+  // Open availability modal for a date
+  const openAvailabilityModal = (date: Date) => {
+    setSelectedAvailabilityDate(date);
+    const existing = getAvailabilityForDate(date);
+    setSelectedTimes(existing?.times || []);
+    setAvailabilityModalOpen(true);
+  };
+
+  // Save availability
+  const saveAvailability = async () => {
+    if (!selectedAvailabilityDate) return;
+
+    setAvailabilitySaving(true);
+    const dateStr = format(selectedAvailabilityDate, "yyyy-MM-dd");
+    const existing = getAvailabilityForDate(selectedAvailabilityDate);
+
+    if (selectedTimes.length === 0) {
+      // Delete availability if no times selected
+      if (existing) {
+        const { error } = await supabase
+          .from("availabilities")
+          .delete()
+          .eq("id", existing.id);
+
+        if (!error) {
+          setAvailabilities(availabilities.filter((a) => a.id !== existing.id));
+        }
+      }
+    } else if (existing) {
+      // Update existing availability
+      const { data, error } = await supabase
+        .from("availabilities")
+        .update({ times: selectedTimes, updated_at: new Date().toISOString() })
+        .eq("id", existing.id)
+        .select()
+        .single();
+
+      if (!error && data) {
+        setAvailabilities(availabilities.map((a) => (a.id === existing.id ? data : a)));
+      }
+    } else {
+      // Create new availability
+      const { data, error } = await supabase
+        .from("availabilities")
+        .insert({ date: dateStr, times: selectedTimes })
+        .select()
+        .single();
+
+      if (!error && data) {
+        setAvailabilities([...availabilities, data]);
+      }
+    }
+
+    setAvailabilitySaving(false);
+    setAvailabilityModalOpen(false);
+    setSelectedAvailabilityDate(null);
+    setSelectedTimes([]);
+  };
+
+  // Toggle time selection
+  const toggleTimeSelection = (time: string) => {
+    setSelectedTimes((prev) =>
+      prev.includes(time) ? prev.filter((t) => t !== time) : [...prev, time].sort()
+    );
   };
 
   // Notification functions
@@ -737,6 +845,160 @@ export default function AdminDashboard({
         </div>
       )}
 
+      {/* Availability Modal */}
+      {availabilityModalOpen && selectedAvailabilityDate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => {
+              if (!availabilitySaving) {
+                setAvailabilityModalOpen(false);
+                setSelectedAvailabilityDate(null);
+                setSelectedTimes([]);
+              }
+            }}
+          />
+
+          {/* Modal */}
+          <div className="relative bg-white dark:bg-[#13102b] rounded-2xl shadow-2xl w-full max-w-md border border-slate-200 dark:border-[#2d2a4a]">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-[#2d2a4a]">
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                  {t("reservations.availability.modalTitle")}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                  {t("reservations.availability.selectTimes")}{" "}
+                  <span className="font-medium text-amber-600 dark:text-amber-400">
+                    {format(selectedAvailabilityDate, "EEEE, MMMM d, yyyy", { locale: dateLocale })}
+                  </span>
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  if (!availabilitySaving) {
+                    setAvailabilityModalOpen(false);
+                    setSelectedAvailabilityDate(null);
+                    setSelectedTimes([]);
+                  }
+                }}
+                disabled={availabilitySaving}
+                className="p-2 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded-lg transition disabled:opacity-50"
+              >
+                <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              {/* Quick Actions */}
+              <div className="flex gap-2 mb-4">
+                <button
+                  onClick={() => setSelectedTimes([...timeSlots])}
+                  className="px-3 py-1.5 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-md hover:bg-green-200 dark:hover:bg-green-900/50 transition"
+                >
+                  {t("reservations.availability.selectAll")}
+                </button>
+                <button
+                  onClick={() => setSelectedTimes([])}
+                  className="px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-[#1a1735] text-slate-600 dark:text-slate-400 rounded-md hover:bg-slate-200 dark:hover:bg-[#2d2a4a] transition"
+                >
+                  {t("reservations.availability.clearAll")}
+                </button>
+              </div>
+
+              {/* Time Slots Grid */}
+              <div className="grid grid-cols-4 gap-2">
+                {timeSlots.map((time) => {
+                  const isSelected = selectedTimes.includes(time);
+                  const bookedTimes = getBookedTimesForDate(selectedAvailabilityDate);
+                  const isBooked = bookedTimes.includes(time);
+
+                  return (
+                    <button
+                      key={time}
+                      onClick={() => !isBooked && toggleTimeSelection(time)}
+                      disabled={isBooked}
+                      className={`relative py-2.5 px-2 rounded-lg text-sm font-medium transition ${
+                        isBooked
+                          ? "bg-red-50 dark:bg-red-900/20 text-red-400 dark:text-red-500 cursor-not-allowed border border-red-200 dark:border-red-900/30"
+                          : isSelected
+                          ? "bg-amber-500 text-white shadow-md"
+                          : "bg-slate-100 dark:bg-[#1a1735] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#2d2a4a] border border-slate-200 dark:border-[#2d2a4a]"
+                      }`}
+                    >
+                      {time}
+                      {isBooked && (
+                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                      )}
+                      {isSelected && !isBooked && (
+                        <Check className="absolute top-1 right-1 w-3 h-3" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Status Info */}
+              <div className="mt-4 flex items-center gap-4 text-xs">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded bg-amber-500" />
+                  <span className="text-slate-600 dark:text-slate-400">{t("reservations.availability.availableSlots")}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-900/50 relative">
+                    <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
+                  </div>
+                  <span className="text-slate-600 dark:text-slate-400">{t("reservations.availability.bookedSlot")}</span>
+                </div>
+              </div>
+
+              {/* Selection Summary */}
+              <div className="mt-4 p-3 bg-slate-50 dark:bg-[#1a1735] rounded-lg">
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {selectedTimes.length === 0
+                    ? t("reservations.availability.noTimesSelected")
+                    : t("reservations.availability.timesSelected", { count: selectedTimes.length })}
+                </p>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-slate-200 dark:border-[#2d2a4a]">
+              <button
+                onClick={() => {
+                  setAvailabilityModalOpen(false);
+                  setSelectedAvailabilityDate(null);
+                  setSelectedTimes([]);
+                }}
+                disabled={availabilitySaving}
+                className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
+              >
+                {t("reservations.availability.cancel")}
+              </button>
+              <button
+                onClick={saveAvailability}
+                disabled={availabilitySaving}
+                className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition disabled:opacity-50 flex items-center gap-2"
+              >
+                {availabilitySaving ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    {t("reservations.availability.saving")}
+                  </>
+                ) : (
+                  <>
+                    <Check size={16} />
+                    {t("reservations.availability.save")}
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-slate-900 dark:bg-[#0c0a1d] dark:border-b dark:border-[#2d2a4a] text-white px-4 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8">
@@ -878,9 +1140,14 @@ export default function AdminDashboard({
             {/* Calendar View */}
             <div className="bg-white dark:bg-[#13102b] rounded-lg border border-slate-200 dark:border-[#2d2a4a] p-4 mb-8">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
-                  {t("reservations.calendar.title")}
-                </h3>
+                <div>
+                  <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+                    {t("reservations.calendar.title")}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    {t("reservations.calendar.clickToSetAvailability")}
+                  </p>
+                </div>
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() =>
@@ -938,19 +1205,28 @@ export default function AdminDashboard({
                     {calendarDays.map((day) => {
                       const dayReservations = getReservationsForDay(day);
                       const hasReservations = dayReservations.length > 0;
+                      const dayAvailability = getAvailabilityForDate(day);
+                      const hasAvailability = dayAvailability && dayAvailability.times.length > 0;
 
                       return (
                         <div
                           key={day.toISOString()}
-                          className={`bg-white dark:bg-[#13102b] min-h-[70px] p-1.5 ${
-                            isToday(day) ? "bg-amber-50 dark:bg-amber-900/20" : ""
-                          }`}
+                          onClick={() => openAvailabilityModal(day)}
+                          className={`bg-white dark:bg-[#13102b] min-h-[70px] p-1.5 cursor-pointer hover:bg-slate-50 dark:hover:bg-[#1a1735] transition relative ${
+                            isToday(day) ? "bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 dark:hover:bg-amber-900/30" : ""
+                          } ${hasAvailability ? "ring-1 ring-inset ring-green-400/50 dark:ring-green-500/30" : ""}`}
                         >
+                          {/* Availability indicator */}
+                          {hasAvailability && (
+                            <div className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full" title={`${dayAvailability.times.length} slots available`} />
+                          )}
                           <div className="flex flex-col h-full">
                             <span
                               className={`text-xs font-medium mb-1 ${
                                 isToday(day)
                                   ? "text-amber-600 dark:text-amber-400"
+                                  : hasAvailability
+                                  ? "text-green-600 dark:text-green-400"
                                   : "text-slate-500 dark:text-slate-400"
                               }`}
                             >
@@ -961,6 +1237,7 @@ export default function AdminDashboard({
                                 {dayReservations.slice(0, 2).map((reservation) => (
                                   <div
                                     key={reservation.id}
+                                    onClick={(e) => e.stopPropagation()}
                                     className={`text-[10px] leading-tight px-1 py-0.5 rounded truncate ${
                                       reservation.status === "confirmed"
                                         ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
@@ -981,6 +1258,13 @@ export default function AdminDashboard({
                                     +{dayReservations.length - 2} more
                                   </div>
                                 )}
+                              </div>
+                            )}
+                            {!hasReservations && hasAvailability && (
+                              <div className="flex-1 flex items-center justify-center">
+                                <span className="text-[9px] text-green-600 dark:text-green-400 font-medium">
+                                  {dayAvailability.times.length} slots
+                                </span>
                               </div>
                             )}
                           </div>

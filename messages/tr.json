@@ -196,7 +196,13 @@
     },
     "workingHours": "Pazartesi - Cumartesi, 08:00 - 20:00",
     "freeConsultation": "Ücretsiz 30 dakikalık görüşme",
-    "noObligation": "Bağlayıcı değil, istediğiniz zaman iptal edebilirsiniz"
+    "noObligation": "Bağlayıcı değil, istediğiniz zaman iptal edebilirsiniz",
+    "noAvailability": {
+      "title": "Uygun Tarih Yok",
+      "description": "Şu anda uygun danışmanlık saati bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin veya doğrudan bizimle iletişime geçin.",
+      "contactUs": "Bize Ulaşın"
+    },
+    "noTimesAvailable": "Bu tarih için uygun saat bulunmuyor"
   },
   "properties": {
     "title": "Emlaklarımız",
@@ -374,10 +380,26 @@
       },
       "confirmDelete": "Bu randevuyu silmek istediğinizden emin misiniz?",
       "calendar": {
-        "title": "Randevu Takvimi",
+        "title": "Uygunluk Takvimi",
         "today": "Bugün",
         "noAppointments": "Randevu yok",
-        "appointments": "randevu"
+        "appointments": "randevu",
+        "clickToSetAvailability": "Uygunluk ayarlamak için bir tarihe tıklayın"
+      },
+      "availability": {
+        "modalTitle": "Uygunluk Ayarla",
+        "selectTimes": "Uygun zaman dilimlerini seçin:",
+        "noTimesSelected": "Hiç saat seçilmedi - bu gün uygun olmayacak",
+        "timesSelected": "{count} zaman dilimi seçildi",
+        "selectAll": "Tümünü Seç",
+        "clearAll": "Temizle",
+        "save": "Uygunluğu Kaydet",
+        "cancel": "İptal",
+        "saving": "Kaydediliyor...",
+        "saved": "Uygunluk başarıyla kaydedildi",
+        "error": "Uygunluk kaydedilemedi",
+        "availableSlots": "uygun",
+        "bookedSlot": "Rezerveli"
       },
       "notifications": {
         "enabled": "Bildirimler Açık",

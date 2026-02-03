@@ -4,16 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/client";
-import {
-  format,
-  addDays,
-  isMonday,
-  isTuesday,
-  isWednesday,
-  isThursday,
-  isFriday,
-  isSaturday,
-} from "date-fns";
+import { format } from "date-fns";
 import {
   enGB,
   tr,
@@ -78,47 +69,14 @@ type Property = {
   images: string[];
 };
 
+// Availability type
+type Availability = {
+  id: string;
+  date: string;
+  times: string[];
+};
+
 const bucketUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/`;
-
-const timeSlots = [
-  "08:00",
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-];
-
-function isWorkingDay(date: Date) {
-  return (
-    isMonday(date) ||
-    isTuesday(date) ||
-    isWednesday(date) ||
-    isThursday(date) ||
-    isFriday(date) ||
-    isSaturday(date)
-  );
-}
-
-function getNext30Days() {
-  const days = [];
-  const current = new Date();
-
-  for (let i = 0; i < 45 && days.length < 30; i++) {
-    const date = addDays(current, i);
-    if (isWorkingDay(date)) {
-      days.push(date);
-    }
-  }
-  return days;
-}
 
 // Property Selection Modal Component
 function PropertySelectionModal({
@@ -267,6 +225,11 @@ export default function BookPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  // Availability state
+  const [availabilities, setAvailabilities] = useState<Availability[]>([]);
+  const [availabilitiesLoading, setAvailabilitiesLoading] = useState(true);
+  const [availableTimesForDate, setAvailableTimesForDate] = useState<string[]>([]);
+
   // Properties state
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedProperties, setSelectedProperties] = useState<Property[]>([]);
@@ -286,7 +249,37 @@ export default function BookPage() {
   });
 
   const supabase = createClient();
-  const availableDays = getNext30Days();
+
+  // Fetch availabilities on mount
+  useEffect(() => {
+    async function fetchAvailabilities() {
+      setAvailabilitiesLoading(true);
+      const today = format(new Date(), "yyyy-MM-dd");
+
+      const { data, error } = await supabase
+        .from("availabilities")
+        .select("id, date, times")
+        .gte("date", today)
+        .order("date", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching availabilities:", error);
+        setAvailabilitiesLoading(false);
+        return;
+      }
+
+      if (data) {
+        // Filter out availabilities with no times
+        const validAvailabilities = data.filter((a) => a.times && a.times.length > 0);
+        setAvailabilities(validAvailabilities);
+      }
+      setAvailabilitiesLoading(false);
+    }
+    fetchAvailabilities();
+  }, [supabase]);
+
+  // Get available dates from availabilities
+  const availableDays = availabilities.map((a) => new Date(a.date + "T00:00:00"));
 
   // Fetch properties on mount
   useEffect(() => {
@@ -307,19 +300,32 @@ export default function BookPage() {
       }
     }
     fetchProperties();
-  }, []);
+  }, [supabase]);
 
   async function handleDateSelect(date: Date) {
     setSelectedDate(date);
     setSelectedTime(null);
 
+    const dateStr = format(date, "yyyy-MM-dd");
+
+    // Get available times from availability
+    const availability = availabilities.find((a) => a.date === dateStr);
+    const availableTimes = availability?.times || [];
+
+    // Get booked times for this date
     const { data } = await supabase
       .from("reservations")
       .select("time")
-      .eq("date", format(date, "yyyy-MM-dd"))
+      .eq("date", dateStr)
       .neq("status", "cancelled");
 
-    setBookedSlots(data?.map((r) => r.time.slice(0, 5)) || []);
+    const booked = data?.map((r) => r.time.slice(0, 5)) || [];
+    setBookedSlots(booked);
+
+    // Calculate actually available times (available - booked)
+    const actuallyAvailable = availableTimes.filter((time) => !booked.includes(time));
+    setAvailableTimesForDate(actuallyAvailable);
+
     setStep(2);
   }
 
@@ -472,30 +478,52 @@ export default function BookPage() {
               <h2 className="text-sm font-medium text-slate-900 dark:text-white">{t("selectDate")}</h2>
             </div>
             <div className="p-3 sm:p-4">
-              <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-10 gap-1.5">
-                {availableDays.map((date) => {
-                  const isSelected = selectedDate?.toDateString() === date.toDateString();
-                  return (
-                    <button
-                      key={date.toISOString()}
-                      onClick={() => handleDateSelect(date)}
-                      className={`p-1.5 sm:p-2 rounded-md text-center transition ${
-                        isSelected
-                          ? "bg-amber-500 text-white"
-                          : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
-                      }`}
-                    >
-                      <div className={`text-[10px] font-medium ${isSelected ? "text-amber-100" : "text-slate-400 dark:text-slate-500"}`}>
-                        {format(date, "EEE", { locale: dateLocale })}
-                      </div>
-                      <div className="text-sm font-semibold">{format(date, "d", { locale: dateLocale })}</div>
-                      <div className={`text-[10px] ${isSelected ? "text-amber-100" : "text-slate-400 dark:text-slate-500"}`}>
-                        {format(date, "MMM", { locale: dateLocale })}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+              {availabilitiesLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <div className="w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full animate-spin" />
+                </div>
+              ) : availableDays.length === 0 ? (
+                <div className="text-center py-12">
+                  <Calendar className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+                  <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                    {t("noAvailability.title")}
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-4">
+                    {t("noAvailability.description")}
+                  </p>
+                  <Link
+                    href="/#contact"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-md text-sm font-medium transition"
+                  >
+                    {t("noAvailability.contactUs")}
+                  </Link>
+                </div>
+              ) : (
+                <div className="grid grid-cols-6 sm:grid-cols-7 md:grid-cols-10 gap-1.5">
+                  {availableDays.map((date) => {
+                    const isSelected = selectedDate?.toDateString() === date.toDateString();
+                    return (
+                      <button
+                        key={date.toISOString()}
+                        onClick={() => handleDateSelect(date)}
+                        className={`p-1.5 sm:p-2 rounded-md text-center transition ${
+                          isSelected
+                            ? "bg-amber-500 text-white"
+                            : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
+                        }`}
+                      >
+                        <div className={`text-[10px] font-medium ${isSelected ? "text-amber-100" : "text-slate-400 dark:text-slate-500"}`}>
+                          {format(date, "EEE", { locale: dateLocale })}
+                        </div>
+                        <div className="text-sm font-semibold">{format(date, "d", { locale: dateLocale })}</div>
+                        <div className={`text-[10px] ${isSelected ? "text-amber-100" : "text-slate-400 dark:text-slate-500"}`}>
+                          {format(date, "MMM", { locale: dateLocale })}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
 
@@ -514,29 +542,49 @@ export default function BookPage() {
               </button>
             </div>
             <div className="p-3 sm:p-4">
-              <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-13 gap-1.5">
-                {timeSlots.map((time) => {
-                  const isBooked = bookedSlots.includes(time);
-                  const isSelected = selectedTime === time;
+              {(() => {
+                // Get the availability for the selected date
+                const dateStr = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
+                const availability = availabilities.find((a) => a.date === dateStr);
+                const availableTimes = availability?.times || [];
+
+                if (availableTimes.length === 0) {
                   return (
-                    <button
-                      key={time}
-                      onClick={() => !isBooked && handleTimeSelect(time)}
-                      disabled={isBooked}
-                      className={`relative py-2 px-1 rounded-md text-center text-sm font-medium transition ${
-                        isBooked
-                          ? "bg-slate-100 dark:bg-[#1a1735] text-slate-300 dark:text-slate-600 cursor-not-allowed"
-                          : isSelected
-                          ? "bg-amber-500 text-white"
-                          : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
-                      }`}
-                    >
-                      {time}
-                      {isBooked && <span className="absolute -top-1 -right-1 w-2 h-2 bg-slate-400 dark:bg-slate-600 rounded-full" />}
-                    </button>
+                    <div className="text-center py-8">
+                      <Clock className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        {t("noTimesAvailable")}
+                      </p>
+                    </div>
                   );
-                })}
-              </div>
+                }
+
+                return (
+                  <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-13 gap-1.5">
+                    {availableTimes.map((time) => {
+                      const isBooked = bookedSlots.includes(time);
+                      const isSelected = selectedTime === time;
+                      return (
+                        <button
+                          key={time}
+                          onClick={() => !isBooked && handleTimeSelect(time)}
+                          disabled={isBooked}
+                          className={`relative py-2 px-1 rounded-md text-center text-sm font-medium transition ${
+                            isBooked
+                              ? "bg-slate-100 dark:bg-[#1a1735] text-slate-300 dark:text-slate-600 cursor-not-allowed"
+                              : isSelected
+                              ? "bg-amber-500 text-white"
+                              : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
+                          }`}
+                        >
+                          {time}
+                          {isBooked && <span className="absolute -top-1 -right-1 w-2 h-2 bg-slate-400 dark:bg-slate-600 rounded-full" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
             </div>
           </div>
 

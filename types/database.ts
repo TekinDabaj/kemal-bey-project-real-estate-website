@@ -91,3 +91,11 @@ export type BlogPost = {
   updated_at: string;
   published_at: string | null;
 };
+
+export type Availability = {
+  id: string;
+  date: string; // YYYY-MM-DD format
+  times: string[]; // Array of HH:MM time slots
+  created_at: string;
+  updated_at: string;
+};

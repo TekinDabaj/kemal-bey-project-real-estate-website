@@ -196,7 +196,13 @@
     },
     "workingHours": "Available Monday - Saturday, 8:00 AM - 8:00 PM",
     "freeConsultation": "Free 30-minute consultation",
-    "noObligation": "No obligation, cancel anytime"
+    "noObligation": "No obligation, cancel anytime",
+    "noAvailability": {
+      "title": "No Available Dates",
+      "description": "There are currently no consultation slots available. Please check back later or contact us directly.",
+      "contactUs": "Contact Us"
+    },
+    "noTimesAvailable": "No times available for this date"
   },
   "properties": {
     "title": "Our Properties",
@@ -374,10 +380,26 @@
       },
       "confirmDelete": "Are you sure you want to delete this reservation?",
       "calendar": {
-        "title": "Reservation Calendar",
+        "title": "Availability Calendar",
         "today": "Today",
         "noAppointments": "No appointments",
-        "appointments": "appointments"
+        "appointments": "appointments",
+        "clickToSetAvailability": "Click on a date to set availability"
+      },
+      "availability": {
+        "modalTitle": "Set Availability",
+        "selectTimes": "Select available time slots for",
+        "noTimesSelected": "No times selected - this day will be unavailable",
+        "timesSelected": "{count} time slot(s) selected",
+        "selectAll": "Select All",
+        "clearAll": "Clear All",
+        "save": "Save Availability",
+        "cancel": "Cancel",
+        "saving": "Saving...",
+        "saved": "Availability saved successfully",
+        "error": "Failed to save availability",
+        "availableSlots": "available",
+        "bookedSlot": "Booked"
       },
       "notifications": {
         "enabled": "Notifications On",
