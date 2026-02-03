@@ -915,6 +915,10 @@ export default function HeroSliderMobile({
           left: 0;
           right: 0;
           height: 3px;
+          background: linear-gradient(90deg, #00008B, #0000CD);
+        }
+
+        :global(.dark) .mobile-testimonial-card::before {
           background: linear-gradient(90deg, #f59e0b, #d97706);
         }
 
@@ -927,12 +931,16 @@ export default function HeroSliderMobile({
           width: 34px;
           height: 34px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          background: linear-gradient(135deg, #00008B 0%, #0000CD 100%);
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 12px;
           color: white;
+        }
+
+        :global(.dark) .mobile-testimonial-quote-icon {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         }
 
         .mobile-testimonial-stars {
@@ -1160,9 +1168,13 @@ export default function HeroSliderMobile({
           font-family: "Biryani", sans-serif;
           font-size: 20px;
           font-weight: 900;
-          color: #f59e0b;
+          color: #00008B;
           line-height: 1;
           margin-bottom: 2px;
+        }
+
+        :global(.dark) .mobile-fourth-stat-number {
+          color: #f59e0b;
         }
 
         .mobile-fourth-stat-label {
@@ -1299,6 +1311,10 @@ export default function HeroSliderMobile({
         }
 
         .mobile-title-highlight {
+          color: #00008B;
+        }
+
+        :global(.dark) .mobile-title-highlight {
           color: #f59e0b;
         }
 
