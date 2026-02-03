@@ -7,6 +7,8 @@ import { useTranslations } from "next-intl";
 import { HeroSlide, Property } from "@/types/database";
 import WorldMap from "./worldmap";
 import AboutUsImageGallery from "./AboutUsImageGallery";
+import ServicesCards from "./ServicesCards";
+import AboutUsCards from "./AboutUsCards";
 import {
   Bath,
   BedDouble,
@@ -2861,6 +2863,10 @@ export default function HeroSlider({
           left: 0;
           right: 0;
           height: 4px;
+          background: linear-gradient(90deg, #00008B, #0000CD);
+        }
+
+        :global(.dark) .testimonial-card::before {
           background: linear-gradient(90deg, #f59e0b, #d97706);
         }
 
@@ -2882,12 +2888,16 @@ export default function HeroSlider({
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          background: linear-gradient(135deg, #00008B 0%, #0000CD 100%);
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 16px;
           color: white;
+        }
+
+        :global(.dark) .testimonial-quote-icon {
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         }
 
         .testimonial-stars {
@@ -3572,9 +3582,13 @@ export default function HeroSlider({
           font-family: "Montserrat", sans-serif;
           font-size: 24px;
           font-weight: 800;
-          color: #f59e0b;
+          color: #00008B;
           line-height: 1;
           margin-bottom: 2px;
+        }
+
+        :global(.dark) .fourth-view-stat-number {
+          color: #f59e0b;
         }
 
         .fourth-view-stat-label {
@@ -3926,7 +3940,7 @@ export default function HeroSlider({
         }
 
         .fifth-view-title .title-highlight {
-          color: #f59e0b;
+          color: #00008B;
         }
 
         :global(.dark) .fifth-view-title {
@@ -5119,43 +5133,25 @@ export default function HeroSlider({
 
               <div className="fourth-view-values">
                 <h2 className="fourth-view-values-title">{t("fourthView.coreValues")}</h2>
-                <div className="fourth-view-values-grid">
-                  <div className="fourth-view-value-card value-trust">
-                    <div className="fourth-view-value-icon">
-                      <Shield size={22} />
-                    </div>
-                    <div className="fourth-view-value-content">
-                      <h3 className="fourth-view-value-title">
-                        {t("fourthView.values.trust.title")}
-                      </h3>
-                      <p className="fourth-view-value-desc">
-                        {t("fourthView.values.trust.description")}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="fourth-view-value-card value-excellence">
-                    <div className="fourth-view-value-icon">
-                      <Award size={20} />
-                    </div>
-                    <div className="fourth-view-value-content">
-                      <h3 className="fourth-view-value-title">{t("fourthView.values.excellence.title")}</h3>
-                      <p className="fourth-view-value-desc">
-                        {t("fourthView.values.excellence.description")}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="fourth-view-value-card value-client">
-                    <div className="fourth-view-value-icon">
-                      <Users size={20} />
-                    </div>
-                    <div className="fourth-view-value-content">
-                      <h3 className="fourth-view-value-title">{t("fourthView.values.clientFirst.title")}</h3>
-                      <p className="fourth-view-value-desc">
-                        {t("fourthView.values.clientFirst.description")}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <AboutUsCards
+                  values={[
+                    {
+                      icon: "shield",
+                      title: t("fourthView.values.trust.title"),
+                      description: t("fourthView.values.trust.description"),
+                    },
+                    {
+                      icon: "award",
+                      title: t("fourthView.values.excellence.title"),
+                      description: t("fourthView.values.excellence.description"),
+                    },
+                    {
+                      icon: "users",
+                      title: t("fourthView.values.clientFirst.title"),
+                      description: t("fourthView.values.clientFirst.description"),
+                    },
+                  ]}
+                />
               </div>
 
               {/* Stats - inline under values */}
@@ -5237,63 +5233,30 @@ export default function HeroSlider({
               </p>
             </div>
 
-            <div className="services-grid">
-              <div className="service-card">
-                <div className="service-card-inner">
-                  <div className="service-icon-wrapper">
-                    <Home size={32} />
-                  </div>
-                  <div className="service-card-content">
-                    <h3 className="service-card-title">{t("fifthView.services.propertySales.title")}</h3>
-                    <p className="service-card-desc">
-                      {t("fifthView.services.propertySales.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="service-card service-card-highlight">
-                <div className="service-card-inner">
-                  <div className="service-icon-wrapper">
-                    <Building size={32} />
-                  </div>
-                  <div className="service-card-content">
-                    <h3 className="service-card-title">{t("fifthView.services.propertyManagement.title")}</h3>
-                    <p className="service-card-desc">
-                      {t("fifthView.services.propertyManagement.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="service-card">
-                <div className="service-card-inner">
-                  <div className="service-icon-wrapper">
-                    <TrendingUp size={32} />
-                  </div>
-                  <div className="service-card-content">
-                    <h3 className="service-card-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
-                    <p className="service-card-desc">
-                      {t("fifthView.services.investmentAdvisory.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="service-card service-card-highlight">
-                <div className="service-card-inner">
-                  <div className="service-icon-wrapper">
-                    <Globe size={32} />
-                  </div>
-                  <div className="service-card-content">
-                    <h3 className="service-card-title">{t("fifthView.services.internationalProperties.title")}</h3>
-                    <p className="service-card-desc">
-                      {t("fifthView.services.internationalProperties.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ServicesCards
+              services={[
+                {
+                  icon: "home",
+                  title: t("fifthView.services.propertySales.title"),
+                  description: t("fifthView.services.propertySales.description"),
+                },
+                {
+                  icon: "building",
+                  title: t("fifthView.services.propertyManagement.title"),
+                  description: t("fifthView.services.propertyManagement.description"),
+                },
+                {
+                  icon: "trendingUp",
+                  title: t("fifthView.services.investmentAdvisory.title"),
+                  description: t("fifthView.services.investmentAdvisory.description"),
+                },
+                {
+                  icon: "globe",
+                  title: t("fifthView.services.internationalProperties.title"),
+                  description: t("fifthView.services.internationalProperties.description"),
+                },
+              ]}
+            />
           </div>
 
           {/* Down arrow to View 6 (Hidden since contact section is hidden)

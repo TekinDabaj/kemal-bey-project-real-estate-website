@@ -5,6 +5,8 @@ import { gsap } from "gsap";
 import { useTranslations } from "next-intl";
 import WorldMap from "./worldmap";
 import { Property } from "@/types/database";
+import AboutUsCards from "./AboutUsCards";
+import ServicesCards from "./ServicesCards";
 import {
   Bath,
   BedDouble,
@@ -1930,43 +1932,25 @@ export default function HeroSliderMobile({
 
             <div className="mobile-fourth-values">
               <h3 className="mobile-fourth-values-title">{t("fourthView.coreValues")}</h3>
-              <div className="mobile-fourth-values-grid">
-                <div className="mobile-fourth-value-card">
-                  <div className="mobile-fourth-value-icon">
-                    <Shield size={18} />
-                  </div>
-                  <div className="mobile-fourth-value-content">
-                    <h4 className="mobile-fourth-value-title">
-                      {t("fourthView.values.trust.title")}
-                    </h4>
-                    <p className="mobile-fourth-value-desc">
-                      {t("fourthView.values.trust.description")}
-                    </p>
-                  </div>
-                </div>
-                <div className="mobile-fourth-value-card">
-                  <div className="mobile-fourth-value-icon">
-                    <Award size={18} />
-                  </div>
-                  <div className="mobile-fourth-value-content">
-                    <h4 className="mobile-fourth-value-title">{t("fourthView.values.excellence.title")}</h4>
-                    <p className="mobile-fourth-value-desc">
-                      {t("fourthView.values.excellence.description")}
-                    </p>
-                  </div>
-                </div>
-                <div className="mobile-fourth-value-card">
-                  <div className="mobile-fourth-value-icon">
-                    <Users size={18} />
-                  </div>
-                  <div className="mobile-fourth-value-content">
-                    <h4 className="mobile-fourth-value-title">{t("fourthView.values.clientFirst.title")}</h4>
-                    <p className="mobile-fourth-value-desc">
-                      {t("fourthView.values.clientFirst.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <AboutUsCards
+                values={[
+                  {
+                    icon: "shield",
+                    title: t("fourthView.values.trust.title"),
+                    description: t("fourthView.values.trust.description"),
+                  },
+                  {
+                    icon: "award",
+                    title: t("fourthView.values.excellence.title"),
+                    description: t("fourthView.values.excellence.description"),
+                  },
+                  {
+                    icon: "users",
+                    title: t("fourthView.values.clientFirst.title"),
+                    description: t("fourthView.values.clientFirst.description"),
+                  },
+                ]}
+              />
             </div>
 
             <div className="mobile-fourth-stats">
@@ -2022,55 +2006,30 @@ export default function HeroSliderMobile({
             </p>
           </div>
 
-          <div className="mobile-services-grid">
-            <div className="mobile-service-card">
-              <div className="mobile-service-card-inner">
-                <div className="mobile-service-icon-wrapper">
-                  <Home size={28} />
-                </div>
-                <h3 className="mobile-service-title">{t("fifthView.services.propertySales.title")}</h3>
-                <p className="mobile-service-desc">
-                  {t("fifthView.services.propertySales.description")}
-                </p>
-              </div>
-            </div>
-
-            <div className="mobile-service-card mobile-service-card-highlight">
-              <div className="mobile-service-card-inner">
-                <div className="mobile-service-icon-wrapper">
-                  <Building size={28} />
-                </div>
-                <h3 className="mobile-service-title">{t("fifthView.services.propertyManagement.title")}</h3>
-                <p className="mobile-service-desc">
-                  {t("fifthView.services.propertyManagement.description")}
-                </p>
-              </div>
-            </div>
-
-            <div className="mobile-service-card">
-              <div className="mobile-service-card-inner">
-                <div className="mobile-service-icon-wrapper">
-                  <TrendingUp size={28} />
-                </div>
-                <h3 className="mobile-service-title">{t("fifthView.services.investmentAdvisory.title")}</h3>
-                <p className="mobile-service-desc">
-                  {t("fifthView.services.investmentAdvisory.description")}
-                </p>
-              </div>
-            </div>
-
-            <div className="mobile-service-card mobile-service-card-highlight">
-              <div className="mobile-service-card-inner">
-                <div className="mobile-service-icon-wrapper">
-                  <Globe size={28} />
-                </div>
-                <h3 className="mobile-service-title">{t("fifthView.services.internationalProperties.title")}</h3>
-                <p className="mobile-service-desc">
-                  {t("fifthView.services.internationalProperties.description")}
-                </p>
-              </div>
-            </div>
-          </div>
+          <ServicesCards
+            services={[
+              {
+                icon: "home",
+                title: t("fifthView.services.propertySales.title"),
+                description: t("fifthView.services.propertySales.description"),
+              },
+              {
+                icon: "building",
+                title: t("fifthView.services.propertyManagement.title"),
+                description: t("fifthView.services.propertyManagement.description"),
+              },
+              {
+                icon: "trendingUp",
+                title: t("fifthView.services.investmentAdvisory.title"),
+                description: t("fifthView.services.investmentAdvisory.description"),
+              },
+              {
+                icon: "globe",
+                title: t("fifthView.services.internationalProperties.title"),
+                description: t("fifthView.services.internationalProperties.description"),
+              },
+            ]}
+          />
         </section>
 
 {/* Sixth View Section - Contact (Hidden for now)
