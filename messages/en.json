@@ -202,7 +202,8 @@
       "description": "There are currently no consultation slots available. Please check back later or contact us directly.",
       "contactUs": "Contact Us"
     },
-    "noTimesAvailable": "No times available for this date"
+    "noTimesAvailable": "No times available for this date",
+    "timezoneNotice": "All times are displayed in Cyprus Time (EET/EEST)"
   },
   "properties": {
     "title": "Our Properties",

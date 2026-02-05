@@ -202,7 +202,8 @@
       "description": "Şu anda uygun danışmanlık saati bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin veya doğrudan bizimle iletişime geçin.",
       "contactUs": "Bize Ulaşın"
     },
-    "noTimesAvailable": "Bu tarih için uygun saat bulunmuyor"
+    "noTimesAvailable": "Bu tarih için uygun saat bulunmuyor",
+    "timezoneNotice": "Tüm saatler Kıbrıs Saati (EET/EEST) olarak gösterilmektedir"
   },
   "properties": {
     "title": "Emlaklarımız",

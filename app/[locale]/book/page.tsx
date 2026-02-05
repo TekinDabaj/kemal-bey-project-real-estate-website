@@ -560,29 +560,34 @@ export default function BookPage() {
                 }
 
                 return (
-                  <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-13 gap-1.5">
-                    {availableTimes.map((time) => {
-                      const isBooked = bookedSlots.includes(time);
-                      const isSelected = selectedTime === time;
-                      return (
-                        <button
-                          key={time}
-                          onClick={() => !isBooked && handleTimeSelect(time)}
-                          disabled={isBooked}
-                          className={`relative py-2 px-1 rounded-md text-center text-sm font-medium transition ${
-                            isBooked
-                              ? "bg-slate-100 dark:bg-[#1a1735] text-slate-300 dark:text-slate-600 cursor-not-allowed"
-                              : isSelected
-                              ? "bg-amber-500 text-white"
-                              : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
-                          }`}
-                        >
-                          {time}
-                          {isBooked && <span className="absolute -top-1 -right-1 w-2 h-2 bg-slate-400 dark:bg-slate-600 rounded-full" />}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  <>
+                    <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-13 gap-1.5">
+                      {availableTimes.map((time) => {
+                        const isBooked = bookedSlots.includes(time);
+                        const isSelected = selectedTime === time;
+                        return (
+                          <button
+                            key={time}
+                            onClick={() => !isBooked && handleTimeSelect(time)}
+                            disabled={isBooked}
+                            className={`relative py-2 px-1 rounded-md text-center text-sm font-medium transition ${
+                              isBooked
+                                ? "bg-slate-100 dark:bg-[#1a1735] text-slate-300 dark:text-slate-600 cursor-not-allowed"
+                                : isSelected
+                                ? "bg-amber-500 text-white"
+                                : "hover:bg-slate-100 dark:hover:bg-[#1a1735] text-slate-700 dark:text-slate-300"
+                            }`}
+                          >
+                            {time}
+                            {isBooked && <span className="absolute -top-1 -right-1 w-2 h-2 bg-slate-400 dark:bg-slate-600 rounded-full" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center mt-3">
+                      {t("timezoneNotice")}
+                    </p>
+                  </>
                 );
               })()}
             </div>
