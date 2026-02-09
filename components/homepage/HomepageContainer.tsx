@@ -18,7 +18,16 @@ type Props = {
 
 export default function HomepageContainer({ heroSlides }: Props) {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(() => {
+    if (typeof window !== "undefined") {
+      const target = sessionStorage.getItem("targetView");
+      if (target) {
+        sessionStorage.removeItem("targetView");
+        return Number(target);
+      }
+    }
+    return 0;
+  });
   const [leavingSlide, setLeavingSlide] = useState<number | null>(null);
   const [fadingOutSlide, setFadingOutSlide] = useState<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -30,6 +39,26 @@ export default function HomepageContainer({ heroSlides }: Props) {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  const navigate = (target: number) => {
+    if (target === activeSlide) return;
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    if (target === 0) {
+      // Going back to Intro: fade out the current slide
+      setFadingOutSlide(activeSlide);
+      setActiveSlide(target);
+      timerRef.current = setTimeout(() => setFadingOutSlide(null), 500);
+    } else {
+      // Going between slides: crossfade
+      setLeavingSlide(activeSlide);
+      setActiveSlide(target);
+      timerRef.current = setTimeout(() => setLeavingSlide(null), 500);
+    }
+  };
+
+  const goUp = () => navigate(Math.max(0, activeSlide - 1));
+  const goDown = () => navigate(Math.min(5, activeSlide + 1));
 
   // Disable page scroll on desktop only
   useEffect(() => {
@@ -58,34 +87,6 @@ export default function HomepageContainer({ heroSlides }: Props) {
     };
   });
 
-  // Check for target view from sessionStorage (when navigating from another page)
-  useEffect(() => {
-    const target = sessionStorage.getItem("targetView");
-    if (target) {
-      sessionStorage.removeItem("targetView");
-      navigate(Number(target));
-    }
-  }, []);
-
-  const navigate = (target: number) => {
-    if (target === activeSlide) return;
-    if (timerRef.current) clearTimeout(timerRef.current);
-
-    if (target === 0) {
-      // Going back to Intro: fade out the current slide
-      setFadingOutSlide(activeSlide);
-      setActiveSlide(target);
-      timerRef.current = setTimeout(() => setFadingOutSlide(null), 500);
-    } else {
-      // Going between slides: crossfade
-      setLeavingSlide(activeSlide);
-      setActiveSlide(target);
-      timerRef.current = setTimeout(() => setLeavingSlide(null), 500);
-    }
-  };
-
-  const goUp = () => navigate(Math.max(0, activeSlide - 1));
-  const goDown = () => navigate(Math.min(5, activeSlide + 1));
 
   const isVisible = (n: number) => activeSlide === n || leavingSlide === n || fadingOutSlide === n;
 
