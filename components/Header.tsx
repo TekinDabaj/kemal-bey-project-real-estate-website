@@ -59,7 +59,7 @@ export default function Header() {
               </button>
               <button
                 className="text-white/80 hover:text-amber-400 transition text-sm"
-                onClick={(e) => handleViewNavigation(e, 4)}
+                onClick={(e) => handleViewNavigation(e, 3)}
               >
                 {t('aboutUs')}
               </button>
@@ -114,7 +114,7 @@ export default function Header() {
               </button>
               <button
                 className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
-                onClick={(e) => handleViewNavigation(e, 4)}
+                onClick={(e) => handleViewNavigation(e, 3)}
               >
                 {t('aboutUs')}
               </button>

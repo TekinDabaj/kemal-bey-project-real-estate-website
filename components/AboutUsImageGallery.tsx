@@ -53,12 +53,10 @@ const defaultImages: GalleryImage[] = [
 ];
 
 export default function ImageGallery({
-  title = "Image Grid",
   images = defaultImages,
 }: ImageGalleryProps) {
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>{title}</h1>
       <div className={styles.gallery}>
         {images.map((image, index) => (
           <div key={index} className={styles.galleryItem}>

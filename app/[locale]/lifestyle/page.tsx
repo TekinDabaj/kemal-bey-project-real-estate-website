@@ -12,15 +12,23 @@ export default async function LifestylePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-amber-50/30 flex items-center justify-center font-[family-name:var(--font-montserrat)]">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#00008B]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-[#00008B]/3 to-amber-500/3 rounded-full blur-3xl" />
+    <div className="relative min-h-screen bg-white dark:bg-[#0c0a1d] flex items-center justify-center font-[family-name:var(--font-montserrat)]">
+      {/* Grid background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-[25%] w-[25%] h-[33.33%] bg-[#f0f0f0] dark:bg-white/[0.03]" />
+        <div className="absolute top-0 left-[75%] w-[25%] h-[33.33%] bg-[#f0f0f0] dark:bg-white/[0.03]" />
+        <div className="absolute top-[33.33%] left-0 w-[25%] h-[33.33%] bg-[#f0f0f0] dark:bg-white/[0.03]" />
+        <div className="absolute top-[33.33%] left-[50%] w-[25%] h-[33.33%] bg-[#f0f0f0] dark:bg-white/[0.03]" />
+        <div className="absolute top-[66.66%] left-[25%] w-[25%] h-[33.33%] bg-[#f0f0f0] dark:bg-white/[0.03]" />
+        <div className="absolute top-[66.66%] left-[75%] w-[25%] h-[33.33%] bg-[#f0f0f0] dark:bg-white/[0.03]" />
+        <div className="absolute left-[25%] top-0 w-px h-full bg-black/[0.08] dark:bg-white/[0.05]" />
+        <div className="absolute left-[50%] top-0 w-px h-full bg-black/[0.08] dark:bg-white/[0.05]" />
+        <div className="absolute left-[75%] top-0 w-px h-full bg-black/[0.08] dark:bg-white/[0.05]" />
+        <div className="absolute top-[33.33%] left-0 w-full h-px bg-black/[0.08] dark:bg-white/[0.05]" />
+        <div className="absolute top-[66.66%] left-0 w-full h-px bg-black/[0.08] dark:bg-white/[0.05]" />
       </div>
 
-      <div className="relative max-w-3xl mx-auto px-6 text-center py-20">
+      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center py-20">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-[#00008B]/10 text-[#00008B] px-4 py-2 rounded-full text-sm font-medium mb-8">
           <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
@@ -33,7 +41,7 @@ export default async function LifestylePage() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-slate-700 font-light italic mb-6">
+        <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-light italic mb-6">
           {t('subtitle')}
         </p>
 
@@ -45,7 +53,7 @@ export default async function LifestylePage() {
         </div>
 
         {/* Description */}
-        <p className="text-slate-600 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-400 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
           {t('description')}
         </p>
 
