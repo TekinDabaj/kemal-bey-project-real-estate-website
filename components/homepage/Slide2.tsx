@@ -97,6 +97,10 @@ export default function Slide2({
             padding: 100px 80px 0 80px;
           }
 
+          .slide2-title {
+            white-space: normal;
+          }
+
           .slide2-subtitle {
             font-size: 14px;
             line-height: 1.5;
