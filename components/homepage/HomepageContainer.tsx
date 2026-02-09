@@ -31,15 +31,16 @@ export default function HomepageContainer({ heroSlides }: Props) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Disable page scroll
+  // Disable page scroll on desktop only
   useEffect(() => {
+    if (isMobile !== false) return;
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     };
-  }, []);
+  }, [isMobile]);
 
   // Listen for header navigation events
   useEffect(() => {
