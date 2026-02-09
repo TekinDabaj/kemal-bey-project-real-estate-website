@@ -1011,5 +1011,10 @@
       "interior": "İç Tasarım",
       "decor": "Ev Dekorasyonu"
     }
+  },
+  "lifestyleSlide": {
+    "title": "KA Lifestyle",
+    "subtitle": "Mekanınızı bir şahesere dönüştürün. Benzersiz vizyonunuza özel, kişiye özel iç tasarım hizmetleri, premium mobilya küratörlüğü ve eksiksiz ev stil çözümleri sunuyoruz.",
+    "viewAll": "Tümünü Gör"
   }
 }

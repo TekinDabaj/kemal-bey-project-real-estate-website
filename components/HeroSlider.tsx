@@ -9,6 +9,8 @@ import WorldMap from "./worldmap";
 import AboutUsImageGallery from "./AboutUsImageGallery";
 import ServicesCards from "./ServicesCards";
 import AboutUsCards from "./AboutUsCards";
+import ImageCarousel from "./ImageCarousel";
+import { Link } from "@/i18n/routing";
 import {
   Bath,
   BedDouble,
@@ -65,6 +67,7 @@ export default function HeroSlider({
   properties = [],
 }: Props) {
   const t = useTranslations("heroSlider");
+  const tLifestyle = useTranslations("lifestyleSlide");
   const propertyScrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -72,6 +75,7 @@ export default function HeroSlider({
   const [showArticle, setShowArticle] = useState(false);
   const [showThirdView, setShowThirdView] = useState(false);
   const [showFourthView, setShowFourthView] = useState(false);
+  const [showLifestyleView, setShowLifestyleView] = useState(false);
   const [showFifthView, setShowFifthView] = useState(false);
   const [showSixthView, setShowSixthView] = useState(false);
   const [contactForm, setContactForm] = useState({
@@ -1635,15 +1639,15 @@ export default function HeroSlider({
     tl.to(thirdDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
-  const handleDownToFifth = () => {
+  const handleDownToLifestyle = () => {
     if (!containerRef.current || isMoving) return;
     setIsMoving(true);
 
     const fourthViewSection = containerRef.current.querySelector(
       ".fourth-view-section"
     );
-    const fifthViewSection = containerRef.current.querySelector(
-      ".fifth-view-section"
+    const lifestyleViewSection = containerRef.current.querySelector(
+      ".lifestyle-view-section"
     );
     const fourthUpBtn = containerRef.current.querySelector(
       ".fourth-view-up-button"
@@ -1654,6 +1658,138 @@ export default function HeroSlider({
     const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
     const fourthRight =
       containerRef.current.querySelector(".fourth-view-right");
+    const lifestyleTitle = containerRef.current.querySelector(".lifestyle-view-title");
+    const lifestyleSubtitle = containerRef.current.querySelector(
+      ".lifestyle-view-subtitle"
+    );
+    const lifestyleRight = containerRef.current.querySelector(".lifestyle-view-right");
+
+    setShowLifestyleView(true);
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+      },
+    });
+
+    // Fade out buttons first
+    tl.to(fourthDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(fourthUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+
+    // Fade in lifestyle view section
+    tl.fromTo(
+      lifestyleViewSection,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.5, ease: "power2.out" },
+      0.1
+    );
+
+    // Slide fourth view content up
+    tl.to(
+      fourthLeft,
+      { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
+      0.1
+    );
+    tl.to(
+      fourthRight,
+      { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
+      0.15
+    );
+
+    // Animate lifestyle view content in
+    tl.fromTo(
+      lifestyleTitle,
+      { yPercent: 50, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+      0.3
+    );
+
+    tl.fromTo(
+      lifestyleSubtitle,
+      { yPercent: 50, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+      0.4
+    );
+
+    tl.fromTo(
+      lifestyleRight,
+      { yPercent: 30, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" },
+      0.35
+    );
+
+    // Hide fourth view section at the end
+    tl.set(fourthViewSection, { autoAlpha: 0 });
+  };
+
+  const handleBackToFourthFromLifestyle = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const fourthViewSection = containerRef.current.querySelector(
+      ".fourth-view-section"
+    );
+    const lifestyleViewSection = containerRef.current.querySelector(
+      ".lifestyle-view-section"
+    );
+    const fourthUpBtn = containerRef.current.querySelector(
+      ".fourth-view-up-button"
+    );
+    const fourthDownBtn = containerRef.current.querySelector(
+      ".fourth-view-down-button"
+    );
+    const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
+    const fourthRight =
+      containerRef.current.querySelector(".fourth-view-right");
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsMoving(false);
+        setShowLifestyleView(false);
+      },
+    });
+
+    // Show fourth view section first
+    tl.set(fourthViewSection, { autoAlpha: 1 });
+
+    // Fade out lifestyle view
+    tl.to(lifestyleViewSection, { autoAlpha: 0, duration: 0.4 }, 0);
+
+    // Slide fourth view content back in
+    tl.to(
+      fourthLeft,
+      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+      0.2
+    );
+    tl.to(
+      fourthRight,
+      { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+      0.25
+    );
+
+    // Show buttons
+    tl.to(fourthUpBtn, { autoAlpha: 1, duration: 0.3 }, 0.5);
+    tl.to(fourthDownBtn, { autoAlpha: 1, duration: 0.3 }, 0.5);
+  };
+
+  const handleDownToFifthFromLifestyle = () => {
+    if (!containerRef.current || isMoving) return;
+    setIsMoving(true);
+
+    const lifestyleViewSection = containerRef.current.querySelector(
+      ".lifestyle-view-section"
+    );
+    const fifthViewSection = containerRef.current.querySelector(
+      ".fifth-view-section"
+    );
+    const lifestyleUpBtn = containerRef.current.querySelector(
+      ".lifestyle-view-up-button"
+    );
+    const lifestyleDownBtn = containerRef.current.querySelector(
+      ".lifestyle-view-down-button"
+    );
+    const lifestyleLeft = containerRef.current.querySelector(".lifestyle-view-left");
+    const lifestyleRight = containerRef.current.querySelector(".lifestyle-view-right");
     const fifthTitle = containerRef.current.querySelector(".fifth-view-title");
     const fifthSubtitle = containerRef.current.querySelector(
       ".fifth-view-subtitle"
@@ -1669,8 +1805,8 @@ export default function HeroSlider({
     });
 
     // Fade out buttons first
-    tl.to(fourthDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
-    tl.to(fourthUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(lifestyleDownBtn, { autoAlpha: 0, duration: 0.2 }, 0);
+    tl.to(lifestyleUpBtn, { autoAlpha: 0, duration: 0.2 }, 0);
 
     // Fade in fifth view section
     tl.fromTo(
@@ -1680,14 +1816,14 @@ export default function HeroSlider({
       0.1
     );
 
-    // Slide fourth view content up
+    // Slide lifestyle view content up
     tl.to(
-      fourthLeft,
+      lifestyleLeft,
       { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
       0.1
     );
     tl.to(
-      fourthRight,
+      lifestyleRight,
       { yPercent: -100, autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
       0.15
     );
@@ -1717,29 +1853,28 @@ export default function HeroSlider({
       );
     });
 
-    // Hide fourth view section at the end
-    tl.set(fourthViewSection, { autoAlpha: 0 });
+    // Hide lifestyle view section at the end
+    tl.set(lifestyleViewSection, { autoAlpha: 0 });
   };
 
-  const handleBackToFourth = () => {
+  const handleBackToLifestyle = () => {
     if (!containerRef.current || isMoving) return;
     setIsMoving(true);
 
-    const fourthViewSection = containerRef.current.querySelector(
-      ".fourth-view-section"
+    const lifestyleViewSection = containerRef.current.querySelector(
+      ".lifestyle-view-section"
     );
     const fifthViewSection = containerRef.current.querySelector(
       ".fifth-view-section"
     );
-    const fourthUpBtn = containerRef.current.querySelector(
-      ".fourth-view-up-button"
+    const lifestyleUpBtn = containerRef.current.querySelector(
+      ".lifestyle-view-up-button"
     );
-    const fourthDownBtn = containerRef.current.querySelector(
-      ".fourth-view-down-button"
+    const lifestyleDownBtn = containerRef.current.querySelector(
+      ".lifestyle-view-down-button"
     );
-    const fourthLeft = containerRef.current.querySelector(".fourth-view-left");
-    const fourthRight =
-      containerRef.current.querySelector(".fourth-view-right");
+    const lifestyleLeft = containerRef.current.querySelector(".lifestyle-view-left");
+    const lifestyleRight = containerRef.current.querySelector(".lifestyle-view-right");
     const fifthTitle = containerRef.current.querySelector(".fifth-view-title");
     const fifthSubtitle = containerRef.current.querySelector(
       ".fifth-view-subtitle"
@@ -1753,8 +1888,8 @@ export default function HeroSlider({
       },
     });
 
-    // Show fourth view section
-    tl.set(fourthViewSection, { autoAlpha: 1 });
+    // Show lifestyle view section
+    tl.set(lifestyleViewSection, { autoAlpha: 1 });
 
     // Fade out fifth view section
     tl.to(
@@ -1782,23 +1917,23 @@ export default function HeroSlider({
       );
     });
 
-    // Slide fourth view content back down
+    // Slide lifestyle view content back down
     tl.fromTo(
-      fourthLeft,
+      lifestyleLeft,
       { yPercent: -100, autoAlpha: 0 },
       { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
       0.3
     );
     tl.fromTo(
-      fourthRight,
+      lifestyleRight,
       { yPercent: -100, autoAlpha: 0 },
       { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power2.out" },
       0.35
     );
 
     // Show buttons at the end
-    tl.to(fourthUpBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
-    tl.to(fourthDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
+    tl.to(lifestyleUpBtn, { autoAlpha: 1, duration: 0.4 }, 0.6);
+    tl.to(lifestyleDownBtn, { autoAlpha: 1, duration: 0.4 }, 0.7);
   };
 
   // Navigate from Fifth View to Sixth View (Contact)
@@ -2019,7 +2154,11 @@ export default function HeroSlider({
           background: rgba(130, 130, 130, 0.2);
           z-index: 300;
           pointer-events: none;
-          transition: mask-image 0.5s ease, -webkit-mask-image 0.5s ease;
+          transition: mask-image 0.5s ease, -webkit-mask-image 0.5s ease, z-index 0.3s ease;
+        }
+
+        .divider.fade-bottom-right {
+          z-index: 1;
         }
 
         .divider--vertical:nth-of-type(1) {
@@ -3841,6 +3980,264 @@ export default function HeroSlider({
           }
         }
 
+        /* Lifestyle View Section - KA Lifestyle */
+        .lifestyle-view-section {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+          z-index: 47;
+          visibility: hidden;
+          opacity: 0;
+          pointer-events: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .lifestyle-view-section.active {
+          pointer-events: auto;
+        }
+
+        :global(.dark) .lifestyle-view-section {
+          background: #0c0a1d;
+        }
+
+        .lifestyle-view-up-button {
+          position: fixed;
+          top: 100px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          z-index: 1000;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: auto;
+        }
+
+        :global(.dark) .lifestyle-view-up-button {
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lifestyle-view-up-button svg {
+          transition: all 0.2s ease-in-out;
+        }
+
+        .lifestyle-view-up-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .lifestyle-view-up-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lifestyle-view-up-button:hover svg {
+          transform: translateY(-4px);
+        }
+
+        :global(.dark) .lifestyle-view-up-button svg path {
+          fill: white;
+        }
+
+        .lifestyle-view-down-button {
+          position: fixed;
+          bottom: 100px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          z-index: 1000;
+          overflow: hidden;
+          border: solid 2px #1a1a2e;
+          opacity: 0.6;
+          transition: all 0.2s;
+          background: rgba(26, 26, 46, 0.1);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: auto;
+        }
+
+        :global(.dark) .lifestyle-view-down-button {
+          border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lifestyle-view-down-button svg {
+          transition: all 0.2s ease-in-out;
+        }
+
+        .lifestyle-view-down-button:hover {
+          opacity: 1;
+          background: rgba(26, 26, 46, 0.2);
+        }
+
+        :global(.dark) .lifestyle-view-down-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lifestyle-view-down-button:hover svg {
+          transform: translateY(4px);
+        }
+
+        :global(.dark) .lifestyle-view-down-button svg path {
+          fill: white;
+        }
+
+        .lifestyle-view-content {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          padding: 80px 60px 40px;
+          gap: 60px;
+        }
+
+        .lifestyle-view-left {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .lifestyle-view-right {
+          flex: 1.2;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          overflow: hidden;
+          border-radius: 16px;
+        }
+
+        .lifestyle-view-header {
+          margin-bottom: 20px;
+        }
+
+        .lifestyle-view-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 48px;
+          line-height: 1.1;
+          font-weight: 900;
+          color: #1a1a2e;
+          margin: 0 0 10px;
+        }
+
+        :global(.dark) .lifestyle-view-title {
+          color: white;
+        }
+
+        .lifestyle-view-body {
+          margin-bottom: 24px;
+        }
+
+        .lifestyle-view-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 17px;
+          line-height: 1.7;
+          color: #475569;
+          margin: 0 0 24px;
+        }
+
+        :global(.dark) .lifestyle-view-subtitle {
+          color: #94a3b8;
+        }
+
+        .lifestyle-view-button {
+          display: inline-block;
+          font-family: "Montserrat", sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+          color: #1a1a2e;
+          padding: 12px 32px;
+          border: 2px solid #1a1a2e;
+          border-radius: 50px;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          background: transparent;
+        }
+
+        .lifestyle-view-button:hover {
+          background: #FF8C00;
+          border-color: #FF8C00;
+          color: white;
+        }
+
+        :global(.dark) .lifestyle-view-button {
+          color: white;
+          border-color: white;
+        }
+
+        :global(.dark) .lifestyle-view-button:hover {
+          background: #FF8C00;
+          border-color: #FF8C00;
+          color: white;
+        }
+
+        @media (max-width: 1024px) {
+          .lifestyle-view-content {
+            flex-direction: column;
+            padding: 100px 40px 40px;
+            gap: 30px;
+          }
+
+          .lifestyle-view-left {
+            flex: none;
+          }
+
+          .lifestyle-view-right {
+            flex: 1;
+          }
+
+          .lifestyle-view-title {
+            font-size: 36px;
+          }
+
+          .lifestyle-view-subtitle {
+            font-size: 15px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .lifestyle-view-content {
+            padding: 90px 20px 30px;
+          }
+
+          .lifestyle-view-title {
+            font-size: 28px;
+          }
+
+          .lifestyle-view-subtitle {
+            font-size: 14px;
+          }
+
+          .lifestyle-view-up-button {
+            width: 44px;
+            height: 44px;
+            top: 90px;
+          }
+
+          .lifestyle-view-down-button {
+            width: 44px;
+            height: 44px;
+            bottom: 25px;
+          }
+        }
+
         /* Fifth View Section - Our Services (Bento Grid) */
         .fifth-view-section {
           position: fixed;
@@ -4778,7 +5175,7 @@ export default function HeroSlider({
         {/* Dividers */}
         <div
           className={`divider divider--vertical ${
-            showSixthView || showFifthView || showFourthView
+            showSixthView || showFifthView || showLifestyleView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -4787,7 +5184,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--vertical ${
-            showSixthView || showFifthView || showFourthView
+            showSixthView || showFifthView || showLifestyleView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -4796,7 +5193,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--vertical ${
-            showSixthView || showFifthView || showFourthView
+            showSixthView || showFifthView || showLifestyleView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -4805,7 +5202,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--horizontal ${
-            showSixthView || showFifthView || showFourthView
+            showSixthView || showFifthView || showLifestyleView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -4814,7 +5211,7 @@ export default function HeroSlider({
         ></div>
         <div
           className={`divider divider--horizontal ${
-            showSixthView || showFifthView || showFourthView
+            showSixthView || showFifthView || showLifestyleView || showFourthView
               ? "fade-bottom-right"
               : showThirdView
               ? "fade-bottom"
@@ -5160,7 +5557,73 @@ export default function HeroSlider({
           {/* Down arrow to View 5 */}
           <button
             className="fourth-view-down-button"
-            onClick={handleDownToFifth}
+            onClick={handleDownToLifestyle}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 19.87c-.475-.568-1.313-.645-1.88-.172L26 30.374 13.19 19.697c-.565-.472-1.408-.395-1.88.17-.474.567-.397 1.41.17 1.882l13.665 11.386c.248.207.552.312.854.312.303 0 .607-.104.854-.312L40.52 21.75c.567-.474.644-1.315.17-1.88z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Lifestyle View Section - KA Lifestyle */}
+        <div
+          className={`lifestyle-view-section ${showLifestyleView ? "active" : ""}`}
+        >
+          <button
+            className="lifestyle-view-up-button"
+            onClick={handleBackToFourthFromLifestyle}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 50 50"
+            >
+              <path
+                fill="#1a1a2e"
+                d="M40.69 30.13c-.475.568-1.313.645-1.88.172L26 19.626 13.19 30.303c-.565.472-1.408.395-1.88-.17-.474-.567-.397-1.41.17-1.882l13.665-11.386c.248-.207.552-.312.854-.312.303 0 .607.104.854.312L40.52 28.25c.567.474.644 1.315.17 1.88z"
+              />
+            </svg>
+          </button>
+
+          <div className="lifestyle-view-content">
+            {/* Left Side: Title, Text */}
+            <div className="lifestyle-view-left">
+              <div className="lifestyle-view-header">
+                <h1 className="lifestyle-view-title">{tLifestyle("title")}</h1>
+              </div>
+
+              <div className="lifestyle-view-body">
+                <p className="lifestyle-view-subtitle">
+                  {tLifestyle("subtitle")}
+                </p>
+                <Link
+                  href="/lifestyle"
+                  className="lifestyle-view-button"
+                >
+                  {tLifestyle("viewAll")}
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Side: Image Carousel */}
+            <div className="lifestyle-view-right">
+              <ImageCarousel />
+            </div>
+          </div>
+
+          {/* Down arrow to Fifth View */}
+          <button
+            className="lifestyle-view-down-button"
+            onClick={handleDownToFifthFromLifestyle}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -5180,7 +5643,7 @@ export default function HeroSlider({
         <div className={`fifth-view-section ${showFifthView ? "active" : ""}`}>
           <button
             className="fifth-view-up-button"
-            onClick={handleBackToFourth}
+            onClick={handleBackToLifestyle}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -1011,5 +1011,10 @@
       "interior": "Interior Design",
       "decor": "Home Decor"
     }
+  },
+  "lifestyleSlide": {
+    "title": "KA Lifestyle",
+    "subtitle": "Transform your space into a masterpiece. We offer bespoke interior design services, premium furniture curation, and complete home styling solutions tailored to your unique vision.",
+    "viewAll": "View All"
   }
 }
