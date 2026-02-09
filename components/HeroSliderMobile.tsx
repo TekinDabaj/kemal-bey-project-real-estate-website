@@ -838,6 +838,7 @@ export default function HeroSliderMobile({
           margin: 0;
           letter-spacing: 0.5px;
           line-height: 1.4;
+          text-align: center;
         }
 
         :global(.dark) .mobile-third-subtitle {
@@ -1914,7 +1915,14 @@ export default function HeroSliderMobile({
                     </div>
                     <div className="mobile-testimonial-author-info">
                       <h4 className="mobile-testimonial-author-name">
-                        {t(`thirdView.testimonials.items.${index}.name`)}
+                        {(() => {
+                          const fullName = t(`thirdView.testimonials.items.${index}.name`);
+                          const parts = fullName.split(' ');
+                          if (parts.length > 1) {
+                            return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
+                          }
+                          return fullName;
+                        })()}
                       </h4>
                       <p className="mobile-testimonial-author-location">
                         {t(`thirdView.testimonials.items.${index}.location`)}
@@ -1953,50 +1961,6 @@ export default function HeroSliderMobile({
               <p className="mobile-fourth-text">
                 {t("fourthView.description")}
               </p>
-            </div>
-
-            <div className="mobile-fourth-values">
-              <h3 className="mobile-fourth-values-title">{t("fourthView.coreValues")}</h3>
-              <AboutUsCards
-                values={[
-                  {
-                    icon: "shield",
-                    title: t("fourthView.values.trust.title"),
-                    description: t("fourthView.values.trust.description"),
-                  },
-                  {
-                    icon: "award",
-                    title: t("fourthView.values.excellence.title"),
-                    description: t("fourthView.values.excellence.description"),
-                  },
-                  {
-                    icon: "users",
-                    title: t("fourthView.values.clientFirst.title"),
-                    description: t("fourthView.values.clientFirst.description"),
-                  },
-                ]}
-              />
-            </div>
-
-            <div className="mobile-fourth-stats">
-              <div className="mobile-fourth-stat">
-                <div className="mobile-fourth-stat-number">500+</div>
-                <div className="mobile-fourth-stat-label">{t("fourthView.stats.propertiesSold")}</div>
-              </div>
-              <div className="mobile-fourth-stat">
-                <div className="mobile-fourth-stat-number">15+</div>
-                <div className="mobile-fourth-stat-label">{t("fourthView.stats.yearsExperience")}</div>
-              </div>
-              <div className="mobile-fourth-stat">
-                <div className="mobile-fourth-stat-number">30+</div>
-                <div className="mobile-fourth-stat-label">{t("fourthView.stats.countries")}</div>
-              </div>
-              <div className="mobile-fourth-stat">
-                <div className="mobile-fourth-stat-number">98%</div>
-                <div className="mobile-fourth-stat-label">
-                  {t("fourthView.stats.clientSatisfaction")}
-                </div>
-              </div>
             </div>
 
             <div className="mobile-fourth-gallery">
