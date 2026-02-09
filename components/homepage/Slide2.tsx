@@ -193,6 +193,10 @@ export default function Slide2({
           .slide2-subtitle {
             font-size: 14px;
           }
+
+          .slide2-bottom {
+            padding: 0 0 90px 0;
+          }
         }
       `}</style>
 

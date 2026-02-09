@@ -3,10 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import WorldMap from "./worldmap";
 import { Property } from "@/types/database";
 import AboutUsCards from "./AboutUsCards";
 import ServicesCards from "./ServicesCards";
+import Testimonials from "./homepage/Testimonials";
+import MobileImageCarousel from "./MobileImageCarousel";
 import {
   Bath,
   BedDouble,
@@ -111,6 +114,7 @@ export default function HeroSliderMobile({
   properties = [],
 }: Props) {
   const t = useTranslations("heroSlider");
+  const tLifestyle = useTranslations("lifestyleSlide");
   const heroRef = useRef<HTMLDivElement>(null);
   const articleRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
@@ -1291,6 +1295,114 @@ export default function HeroSliderMobile({
           z-index: 1;
         }
 
+        /* KA Lifestyle Section */
+        .mobile-lifestyle-view {
+          position: relative;
+          background: white;
+          padding: 24px 16px;
+          overflow: hidden;
+        }
+
+        :global(.dark) .mobile-lifestyle-view {
+          background: #0c0a1d;
+        }
+
+        .mobile-lifestyle-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .mobile-lifestyle-bg-slice {
+          position: relative;
+          overflow: hidden;
+          border: 1px solid transparent;
+        }
+
+        .mobile-lifestyle-bg-slice.visible {
+          border-color: rgba(0, 0, 0, 0.06);
+          background-color: rgba(0, 0, 0, 0.015);
+        }
+
+        :global(.dark) .mobile-lifestyle-bg-slice.visible {
+          border-color: rgba(255, 255, 255, 0.08);
+          background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .mobile-lifestyle-content {
+          position: relative;
+          z-index: 1;
+        }
+
+        .mobile-lifestyle-header {
+          text-align: center;
+          margin-bottom: 8px;
+        }
+
+        .mobile-lifestyle-title {
+          font-family: "Biryani", sans-serif;
+          font-size: 28px;
+          font-weight: 900;
+          color: #1a1a2e;
+          margin: 0 0 8px 0;
+          line-height: 1.1;
+        }
+
+        :global(.dark) .mobile-lifestyle-title {
+          color: white;
+        }
+
+        .mobile-lifestyle-subtitle {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          color: #475569;
+          margin: 0 0 16px 0;
+          line-height: 1.6;
+        }
+
+        :global(.dark) .mobile-lifestyle-subtitle {
+          color: #94a3b8;
+        }
+
+        .mobile-lifestyle-btn {
+          display: inline-block;
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          font-weight: 600;
+          padding: 12px 28px;
+          border-radius: 999px;
+          background: transparent;
+          color: #1a1a2e;
+          text-decoration: none;
+          border: 2px solid #1a1a2e;
+          transition: all 0.3s ease;
+          text-align: center;
+        }
+
+        .mobile-lifestyle-btn:active {
+          background: #f59e0b;
+          border-color: #f59e0b;
+          color: #ffffff;
+        }
+
+        :global(.dark) .mobile-lifestyle-btn {
+          color: white;
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        :global(.dark) .mobile-lifestyle-btn:active {
+          background: #f59e0b;
+          border-color: #f59e0b;
+          color: #ffffff;
+        }
+
         /* Fifth View Section - Services */
         .mobile-fifth-view {
           position: relative;
@@ -1754,7 +1866,7 @@ export default function HeroSliderMobile({
             <div className="mobile-third-content">
               <h2 className="mobile-third-title">{(t.raw("thirdView.titleWords") as string[]).join(" ")}</h2>
               <p className="mobile-third-subtitle">
-                {t("thirdView.subtitle")}
+                {t("thirdView.subtitle").split(".")[0]}.
               </p>
             </div>
           </div>
@@ -1891,48 +2003,7 @@ export default function HeroSliderMobile({
 
         {/* Testimonials Section */}
         <div className="mobile-third-testimonials">
-          <div className="mobile-testimonials-header">
-            <h3 className="mobile-testimonials-title">{t("thirdView.testimonials.title")}</h3>
-          </div>
-          <div className="mobile-testimonials-scroll">
-            <div className="mobile-testimonials-grid">
-              {[0, 1, 2, 3].map((index) => (
-                <div key={index} className="mobile-testimonial-card">
-                  <div className="mobile-testimonial-quote-icon">
-                    <Quote size={18} />
-                  </div>
-                  <div className="mobile-testimonial-stars">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={12} fill="#f59e0b" color="#f59e0b" />
-                    ))}
-                  </div>
-                  <p className="mobile-testimonial-text">
-                    {t(`thirdView.testimonials.items.${index}.text`)}
-                  </p>
-                  <div className="mobile-testimonial-author">
-                    <div className="mobile-testimonial-author-avatar">
-                      {t(`thirdView.testimonials.items.${index}.name`).charAt(0)}
-                    </div>
-                    <div className="mobile-testimonial-author-info">
-                      <h4 className="mobile-testimonial-author-name">
-                        {(() => {
-                          const fullName = t(`thirdView.testimonials.items.${index}.name`);
-                          const parts = fullName.split(' ');
-                          if (parts.length > 1) {
-                            return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
-                          }
-                          return fullName;
-                        })()}
-                      </h4>
-                      <p className="mobile-testimonial-author-location">
-                        {t(`thirdView.testimonials.items.${index}.location`)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Testimonials />
         </div>
 
         {/* Fourth View Section - About Us */}
@@ -1981,6 +2052,31 @@ export default function HeroSliderMobile({
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* KA Lifestyle Section */}
+        <section className="mobile-lifestyle-view">
+          <div className="mobile-lifestyle-bg">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div
+                key={i}
+                className={`mobile-lifestyle-bg-slice ${
+                  [0, 3, 5, 7, 10].includes(i) ? "visible" : ""
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="mobile-lifestyle-content">
+            <div className="mobile-lifestyle-header">
+              <h2 className="mobile-lifestyle-title">{tLifestyle("title")}</h2>
+              <p className="mobile-lifestyle-subtitle">{tLifestyle("subtitle")}</p>
+              <Link href="/lifestyle" className="mobile-lifestyle-btn">
+                {tLifestyle("viewAll")}
+              </Link>
+            </div>
+            <MobileImageCarousel />
           </div>
         </section>
 

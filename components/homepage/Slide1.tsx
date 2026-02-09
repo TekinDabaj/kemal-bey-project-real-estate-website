@@ -108,7 +108,7 @@ export default function Slide1({ active, leaving, fadingOut, visible, onUpClick,
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          z-index: 10;
+          z-index: 50;
           overflow: hidden;
           border: solid 2px #1a1a2e;
           opacity: 0.6;
