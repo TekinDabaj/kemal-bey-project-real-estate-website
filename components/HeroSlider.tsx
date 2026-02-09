@@ -2729,6 +2729,7 @@ export default function HeroSlider({
 
         .third-view-subtitle-wrapper {
           overflow: hidden;
+          text-align: center;
         }
 
         .third-view-subtitle {
@@ -5071,7 +5072,14 @@ export default function HeroSlider({
                       </div>
                       <div className="testimonial-author-info">
                         <h4 className="testimonial-author-name">
-                          {t(`thirdView.testimonials.items.${index}.name`)}
+                          {(() => {
+                            const fullName = t(`thirdView.testimonials.items.${index}.name`);
+                            const parts = fullName.split(' ');
+                            if (parts.length > 1) {
+                              return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
+                            }
+                            return fullName;
+                          })()}
                         </h4>
                         <p className="testimonial-author-location">
                           {t(`thirdView.testimonials.items.${index}.location`)}
@@ -5138,51 +5146,6 @@ export default function HeroSlider({
                 <p className="fourth-view-text">
                   {t("fourthView.description")}
                 </p>
-              </div>
-
-              <div className="fourth-view-values">
-                <h2 className="fourth-view-values-title">{t("fourthView.coreValues")}</h2>
-                <AboutUsCards
-                  values={[
-                    {
-                      icon: "shield",
-                      title: t("fourthView.values.trust.title"),
-                      description: t("fourthView.values.trust.description"),
-                    },
-                    {
-                      icon: "award",
-                      title: t("fourthView.values.excellence.title"),
-                      description: t("fourthView.values.excellence.description"),
-                    },
-                    {
-                      icon: "users",
-                      title: t("fourthView.values.clientFirst.title"),
-                      description: t("fourthView.values.clientFirst.description"),
-                    },
-                  ]}
-                />
-              </div>
-
-              {/* Stats - inline under values */}
-              <div className="fourth-view-stats">
-                <div className="fourth-view-stat">
-                  <div className="fourth-view-stat-number">500+</div>
-                  <div className="fourth-view-stat-label">{t("fourthView.stats.propertiesSold")}</div>
-                </div>
-                <div className="fourth-view-stat">
-                  <div className="fourth-view-stat-number">15+</div>
-                  <div className="fourth-view-stat-label">{t("fourthView.stats.yearsExperience")}</div>
-                </div>
-                <div className="fourth-view-stat">
-                  <div className="fourth-view-stat-number">30+</div>
-                  <div className="fourth-view-stat-label">{t("fourthView.stats.countries")}</div>
-                </div>
-                <div className="fourth-view-stat">
-                  <div className="fourth-view-stat-number">98%</div>
-                  <div className="fourth-view-stat-label">
-                    {t("fourthView.stats.clientSatisfaction")}
-                  </div>
-                </div>
               </div>
             </div>
 

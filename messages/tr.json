@@ -8,9 +8,10 @@
     "properties": "Öne Çıkan Emlaklar",
     "services": "Hizmetlerimiz",
     "about": "Hakkımızda",
+    "aboutUs": "Hakkımızda",
     "blog": "Blog",
     "contact": "İletişim",
-    "bookConsultation": "Randevu Al",
+    "bookConsultation": "Ücretsiz Randevu Al",
     "brandName": "KA GLOBAL"
   },
   "home": {
@@ -131,7 +132,7 @@
     "contactInfo": "İletişim Bilgileri",
     "propertyPreferences": "Mülk Tercihleri",
     "budget": "Bütçe",
-    "budgetPlaceholder": "örn. 1.000.000₺ - 10.000.000₺",
+    "budgetPlaceholder": "örn. £100,000 - £1,000,000",
     "propertyType": "Mülk Tipi",
     "selectPropertyType": "Mülk tipi seçin",
     "booked": "Dolu",
@@ -203,7 +204,14 @@
       "contactUs": "Bize Ulaşın"
     },
     "noTimesAvailable": "Bu tarih için uygun saat bulunmuyor",
-    "timezoneNotice": "Tüm saatler Kıbrıs Saati (EET/EEST) olarak gösterilmektedir"
+    "timezoneNotice": "Tüm saatler Kıbrıs Saati (EET/EEST) olarak gösterilmektedir",
+    "validation": {
+      "required": "Lütfen tüm zorunlu alanları doldurun",
+      "budgetRequired": "Bütçe zorunludur",
+      "propertyTypeRequired": "Mülk tipi zorunludur",
+      "reasonRequired": "Amaç zorunludur",
+      "referralRequired": "Lütfen bizi nasıl bulduğunuzu belirtin"
+    }
   },
   "properties": {
     "title": "Emlaklarımız",
@@ -879,7 +887,7 @@
       }
     },
     "thirdView": {
-      "titleWords": ["Hayalinizdeki", "Eviniz,", "Her", "Yerde"],
+      "titleWords": ["Hayalinizdeki", "Eviniz,", "Her", "Yerde..."],
       "subtitle": "Londra'dan Dubai'ye, Kıbrıs'tan Singapur'a — sizi dünya genelinde premium mülklerle buluşturuyoruz",
       "featuredProperties": "Öne Çıkan Mülkler",
       "noImage": "Görsel yok",
@@ -990,6 +998,18 @@
       },
       "sending": "Gönderiliyor...",
       "sendMessage": "Mesaj Gönder"
+    }
+  },
+  "lifestyle": {
+    "comingSoon": "Yakında",
+    "title": "KA Lifestyle",
+    "subtitle": "Lüks Yaşam, Yeniden Tanımlandı",
+    "description": "Premium mobilya, kişiye özel iç tasarım hizmetleri ve seçkin yaşam deneyimlerinden oluşan özel bir koleksiyon hazırlıyoruz. Olağanüstü bir şey yolda.",
+    "backToHome": "Ana Sayfaya Dön",
+    "features": {
+      "furniture": "Premium Mobilya",
+      "interior": "İç Tasarım",
+      "decor": "Ev Dekorasyonu"
     }
   }
 }

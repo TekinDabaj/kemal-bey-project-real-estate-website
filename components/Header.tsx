@@ -61,14 +61,21 @@ export default function Header() {
                 className="text-white/80 hover:text-amber-400 transition text-sm"
                 onClick={(e) => handleViewNavigation(e, 4)}
               >
-                {'KA GLOBAL'}
+                {t('aboutUs')}
               </button>
+              <Link
+                href="/lifestyle"
+                className="text-white/80 hover:text-amber-400 transition text-sm"
+                onClick={() => setIsOpen(false)}
+              >
+                KA Lifestyle
+              </Link>
             </div>
 
             {/* Right: Desktop controls */}
             <div className="hidden md:flex items-center space-x-4">
               <div className="flex items-center gap-2 pl-2 border-l border-white/10">
-                <ThemeToggle />
+                <div className="hidden"><ThemeToggle /></div>
                 <LanguageSwitcher />
               </div>
               <Link
@@ -81,7 +88,7 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <div className="flex items-center gap-4 md:hidden ml-auto">
-              <ThemeToggle />
+              <div className="hidden"><ThemeToggle /></div>
               <LanguageSwitcher />
               <button onClick={() => setIsOpen(!isOpen)} className="text-white p-1">
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -109,8 +116,15 @@ export default function Header() {
                 className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
                 onClick={(e) => handleViewNavigation(e, 4)}
               >
-                {'KA GLOBAL'}
+                {t('aboutUs')}
               </button>
+              <Link
+                href="/lifestyle"
+                className="block w-full text-left py-2 px-2 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-lg transition"
+                onClick={() => setIsOpen(false)}
+              >
+                KA Lifestyle
+              </Link>
             </div>
           )}
         </div>

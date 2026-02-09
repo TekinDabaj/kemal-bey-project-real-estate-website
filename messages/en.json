@@ -8,9 +8,10 @@
     "properties": "Featured Properties",
     "services": "Our Services",
     "about": "About",
+    "aboutUs": "About Us",
     "blog": "Blog",
     "contact": "Contact",
-    "bookConsultation": "Book Consultation",
+    "bookConsultation": "Book Free Consultation",
     "brandName": "KA GLOBAL"
   },
   "home": {
@@ -134,7 +135,7 @@
     "contactInfo": "Contact Information",
     "propertyPreferences": "Property Preferences",
     "budget": "Budget",
-    "budgetPlaceholder": "e.g., $100,000 - $1,000,000",
+    "budgetPlaceholder": "e.g., £100,000 - £1,000,000",
     "propertyType": "Property Type",
     "selectPropertyType": "Select property type",
     "propertyTypes": {
@@ -203,7 +204,14 @@
       "contactUs": "Contact Us"
     },
     "noTimesAvailable": "No times available for this date",
-    "timezoneNotice": "All times are displayed in Cyprus Time (EET/EEST)"
+    "timezoneNotice": "All times are displayed in Cyprus Time (EET/EEST)",
+    "validation": {
+      "required": "Please fill in all required fields",
+      "budgetRequired": "Budget is required",
+      "propertyTypeRequired": "Property type is required",
+      "reasonRequired": "Purpose is required",
+      "referralRequired": "Please tell us how you found us"
+    }
   },
   "properties": {
     "title": "Our Properties",
@@ -879,7 +887,7 @@
       }
     },
     "thirdView": {
-      "titleWords": ["Your", "Dream", "Home,", "Anywhere"],
+      "titleWords": ["Your", "Dream", "Home,", "Anywhere..."],
       "subtitle": "From London to Dubai, Cyprus to Singapore — we connect you with premium properties worldwide",
       "featuredProperties": "Featured Properties",
       "noImage": "No image",
@@ -990,6 +998,18 @@
       },
       "sending": "Sending...",
       "sendMessage": "Send Message"
+    }
+  },
+  "lifestyle": {
+    "comingSoon": "Coming Soon",
+    "title": "KA Lifestyle",
+    "subtitle": "Luxury Living, Redefined",
+    "description": "We're crafting an exclusive collection of premium furniture, bespoke interior design services, and curated lifestyle experiences. Something extraordinary is on its way.",
+    "backToHome": "Back to Home",
+    "features": {
+      "furniture": "Premium Furniture",
+      "interior": "Interior Design",
+      "decor": "Home Decor"
     }
   }
 }

@@ -224,6 +224,7 @@ export default function BookPage() {
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   // Availability state
   const [availabilities, setAvailabilities] = useState<Availability[]>([]);
@@ -243,7 +244,6 @@ export default function BookPage() {
     message: "",
     budget: "",
     propertyType: "",
-    investmentType: "",
     reason: "",
     referralSource: "",
   });
@@ -338,6 +338,21 @@ export default function BookPage() {
     e.preventDefault();
     if (!selectedDate || !selectedTime) return;
 
+    // Validate all required fields
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.budget ||
+      !formData.propertyType ||
+      !formData.reason ||
+      !formData.referralSource
+    ) {
+      setValidationError(t("validation.required"));
+      return;
+    }
+
+    setValidationError(null);
     setLoading(true);
 
     const { error } = await supabase.from("reservations").insert({
@@ -347,13 +362,13 @@ export default function BookPage() {
       message: formData.message || null,
       date: format(selectedDate, "yyyy-MM-dd"),
       time: selectedTime,
-      budget: formData.budget || null,
-      property_type: formData.propertyType || null,
-      investment_type: formData.investmentType || null,
-      reason: formData.reason || null,
-      referral_source: formData.referralSource || null,
-      desired_properties: selectedProperties.length > 0 
-        ? selectedProperties.map(p => p.id) 
+      budget: formData.budget,
+      property_type: formData.propertyType,
+      investment_type: null,
+      reason: formData.reason,
+      referral_source: formData.referralSource,
+      desired_properties: selectedProperties.length > 0
+        ? selectedProperties.map(p => p.id)
         : null,
     });
 
@@ -376,7 +391,6 @@ export default function BookPage() {
         time: selectedTime,
         budget: formData.budget,
         propertyType: formData.propertyType,
-        investmentType: formData.investmentType,
         reason: formData.reason,
         referralSource: formData.referralSource,
         desiredProperties: selectedProperties.map(p => p.title).join(", "),
@@ -679,21 +693,29 @@ export default function BookPage() {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div>
-                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("budget")}</label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">
+                      {t("budget")} <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="text"
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                      className={`w-full px-3 py-2 text-sm border bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${
+                        validationError && !formData.budget ? "border-red-400 dark:border-red-500" : "border-slate-200 dark:border-[#2d2a4a]"
+                      }`}
                       placeholder={t("budgetPlaceholder")}
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("propertyType")}</label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">
+                      {t("propertyType")} <span className="text-red-500">*</span>
+                    </label>
                     <select
                       value={formData.propertyType}
                       onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                      className={`w-full px-3 py-2 text-sm border bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${
+                        validationError && !formData.propertyType ? "border-red-400 dark:border-red-500" : "border-slate-200 dark:border-[#2d2a4a]"
+                      }`}
                     >
                       <option value="">{t("selectPropertyType")}</option>
                       <option value="house">{t("propertyTypes.house")}</option>
@@ -703,37 +725,31 @@ export default function BookPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("investmentType")}</label>
-                    <select
-                      value={formData.investmentType}
-                      onChange={(e) => setFormData({ ...formData, investmentType: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
-                    >
-                      <option value="">{t("selectInvestmentType")}</option>
-                      <option value="buying">{t("investmentTypes.buying")}</option>
-                      <option value="renting">{t("investmentTypes.renting")}</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("reason")}</label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">
+                      {t("reason")} <span className="text-red-500">*</span>
+                    </label>
                     <select
                       value={formData.reason}
                       onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                      className={`w-full px-3 py-2 text-sm border bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${
+                        validationError && !formData.reason ? "border-red-400 dark:border-red-500" : "border-slate-200 dark:border-[#2d2a4a]"
+                      }`}
                     >
                       <option value="">{t("selectReason")}</option>
                       <option value="investment">{t("reasons.investment")}</option>
                       <option value="personal">{t("reasons.personal")}</option>
                     </select>
                   </div>
-                </div>
-                <div className="mt-4">
                   <div>
-                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">{t("referralSource")}</label>
+                    <label className="text-xs text-slate-500 dark:text-slate-400 mb-1.5 block">
+                      {t("referralSource")} <span className="text-red-500">*</span>
+                    </label>
                     <select
                       value={formData.referralSource}
                       onChange={(e) => setFormData({ ...formData, referralSource: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                      className={`w-full px-3 py-2 text-sm border bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-md focus:ring-1 focus:ring-amber-500 focus:border-amber-500 outline-none transition ${
+                        validationError && !formData.referralSource ? "border-red-400 dark:border-red-500" : "border-slate-200 dark:border-[#2d2a4a]"
+                      }`}
                     >
                       <option value="">{t("selectReferralSource")}</option>
                       <option value="google">{t("referralSources.google")}</option>
@@ -764,6 +780,16 @@ export default function BookPage() {
                   placeholder={t("messagePlaceholder")}
                 />
               </div>
+
+              {/* Validation Error Message */}
+              {validationError && (
+                <div className="mb-4 px-4 py-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/30 rounded-md flex items-center gap-3">
+                  <div className="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <X className="w-4 h-4 text-red-600 dark:text-red-400" />
+                  </div>
+                  <p className="text-sm text-red-700 dark:text-red-300 font-medium">{validationError}</p>
+                </div>
+              )}
 
               <button
                 type="submit"
