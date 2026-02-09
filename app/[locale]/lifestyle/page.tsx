@@ -32,7 +32,7 @@ export default async function LifestylePage() {
 
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-20 w-full max-w-7xl mx-auto px-5 md:px-10 py-20 pt-24 md:pt-28">
         {/* Left: Content */}
-        <div className="flex-1 min-w-0 max-w-lg">
+        <div className="flex-1 min-w-0 max-w-lg text-center md:text-left flex flex-col items-center md:items-start">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-[#00008B]/10 text-[#00008B] px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium mb-5 md:mb-8">
             <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
@@ -50,7 +50,7 @@ export default async function LifestylePage() {
           </p>
 
           {/* Divider */}
-          <div className="flex items-center gap-4 mb-5 md:mb-8">
+          <div className="flex items-center justify-center md:justify-start gap-4 mb-5 md:mb-8">
             <div className="h-px w-12 md:w-16 bg-gradient-to-r from-transparent to-amber-500/50" />
             <div className="w-2 h-2 bg-amber-500 rotate-45" />
             <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-amber-500/50" />
@@ -62,7 +62,7 @@ export default async function LifestylePage() {
           </p>
 
           {/* Feature Icons */}
-          <div className="flex items-center gap-6 md:gap-12 mb-8 md:mb-12">
+          <div className="flex items-center justify-center md:justify-start gap-6 md:gap-12 mb-8 md:mb-12">
             {features.map((feature, i) => (
               <div key={i} className="flex flex-col items-center gap-2 md:gap-3 group">
                 <div className="w-14 h-14 md:w-20 md:h-20 bg-white dark:bg-white/5 rounded-2xl shadow-lg shadow-slate-200/50 dark:shadow-none flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:border-amber-500/30 group-hover:shadow-amber-500/10 transition-all duration-300">
