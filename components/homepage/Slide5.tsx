@@ -72,6 +72,42 @@ export default function Slide5({ active, leaving, fadingOut, onUpClick, onDownCl
           color: rgba(255, 255, 255, 0.6);
         }
 
+        @media (max-height: 850px) {
+          .slide5-content {
+            padding: 90px 60px 40px;
+          }
+
+          .slide5-title {
+            font-size: 40px;
+          }
+
+          .slide5-subtitle {
+            font-size: 14px;
+          }
+
+          .slide5-header {
+            margin-bottom: 30px;
+          }
+        }
+
+        @media (max-height: 750px) {
+          .slide5-content {
+            padding: 80px 50px 30px;
+          }
+
+          .slide5-title {
+            font-size: 32px;
+          }
+
+          .slide5-subtitle {
+            font-size: 13px;
+          }
+
+          .slide5-header {
+            margin-bottom: 20px;
+          }
+        }
+
         @media (max-width: 1400px) {
           .slide5-title {
             font-size: 44px;

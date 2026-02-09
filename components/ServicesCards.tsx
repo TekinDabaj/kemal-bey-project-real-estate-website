@@ -347,6 +347,57 @@ const styles = `
     margin: 0;
   }
 
+  /* Laptop height */
+  @media (max-height: 850px) {
+    .services-highlight-card {
+      min-height: 160px;
+      padding: 1.2em;
+    }
+
+    .services-card-icon-wrapper {
+      width: 40px;
+      height: 40px;
+    }
+
+    .services-card-title {
+      font-size: 0.9em;
+    }
+
+    .services-card-description {
+      font-size: 0.78em;
+    }
+
+    .services-card-grid {
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-height: 750px) {
+    .services-highlight-card {
+      min-height: 130px;
+      padding: 1em;
+    }
+
+    .services-card-icon-wrapper {
+      width: 34px;
+      height: 34px;
+    }
+
+    .services-card-title {
+      font-size: 0.82em;
+    }
+
+    .services-card-description {
+      font-size: 0.72em;
+      line-height: 1.4;
+    }
+
+    .services-card-grid {
+      gap: 0.6rem;
+      max-width: 1000px;
+    }
+  }
+
   /* Tablet */
   @media (max-width: 1024px) {
     .services-card-grid {

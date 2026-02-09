@@ -243,6 +243,80 @@ export default function Testimonials() {
           100% { transform: translateX(-50%); }
         }
 
+        @media (max-height: 850px) {
+          .testi-card {
+            width: 280px;
+            padding: 18px;
+          }
+
+          .testi-card-top {
+            margin-bottom: 8px;
+          }
+
+          .testi-text {
+            font-size: 12px;
+            margin: 0 0 12px;
+            -webkit-line-clamp: 3;
+          }
+
+          .testi-author {
+            padding-top: 10px;
+            gap: 8px;
+          }
+
+          .testi-quote {
+            width: 28px;
+            height: 28px;
+          }
+
+          .testi-avatar {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+          }
+
+          .testi-name {
+            font-size: 12px;
+          }
+
+          .testi-location {
+            font-size: 10px;
+          }
+        }
+
+        @media (max-height: 750px) {
+          .testi-card {
+            width: 240px;
+            padding: 14px;
+          }
+
+          .testi-text {
+            font-size: 11px;
+            margin: 0 0 10px;
+            -webkit-line-clamp: 2;
+          }
+
+          .testi-quote {
+            width: 24px;
+            height: 24px;
+          }
+
+          .testi-avatar {
+            width: 28px;
+            height: 28px;
+            font-size: 12px;
+          }
+
+          .testi-name {
+            font-size: 11px;
+          }
+
+          .testi-set {
+            gap: 12px;
+            padding-right: 12px;
+          }
+        }
+
         @media (max-width: 1400px) {
           .testi-card {
             width: 320px;

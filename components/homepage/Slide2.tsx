@@ -92,6 +92,48 @@ export default function Slide2({
           color: #ffffff;
         }
 
+        @media (max-height: 850px) {
+          .slide2-content {
+            padding: 100px 80px 0 80px;
+          }
+
+          .slide2-subtitle {
+            font-size: 14px;
+            line-height: 1.5;
+          }
+
+          .slide2-text {
+            padding-top: 20px;
+          }
+
+          .slide2-bottom {
+            padding: 0 0 60px 0;
+          }
+        }
+
+        @media (max-height: 750px) {
+          .slide2-content {
+            padding: 90px 80px 0 80px;
+          }
+
+          .slide2-subtitle {
+            font-size: 13px;
+            line-height: 1.4;
+          }
+
+          .slide2-text {
+            padding-top: 10px;
+          }
+
+          .slide2-title {
+            margin: 0 0 16px 0;
+          }
+
+          .slide2-bottom {
+            padding: 0 0 50px 0;
+          }
+        }
+
         @media (max-width: 1400px) {
           .slide2-globe {
             transform: scale(1.3) translateX(60px);
