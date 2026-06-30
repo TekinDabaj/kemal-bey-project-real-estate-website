@@ -600,7 +600,7 @@ export default function AdminDashboard({
       .eq("id", rejectingReservation.id);
 
     if (error) {
-      alert(`Failed to save the reschedule: ${error.message}`);
+      alert(t("reservations.reschedule.saveError", { error: error.message }));
       setRescheduleSending(false);
       return;
     }
@@ -630,14 +630,16 @@ export default function AdminDashboard({
       const data = await res.json();
       if (!res.ok) {
         alert(
-          `Reschedule saved, but the email failed to send: ${data.details || data.error}`
+          t("reservations.reschedule.emailError", {
+            error: data.details || data.error,
+          })
         );
       } else {
-        alert("Reschedule offer sent to the client.");
+        alert(t("reservations.reschedule.sentAlert"));
       }
     } catch (e) {
       console.error("Failed to send reschedule offer:", e);
-      alert("Reschedule saved, but the email failed to send.");
+      alert(t("reservations.reschedule.emailErrorGeneric"));
     }
 
     // Step 3: reflect the proposal locally
@@ -805,12 +807,14 @@ export default function AdminDashboard({
             <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-[#2d2a4a]">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  {rescheduleMode ? "Reschedule Appointment" : "Cancel Reservation"}
+                  {rescheduleMode
+                    ? t("reservations.reschedule.title")
+                    : t("reservations.rejection.title")}
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                   {rescheduleMode
-                    ? "Offer the client a new date and time"
-                    : "Please provide a reason for cancellation"}
+                    ? t("reservations.reschedule.subtitle")
+                    : t("reservations.rejection.subtitle")}
                 </p>
               </div>
               <button
@@ -852,9 +856,17 @@ export default function AdminDashboard({
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   {rescheduleMode ? (
-                    <>Note to Client <span className="text-slate-400 font-normal">(optional)</span></>
+                    <>
+                      {t("reservations.reschedule.noteLabel")}{" "}
+                      <span className="text-slate-400 font-normal">
+                        ({t("reservations.reschedule.optional")})
+                      </span>
+                    </>
                   ) : (
-                    <>Rejection Reason <span className="text-red-500">*</span></>
+                    <>
+                      {t("reservations.rejection.reasonLabel")}{" "}
+                      <span className="text-red-500">*</span>
+                    </>
                   )}
                 </label>
                 <textarea
@@ -862,15 +874,15 @@ export default function AdminDashboard({
                   onChange={(e) => setRejectionReason(e.target.value)}
                   placeholder={
                     rescheduleMode
-                      ? "e.g., We had a scheduling conflict, but we'd love to see you at this new time."
-                      : "e.g., Unfortunately, we are fully booked on this date. Please select another time slot."
+                      ? t("reservations.reschedule.notePlaceholder")
+                      : t("reservations.rejection.reasonPlaceholder")
                   }
                   rows={3}
                   className="w-full px-4 py-3 border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 outline-none transition resize-none placeholder:text-slate-400 dark:placeholder:text-slate-500"
                   disabled={rejectionLoading || rescheduleSending}
                 />
                 <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                  This message will be included in the email to the client.
+                  {t("reservations.rejection.emailNote")}
                 </p>
               </div>
 
@@ -882,7 +894,7 @@ export default function AdminDashboard({
                   className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-400 rounded-lg font-medium text-sm hover:bg-amber-50 dark:hover:bg-amber-500/10 transition disabled:opacity-50"
                 >
                   <Calendar size={16} />
-                  Offer a Reschedule Instead
+                  {t("reservations.reschedule.offer")}
                 </button>
               )}
 
@@ -892,15 +904,15 @@ export default function AdminDashboard({
                 return (
                   <div className="mt-4 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 bg-amber-50/50 dark:bg-amber-500/5">
                     <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1">
-                      Propose a New Time
+                      {t("reservations.reschedule.proposeTitle")}
                     </p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
-                      Select an available slot to offer the client.
+                      {t("reservations.reschedule.proposeSubtitle")}
                     </p>
 
                     {options.length === 0 ? (
                       <p className="text-sm text-slate-500 dark:text-slate-400 py-4 text-center">
-                        No available slots. Add availability dates first.
+                        {t("reservations.reschedule.noSlots")}
                       </p>
                     ) : (
                       <div className="max-h-56 overflow-y-auto space-y-3 pr-1">
@@ -940,7 +952,7 @@ export default function AdminDashboard({
                     {rescheduleDate && rescheduleTime && (
                       <div className="mt-3 flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200 bg-white dark:bg-[#1a1735] rounded-lg px-3 py-2 border border-amber-200 dark:border-amber-500/30">
                         <Check size={16} className="text-amber-500" />
-                        Selected:{" "}
+                        {t("reservations.reschedule.selected")}{" "}
                         <span className="font-medium">
                           {format(new Date(rescheduleDate + "T00:00:00"), "MMM d", { locale: dateLocale })} · {rescheduleTime}
                         </span>
@@ -968,7 +980,9 @@ export default function AdminDashboard({
                     disabled={rescheduleSending}
                     className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
                   >
-                    {rescheduleOnly ? "Cancel" : "Back"}
+                    {rescheduleOnly
+                      ? t("reservations.reschedule.cancel")
+                      : t("reservations.reschedule.back")}
                   </button>
                   <button
                     onClick={handleSendReschedule}
@@ -978,12 +992,12 @@ export default function AdminDashboard({
                     {rescheduleSending ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
+                        {t("reservations.reschedule.sending")}
                       </>
                     ) : (
                       <>
                         <Calendar size={16} />
-                        Send Reschedule Offer
+                        {t("reservations.reschedule.send")}
                       </>
                     )}
                   </button>
@@ -995,7 +1009,7 @@ export default function AdminDashboard({
                     disabled={rejectionLoading}
                     className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
                   >
-                    Cancel
+                    {t("reservations.rejection.cancel")}
                   </button>
                   <button
                     onClick={handleRejectReservation}
@@ -1005,12 +1019,12 @@ export default function AdminDashboard({
                     {rejectionLoading ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending...
+                        {t("reservations.rejection.sending")}
                       </>
                     ) : (
                       <>
                         <X size={16} />
-                        Reject & Send Email
+                        {t("reservations.rejection.submit")}
                       </>
                     )}
                   </button>
@@ -1596,7 +1610,7 @@ export default function AdminDashboard({
                           {reservation.reschedule_status === "proposed" && (
                             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
                               <Calendar size={12} />
-                              Reschedule sent
+                              {t("reservations.reschedule.badge")}
                             </span>
                           )}
                           <span className="text-slate-400 dark:text-slate-500 text-sm">
@@ -1780,7 +1794,7 @@ export default function AdminDashboard({
                           <button
                             onClick={() => openRescheduleModal(reservation)}
                             className="p-2 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg hover:bg-amber-200 dark:hover:bg-amber-900/50 transition"
-                            title="Reschedule"
+                            title={t("reservations.reschedule.buttonTitle")}
                           >
                             <Calendar size={18} />
                           </button>

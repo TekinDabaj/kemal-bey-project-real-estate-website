@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   Calendar,
   Clock,
@@ -120,6 +121,7 @@ function DateTimeBand({ date, time }: { date: string; time: string }) {
 }
 
 function RescheduleInner() {
+  const t = useTranslations("reschedule");
   const params = useSearchParams();
   const token = params.get("token");
   const intent = params.get("action"); // "confirm" | "decline" | null
@@ -197,7 +199,7 @@ function RescheduleInner() {
       <Shell>
         <div className="flex flex-col items-center py-10 text-slate-400">
           <Loader2 className="w-7 h-7 animate-spin text-amber-500 mb-4" strokeWidth={1.5} />
-          <p className="text-[11px] tracking-[0.25em] uppercase">Loading</p>
+          <p className="text-[11px] tracking-[0.25em] uppercase">{t("loading")}</p>
         </div>
       </Shell>
     );
@@ -210,12 +212,9 @@ function RescheduleInner() {
         <Emblem tone="muted">
           <X className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
         </Emblem>
-        <Eyebrow text="Unavailable" tone="muted" />
-        <Title>Link not valid</Title>
-        <Body>
-          This reschedule link is invalid or has expired. Please contact us and
-          we&apos;ll be happy to help.
-        </Body>
+        <Eyebrow text={t("invalid.eyebrow")} tone="muted" />
+        <Title>{t("invalid.title")}</Title>
+        <Body>{t("invalid.body")}</Body>
       </Shell>
     );
   }
@@ -235,9 +234,9 @@ function RescheduleInner() {
         <Emblem>
           <CalendarCheck className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
         </Emblem>
-        <Eyebrow text="Appointment Confirmed" />
-        <Title>You&apos;re all set</Title>
-        <Body>Your consultation has been confirmed for the new time below.</Body>
+        <Eyebrow text={t("accepted.eyebrow")} />
+        <Title>{t("accepted.title")}</Title>
+        <Body>{t("accepted.body")}</Body>
 
         <div className="mt-10 mb-8">
           <DateTimeBand date={formatDate(details.newDate)} time={details.newTime} />
@@ -252,13 +251,13 @@ function RescheduleInner() {
               className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] tracking-[0.2em] uppercase text-white dark:text-[#0c0a1d] bg-[#0f0f0f] dark:bg-white transition-colors hover:bg-amber-600 dark:hover:bg-amber-500 dark:hover:text-white"
             >
               <Video className="w-4 h-4" strokeWidth={1.5} />
-              Join Google Meet
+              {t("accepted.join")}
             </a>
           </div>
         )}
 
         <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-10">
-          A confirmation email is on its way.
+          {t("accepted.emailNote")}
         </p>
       </Shell>
     );
@@ -270,12 +269,9 @@ function RescheduleInner() {
         <Emblem tone="muted">
           <X className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
         </Emblem>
-        <Eyebrow text="Reschedule Declined" tone="muted" />
-        <Title>Thanks for letting us know</Title>
-        <Body>
-          We&apos;ve informed our team. Feel free to reply to our email if
-          you&apos;d like to arrange a different time.
-        </Body>
+        <Eyebrow text={t("declined.eyebrow")} tone="muted" />
+        <Title>{t("declined.title")}</Title>
+        <Body>{t("declined.body")}</Body>
       </Shell>
     );
   }
@@ -286,12 +282,9 @@ function RescheduleInner() {
         <Emblem>
           <Clock className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
         </Emblem>
-        <Eyebrow text="No Longer Available" />
-        <Title>That time was just taken</Title>
-        <Body>
-          Unfortunately the proposed slot is no longer available. Please reply to
-          our email and we&apos;ll find another time for you.
-        </Body>
+        <Eyebrow text={t("slotTaken.eyebrow")} />
+        <Title>{t("slotTaken.title")}</Title>
+        <Body>{t("slotTaken.body")}</Body>
       </Shell>
     );
   }
@@ -302,12 +295,9 @@ function RescheduleInner() {
         <Emblem tone="muted">
           <X className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
         </Emblem>
-        <Eyebrow text="Something Went Wrong" tone="muted" />
-        <Title>Please try again</Title>
-        <Body>
-          We couldn&apos;t process your response just now. Try again in a moment
-          or reply to our email.
-        </Body>
+        <Eyebrow text={t("error.eyebrow")} tone="muted" />
+        <Title>{t("error.title")}</Title>
+        <Body>{t("error.body")}</Body>
       </Shell>
     );
   }
@@ -318,12 +308,9 @@ function RescheduleInner() {
       <Emblem>
         <Calendar className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
       </Emblem>
-      <Eyebrow text="Reschedule Request" />
-      <Title>Hello, {details.name}</Title>
-      <Body>
-        We&apos;ve proposed a new time for your consultation. Please confirm or
-        decline below.
-      </Body>
+      <Eyebrow text={t("offer.eyebrow")} />
+      <Title>{t("offer.greeting", { name: details.name })}</Title>
+      <Body>{t("offer.body")}</Body>
 
       {/* Original (struck through) */}
       {details.originalDate && (
@@ -351,7 +338,7 @@ function RescheduleInner() {
           ) : (
             <Check className="w-4 h-4" strokeWidth={2} />
           )}
-          Confirm New Time
+          {t("offer.confirm")}
         </button>
         <button
           onClick={() => respond("decline")}
@@ -363,12 +350,12 @@ function RescheduleInner() {
           ) : (
             <X className="w-4 h-4" strokeWidth={2} />
           )}
-          Decline
+          {t("offer.decline")}
         </button>
       </div>
 
       <p className="flex items-center justify-center gap-1.5 text-center text-xs text-slate-400 dark:text-slate-500 mt-8">
-        Questions? Just reply to our email
+        {t("offer.questions")}
         <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
       </p>
     </Shell>

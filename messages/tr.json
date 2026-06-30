@@ -421,6 +421,38 @@
         "enabledBody": "Artık 1 saat içindeki randevular için bildirim alacaksınız.",
         "upcomingTitle": "Yaklaşan Randevu",
         "upcomingBody": "{name} adlı kişinin {minutes} dakika içinde randevusu var (saat {time})"
+      },
+      "rejection": {
+        "title": "Rezervasyonu İptal Et",
+        "subtitle": "Lütfen iptal için bir neden belirtin",
+        "reasonLabel": "İptal Nedeni",
+        "reasonPlaceholder": "örn., Maalesef bu tarihte doluyuz. Lütfen başka bir saat seçin.",
+        "emailNote": "Bu mesaj müşteriye gönderilen e-postaya eklenecektir.",
+        "cancel": "Vazgeç",
+        "submit": "Reddet ve E-posta Gönder",
+        "sending": "Gönderiliyor..."
+      },
+      "reschedule": {
+        "badge": "Yeniden planlama gönderildi",
+        "offer": "Bunun Yerine Yeniden Planlama Öner",
+        "title": "Randevuyu Yeniden Planla",
+        "subtitle": "Müşteriye yeni bir tarih ve saat önerin",
+        "noteLabel": "Müşteriye Not",
+        "optional": "isteğe bağlı",
+        "notePlaceholder": "örn., Bir çakışma yaşadık ancak sizi bu yeni saatte görmekten memnuniyet duyarız.",
+        "proposeTitle": "Yeni Saat Öner",
+        "proposeSubtitle": "Müşteriye önermek için uygun bir saat seçin.",
+        "noSlots": "Uygun saat yok. Önce uygunluk tarihleri ekleyin.",
+        "selected": "Seçilen:",
+        "back": "Geri",
+        "cancel": "Vazgeç",
+        "send": "Yeniden Planlama Gönder",
+        "sending": "Gönderiliyor...",
+        "buttonTitle": "Yeniden Planla",
+        "sentAlert": "Yeniden planlama teklifi müşteriye gönderildi.",
+        "saveError": "Yeniden planlama kaydedilemedi: {error}",
+        "emailError": "Yeniden planlama kaydedildi ancak e-posta gönderilemedi: {error}",
+        "emailErrorGeneric": "Yeniden planlama kaydedildi ancak e-posta gönderilemedi."
       }
     },
     "properties": {
@@ -887,7 +919,12 @@
       }
     },
     "thirdView": {
-      "titleWords": ["Hayalinizdeki", "Eviniz,", "Her", "Yerde..."],
+      "titleWords": [
+        "Hayalinizdeki",
+        "Eviniz,",
+        "Her",
+        "Yerde..."
+      ],
       "subtitle": "Londra'dan Dubai'ye, Kıbrıs'tan Singapur'a — sizi dünya genelinde premium mülklerle buluşturuyoruz. 20 yılı aşkın uluslararası deneyimimizle, ekibimiz küresel pazarlardaki konut ve yatırım fırsatları konusunda uzman rehberlik sunar. İster tatil amaçlı bir mülk, ister kira getirisi yüksek bir yatırım, isterse yurt dışında kalıcı bir konut arıyor olun, sürecin her adımını özenle ve profesyonellikle yönetiyoruz.",
       "featuredProperties": "Öne Çıkan Mülkler",
       "noImage": "Görsel yok",
@@ -1016,5 +1053,43 @@
     "title": "KA Lifestyle",
     "subtitle": "Mekanınızı bir şahesere dönüştürün. Benzersiz vizyonunuza özel, kişiye özel iç tasarım hizmetleri, premium mobilya küratörlüğü ve eksiksiz ev stil çözümleri sunuyoruz.",
     "viewAll": "Tümünü Gör"
+  },
+  "reschedule": {
+    "loading": "Yükleniyor",
+    "invalid": {
+      "eyebrow": "Geçersiz",
+      "title": "Bağlantı geçersiz",
+      "body": "Bu yeniden planlama bağlantısı geçersiz veya süresi dolmuş. Lütfen bizimle iletişime geçin, memnuniyetle yardımcı oluruz."
+    },
+    "accepted": {
+      "eyebrow": "Randevu Onaylandı",
+      "title": "Her şey hazır",
+      "body": "Görüşmeniz aşağıdaki yeni saat için onaylandı.",
+      "join": "Google Meet'e Katıl",
+      "emailNote": "Onay e-postası yola çıktı."
+    },
+    "declined": {
+      "eyebrow": "Yeniden Planlama Reddedildi",
+      "title": "Bildirdiğiniz için teşekkürler",
+      "body": "Ekibimizi bilgilendirdik. Farklı bir saat ayarlamak isterseniz e-postamızı yanıtlamanız yeterli."
+    },
+    "slotTaken": {
+      "eyebrow": "Artık Uygun Değil",
+      "title": "Bu saat az önce doldu",
+      "body": "Maalesef önerilen saat artık uygun değil. Lütfen e-postamızı yanıtlayın, size başka bir saat ayarlayalım."
+    },
+    "error": {
+      "eyebrow": "Bir Sorun Oluştu",
+      "title": "Lütfen tekrar deneyin",
+      "body": "Yanıtınızı şu anda işleyemedik. Birazdan tekrar deneyin veya e-postamızı yanıtlayın."
+    },
+    "offer": {
+      "eyebrow": "Yeniden Planlama Talebi",
+      "greeting": "Merhaba, {name}",
+      "body": "Görüşmeniz için yeni bir saat önerdik. Lütfen aşağıdan onaylayın veya reddedin.",
+      "confirm": "Yeni Saati Onayla",
+      "decline": "Reddet",
+      "questions": "Sorularınız mı var? E-postamızı yanıtlamanız yeterli"
+    }
   }
 }

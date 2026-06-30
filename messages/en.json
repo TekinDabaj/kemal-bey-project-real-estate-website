@@ -421,6 +421,38 @@
         "enabledBody": "You will now receive notifications for upcoming reservations within 1 hour.",
         "upcomingTitle": "Upcoming Reservation",
         "upcomingBody": "{name} has a reservation in {minutes} minutes (at {time})"
+      },
+      "rejection": {
+        "title": "Cancel Reservation",
+        "subtitle": "Please provide a reason for cancellation",
+        "reasonLabel": "Rejection Reason",
+        "reasonPlaceholder": "e.g., Unfortunately, we are fully booked on this date. Please select another time slot.",
+        "emailNote": "This message will be included in the email to the client.",
+        "cancel": "Cancel",
+        "submit": "Reject & Send Email",
+        "sending": "Sending..."
+      },
+      "reschedule": {
+        "badge": "Reschedule sent",
+        "offer": "Offer a Reschedule Instead",
+        "title": "Reschedule Appointment",
+        "subtitle": "Offer the client a new date and time",
+        "noteLabel": "Note to Client",
+        "optional": "optional",
+        "notePlaceholder": "e.g., We had a scheduling conflict, but we'd love to see you at this new time.",
+        "proposeTitle": "Propose a New Time",
+        "proposeSubtitle": "Select an available slot to offer the client.",
+        "noSlots": "No available slots. Add availability dates first.",
+        "selected": "Selected:",
+        "back": "Back",
+        "cancel": "Cancel",
+        "send": "Send Reschedule Offer",
+        "sending": "Sending...",
+        "buttonTitle": "Reschedule",
+        "sentAlert": "Reschedule offer sent to the client.",
+        "saveError": "Failed to save the reschedule: {error}",
+        "emailError": "Reschedule saved, but the email failed to send: {error}",
+        "emailErrorGeneric": "Reschedule saved, but the email failed to send."
       }
     },
     "properties": {
@@ -887,7 +919,12 @@
       }
     },
     "thirdView": {
-      "titleWords": ["Your", "Dream", "Home,", "Anywhere..."],
+      "titleWords": [
+        "Your",
+        "Dream",
+        "Home,",
+        "Anywhere..."
+      ],
       "subtitle": "From London to Dubai, Cyprus to Singapore — we connect you with premium properties worldwide. With over 20 years of international experience, our team provides expert guidance on residential and investment opportunities across key global markets. Whether you're seeking a holiday retreat, a rental investment, or a permanent residence abroad, we handle every step of the journey with care and professionalism.",
       "featuredProperties": "Featured Properties",
       "noImage": "No image",
@@ -1016,5 +1053,43 @@
     "title": "KA Lifestyle",
     "subtitle": "Transform your space into a masterpiece. We offer bespoke interior design services, premium furniture curation, and complete home styling solutions tailored to your unique vision.",
     "viewAll": "View All"
+  },
+  "reschedule": {
+    "loading": "Loading",
+    "invalid": {
+      "eyebrow": "Unavailable",
+      "title": "Link not valid",
+      "body": "This reschedule link is invalid or has expired. Please contact us and we'll be happy to help."
+    },
+    "accepted": {
+      "eyebrow": "Appointment Confirmed",
+      "title": "You're all set",
+      "body": "Your consultation has been confirmed for the new time below.",
+      "join": "Join Google Meet",
+      "emailNote": "A confirmation email is on its way."
+    },
+    "declined": {
+      "eyebrow": "Reschedule Declined",
+      "title": "Thanks for letting us know",
+      "body": "We've informed our team. Feel free to reply to our email if you'd like to arrange a different time."
+    },
+    "slotTaken": {
+      "eyebrow": "No Longer Available",
+      "title": "That time was just taken",
+      "body": "Unfortunately the proposed slot is no longer available. Please reply to our email and we'll find another time for you."
+    },
+    "error": {
+      "eyebrow": "Something Went Wrong",
+      "title": "Please try again",
+      "body": "We couldn't process your response just now. Try again in a moment or reply to our email."
+    },
+    "offer": {
+      "eyebrow": "Reschedule Request",
+      "greeting": "Hello, {name}",
+      "body": "We've proposed a new time for your consultation. Please confirm or decline below.",
+      "confirm": "Confirm New Time",
+      "decline": "Decline",
+      "questions": "Questions? Just reply to our email"
+    }
   }
 }
