@@ -38,13 +38,10 @@ const dateFnsLocales: Record<string, DateFnsLocale> = {
 import {
   Calendar,
   Clock,
-  CheckCircle,
   User,
   MessageSquare,
   ArrowRight,
   ArrowLeft,
-  CalendarCheck,
-  Home,
   Building2,
   Search,
   X,
@@ -403,34 +400,89 @@ export default function BookPage() {
 
   if (success) {
     return (
-      <div className="flex items-center justify-center px-3 py-8 pt-20 bg-slate-50 dark:bg-[#0c0a1d] flex-1">
-        <div className="max-w-md w-full">
-          <div className="bg-white dark:bg-[#13102b] rounded-lg shadow-sm p-5 text-center border border-slate-200 dark:border-[#2d2a4a]">
-            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
-              <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+      <div className="flex-1 flex items-center justify-center bg-white dark:bg-[#0c0a1d] px-5 py-16 sm:py-24">
+        <div className="w-full max-w-xl">
+          {/* Emblem */}
+          <div className="flex justify-center mb-10">
+            <div className="w-16 h-16 rounded-full border border-amber-500/40 flex items-center justify-center">
+              <Check className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
             </div>
-            <h1 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">{t("success.title")}</h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">{t("success.subtitle")}</p>
-            <div className="bg-slate-50 dark:bg-[#1a1735] rounded-md p-3 mb-4">
-              <div className="flex items-center justify-center gap-2 text-sm font-medium text-slate-900 dark:text-white">
-                <CalendarCheck className="w-4 h-4 text-amber-500" />
-                {format(selectedDate!, "EEE, MMM d, yyyy", { locale: dateLocale })} • {selectedTime}
-              </div>
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-              {t("success.confirmationSent")} <strong className="text-slate-700 dark:text-slate-200">{formData.email}</strong>
+          </div>
+
+          {/* Title */}
+          <div className="text-center mb-12">
+            <p className="text-[11px] tracking-[0.4em] uppercase text-amber-600 dark:text-amber-500 mb-5">
+              KA Global
             </p>
-            <div className="bg-amber-50 dark:bg-amber-900/10 rounded-md p-3 mb-4 text-left border border-amber-100 dark:border-amber-900/20">
-              <h3 className="text-xs font-semibold text-slate-700 dark:text-slate-200 mb-2">{t("success.whatNext")}</h3>
-              <ol className="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 list-decimal list-inside">
-                <li>{t("success.step1")}</li>
-                <li>{t("success.step2")}</li>
-                <li>{t("success.step3")}</li>
-              </ol>
+            <h1
+              style={{ fontFamily: "var(--font-montserrat)" }}
+              className="text-3xl sm:text-[2.5rem] leading-tight font-light tracking-tight text-slate-900 dark:text-white mb-4"
+            >
+              {t("success.title")}
+            </h1>
+            <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+              {t("success.subtitle")}
+            </p>
+          </div>
+
+          {/* Date / Time band */}
+          <div className="flex items-stretch justify-center border-y border-slate-200 dark:border-[#2d2a4a] py-7 mb-10">
+            <div className="flex-1 text-center px-4">
+              <Calendar className="w-4 h-4 text-amber-500 mx-auto mb-2.5" strokeWidth={1.5} />
+              <p className="text-sm sm:text-base text-slate-900 dark:text-white font-light">
+                {format(selectedDate!, "EEEE, MMMM d, yyyy", { locale: dateLocale })}
+              </p>
             </div>
-            <Link href="/" className="inline-flex items-center gap-1.5 bg-slate-900 dark:bg-[#2d2a4a] hover:bg-slate-800 dark:hover:bg-[#3d3a5c] text-white px-4 py-2 rounded-md text-sm font-medium transition">
-              <Home className="w-3.5 h-3.5" />
+            <div className="w-px bg-slate-200 dark:bg-[#2d2a4a]" />
+            <div className="flex-1 text-center px-4">
+              <Clock className="w-4 h-4 text-amber-500 mx-auto mb-2.5" strokeWidth={1.5} />
+              <p className="text-sm sm:text-base text-slate-900 dark:text-white font-light">
+                {selectedTime}
+              </p>
+            </div>
+          </div>
+
+          {/* Confirmation email */}
+          <p className="text-center text-sm text-slate-500 dark:text-slate-400 mb-12">
+            {t("success.confirmationSent")}{" "}
+            <span className="text-slate-900 dark:text-white font-medium">{formData.email}</span>
+          </p>
+
+          {/* What's next */}
+          <div className="mb-12">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-slate-400 dark:text-slate-500 text-center mb-6">
+              {t("success.whatNext")}
+            </p>
+            <ol className="max-w-md mx-auto">
+              {[t("success.step1"), t("success.step2"), t("success.step3")].map(
+                (step, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-4 py-3.5 border-b border-slate-100 dark:border-[#1a1735] last:border-0"
+                  >
+                    <span
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                      className="text-amber-500/80 text-sm font-light tabular-nums w-6 shrink-0"
+                    >
+                      0{i + 1}
+                    </span>
+                    <span className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {step}
+                    </span>
+                  </li>
+                )
+              )}
+            </ol>
+          </div>
+
+          {/* Back home — editorial underline link */}
+          <div className="text-center">
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.25em] uppercase text-slate-900 dark:text-white border-b border-slate-900 dark:border-white pb-1 transition-colors hover:text-amber-600 hover:border-amber-600 dark:hover:text-amber-500 dark:hover:border-amber-500"
+            >
               {t("success.backToHome")}
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>

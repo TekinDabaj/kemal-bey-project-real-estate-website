@@ -10,6 +10,7 @@ import {
   Loader2,
   CalendarCheck,
   Video,
+  ArrowUpRight,
 } from "lucide-react";
 
 type Details = {
@@ -32,25 +33,87 @@ function formatDate(dateStr: string | null): string {
   });
 }
 
+const MONT = { fontFamily: "var(--font-montserrat)" };
+
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12">
+    <div className="flex-1 flex items-center justify-center bg-white dark:bg-[#0c0a1d] px-5 py-16 sm:py-24">
       <div className="w-full max-w-md">
-        {/* Brand */}
-        <div className="text-center mb-6">
-          <span className="text-2xl font-light tracking-[0.3em] uppercase text-slate-900">
-            KA
-          </span>
-          <span className="text-2xl font-semibold tracking-[0.3em] uppercase text-amber-500">
-            Global
-          </span>
-        </div>
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
-          {children}
-        </div>
-        <p className="text-center text-xs text-slate-400 mt-6">
-          © {new Date().getFullYear()} KA Global
+        <p className="text-center text-[11px] tracking-[0.4em] uppercase text-amber-600 dark:text-amber-500 mb-12">
+          KA Global
         </p>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/** Thin-bordered circular emblem used at the top of each state. */
+function Emblem({
+  children,
+  tone = "amber",
+}: {
+  children: React.ReactNode;
+  tone?: "amber" | "muted";
+}) {
+  const ring =
+    tone === "muted"
+      ? "border-slate-300 dark:border-slate-600"
+      : "border-amber-500/40";
+  return (
+    <div className="flex justify-center mb-8">
+      <div
+        className={`w-16 h-16 rounded-full border ${ring} flex items-center justify-center`}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function Eyebrow({ text, tone = "amber" }: { text: string; tone?: "amber" | "muted" }) {
+  const color =
+    tone === "muted"
+      ? "text-slate-400 dark:text-slate-500"
+      : "text-amber-600 dark:text-amber-500";
+  return (
+    <p className={`text-[11px] tracking-[0.35em] uppercase ${color} text-center mb-4`}>
+      {text}
+    </p>
+  );
+}
+
+function Title({ children }: { children: React.ReactNode }) {
+  return (
+    <h1
+      style={MONT}
+      className="text-center text-2xl sm:text-3xl font-light tracking-tight text-slate-900 dark:text-white"
+    >
+      {children}
+    </h1>
+  );
+}
+
+function Body({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-center text-sm text-slate-500 dark:text-slate-400 leading-relaxed mt-4">
+      {children}
+    </p>
+  );
+}
+
+/** Hairline date / time band, matching the booking confirmation screen. */
+function DateTimeBand({ date, time }: { date: string; time: string }) {
+  return (
+    <div className="flex items-stretch justify-center border-y border-slate-200 dark:border-[#2d2a4a] py-6">
+      <div className="flex-1 text-center px-3">
+        <Calendar className="w-4 h-4 text-amber-500 mx-auto mb-2" strokeWidth={1.5} />
+        <p className="text-sm text-slate-900 dark:text-white font-light">{date}</p>
+      </div>
+      <div className="w-px bg-slate-200 dark:bg-[#2d2a4a]" />
+      <div className="flex-1 text-center px-3">
+        <Clock className="w-4 h-4 text-amber-500 mx-auto mb-2" strokeWidth={1.5} />
+        <p className="text-sm text-slate-900 dark:text-white font-light">{time}</p>
       </div>
     </div>
   );
@@ -132,9 +195,9 @@ function RescheduleInner() {
   if (loading) {
     return (
       <Shell>
-        <div className="flex flex-col items-center py-8 text-slate-500">
-          <Loader2 className="w-8 h-8 animate-spin text-amber-500 mb-3" />
-          <p className="text-sm">Loading your appointment…</p>
+        <div className="flex flex-col items-center py-10 text-slate-400">
+          <Loader2 className="w-7 h-7 animate-spin text-amber-500 mb-4" strokeWidth={1.5} />
+          <p className="text-[11px] tracking-[0.25em] uppercase">Loading</p>
         </div>
       </Shell>
     );
@@ -144,18 +207,15 @@ function RescheduleInner() {
   if (loadError || !details) {
     return (
       <Shell>
-        <div className="text-center py-6">
-          <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center">
-            <X className="w-7 h-7 text-red-500" />
-          </div>
-          <h1 className="text-lg font-semibold text-slate-900 mb-1">
-            Link not valid
-          </h1>
-          <p className="text-sm text-slate-500">
-            This reschedule link is invalid or has expired. Please contact us
-            and we&apos;ll be happy to help.
-          </p>
-        </div>
+        <Emblem tone="muted">
+          <X className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
+        </Emblem>
+        <Eyebrow text="Unavailable" tone="muted" />
+        <Title>Link not valid</Title>
+        <Body>
+          This reschedule link is invalid or has expired. Please contact us and
+          we&apos;ll be happy to help.
+        </Body>
       </Shell>
     );
   }
@@ -172,41 +232,34 @@ function RescheduleInner() {
   if (finalStatus === "accepted") {
     return (
       <Shell>
-        <div className="text-center py-2">
-          <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-green-50 flex items-center justify-center">
-            <CalendarCheck className="w-7 h-7 text-green-600" />
-          </div>
-          <h1 className="text-xl font-semibold text-slate-900 mb-1">
-            You&apos;re all set!
-          </h1>
-          <p className="text-sm text-slate-500 mb-5">
-            Your appointment has been confirmed for the new time.
-          </p>
-          <div className="bg-slate-50 rounded-xl p-4 text-left mb-5">
-            <div className="flex items-center gap-2 text-sm text-slate-700 mb-1">
-              <Calendar className="w-4 h-4 text-amber-500" />
-              {formatDate(details.newDate)}
-            </div>
-            <div className="flex items-center gap-2 text-sm text-slate-700">
-              <Clock className="w-4 h-4 text-amber-500" />
-              {details.newTime}
-            </div>
-          </div>
-          {meetLink && (
+        <Emblem>
+          <CalendarCheck className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
+        </Emblem>
+        <Eyebrow text="Appointment Confirmed" />
+        <Title>You&apos;re all set</Title>
+        <Body>Your consultation has been confirmed for the new time below.</Body>
+
+        <div className="mt-10 mb-8">
+          <DateTimeBand date={formatDate(details.newDate)} time={details.newTime} />
+        </div>
+
+        {meetLink && (
+          <div className="text-center">
             <a
               href={meetLink}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-[#1a73e8] hover:bg-[#1557b0] text-white px-5 py-2.5 rounded-lg text-sm font-medium transition"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-[12px] tracking-[0.2em] uppercase text-white dark:text-[#0c0a1d] bg-[#0f0f0f] dark:bg-white transition-colors hover:bg-amber-600 dark:hover:bg-amber-500 dark:hover:text-white"
             >
-              <Video className="w-4 h-4" />
+              <Video className="w-4 h-4" strokeWidth={1.5} />
               Join Google Meet
             </a>
-          )}
-          <p className="text-xs text-slate-400 mt-5">
-            A confirmation email is on its way.
-          </p>
-        </div>
+          </div>
+        )}
+
+        <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-10">
+          A confirmation email is on its way.
+        </p>
       </Shell>
     );
   }
@@ -214,18 +267,15 @@ function RescheduleInner() {
   if (finalStatus === "declined") {
     return (
       <Shell>
-        <div className="text-center py-6">
-          <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-            <X className="w-7 h-7 text-slate-500" />
-          </div>
-          <h1 className="text-lg font-semibold text-slate-900 mb-1">
-            Reschedule declined
-          </h1>
-          <p className="text-sm text-slate-500">
-            No problem — we&apos;ve let our team know. Feel free to reply to our
-            email if you&apos;d like to arrange a different time.
-          </p>
-        </div>
+        <Emblem tone="muted">
+          <X className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
+        </Emblem>
+        <Eyebrow text="Reschedule Declined" tone="muted" />
+        <Title>Thanks for letting us know</Title>
+        <Body>
+          We&apos;ve informed our team. Feel free to reply to our email if
+          you&apos;d like to arrange a different time.
+        </Body>
       </Shell>
     );
   }
@@ -233,18 +283,15 @@ function RescheduleInner() {
   if (result === "slot_taken") {
     return (
       <Shell>
-        <div className="text-center py-6">
-          <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-amber-50 flex items-center justify-center">
-            <Clock className="w-7 h-7 text-amber-500" />
-          </div>
-          <h1 className="text-lg font-semibold text-slate-900 mb-1">
-            That time was just taken
-          </h1>
-          <p className="text-sm text-slate-500">
-            Unfortunately the proposed slot is no longer available. Please reply
-            to our email and we&apos;ll find another time for you.
-          </p>
-        </div>
+        <Emblem>
+          <Clock className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
+        </Emblem>
+        <Eyebrow text="No Longer Available" />
+        <Title>That time was just taken</Title>
+        <Body>
+          Unfortunately the proposed slot is no longer available. Please reply to
+          our email and we&apos;ll find another time for you.
+        </Body>
       </Shell>
     );
   }
@@ -252,97 +299,78 @@ function RescheduleInner() {
   if (result === "error") {
     return (
       <Shell>
-        <div className="text-center py-6">
-          <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center">
-            <X className="w-7 h-7 text-red-500" />
-          </div>
-          <h1 className="text-lg font-semibold text-slate-900 mb-1">
-            Something went wrong
-          </h1>
-          <p className="text-sm text-slate-500">
-            We couldn&apos;t process your response. Please try again in a moment
-            or reply to our email.
-          </p>
-        </div>
+        <Emblem tone="muted">
+          <X className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
+        </Emblem>
+        <Eyebrow text="Something Went Wrong" tone="muted" />
+        <Title>Please try again</Title>
+        <Body>
+          We couldn&apos;t process your response just now. Try again in a moment
+          or reply to our email.
+        </Body>
       </Shell>
     );
   }
 
-  // ---- Proposed: show the offer with confirm/decline ----
+  // ---- Proposed: show the offer with confirm / decline ----
   return (
     <Shell>
-      <div className="text-center mb-5">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-amber-500 mb-1">
-          Reschedule Request
-        </p>
-        <h1 className="text-xl font-semibold text-slate-900">
-          Hello, {details.name}
-        </h1>
-        <p className="text-sm text-slate-500 mt-2">
-          We&apos;ve proposed a new time for your consultation. Please confirm or
-          decline below.
-        </p>
-      </div>
+      <Emblem>
+        <Calendar className="w-6 h-6 text-amber-500" strokeWidth={1.5} />
+      </Emblem>
+      <Eyebrow text="Reschedule Request" />
+      <Title>Hello, {details.name}</Title>
+      <Body>
+        We&apos;ve proposed a new time for your consultation. Please confirm or
+        decline below.
+      </Body>
 
-      {/* Original (struck) */}
+      {/* Original (struck through) */}
       {details.originalDate && (
-        <div className="text-center mb-3">
-          <p className="text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-1">
-            Original Request
-          </p>
-          <p className="text-sm text-slate-400 line-through">
+        <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-8 mb-5">
+          <span className="line-through">
             {formatDate(details.originalDate)} · {details.originalTime}
-          </p>
-        </div>
+          </span>
+        </p>
       )}
 
-      {/* New proposed */}
-      <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 mb-6">
-        <p className="text-[10px] font-semibold tracking-widest uppercase text-amber-600 text-center mb-3">
-          Proposed New Time
-        </p>
-        <div className="flex items-center justify-center gap-6">
-          <div className="flex items-center gap-2 text-slate-800 font-medium">
-            <Calendar className="w-4 h-4 text-amber-500" />
-            {formatDate(details.newDate)}
-          </div>
-        </div>
-        <div className="flex items-center justify-center gap-2 text-slate-800 font-medium mt-2">
-          <Clock className="w-4 h-4 text-amber-500" />
-          {details.newTime}
-        </div>
-      </div>
+      {/* Proposed new time */}
+      <DateTimeBand date={formatDate(details.newDate)} time={details.newTime} />
 
-      <div className="flex flex-col gap-3">
+      {/* Actions */}
+      <div className="mt-10 flex flex-col gap-3">
         <button
           onClick={() => respond("confirm")}
           disabled={submitting !== null}
-          className={`flex items-center justify-center gap-2 py-3 rounded-lg font-medium text-sm text-white transition disabled:opacity-60 ${
-            intent === "confirm"
-              ? "bg-green-600 hover:bg-green-700 ring-2 ring-green-300"
-              : "bg-green-600 hover:bg-green-700"
+          className={`group flex items-center justify-center gap-2.5 py-3.5 text-[12px] tracking-[0.2em] uppercase text-white dark:text-[#0c0a1d] bg-[#0f0f0f] dark:bg-white transition-colors hover:bg-amber-600 dark:hover:bg-amber-500 dark:hover:text-white disabled:opacity-50 ${
+            intent === "confirm" ? "ring-1 ring-amber-500 ring-offset-2 ring-offset-white dark:ring-offset-[#0c0a1d]" : ""
           }`}
         >
           {submitting === "confirm" ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
-            <Check className="w-4 h-4" />
+            <Check className="w-4 h-4" strokeWidth={2} />
           )}
           Confirm New Time
         </button>
         <button
           onClick={() => respond("decline")}
           disabled={submitting !== null}
-          className="flex items-center justify-center gap-2 py-3 rounded-lg font-medium text-sm text-slate-600 bg-slate-100 hover:bg-slate-200 transition disabled:opacity-60"
+          className="flex items-center justify-center gap-2.5 py-3.5 text-[12px] tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-[#2d2a4a] transition-colors hover:border-slate-400 dark:hover:border-slate-500 disabled:opacity-50"
         >
           {submitting === "decline" ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
-            <X className="w-4 h-4" />
+            <X className="w-4 h-4" strokeWidth={2} />
           )}
           Decline
         </button>
       </div>
+
+      <p className="flex items-center justify-center gap-1.5 text-center text-xs text-slate-400 dark:text-slate-500 mt-8">
+        Questions? Just reply to our email
+        <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+      </p>
     </Shell>
   );
 }
@@ -352,8 +380,8 @@ export default function ReschedulePage() {
     <Suspense
       fallback={
         <Shell>
-          <div className="flex justify-center py-8">
-            <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+          <div className="flex justify-center py-10">
+            <Loader2 className="w-7 h-7 animate-spin text-amber-500" strokeWidth={1.5} />
           </div>
         </Shell>
       }
