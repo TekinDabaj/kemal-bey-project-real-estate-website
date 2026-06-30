@@ -1593,6 +1593,12 @@ export default function AdminDashboard({
                           >
                             {statusLabels[reservation.status]}
                           </span>
+                          {reservation.reschedule_status === "proposed" && (
+                            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+                              <Calendar size={12} />
+                              Reschedule sent
+                            </span>
+                          )}
                           <span className="text-slate-400 dark:text-slate-500 text-sm">
                             {t("reservations.booked")}{" "}
                             {format(
