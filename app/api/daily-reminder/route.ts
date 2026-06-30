@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { createClient } from '@supabase/supabase-js'
+import { getCyprusToday } from '@/lib/timezone'
 
 export async function GET(request: Request) {
   try {
@@ -16,10 +17,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Get today's date in YYYY-MM-DD format (UTC+02:00 timezone)
-    const now = new Date()
-    const utcPlus2 = new Date(now.getTime() + (2 * 60 * 60 * 1000))
-    const today = utcPlus2.toISOString().split('T')[0]
+    // Get today's date in YYYY-MM-DD as it currently is in Cyprus (DST-aware).
+    const today = getCyprusToday()
 
     // Fetch today's appointments (pending or confirmed only)
     const { data: appointments, error } = await supabase
@@ -69,6 +68,7 @@ export async function GET(request: Request) {
 
     // Format today's date for display
     const displayDate = new Date(today).toLocaleDateString('en-US', {
+      timeZone: 'UTC',
       weekday: 'long',
       year: 'numeric',
       month: 'long',

@@ -1,12 +1,13 @@
 import { google, calendar_v3 } from "googleapis";
 import { createClient } from "@supabase/supabase-js";
+import { CYPRUS_TIMEZONE } from "./timezone";
 
 // Types for the calendar event creation
 export interface CalendarEventInput {
   summary: string;
   description: string;
-  startDateTime: string; // ISO string
-  endDateTime: string; // ISO string
+  startDateTime: string; // naive local time, e.g. "2026-07-15T14:00:00" (interpreted in CYPRUS_TIMEZONE)
+  endDateTime: string; // naive local time, e.g. "2026-07-15T15:00:00" (interpreted in CYPRUS_TIMEZONE)
   attendeeEmail: string;
   attendeeName: string;
 }
@@ -111,11 +112,11 @@ export async function createCalendarEventWithMeet(
       description: input.description,
       start: {
         dateTime: input.startDateTime,
-        timeZone: "Europe/Istanbul", // Turkey timezone
+        timeZone: CYPRUS_TIMEZONE, // Cyprus time (EET/EEST), DST-aware
       },
       end: {
         dateTime: input.endDateTime,
-        timeZone: "Europe/Istanbul",
+        timeZone: CYPRUS_TIMEZONE,
       },
       // Add client as attendee (OAuth allows this)
       attendees: [

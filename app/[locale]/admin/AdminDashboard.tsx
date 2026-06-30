@@ -13,8 +13,8 @@ import {
   addMonths,
   subMonths,
   differenceInMinutes,
-  parseISO,
 } from "date-fns";
+import { cyprusWallClockToInstant } from "@/lib/timezone";
 import {
   enGB,
   tr,
@@ -345,12 +345,15 @@ export default function AdminDashboard({
     );
 
     confirmedReservations.forEach((reservation) => {
-      // Create full datetime from date and time
-      const reservationDate = parseISO(reservation.date);
-      const [hours, minutes] = reservation.time.split(":").map(Number);
-      reservationDate.setHours(hours, minutes, 0, 0);
+      // Resolve the reservation's Cyprus wall-clock time to an absolute
+      // instant (DST-aware) so the countdown is correct regardless of the
+      // admin's own computer timezone.
+      const reservationInstant = cyprusWallClockToInstant(
+        reservation.date,
+        reservation.time
+      );
 
-      const minutesUntil = differenceInMinutes(reservationDate, now);
+      const minutesUntil = differenceInMinutes(reservationInstant, now);
 
       // Notify if within 60 minutes and not already notified
       if (

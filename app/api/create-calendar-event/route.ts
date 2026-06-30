@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createCalendarEventWithMeet } from "@/lib/google-calendar";
+import { buildNaiveDateTimeRange } from "@/lib/timezone";
 
 export async function POST(request: Request) {
   try {
@@ -14,21 +15,15 @@ export async function POST(request: Request) {
       );
     }
 
-    // Parse date and time to create ISO datetime strings
+    // Build naive local datetime strings (no UTC "Z") for a 1-hour meeting.
+    // These are interpreted in CYPRUS_TIMEZONE by the calendar layer, which
+    // lets Google apply the correct EET/EEST (winter/summer) offset itself.
     // date format: "YYYY-MM-DD", time format: "HH:MM"
-    const [hours, minutes] = time.split(":").map(Number);
-
-    // Create start datetime (Turkey timezone: Europe/Istanbul)
-    const startDate = new Date(date);
-    startDate.setHours(hours, minutes, 0, 0);
-
-    // Create end datetime (1 hour meeting duration)
-    const endDate = new Date(startDate);
-    endDate.setHours(endDate.getHours() + 1);
-
-    // Format as ISO strings
-    const startDateTime = startDate.toISOString();
-    const endDateTime = endDate.toISOString();
+    const { startDateTime, endDateTime } = buildNaiveDateTimeRange(
+      date,
+      time,
+      60
+    );
 
     // Build description with client details
     let description = `Property Consultation with ${name}\n\n`;
