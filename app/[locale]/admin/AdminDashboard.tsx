@@ -122,6 +122,9 @@ export default function AdminDashboard({
   const [rescheduleDate, setRescheduleDate] = useState<string | null>(null);
   const [rescheduleTime, setRescheduleTime] = useState<string | null>(null);
   const [rescheduleSending, setRescheduleSending] = useState(false);
+  // True when the modal was opened directly into reschedule mode (e.g. from a
+  // confirmed reservation), so there is no "reject" step to fall back to.
+  const [rescheduleOnly, setRescheduleOnly] = useState(false);
 
   // Property preview modal state
   const [previewProperty, setPreviewProperty] = useState<Property | null>(null);
@@ -530,6 +533,18 @@ export default function AdminDashboard({
     setRejectingReservation(reservation);
     setRejectionReason("");
     setRescheduleMode(false);
+    setRescheduleOnly(false);
+    setRescheduleDate(null);
+    setRescheduleTime(null);
+    setRejectionModalOpen(true);
+  }
+
+  // Open the modal directly into reschedule mode (used for confirmed bookings)
+  function openRescheduleModal(reservation: Reservation) {
+    setRejectingReservation(reservation);
+    setRejectionReason("");
+    setRescheduleMode(true);
+    setRescheduleOnly(true);
     setRescheduleDate(null);
     setRescheduleTime(null);
     setRejectionModalOpen(true);
@@ -541,6 +556,7 @@ export default function AdminDashboard({
     setRejectingReservation(null);
     setRejectionReason("");
     setRescheduleMode(false);
+    setRescheduleOnly(false);
     setRescheduleDate(null);
     setRescheduleTime(null);
   }
@@ -941,14 +957,18 @@ export default function AdminDashboard({
                 <>
                   <button
                     onClick={() => {
-                      setRescheduleMode(false);
-                      setRescheduleDate(null);
-                      setRescheduleTime(null);
+                      if (rescheduleOnly) {
+                        closeRejectionModal();
+                      } else {
+                        setRescheduleMode(false);
+                        setRescheduleDate(null);
+                        setRescheduleTime(null);
+                      }
                     }}
                     disabled={rescheduleSending}
                     className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
                   >
-                    Back
+                    {rescheduleOnly ? "Cancel" : "Back"}
                   </button>
                   <button
                     onClick={handleSendReschedule}
@@ -1749,6 +1769,15 @@ export default function AdminDashboard({
                               <X size={18} />
                             </button>
                           </>
+                        )}
+                        {reservation.status === "confirmed" && (
+                          <button
+                            onClick={() => openRescheduleModal(reservation)}
+                            className="p-2 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg hover:bg-amber-200 dark:hover:bg-amber-900/50 transition"
+                            title="Reschedule"
+                          >
+                            <Calendar size={18} />
+                          </button>
                         )}
                         <button
                           onClick={() => deleteReservation(reservation.id)}

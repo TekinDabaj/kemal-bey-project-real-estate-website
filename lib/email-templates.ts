@@ -308,6 +308,7 @@ export function getRescheduleDeclinedAdminEmail({
   originalTime,
   proposedDate,
   proposedTime,
+  retained,
 }: {
   name: string;
   email: string;
@@ -315,12 +316,14 @@ export function getRescheduleDeclinedAdminEmail({
   originalTime: string;
   proposedDate: string;
   proposedTime: string;
+  retained?: boolean;
 }): string {
+  const outcome = retained
+    ? "declined the proposed new time, so their original confirmed appointment still stands. You may wish to follow up directly."
+    : "declined the proposed reschedule, so the reservation has been cancelled. You may wish to follow up directly.";
   return emailLayout(`
     ${heading("Reschedule Declined", "#ef4444", "Client Declined the New Time")}
-    ${paragraph(
-      `<strong>${name}</strong> (${email}) declined the proposed reschedule, so the reservation has been cancelled. You may wish to follow up directly.`
-    )}
+    ${paragraph(`<strong>${name}</strong> (${email}) ${outcome}`)}
     ${beforeAfterCard(originalDate, originalTime, proposedDate, proposedTime)}
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr><td style="text-align: center; padding: 8px 0;">

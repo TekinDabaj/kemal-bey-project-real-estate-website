@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
-import { createCalendarEventWithMeet } from "@/lib/google-calendar";
+import {
+  createCalendarEventWithMeet,
+  deleteCalendarEvent,
+} from "@/lib/google-calendar";
 import { buildNaiveDateTimeRange } from "@/lib/timezone";
 import {
   getRescheduleConfirmedClientEmail,
@@ -104,11 +107,19 @@ export async function POST(request: Request) {
     const newDate: string = reservation.reschedule_date;
     const newTime = hhmm(reservation.reschedule_time);
 
+    // A reservation that was already confirmed keeps its original confirmed
+    // appointment if the client declines the proposed new time. A pending one
+    // is cancelled (the reschedule was the alternative to outright rejection).
+    const wasConfirmed = reservation.status === "confirmed";
+
     // ----- DECLINE -----------------------------------------------------------
     if (action === "decline") {
       await supabase
         .from("reservations")
-        .update({ reschedule_status: "declined", status: "cancelled" })
+        .update({
+          reschedule_status: "declined",
+          ...(wasConfirmed ? {} : { status: "cancelled" }),
+        })
         .eq("id", reservation.id);
 
       try {
@@ -123,13 +134,14 @@ export async function POST(request: Request) {
             originalTime: hhmm(reservation.time),
             proposedDate: formatDate(newDate),
             proposedTime: newTime,
+            retained: wasConfirmed,
           }),
         });
       } catch (e) {
         console.error("Failed to send decline notification:", e);
       }
 
-      return NextResponse.json({ status: "declined" });
+      return NextResponse.json({ status: "declined", retained: wasConfirmed });
     }
 
     // ----- CONFIRM -----------------------------------------------------------
@@ -149,7 +161,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "slot_taken" }, { status: 409 });
     }
 
-    // Move the reservation to the new slot and confirm it.
+    // Move the reservation to the new slot and confirm it. Clear any stale
+    // calendar/meet info from a prior confirmation (a new event is made below).
     await supabase
       .from("reservations")
       .update({
@@ -157,8 +170,20 @@ export async function POST(request: Request) {
         time: newTime,
         status: "confirmed",
         reschedule_status: "accepted",
+        calendar_event_id: null,
+        meet_link: null,
       })
       .eq("id", reservation.id);
+
+    // If this reservation was already confirmed, remove its old calendar event
+    // so the rescheduled one doesn't leave a duplicate behind.
+    if (reservation.calendar_event_id) {
+      try {
+        await deleteCalendarEvent(reservation.calendar_event_id);
+      } catch (e) {
+        console.error("Failed to delete old calendar event on reschedule:", e);
+      }
+    }
 
     // Create the Google Calendar event + Meet link (non-blocking on failure).
     let meetLink: string | undefined;
