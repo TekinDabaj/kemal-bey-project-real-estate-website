@@ -179,14 +179,14 @@
       "changeSelection": "Seçimi Değiştir ({count} seçili)"
     },
     "success": {
-      "title": "Randevu Onaylandı!",
-      "subtitle": "Görüşmeniz başarıyla planlandı",
+      "title": "Randevu Talebiniz Alındı!",
+      "subtitle": "Görüşme talebiniz başarıyla alındı",
       "scheduledFor": "Tarih",
       "at": "Saat",
-      "confirmationSent": "Onay e-postası gönderildi",
+      "confirmationSent": "Onay e-postası şu adrese gönderilecek",
       "whatNext": "Sırada ne var?",
-      "step1": "Toplantı detaylarını içeren bir onay e-postası alacaksınız",
-      "step2": "Danışmanlarımız görüşmeniz için hazırlık yapacak",
+      "step1": "Ekibimiz talebinizi inceleyip onaylayacak",
+      "step2": "Toplantı bağlantısını içeren bir onay e-postası alacaksınız",
       "step3": "Planlanan saatte görüşmenize katılın",
       "backToHome": "Ana Sayfaya Dön"
     },
