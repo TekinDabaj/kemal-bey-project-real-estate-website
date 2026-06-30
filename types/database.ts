@@ -17,6 +17,11 @@ export type Reservation = {
   // Google Calendar integration fields
   calendar_event_id: string | null;
   meet_link: string | null;
+  // Reschedule flow fields
+  reschedule_token: string | null;
+  reschedule_date: string | null; // YYYY-MM-DD
+  reschedule_time: string | null; // HH:MM
+  reschedule_status: "proposed" | "accepted" | "declined" | null;
 };
 
 export type SiteContent = {

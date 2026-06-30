@@ -37,11 +37,11 @@ function getConfirmationEmailTemplate({
                             Click the button below to join the video call at your scheduled time.<br>
                             You can also add this to your calendar automatically.
                           </p>
-                          <!-- Join Meeting Button -->
-                          <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
+                          <!-- Join Meeting Button (solid bgcolor for email-client compatibility) -->
+                          <table cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
                             <tr>
-                              <td style="background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%); border-radius: 8px;">
-                                <a href="${meetLink}" target="_blank" style="display: inline-block; padding: 14px 32px; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">
+                              <td align="center" bgcolor="#1a73e8" style="background-color: #1a73e8; border-radius: 8px;">
+                                <a href="${meetLink}" target="_blank" style="display: inline-block; padding: 14px 32px; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px; border-radius: 8px;">
                                   Join Meeting
                                 </a>
                               </td>

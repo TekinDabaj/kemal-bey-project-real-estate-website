@@ -117,6 +117,12 @@ export default function AdminDashboard({
   const [rejectingReservation, setRejectingReservation] = useState<Reservation | null>(null);
   const [rejectionLoading, setRejectionLoading] = useState(false);
 
+  // Reschedule (within the rejection modal) state
+  const [rescheduleMode, setRescheduleMode] = useState(false);
+  const [rescheduleDate, setRescheduleDate] = useState<string | null>(null);
+  const [rescheduleTime, setRescheduleTime] = useState<string | null>(null);
+  const [rescheduleSending, setRescheduleSending] = useState(false);
+
   // Property preview modal state
   const [previewProperty, setPreviewProperty] = useState<Property | null>(null);
 
@@ -468,8 +474,13 @@ export default function AdminDashboard({
       // Continue with confirmation - Meet creation failure shouldn't block
     }
 
-    // Step 2: Update database with status and calendar info
-    const updateData: Record<string, unknown> = { status };
+    // Step 2: Update database with status and calendar info. Also invalidate any
+    // outstanding reschedule offer so its emailed link can no longer be used.
+    const updateData: Record<string, unknown> = {
+      status,
+      reschedule_token: null,
+      reschedule_status: null,
+    };
     if (calendarEventId) updateData.calendar_event_id = calendarEventId;
     if (meetLink) updateData.meet_link = meetLink;
 
@@ -518,7 +529,118 @@ export default function AdminDashboard({
   function openRejectionModal(reservation: Reservation) {
     setRejectingReservation(reservation);
     setRejectionReason("");
+    setRescheduleMode(false);
+    setRescheduleDate(null);
+    setRescheduleTime(null);
     setRejectionModalOpen(true);
+  }
+
+  // Close + fully reset the rejection/reschedule modal
+  function closeRejectionModal() {
+    setRejectionModalOpen(false);
+    setRejectingReservation(null);
+    setRejectionReason("");
+    setRescheduleMode(false);
+    setRescheduleDate(null);
+    setRescheduleTime(null);
+  }
+
+  // Available (unbooked) upcoming slots the admin can offer as a new time.
+  function getRescheduleOptions() {
+    const today = format(new Date(), "yyyy-MM-dd");
+    return availabilities
+      .filter((a) => a.date >= today && a.times.length > 0)
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .map((a) => {
+        const booked = getBookedTimesForDate(new Date(a.date + "T00:00:00"));
+        const freeTimes = [...a.times]
+          .filter((tm) => !booked.includes(tm))
+          .sort();
+        return { date: a.date, freeTimes };
+      })
+      .filter((o) => o.freeTimes.length > 0);
+  }
+
+  // Send a reschedule offer to the client (keeps the reservation pending until
+  // the client confirms or declines via the emailed link).
+  async function handleSendReschedule() {
+    if (!rejectingReservation || !rescheduleDate || !rescheduleTime) return;
+
+    setRescheduleSending(true);
+    const token =
+      typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+    // Step 1: persist the proposal on the reservation
+    const { error } = await supabase
+      .from("reservations")
+      .update({
+        reschedule_token: token,
+        reschedule_date: rescheduleDate,
+        reschedule_time: rescheduleTime,
+        reschedule_status: "proposed",
+      })
+      .eq("id", rejectingReservation.id);
+
+    if (error) {
+      alert(`Failed to save the reschedule: ${error.message}`);
+      setRescheduleSending(false);
+      return;
+    }
+
+    // Step 2: email the client the offer with confirm/decline links
+    try {
+      const res = await fetch("/api/send-reschedule-offer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: rejectingReservation.name,
+          email: rejectingReservation.email,
+          originalDate: format(
+            new Date(rejectingReservation.date),
+            "EEEE, MMMM d, yyyy",
+            { locale: dateLocale }
+          ),
+          originalTime: rejectingReservation.time.slice(0, 5),
+          newDate: format(new Date(rescheduleDate), "EEEE, MMMM d, yyyy", {
+            locale: dateLocale,
+          }),
+          newTime: rescheduleTime,
+          reason: rejectionReason.trim(),
+          token,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(
+          `Reschedule saved, but the email failed to send: ${data.details || data.error}`
+        );
+      } else {
+        alert("Reschedule offer sent to the client.");
+      }
+    } catch (e) {
+      console.error("Failed to send reschedule offer:", e);
+      alert("Reschedule saved, but the email failed to send.");
+    }
+
+    // Step 3: reflect the proposal locally
+    setReservations(
+      reservations.map((r) =>
+        r.id === rejectingReservation.id
+          ? {
+              ...r,
+              reschedule_token: token,
+              reschedule_date: rescheduleDate,
+              reschedule_time: rescheduleTime,
+              reschedule_status: "proposed",
+            }
+          : r
+      )
+    );
+
+    setRescheduleSending(false);
+    closeRejectionModal();
   }
 
   // Handle rejection with reason
@@ -548,17 +670,35 @@ export default function AdminDashboard({
       }
     }
 
-    // Step 2: Update database status and clear calendar info
+    // Step 2: Update database status, clear calendar info, and invalidate any
+    // outstanding reschedule offer (so an old emailed link can't be used).
     const { error } = await supabase
       .from("reservations")
-      .update({ status: "cancelled", calendar_event_id: null, meet_link: null })
+      .update({
+        status: "cancelled",
+        calendar_event_id: null,
+        meet_link: null,
+        reschedule_token: null,
+        reschedule_status: null,
+        reschedule_date: null,
+        reschedule_time: null,
+      })
       .eq("id", rejectingReservation.id);
 
     if (!error) {
       setReservations(
         reservations.map((r) =>
           r.id === rejectingReservation.id
-            ? { ...r, status: "cancelled", calendar_event_id: null, meet_link: null }
+            ? {
+                ...r,
+                status: "cancelled",
+                calendar_event_id: null,
+                meet_link: null,
+                reschedule_token: null,
+                reschedule_status: null,
+                reschedule_date: null,
+                reschedule_time: null,
+              }
             : r
         )
       );
@@ -637,10 +777,8 @@ export default function AdminDashboard({
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => {
-              if (!rejectionLoading) {
-                setRejectionModalOpen(false);
-                setRejectingReservation(null);
-                setRejectionReason("");
+              if (!rejectionLoading && !rescheduleSending) {
+                closeRejectionModal();
               }
             }}
           />
@@ -651,21 +789,21 @@ export default function AdminDashboard({
             <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-[#2d2a4a]">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  Cancel Reservation
+                  {rescheduleMode ? "Reschedule Appointment" : "Cancel Reservation"}
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                  Please provide a reason for cancellation
+                  {rescheduleMode
+                    ? "Offer the client a new date and time"
+                    : "Please provide a reason for cancellation"}
                 </p>
               </div>
               <button
                 onClick={() => {
-                  if (!rejectionLoading) {
-                    setRejectionModalOpen(false);
-                    setRejectingReservation(null);
-                    setRejectionReason("");
+                  if (!rejectionLoading && !rescheduleSending) {
+                    closeRejectionModal();
                   }
                 }}
-                disabled={rejectionLoading}
+                disabled={rejectionLoading || rescheduleSending}
                 className="p-2 hover:bg-slate-100 dark:hover:bg-[#1a1735] rounded-lg transition disabled:opacity-50"
               >
                 <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
@@ -694,55 +832,170 @@ export default function AdminDashboard({
                 </div>
               )}
 
-              {/* Reason Input */}
+              {/* Reason / Note Input */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  Rejection Reason <span className="text-red-500">*</span>
+                  {rescheduleMode ? (
+                    <>Note to Client <span className="text-slate-400 font-normal">(optional)</span></>
+                  ) : (
+                    <>Rejection Reason <span className="text-red-500">*</span></>
+                  )}
                 </label>
                 <textarea
                   value={rejectionReason}
                   onChange={(e) => setRejectionReason(e.target.value)}
-                  placeholder="e.g., Unfortunately, we are fully booked on this date. Please select another time slot."
-                  rows={4}
+                  placeholder={
+                    rescheduleMode
+                      ? "e.g., We had a scheduling conflict, but we'd love to see you at this new time."
+                      : "e.g., Unfortunately, we are fully booked on this date. Please select another time slot."
+                  }
+                  rows={3}
                   className="w-full px-4 py-3 border border-slate-200 dark:border-[#2d2a4a] bg-white dark:bg-[#1a1735] text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 outline-none transition resize-none placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                  disabled={rejectionLoading}
+                  disabled={rejectionLoading || rescheduleSending}
                 />
                 <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                  This message will be sent to the client via email.
+                  This message will be included in the email to the client.
                 </p>
               </div>
+
+              {/* Toggle: offer a reschedule instead of rejecting */}
+              {!rescheduleMode && (
+                <button
+                  onClick={() => setRescheduleMode(true)}
+                  disabled={rejectionLoading}
+                  className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-400 rounded-lg font-medium text-sm hover:bg-amber-50 dark:hover:bg-amber-500/10 transition disabled:opacity-50"
+                >
+                  <Calendar size={16} />
+                  Offer a Reschedule Instead
+                </button>
+              )}
+
+              {/* Reschedule slot picker */}
+              {rescheduleMode && (() => {
+                const options = getRescheduleOptions();
+                return (
+                  <div className="mt-4 border border-amber-200 dark:border-amber-500/30 rounded-xl p-4 bg-amber-50/50 dark:bg-amber-500/5">
+                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1">
+                      Propose a New Time
+                    </p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                      Select an available slot to offer the client.
+                    </p>
+
+                    {options.length === 0 ? (
+                      <p className="text-sm text-slate-500 dark:text-slate-400 py-4 text-center">
+                        No available slots. Add availability dates first.
+                      </p>
+                    ) : (
+                      <div className="max-h-56 overflow-y-auto space-y-3 pr-1">
+                        {options.map((opt) => (
+                          <div key={opt.date}>
+                            <p className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5">
+                              {format(new Date(opt.date + "T00:00:00"), "EEEE, MMM d, yyyy", { locale: dateLocale })}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {opt.freeTimes.map((tm) => {
+                                const selected =
+                                  rescheduleDate === opt.date && rescheduleTime === tm;
+                                return (
+                                  <button
+                                    key={tm}
+                                    onClick={() => {
+                                      setRescheduleDate(opt.date);
+                                      setRescheduleTime(tm);
+                                    }}
+                                    disabled={rescheduleSending}
+                                    className={`px-2.5 py-1.5 rounded-md text-xs font-medium transition disabled:opacity-50 ${
+                                      selected
+                                        ? "bg-amber-500 text-white"
+                                        : "bg-white dark:bg-[#1a1735] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#2d2a4a] hover:border-amber-400"
+                                    }`}
+                                  >
+                                    {tm}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {rescheduleDate && rescheduleTime && (
+                      <div className="mt-3 flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200 bg-white dark:bg-[#1a1735] rounded-lg px-3 py-2 border border-amber-200 dark:border-amber-500/30">
+                        <Check size={16} className="text-amber-500" />
+                        Selected:{" "}
+                        <span className="font-medium">
+                          {format(new Date(rescheduleDate + "T00:00:00"), "MMM d", { locale: dateLocale })} · {rescheduleTime}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Footer */}
             <div className="flex items-center justify-end gap-3 p-6 border-t border-slate-200 dark:border-[#2d2a4a]">
-              <button
-                onClick={() => {
-                  setRejectionModalOpen(false);
-                  setRejectingReservation(null);
-                  setRejectionReason("");
-                }}
-                disabled={rejectionLoading}
-                className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleRejectReservation}
-                disabled={!rejectionReason.trim() || rejectionLoading}
-                className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                {rejectionLoading ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <X size={16} />
-                    Reject & Send Email
-                  </>
-                )}
-              </button>
+              {rescheduleMode ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setRescheduleMode(false);
+                      setRescheduleDate(null);
+                      setRescheduleTime(null);
+                    }}
+                    disabled={rescheduleSending}
+                    className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={handleSendReschedule}
+                    disabled={!rescheduleDate || !rescheduleTime || rescheduleSending}
+                    className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {rescheduleSending ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Calendar size={16} />
+                        Send Reschedule Offer
+                      </>
+                    )}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={closeRejectionModal}
+                    disabled={rejectionLoading}
+                    className="px-5 py-2.5 border border-slate-200 dark:border-[#2d2a4a] text-slate-700 dark:text-slate-300 rounded-lg font-medium hover:bg-slate-50 dark:hover:bg-[#1a1735] transition disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleRejectReservation}
+                    disabled={!rejectionReason.trim() || rejectionLoading}
+                    className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {rejectionLoading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <X size={16} />
+                        Reject & Send Email
+                      </>
+                    )}
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
